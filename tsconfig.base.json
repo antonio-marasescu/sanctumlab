@@ -1,0 +1,35 @@
+{
+    "compileOnSave": false,
+    "compilerOptions": {
+        "rootDir": ".",
+        "sourceMap": true,
+        "declaration": false,
+        "moduleResolution": "node",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "importHelpers": true,
+        "target": "es2015",
+        "module": "esnext",
+        "lib": ["es2020", "dom"],
+        "skipLibCheck": true,
+        "skipDefaultLibCheck": true,
+        "baseUrl": ".",
+        "paths": {
+            "@sanctumlab/api-interfaces": [
+                "libs/shared/api-interfaces/src/index.ts"
+            ],
+            "@sanctumlab/fe/auth": ["libs/frontend/features/auth/src/index.ts"],
+            "@sanctumlab/fe/component-library": [
+                "libs/frontend/component-library/src/index.ts"
+            ],
+            "@sanctumlab/fe/data-access": [
+                "libs/frontend/data-access/src/index.ts"
+            ],
+            "@sanctumlab/fe/menu-feature": [
+                "libs/frontend/features/menu-feature/src/index.ts"
+            ],
+            "@sanctumlab/fe/shared-fe": ["libs/frontend/shared-fe/src/index.ts"]
+        }
+    },
+    "exclude": ["node_modules", "tmp"]
+}
