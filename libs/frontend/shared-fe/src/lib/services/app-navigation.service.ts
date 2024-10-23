@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { AppFeatureRoutes, MenuFeatureRoutes } from '../types/app-routes.types';
+import {
+    AppFeatureRoutes,
+    AuthFeatureRoutes,
+    MenuFeatureRoutes
+} from '../types/app-routes.types';
 
 @Injectable({ providedIn: 'root' })
 export class AppNavigationService {
@@ -10,6 +14,13 @@ export class AppNavigationService {
         await this.router.navigate([
             AppFeatureRoutes.MENU,
             MenuFeatureRoutes.MAIN
+        ]);
+    }
+
+    public async navigateToLoginPage(): Promise<void> {
+        await this.router.navigate([
+            AppFeatureRoutes.AUTH,
+            AuthFeatureRoutes.LOGIN
         ]);
     }
 }

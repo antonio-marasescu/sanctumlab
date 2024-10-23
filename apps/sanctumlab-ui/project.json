@@ -23,11 +23,14 @@
                     },
                     {
                         "glob": "**/*",
-                        "input": "apps/sanctumlab-ui/assets",
+                        "input": "apps/sanctumlab-ui/src/assets",
                         "output": "assets"
                     }
                 ],
-                "styles": ["apps/sanctumlab-ui/src/styles.scss"],
+                "styles": [
+                    "apps/sanctumlab-ui/src/styles.scss",
+                    "node_modules/@aws-amplify/ui-angular/theme.css"
+                ],
                 "scripts": []
             },
             "configurations": {
@@ -44,12 +47,27 @@
                             "maximumError": "4kb"
                         }
                     ],
-                    "outputHashing": "all"
+                    "outputHashing": "all",
+                    "optimization": true,
+                    "aot": true,
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/sanctumlab-ui/src/environments/environment.ts",
+                            "with": "apps/sanctumlab-ui/src/environments/environment.production.ts"
+                        }
+                    ]
                 },
                 "development": {
                     "optimization": false,
                     "extractLicenses": false,
-                    "sourceMap": true
+                    "sourceMap": true,
+                    "namedChunks": true,
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/sanctumlab-ui/src/environments/environment.ts",
+                            "with": "apps/sanctumlab-ui/src/environments/environment.development.ts"
+                        }
+                    ]
                 }
             },
             "defaultConfiguration": "production"

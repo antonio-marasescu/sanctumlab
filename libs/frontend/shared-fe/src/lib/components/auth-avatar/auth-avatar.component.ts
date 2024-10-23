@@ -4,6 +4,7 @@ import { ToggleInputComponent } from '@sanctumlab/fe/component-library';
 import { FormControl } from '@angular/forms';
 import { ThemingService } from '../../services/theming.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { AuthenticationService } from '@sanctumlab/fe/auth';
 
 @UntilDestroy()
 @Component({
@@ -46,35 +47,25 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
                         />
                     </div>
                 </li>
-                @if (isLoggedIn) {
-                    @if (!isGuest) {
-                        <li>
-                            <div
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
-                                role="menuitem"
-                            >
-                                Settings
-                            </div>
-                        </li>
-                    }
+                @if (!isGuest) {
                     <li>
                         <div
                             class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
                             role="menuitem"
                         >
-                            Sign out
-                        </div>
-                    </li>
-                } @else {
-                    <li>
-                        <div
-                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
-                            role="menuitem"
-                        >
-                            Login
+                            Settings
                         </div>
                     </li>
                 }
+                <li>
+                    <div
+                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
+                        role="menuitem"
+                        (click)="signOut()"
+                    >
+                        Sign out
+                    </div>
+                </li>
             </ul>
         </div>`,
     styleUrls: [],
@@ -82,13 +73,15 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 })
 export class AuthAvatarComponent implements OnInit {
     protected username?: string = 'Guest';
-    protected isLoggedIn = false;
     protected isGuest = false;
     protected placeholderAvatarUrl = 'assets/guest-avatar.svg';
     protected themeControl!: FormControl<boolean>;
     protected themeControlLabel!: string;
 
-    constructor(private themingService: ThemingService) {}
+    constructor(
+        private themingService: ThemingService,
+        private authService: AuthenticationService
+    ) {}
 
     ngOnInit() {
         initFlowbite();
@@ -112,5 +105,9 @@ export class AuthAvatarComponent implements OnInit {
 
     private getThemeControlLabel(): string {
         return this.themeControl.value ? 'Dark' : 'Light';
+    }
+
+    protected async signOut(): Promise<void> {
+        await this.authService.signOut();
     }
 }

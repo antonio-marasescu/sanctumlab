@@ -1,8 +1,15 @@
+import { AuthFeatureName, AuthRoutes } from '@sanctumlab/fe/auth';
+
 export enum AppFeatureRoutes {
     MENU = 'menu',
-    AUTH = 'auth'
+    AUTH = AuthFeatureName
 }
 
 export enum MenuFeatureRoutes {
     MAIN = 'main'
+}
+
+export enum AuthFeatureRoutes {
+    LOGIN = AuthRoutes.LOGIN,
+    LOGIN_ADMIN = AuthRoutes.LOGIN_ADMIN
 }
