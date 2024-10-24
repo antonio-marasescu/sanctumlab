@@ -1,7 +1,7 @@
 export const environment = {
     production: false,
     apiUrl: '${API_URL}',
-    cognitoGuestUsername: 'sanct-guest@gmail.com',
+    cognitoGuestUsername: '${COGNITO_GUEST_EMAIL}',
     cognitoRedirectUrlSignIn: '${COGNITO_REDIRECT_SIGN_IN}',
     cognitoRedirectUrlSignOut: '${COGNITO_REDIRECT_SIGN_OUT}',
     cognitoDomain: '${COGNITO_DOMAIN}',

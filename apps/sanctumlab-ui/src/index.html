@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="fantasy">
     <head>
         <meta charset="utf-8" />
         <title>Sanctum Lab</title>
@@ -22,19 +22,8 @@
             href="https://fonts.googleapis.com/css2?family=Inter:slnt,wght@-10..0,100..900&display=swap"
             rel="stylesheet"
         />
-        <script>
-            if (
-                localStorage.getItem('color-theme') === 'dark' ||
-                (!('color-theme' in localStorage) &&
-                    window.matchMedia('(prefers-color-scheme: dark)').matches)
-            ) {
-                document.documentElement.classList.add('dark');
-            } else {
-                document.documentElement.classList.remove('dark');
-            }
-        </script>
     </head>
-    <body class="bg-white dark:bg-gray-800">
+    <body>
         <app-root></app-root>
     </body>
 </html>

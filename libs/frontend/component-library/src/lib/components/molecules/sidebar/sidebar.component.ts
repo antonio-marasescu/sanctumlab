@@ -3,10 +3,8 @@ import {
     Component,
     EventEmitter,
     Input,
-    OnInit,
     Output
 } from '@angular/core';
-import { initFlowbite } from 'flowbite';
 import { NgIcon } from '@ng-icons/core';
 import { SidebarItem } from '../../../types/molecules/sidebar.types';
 import { LogoComponent } from '../../atoms/logo/logo.component';
@@ -19,14 +17,10 @@ import { LogoComponent } from '../../atoms/logo/logo.component';
     styleUrls: [],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent {
     @Input({ required: true }) logoUrl!: string;
     @Input({ required: true }) title!: string;
     @Input({ required: true }) items: SidebarItem[] = [];
     @Output() navigate = new EventEmitter<string>();
     @Output() navigateHome = new EventEmitter<void>();
-
-    ngOnInit() {
-        initFlowbite();
-    }
 }

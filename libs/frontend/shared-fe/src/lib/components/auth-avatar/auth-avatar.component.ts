@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { initFlowbite } from 'flowbite';
 import { ToggleInputComponent } from '@sanctumlab/fe/component-library';
 import { FormControl } from '@angular/forms';
 import { ThemingService } from '../../services/theming.service';
@@ -84,7 +83,6 @@ export class AuthAvatarComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        initFlowbite();
         const isDarkMode = this.themingService.isDarkMode();
         this.themeControl = new FormControl<boolean>(isDarkMode, {
             nonNullable: true

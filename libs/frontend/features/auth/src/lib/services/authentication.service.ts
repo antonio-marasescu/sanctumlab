@@ -10,7 +10,6 @@ import { signIn, signOut, fetchAuthSession } from 'aws-amplify/auth';
 import { Hub } from 'aws-amplify/utils';
 import { Router } from '@angular/router';
 import { AuthFeatureName, AuthRoutes } from '../types/auth-navigation.types';
-import { BehaviorSubject } from 'rxjs';
 import { AuthUser } from '../types/auth.types';
 import { Store } from '@ngrx/store';
 import { AuthState } from '../state/auth.reducers';

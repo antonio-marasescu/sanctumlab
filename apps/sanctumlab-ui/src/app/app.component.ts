@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { initFlowbite } from 'flowbite';
 import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
 
 @Component({
@@ -10,8 +9,4 @@ import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
     template: `<router-outlet></router-outlet>`,
     styleUrls: []
 })
-export class AppComponent implements OnInit {
-    ngOnInit() {
-        initFlowbite();
-    }
-}
+export class AppComponent {}

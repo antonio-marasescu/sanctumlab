@@ -27,43 +27,43 @@ import { retrieveErrorMessage } from '../../../utils/validation.utils';
     imports: [ReactiveFormsModule, NgClass],
     template: `<div>
         <label
-            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >{{ label }}</label
-        >
-        <input
-            class="text-input"
+            class="input flex items-center gap-2"
             [ngClass]="{
-                invalid: controlState === InputState.Invalid,
-                default: controlState === InputState.Valid,
-                disabled: this.disabled
+                'input-bordered': inputStyle === 'bordered',
+                'input-error': controlState === InputState.Invalid,
+                'input-primary': controlState === InputState.Valid
             }"
-            [type]="type"
-            [attr.id]="id"
-            [attr.name]="id"
-            [formControl]="control"
-            [placeholder]="placeholder"
-            [required]="required"
-            [attr.aria-label]="label"
-            [autofocus]="autofocus"
-            autocomplete="false"
-        />
-        @if (controlState === InputState.Invalid) {
-            <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+        >
+            {{ label }}
+            <input
+                class="grow"
+                [type]="type"
+                [attr.id]="id"
+                [attr.name]="id"
+                [formControl]="control"
+                [placeholder]="placeholder"
+                [attr.aria-label]="label"
+                [autofocus]="autofocus"
+                autocomplete="false"
+            />
+        </label>
+        @if (controlState === InputState.Invalid && errorMessage) {
+            <p class="mt-1 text-sm text-error">
                 {{ errorMessage }}
             </p>
         }
     </div>`,
-    styleUrl: 'text-input.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TextInputComponent implements OnInit {
     @Input({ required: true }) id!: string;
     @Input({ required: true }) label!: string;
+    @Input({ required: true }) control!: FormControl<string>;
     @Input({ required: false }) type: TextInputType = 'text';
     @Input({ required: false }) placeholder?: string = '';
-    @Input({ required: false }) required = false;
     @Input({ required: false }) autofocus = false;
-    @Input({ required: true }) control!: FormControl<string>;
+    @Input({ required: false }) inputStyle: 'default' | 'bordered' = 'default';
+
     protected readonly InputState = InputState;
     protected errorMessage = '';
 
