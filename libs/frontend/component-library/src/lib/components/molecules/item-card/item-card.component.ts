@@ -10,7 +10,7 @@ import { ComponentTheme } from '../../../types/shared/theme.types';
 import { NgIcon } from '@ng-icons/core';
 
 @Component({
-    selector: 'ngx-clib-menu-card',
+    selector: 'ngx-clib-item-card',
     standalone: true,
     imports: [NgOptimizedImage, NgClass, NgTemplateOutlet, NgIcon],
     template: `
@@ -44,7 +44,8 @@ import { NgIcon } from '@ng-icons/core';
         <ng-template #card>
             <div
                 [id]="id"
-                class="card bg-base-100 w-64 lg:w-96 isolate aspect-video shadow-xl ring-1 ring-black/5 hover:bg-base-200 cursor-pointer"
+                class="card bg-base-200 w-64 lg:w-96 isolate aspect-video shadow-xl ring-1 ring-black/5 hover:bg-base-300 cursor-pointer dark:hover:bg-neutral dark:shadow-neutral
+                 dark:shadow-sm"
                 (click)="cardClick.emit(id)"
             >
                 <div class="card-body">
@@ -52,12 +53,13 @@ import { NgIcon } from '@ng-icons/core';
                     <p>
                         {{ description }}
                     </p>
-                    <div class="card-actions pt-2">
-                        <div class="badge badge-outline">Tequila</div>
-                        <div class="badge badge-outline">Rum</div>
-                        <div class="badge badge-outline">Rum</div>
-                        <div class="badge badge-outline">Rum</div>
-                    </div>
+                    @if (tags && tags.length > 0) {
+                        <div class="card-actions pt-2">
+                            @for (tag of tags; track tag) {
+                                <div class="badge badge-accent">{{ tag }}</div>
+                            }
+                        </div>
+                    }
                 </div>
             </div>
         </ng-template>
@@ -65,12 +67,13 @@ import { NgIcon } from '@ng-icons/core';
     styleUrls: [],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MenuCardComponent {
+export class ItemCardComponent {
     @Input({ required: true }) id!: string;
     @Input({ required: true }) title!: string;
     @Input({ required: true }) description!: string;
     @Input({ required: false }) hasIndicator = false;
     @Input({ required: false }) indicatorTheme: ComponentTheme = 'primary';
     @Input({ required: false }) indicator!: string;
+    @Input({ required: false }) tags: string[] = [];
     @Output() cardClick = new EventEmitter<string>();
 }

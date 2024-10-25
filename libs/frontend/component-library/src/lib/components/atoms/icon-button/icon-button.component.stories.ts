@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import { ButtonComponent } from './button.component';
 import {
     ComponentSizes,
     ComponentThemes
 } from '../../../types/shared/theme.types';
+import { IconButtonComponent } from './icon-button.component';
 
-const meta: Meta<ButtonComponent> = {
-    component: ButtonComponent,
-    title: 'Atoms/Button',
+const meta: Meta<IconButtonComponent> = {
+    component: IconButtonComponent,
+    title: 'Atoms/IconButton',
     argTypes: {
         theme: {
             control: { type: 'radio' },
@@ -22,18 +22,15 @@ const meta: Meta<ButtonComponent> = {
     }
 };
 export default meta;
-type Story = StoryObj<ButtonComponent>;
+type Story = StoryObj<IconButtonComponent>;
 
 export const Primary: Story = {
     args: {
-        label: 'Button',
-        theme: 'primary',
+        icon: 'matMenu',
         size: 'md',
+        theme: 'primary',
         isOutlined: false,
-        isActive: false,
-        isResponsive: false,
         isCircle: false,
-        isWide: false,
         disabled: false
     }
 };

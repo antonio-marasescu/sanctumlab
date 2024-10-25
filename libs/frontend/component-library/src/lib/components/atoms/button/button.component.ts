@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    EventEmitter,
+    Input,
+    Output
+} from '@angular/core';
 import { NgClass } from '@angular/common';
 import {
     ComponentSize,
@@ -22,15 +28,17 @@ import {
                     'btn-info': theme === 'info',
                     'btn-success': theme === 'success',
                     'btn-error': theme === 'error',
+                    'btn-ghost': theme === 'ghost',
                     'btn-active': isActive,
                     'btn-outline': isOutlined,
                     'btn-xs': size === 'xs',
                     'btn-sm': size === 'sm',
                     'btn-md': size === 'md',
                     'btn-lg': size === 'lg',
-                    'btn-xl': size === 'xl',
+                    'w-full': isWide,
                     'btn-circle': isCircle
                 }"
+                (click)="clickEvent.emit()"
             >
                 {{ label }}
             </button>
@@ -46,10 +54,13 @@ import {
                     'btn-info': theme === 'info',
                     'btn-success': theme === 'success',
                     'btn-error': theme === 'error',
+                    'btn-ghost': theme === 'ghost',
                     'btn-active': isActive,
                     'btn-outline': isOutlined,
+                    'w-full': isWide,
                     'btn-circle': isCircle
                 }"
+                (click)="clickEvent.emit()"
             >
                 {{ label }}
             </button>
@@ -59,11 +70,13 @@ import {
 })
 export class ButtonComponent {
     @Input({ required: true }) label!: string;
-    @Input({ required: false }) theme: ComponentTheme = 'primary';
+    @Input({ required: false }) theme: ComponentTheme | 'ghost' = 'primary';
     @Input({ required: false }) size: Omit<ComponentSize, 'xl'> = 'md';
     @Input({ required: false }) isOutlined = false;
     @Input({ required: false }) isResponsive = false;
+    @Input({ required: false }) isWide = false;
     @Input({ required: false }) isActive = false;
     @Input({ required: false }) isCircle = false;
     @Input({ required: false }) disabled = false;
+    @Output() clickEvent = new EventEmitter<void>();
 }

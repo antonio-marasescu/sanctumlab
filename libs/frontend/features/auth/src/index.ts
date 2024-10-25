@@ -14,3 +14,6 @@ export * from './lib/services/authentication.service';
 
 // TYPES
 export * from './lib/types/auth-navigation.types';
+
+// STATE
+export * from './lib/state/auth.selectors';

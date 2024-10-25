@@ -11,7 +11,6 @@ export function retrieveErrorMessage(
     const firstErrorKey = Object.keys(control.errors)[0];
 
     const errorMessageFn = validationConfiguration.errors[firstErrorKey];
-    console.log(control.errors[firstErrorKey]);
     if (!errorMessageFn) {
         return firstErrorKey;
     }

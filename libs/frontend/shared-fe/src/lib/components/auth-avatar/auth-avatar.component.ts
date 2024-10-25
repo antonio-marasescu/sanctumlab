@@ -1,111 +1,63 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { ToggleInputComponent } from '@sanctumlab/fe/component-library';
-import { FormControl } from '@angular/forms';
-import { ThemingService } from '../../services/theming.service';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { AuthenticationService } from '@sanctumlab/fe/auth';
+import {
+    MenuAvatarComponent,
+    MenuItem,
+    ThemeChangerComponent,
+    ToggleInputComponent
+} from '@sanctumlab/fe/component-library';
+import { UntilDestroy } from '@ngneat/until-destroy';
+import {
+    AuthenticationService,
+    selectAuthStateCurrentUser
+} from '@sanctumlab/fe/auth';
+import { Store } from '@ngrx/store';
+import { map, Observable } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
 
 @UntilDestroy()
 @Component({
     selector: 'ngx-shared-auth-avatar',
     standalone: true,
-    imports: [ToggleInputComponent],
-    template: ` <div>
-            <button
-                type="button"
-                class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-                aria-expanded="false"
-                data-dropdown-toggle="dropdown-user"
-            >
-                <span class="sr-only">Open user menu</span>
-                <img
-                    class="w-8 h-8 rounded-full bg-gray-600"
-                    [src]="placeholderAvatarUrl"
-                    alt="User Avatar"
-                />
-            </button>
-        </div>
-        <div
-            class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
-            id="dropdown-user"
-        >
-            <div class="px-4 py-3" role="none">
-                <p class="text-sm text-gray-900 dark:text-white" role="none">
-                    {{ username }}
-                </p>
-            </div>
-            <ul class="py-1" role="none">
-                <li>
-                    <div
-                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                        role="menuitem"
-                    >
-                        <ngx-clib-toggle-input
-                            [label]="themeControlLabel"
-                            [control]="themeControl"
-                        />
-                    </div>
-                </li>
-                @if (!isGuest) {
-                    <li>
-                        <div
-                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
-                            role="menuitem"
-                        >
-                            Settings
-                        </div>
-                    </li>
-                }
-                <li>
-                    <div
-                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
-                        role="menuitem"
-                        (click)="signOut()"
-                    >
-                        Sign out
-                    </div>
-                </li>
-            </ul>
-        </div>`,
+    imports: [
+        ToggleInputComponent,
+        MenuAvatarComponent,
+        ThemeChangerComponent,
+        AsyncPipe
+    ],
+    template: ` <ngx-clib-menu-avatar
+        [size]="'xs'"
+        [isPlaceholder]="true"
+        [placeholder]="(username$ | async) || ''"
+        [items]="items"
+        [rightSide]="true"
+        (menuClick)="onMenuClick($event)"
+    >
+    </ngx-clib-menu-avatar>`,
     styleUrls: [],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AuthAvatarComponent implements OnInit {
-    protected username?: string = 'Guest';
-    protected isGuest = false;
-    protected placeholderAvatarUrl = 'assets/guest-avatar.svg';
-    protected themeControl!: FormControl<boolean>;
-    protected themeControlLabel!: string;
+    protected username$!: Observable<string>;
+
+    protected readonly items: MenuItem[] = [
+        { id: 'settings', label: 'Settings' },
+        { id: 'sign-out', label: 'Sign Out' }
+    ];
 
     constructor(
-        private themingService: ThemingService,
-        private authService: AuthenticationService
+        private authService: AuthenticationService,
+        private store: Store
     ) {}
 
     ngOnInit() {
-        const isDarkMode = this.themingService.isDarkMode();
-        this.themeControl = new FormControl<boolean>(isDarkMode, {
-            nonNullable: true
-        });
-        this.themeControlLabel = this.getThemeControlLabel();
-
-        this.themeControl.valueChanges
-            .pipe(untilDestroyed(this))
-            .subscribe(switchValue => {
-                if (switchValue) {
-                    this.themingService.toggleDarkMode();
-                } else {
-                    this.themingService.toggleLightMode();
-                }
-                this.themeControlLabel = this.getThemeControlLabel();
-            });
+        this.username$ = this.store
+            .select(selectAuthStateCurrentUser())
+            .pipe(map(user => user?.username?.slice(0, 2) || ''));
     }
 
-    private getThemeControlLabel(): string {
-        return this.themeControl.value ? 'Dark' : 'Light';
-    }
-
-    protected async signOut(): Promise<void> {
-        await this.authService.signOut();
+    protected async onMenuClick(id: string): Promise<void> {
+        if (id === 'sign-out') {
+            await this.authService.signOut();
+        }
     }
 }

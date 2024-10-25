@@ -5,7 +5,7 @@ import { NgClass } from '@angular/common';
     selector: 'ngx-clib-logo',
     standalone: true,
     imports: [NgClass],
-    template: ` <div class="flex ms-2 md:me-24">
+    template: ` <div class="flex">
         <img
             [src]="logoUrl"
             class="h-8 me-3 cursor-pointer hover:opacity-85"
@@ -18,7 +18,7 @@ import { NgClass } from '@angular/common';
         />
         @if (useTitle) {
             <span
-                class="self-center text-xl text-neutral font-semibold sm:text-2xl whitespace-nowrap"
+                class="self-center text-lg text-base-content font-semibold sm:text-xl lg:text-2xl whitespace-nowrap"
                 >{{ title }}</span
             >
         }

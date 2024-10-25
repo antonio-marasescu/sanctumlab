@@ -3,7 +3,11 @@ import { applicationConfig } from '@storybook/angular';
 import { provideInputValidationConfiguration } from '../src/lib/config/input-validation.config';
 import { provideIcons } from '@ng-icons/core';
 import { matLocalGroceryStoreRound } from '@ng-icons/material-icons/round';
-import { matLocalBar, matMenu } from '@ng-icons/material-icons/baseline';
+import {
+    matClose,
+    matLocalBar,
+    matMenu
+} from '@ng-icons/material-icons/baseline';
 
 const preview: Preview = {
     decorators: [
@@ -12,7 +16,8 @@ const preview: Preview = {
                 provideIcons({
                     matLocalGroceryStoreRound,
                     matLocalBar,
-                    matMenu
+                    matMenu,
+                    matClose
                 }),
                 provideInputValidationConfiguration({
                     errors: {

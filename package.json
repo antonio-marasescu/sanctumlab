@@ -5,6 +5,8 @@
     "scripts": {
         "serve:ui": "nx serve sanctumlab-ui",
         "storybook:clib": "nx storybook component-library",
+        "test": "nx run-many --target=test --passWithNoTests",
+        "lint": "nx run-many --target=lint",
         "prepare": "husky"
     },
     "private": true,

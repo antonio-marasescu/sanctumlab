@@ -14,7 +14,7 @@ const control = new FormControl<string>('', {
 
 const meta: Meta<ToggleInputComponent> = {
     component: ToggleInputComponent,
-    title: 'Atoms/ToggleInput',
+    title: 'Atoms/Inputs/ToggleInput',
     render: args => ({
         props: {
             ...args,

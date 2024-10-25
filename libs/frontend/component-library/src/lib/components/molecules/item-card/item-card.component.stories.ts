@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import { MenuCardComponent } from './menu-card.component';
+import { ItemCardComponent } from './item-card.component';
 import { ComponentThemes } from '../../../types/shared/theme.types';
 
-const meta: Meta<MenuCardComponent> = {
-    component: MenuCardComponent,
-    title: 'Molecules/MenuCard',
+const meta: Meta<ItemCardComponent> = {
+    component: ItemCardComponent,
+    title: 'Molecules/ItemCard',
     argTypes: {
         indicatorTheme: {
             control: { type: 'radio' },
@@ -13,7 +13,7 @@ const meta: Meta<MenuCardComponent> = {
     }
 };
 export default meta;
-type Story = StoryObj<MenuCardComponent>;
+type Story = StoryObj<ItemCardComponent>;
 
 export const Primary: Story = {
     args: {
@@ -23,6 +23,7 @@ export const Primary: Story = {
             'A refreshing cocktail with tequila, lime juice, and orange liqueur, served with salt on the rim.',
         hasIndicator: false,
         indicator: 'disabled',
-        indicatorTheme: 'primary'
+        indicatorTheme: 'primary',
+        tags: ['Tequila', 'Lime', 'Orange Liqueur']
     }
 };

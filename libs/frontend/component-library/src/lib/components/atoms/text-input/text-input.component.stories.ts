@@ -13,7 +13,7 @@ const control = new FormControl<string>('', {
 });
 
 const meta: Meta<TextInputComponent> = {
-    title: 'Atoms/TextInput',
+    title: 'Atoms/Inputs/TextInput',
     component: TextInputComponent,
     render: args => ({
         props: {

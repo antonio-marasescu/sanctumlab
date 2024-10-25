@@ -15,7 +15,11 @@ import { provideEffects } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideIcons } from '@ng-icons/core';
 import { matLocalGroceryStoreRound } from '@ng-icons/material-icons/round';
-import { matLocalBar, matMenu } from '@ng-icons/material-icons/baseline';
+import {
+    matClose,
+    matLocalBar,
+    matMenu
+} from '@ng-icons/material-icons/baseline';
 import { environment } from '../environments/environment';
 import { provideApiEndpointConfiguration } from '@sanctumlab/fe/data-access';
 import { provideHttpClient } from '@angular/common/http';
@@ -33,7 +37,12 @@ export const appConfig: ApplicationConfig = {
         provideEffects(),
         provideStore(),
         provideStoreDevtools({ maxAge: 50, logOnly: !isDevMode() }),
-        provideIcons({ matLocalGroceryStoreRound, matLocalBar, matMenu }),
+        provideIcons({
+            matLocalGroceryStoreRound,
+            matLocalBar,
+            matMenu,
+            matClose
+        }),
         provideAuthConfiguration({
             cognitoGuestUsername: environment.cognitoGuestUsername,
             cognitoRedirectUrlSignIn: environment.cognitoRedirectUrlSignIn,

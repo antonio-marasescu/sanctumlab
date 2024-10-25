@@ -22,6 +22,16 @@
             href="https://fonts.googleapis.com/css2?family=Inter:slnt,wght@-10..0,100..900&display=swap"
             rel="stylesheet"
         />
+        <script>
+            const colorThemeKey = 'data-theme';
+            const colorTheme = localStorage.getItem(colorThemeKey);
+            if (colorTheme) {
+                document.documentElement.setAttribute(
+                    colorThemeKey,
+                    colorTheme
+                );
+            }
+        </script>
     </head>
     <body>
         <app-root></app-root>

@@ -1,0 +1,72 @@
+<div class="drawer">
+    <input
+        id="sidebar-drawer"
+        type="checkbox"
+        class="drawer-toggle"
+        [formControl]="sidebarControl"
+    />
+    <div class="drawer-content flex flex-col">
+        <div class="navbar bg-base-100 w-full border-b-2 border-base-200">
+            <div class="flex-none">
+                <label
+                    for="sidebar-drawer"
+                    aria-label="open sidebar"
+                    class="btn btn-square btn-ghost"
+                >
+                    <ng-icon name="matMenu" size="24"></ng-icon>
+                </label>
+            </div>
+
+            <div class="mx-2 flex-1 px-2">
+                <div>
+                    <ngx-clib-logo [logoUrl]="logoUrl" [title]="title" />
+                </div>
+            </div>
+            <ng-content select="[theme]"></ng-content>
+            <div>
+                <ng-content select="[avatar]"></ng-content>
+            </div>
+        </div>
+        <ng-content select="[content]"></ng-content>
+    </div>
+
+    <div class="drawer-side">
+        <label
+            for="sidebar-drawer"
+            aria-label="close sidebar"
+            class="drawer-overlay"
+        ></label>
+        <ul class="menu bg-base-100 min-h-full w-80 p-4">
+            <div class="pl-4 pr-4 pt-2 pb-2 text-start text-balance lg:hidden">
+                <div class="flex items-center">
+                    <div class="flex-grow"></div>
+                    <ngx-clib-icon-button
+                        icon="matClose"
+                        [size]="'xs'"
+                        theme="ghost"
+                        [isCircle]="false"
+                        [isOutlined]="false"
+                        (click)="onCloseSidebar()"
+                    />
+                </div>
+            </div>
+
+            @for (category of itemCategories; track category.id) {
+                <li [id]="category.id">
+                    <h2 class="menu-title">{{ category.label }}</h2>
+                    <ul class="menu bg-base-100">
+                        @for (item of category.items; track item.id) {
+                            <li>
+                                <a>
+                                    <ng-icon [name]="item.icon" size="16" />{{
+                                        item.label
+                                    }}
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
