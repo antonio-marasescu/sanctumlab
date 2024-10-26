@@ -30,6 +30,11 @@ export class SidebarComponent {
         nonNullable: true
     });
 
+    protected onNavigate(id: string): void {
+        this.navigate.emit(id);
+        this.sidebarControl.setValue(false);
+    }
+
     protected onCloseSidebar(): void {
         this.sidebarControl.setValue(false);
     }

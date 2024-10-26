@@ -5,7 +5,6 @@ import {
     ThemeChangerComponent
 } from '@sanctumlab/fe/component-library';
 import { AppNavigationService } from '../../services/app-navigation.service';
-import { AppFeatureRoutes } from '../../types/app-routes.types';
 import { AuthAvatarComponent } from '../auth-avatar/auth-avatar.component';
 import { ThemingService } from '../../services/theming.service';
 import { FormControl } from '@angular/forms';
@@ -39,9 +38,14 @@ export class AppSidebarComponent implements OnInit {
             label: 'Menus',
             items: [
                 {
-                    id: 'cocktail',
+                    id: 'cocktails',
                     icon: 'matLocalBar',
                     label: 'Cocktails'
+                },
+                {
+                    id: 'snacks',
+                    icon: 'matFastfood',
+                    label: 'Snacks'
                 }
             ]
         }
@@ -72,8 +76,11 @@ export class AppSidebarComponent implements OnInit {
     }
 
     protected async onNavigate(id: string): Promise<void> {
-        if (id === AppFeatureRoutes.MENU) {
-            await this.appNavigationService.navigateToMenuFeature();
+        if (id === 'cocktails') {
+            await this.appNavigationService.navigateToMenuCocktails();
+        }
+        if (id === 'snacks') {
+            await this.appNavigationService.navigateToMenuSnacks();
         }
     }
 

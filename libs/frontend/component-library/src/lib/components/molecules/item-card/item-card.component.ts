@@ -15,7 +15,7 @@ import { NgIcon } from '@ng-icons/core';
     imports: [NgOptimizedImage, NgClass, NgTemplateOutlet, NgIcon],
     template: `
         @if (hasIndicator) {
-            <div class="indicator">
+            <div class="indicator w-full max-w-64 sm:max-w-64 lg:max-w-96">
                 <span
                     class="indicator-item indicator-bottom indicator-center badge text-xs font-semibold cursor-pointer hover:opacity-85"
                     [ngClass]="{
@@ -44,7 +44,7 @@ import { NgIcon } from '@ng-icons/core';
         <ng-template #card>
             <div
                 [id]="id"
-                class="card bg-base-200 w-64 lg:w-96 isolate aspect-video shadow-xl ring-1 ring-black/5 hover:bg-base-300 cursor-pointer dark:hover:bg-neutral dark:shadow-neutral
+                class="card bg-base-100 w-full max-w-64 sm:max-w-64 lg:max-w-96 isolate aspect-video shadow-xl ring-1 ring-black/5 hover:bg-base-300 cursor-pointer dark:bg-base-200 dark:hover:bg-neutral dark:shadow-neutral
                  dark:shadow-sm"
                 (click)="cardClick.emit(id)"
             >

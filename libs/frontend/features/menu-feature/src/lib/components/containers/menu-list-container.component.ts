@@ -1,9 +1,19 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    Input,
+    OnChanges,
+    OnInit,
+    SimpleChanges
+} from '@angular/core';
 import { MenuListViewComponent } from '../views/menu-list-view.component';
-import { MenuApiService } from '@sanctumlab/fe/data-access';
+import { ProductApiService } from '@sanctumlab/fe/data-access';
 import { Observable } from 'rxjs';
-import { MenuItem, MenuItemType } from '@sanctumlab/api-interfaces';
 import { AsyncPipe } from '@angular/common';
+import {
+    ProductItemCategory,
+    ProductItemDto
+} from '@sanctumlab/api-interfaces';
 
 @Component({
     selector: 'ngx-menu-list-container',
@@ -13,14 +23,27 @@ import { AsyncPipe } from '@angular/common';
     styleUrls: [],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MenuListContainerComponent implements OnInit {
-    protected items$!: Observable<MenuItem[]>;
+export class MenuListContainerComponent implements OnInit, OnChanges {
+    @Input() category!: ProductItemCategory;
+    protected items$!: Observable<ProductItemDto[]>;
 
-    constructor(private menuApiService: MenuApiService) {}
+    constructor(private menuApiService: ProductApiService) {}
 
     ngOnInit() {
-        this.items$ = this.menuApiService.retrieveMenuStream(
-            MenuItemType.Cocktail
+        this.items$ = this.menuApiService.retrieveProductsByCategoryStream(
+            this.category
         );
+        this.menuApiService.sendRetrieveProductList();
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        if (
+            changes['category'].previousValue !==
+            changes['category'].currentValue
+        ) {
+            this.items$ = this.menuApiService.retrieveProductsByCategoryStream(
+                changes['category'].currentValue
+            );
+        }
     }
 }

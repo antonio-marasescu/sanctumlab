@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { LogoComponent } from './logo.component';
+import { ComponentSizes } from '../../../types/shared/theme.types';
 
 const meta: Meta<LogoComponent> = {
     title: 'Atoms/Logo',
@@ -7,7 +8,7 @@ const meta: Meta<LogoComponent> = {
     argTypes: {
         size: {
             control: { type: 'radio' },
-            options: ['md', 'lg', 'xl']
+            options: [Object.keys(ComponentSizes)]
         }
     }
 };
@@ -19,6 +20,7 @@ export const Primary: Story = {
         logoUrl: 'assets/logo-bg.png',
         title: 'Sanctum Lab',
         useTitle: true,
-        size: 'md'
+        size: 'md',
+        isResponsive: false
     }
 };

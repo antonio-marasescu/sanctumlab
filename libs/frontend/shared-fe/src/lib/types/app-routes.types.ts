@@ -6,7 +6,8 @@ export enum AppFeatureRoutes {
 }
 
 export enum MenuFeatureRoutes {
-    MAIN = 'main'
+    COCKTAILS = 'cocktails',
+    SNACKS = 'snacks'
 }
 
 export enum AuthFeatureRoutes {

@@ -14,14 +14,17 @@ import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideIcons } from '@ng-icons/core';
-import { matLocalGroceryStoreRound } from '@ng-icons/material-icons/round';
 import {
     matClose,
+    matFastfood,
     matLocalBar,
     matMenu
 } from '@ng-icons/material-icons/baseline';
 import { environment } from '../environments/environment';
-import { provideApiEndpointConfiguration } from '@sanctumlab/fe/data-access';
+import {
+    provideApiEndpointConfiguration,
+    provideDataAccessState
+} from '@sanctumlab/fe/data-access';
 import { provideHttpClient } from '@angular/common/http';
 import {
     provideAuthConfiguration,
@@ -38,7 +41,7 @@ export const appConfig: ApplicationConfig = {
         provideStore(),
         provideStoreDevtools({ maxAge: 50, logOnly: !isDevMode() }),
         provideIcons({
-            matLocalGroceryStoreRound,
+            matFastfood,
             matLocalBar,
             matMenu,
             matClose
@@ -66,6 +69,7 @@ export const appConfig: ApplicationConfig = {
             }
         }),
         provideZoneChangeDetection({ eventCoalescing: true }),
+        provideDataAccessState(),
         provideRouter(
             appRoutes,
             withEnabledBlockingInitialNavigation(),

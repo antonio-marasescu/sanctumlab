@@ -1,2 +1,2 @@
 // TYPES
-export * from './lib/menu-api.types';
+export * from './lib/product-api.types';

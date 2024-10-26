@@ -12,7 +12,7 @@ export interface AuthState extends EntityState<AuthUser> {
 
 export const authStateAdapter: EntityAdapter<AuthUser> =
     createEntityAdapter<AuthUser>({
-        selectId: user => user.id
+        selectId: item => item.id
     });
 
 export const authInitialState: AuthState = authStateAdapter.getInitialState({

@@ -1,11 +1,15 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { AppSidebarComponent } from '@sanctumlab/fe/shared-fe';
+import { MenuListContainerComponent } from './containers/menu-list-container.component';
 
 @Component({
     selector: 'ngx-menu-root',
     standalone: true,
-    imports: [RouterOutlet],
-    template: `<router-outlet></router-outlet>`,
+    imports: [RouterOutlet, AppSidebarComponent, MenuListContainerComponent],
+    template: `<ngx-shared-app-sidebar
+        ><router-outlet></router-outlet
+    ></ngx-shared-app-sidebar>`,
     styleUrls: [],
     changeDetection: ChangeDetectionStrategy.OnPush
 })

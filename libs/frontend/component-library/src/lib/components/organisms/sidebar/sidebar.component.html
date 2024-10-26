@@ -19,7 +19,11 @@
 
             <div class="mx-2 flex-1 px-2">
                 <div>
-                    <ngx-clib-logo [logoUrl]="logoUrl" [title]="title" />
+                    <ngx-clib-logo
+                        [logoUrl]="logoUrl"
+                        [title]="title"
+                        [isResponsive]="true"
+                    />
                 </div>
             </div>
             <ng-content select="[theme]"></ng-content>
@@ -57,7 +61,7 @@
                     <ul class="menu bg-base-100">
                         @for (item of category.items; track item.id) {
                             <li>
-                                <a>
+                                <a (click)="onNavigate(item.id)">
                                     <ng-icon [name]="item.icon" size="16" />{{
                                         item.label
                                     }}
