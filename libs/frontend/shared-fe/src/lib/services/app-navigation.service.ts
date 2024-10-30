@@ -28,6 +28,21 @@ export class AppNavigationService {
         ]);
     }
 
+    public async navigateToMenuCreateItem(): Promise<void> {
+        await this.router.navigate([
+            AppFeatureRoutes.MENU,
+            MenuFeatureRoutes.CREATE
+        ]);
+    }
+
+    public async navigateToMenuEditItem(id: string): Promise<void> {
+        await this.router.navigate([
+            AppFeatureRoutes.MENU,
+            MenuFeatureRoutes.EDIT,
+            id
+        ]);
+    }
+
     public async navigateToLoginPage(): Promise<void> {
         await this.router.navigate([
             AppFeatureRoutes.AUTH,

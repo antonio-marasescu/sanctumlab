@@ -6,7 +6,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
     standalone: true,
     imports: [ReactiveFormsModule],
     template: `<div class="form-control">
-        <label class="label cursor-pointer">
+        <label class="label cursor-pointer justify-start gap-4">
             <span class="label-text">{{ label }}</span>
             <input
                 type="checkbox"

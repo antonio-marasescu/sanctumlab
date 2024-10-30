@@ -15,7 +15,9 @@ import { NgIcon } from '@ng-icons/core';
     imports: [NgOptimizedImage, NgClass, NgTemplateOutlet, NgIcon],
     template: `
         @if (hasIndicator) {
-            <div class="indicator w-full max-w-64 sm:max-w-64 lg:max-w-96">
+            <div
+                class="indicator w-full h-full max-w-64 sm:max-w-64 lg:max-w-96"
+            >
                 <span
                     class="indicator-item indicator-bottom indicator-center badge text-xs font-semibold cursor-pointer hover:opacity-85"
                     [ngClass]="{
@@ -44,15 +46,17 @@ import { NgIcon } from '@ng-icons/core';
         <ng-template #card>
             <div
                 [id]="id"
-                class="card bg-base-100 w-full max-w-64 sm:max-w-64 lg:max-w-96 isolate aspect-video shadow-xl ring-1 ring-black/5 hover:bg-base-300 cursor-pointer dark:bg-base-200 dark:hover:bg-neutral dark:shadow-neutral
+                class="card bg-base-100 w-full max-w-64 sm:max-w-64 lg:max-w-96 shadow-xl ring-1 ring-black/5 hover:bg-base-300 cursor-pointer dark:bg-base-200 dark:hover:bg-neutral dark:shadow-neutral
                  dark:shadow-sm"
                 (click)="cardClick.emit(id)"
             >
                 <div class="card-body">
                     <h2 class="card-title">{{ title.toUpperCase() }}</h2>
-                    <p>
-                        {{ description }}
-                    </p>
+                    <div class="min-h-20 max-h-20">
+                        <p class="line-clamp-3">
+                            {{ description }}
+                        </p>
+                    </div>
                     @if (tags && tags.length > 0) {
                         <div class="card-actions pt-2">
                             @for (tag of tags; track tag) {

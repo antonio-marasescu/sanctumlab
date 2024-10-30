@@ -1,7 +1,12 @@
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { SidebarComponent } from './sidebar.component';
 import { MenuAvatarComponent } from '../../molecules/menu-avatar/menu-avatar.component';
-import { ThemeChangerComponent } from '../../atoms/theme-changer/theme-changer.component';
+import { ThemeChangerComponent } from '../../atoms/inputs/theme-changer/theme-changer.component';
+import { FormControl } from '@angular/forms';
+
+const themeChangerControl = new FormControl<boolean>(false, {
+    nonNullable: true
+});
 
 const meta: Meta<SidebarComponent> = {
     component: SidebarComponent,
@@ -16,7 +21,7 @@ const meta: Meta<SidebarComponent> = {
         template: `
           <ngx-clib-sidebar [logoUrl]="logoUrl" [title]="title" [itemCategories]="itemCategories">
             <div theme>
-                <ngx-clib-theme-changer />
+                <ngx-clib-theme-changer [control]="themeChangerControl"/>
             </div>
             <div avatar>
                 <ngx-clib-menu-avatar [isPlaceholder]="true" placeholder="AM" size="xs" [items]="avatarItems" [rightSide]="true"/>
@@ -29,7 +34,8 @@ const meta: Meta<SidebarComponent> = {
             avatarItems: [
                 { id: 'login', label: 'Login' },
                 { id: 'logout', label: 'Logout' }
-            ]
+            ],
+            themeChangerControl
         }
     })
 };

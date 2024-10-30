@@ -1,1 +1,1 @@
-export type TextInputType = 'text' | 'password' | 'textarea';
+export type TextInputType = 'text' | 'password';

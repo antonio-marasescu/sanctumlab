@@ -6,6 +6,7 @@ import { ProductsActions } from './products.actions';
 export const ProductsStateFeatureName = 'products';
 
 export interface ProductsState extends EntityState<ProductItemDto> {
+    currentProductId: string | null;
     errorReason: string | null;
     loading: boolean;
 }
@@ -17,6 +18,7 @@ export const productsStateAdapter: EntityAdapter<ProductItemDto> =
 
 export const productsInitialState: ProductsState =
     productsStateAdapter.getInitialState({
+        currentProductId: null,
         errorReason: null,
         loading: false
     });
@@ -68,6 +70,19 @@ export const productsStateReducer = createReducer(
     on(ProductsActions.getProductListSuccess, (state, { products }) => {
         return productsStateAdapter.setAll(products, {
             ...state,
+            loading: false
+        });
+    }),
+    on(ProductsActions.getProductById, state => {
+        return {
+            ...state,
+            loading: true
+        };
+    }),
+    on(ProductsActions.getProductByIdSuccess, (state, { product }) => {
+        return productsStateAdapter.setOne(product, {
+            ...state,
+            currentProductId: product.id,
             loading: false
         });
     }),

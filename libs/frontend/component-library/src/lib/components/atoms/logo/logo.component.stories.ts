@@ -8,7 +8,7 @@ const meta: Meta<LogoComponent> = {
     argTypes: {
         size: {
             control: { type: 'radio' },
-            options: [Object.keys(ComponentSizes)]
+            options: [...Object.keys(ComponentSizes)]
         }
     }
 };

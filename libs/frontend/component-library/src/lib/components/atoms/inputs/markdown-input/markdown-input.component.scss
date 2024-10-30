@@ -1,0 +1,178 @@
+.ql-toolbar.ql-snow {
+    --tw-bg-opacity: 1;
+    background-color: var(--fallback-n, oklch(var(--n) / var(--tw-bg-opacity)));
+    border: 1px solid
+        var(--fallback-b2, oklch(var(--b2) / var(--tw-bg-opacity)));
+    box-sizing: border-box;
+    font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+        'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    padding: 8px;
+    border-top-right-radius: 0.75rem;
+    border-top-left-radius: 0.75rem;
+}
+
+.ql-container.ql-snow {
+    --tw-bg-opacity: 1;
+    background-color: var(
+        --fallback-b1,
+        oklch(var(--b1) / var(--tw-bg-opacity))
+    );
+    border: 1px solid
+        var(--fallback-b2, oklch(var(--b2) / var(--tw-bg-opacity)));
+    border-bottom-right-radius: 0.75rem;
+    border-bottom-left-radius: 0.75rem;
+    min-height: 200px;
+}
+
+.ql-toolbar.ql-snow .ql-picker.ql-expanded .ql-picker-label {
+    border-color: var(--fallback-bc, oklch(var(--bc) / 1));
+}
+
+.ql-snow .ql-picker-options {
+    --tw-bg-opacity: 1;
+    background-color: var(--fallback-n, oklch(var(--n) / var(--tw-bg-opacity)));
+    display: none;
+    min-width: 100%;
+    padding: 4px 8px;
+    position: absolute;
+    white-space: nowrap;
+}
+
+.ql-snow .ql-picker.ql-expanded .ql-picker-label .ql-fill {
+    --tw-bg-opacity: 1;
+    fill: var(--fallback-b2, oklch(var(--b2) / var(--tw-bg-opacity)));
+}
+
+.ql-snow .ql-picker.ql-expanded .ql-picker-label .ql-stroke {
+    --tw-bg-opacity: 1;
+    stroke: var(--fallback-b2, oklch(var(--b2) / var(--tw-bg-opacity)));
+}
+
+.ql-snow.ql-toolbar button:hover,
+.ql-snow .ql-toolbar button:hover,
+.ql-snow.ql-toolbar button:focus,
+.ql-snow .ql-toolbar button:focus,
+.ql-snow.ql-toolbar button.ql-active,
+.ql-snow .ql-toolbar button.ql-active,
+.ql-snow.ql-toolbar .ql-picker-label:hover,
+.ql-snow .ql-toolbar .ql-picker-label:hover,
+.ql-snow.ql-toolbar .ql-picker-label.ql-active,
+.ql-snow .ql-toolbar .ql-picker-label.ql-active,
+.ql-snow.ql-toolbar .ql-picker-item:hover,
+.ql-snow .ql-toolbar .ql-picker-item:hover,
+.ql-snow.ql-toolbar .ql-picker-item.ql-selected,
+.ql-snow .ql-toolbar .ql-picker-item.ql-selected {
+    color: var(--fallback-a, oklch(var(--a) / var(--tw-bg-opacity)));
+}
+
+.ql-snow.ql-toolbar button:hover .ql-fill,
+.ql-snow .ql-toolbar button:hover .ql-fill,
+.ql-snow.ql-toolbar button:focus .ql-fill,
+.ql-snow .ql-toolbar button:focus .ql-fill,
+.ql-snow.ql-toolbar button.ql-active .ql-fill,
+.ql-snow .ql-toolbar button.ql-active .ql-fill,
+.ql-snow.ql-toolbar .ql-picker-label:hover .ql-fill,
+.ql-snow .ql-toolbar .ql-picker-label:hover .ql-fill,
+.ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-fill,
+.ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-fill,
+.ql-snow.ql-toolbar .ql-picker-item:hover .ql-fill,
+.ql-snow .ql-toolbar .ql-picker-item:hover .ql-fill,
+.ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-fill,
+.ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-fill,
+.ql-snow.ql-toolbar button:hover .ql-stroke.ql-fill,
+.ql-snow .ql-toolbar button:hover .ql-stroke.ql-fill,
+.ql-snow.ql-toolbar button:focus .ql-stroke.ql-fill,
+.ql-snow .ql-toolbar button:focus .ql-stroke.ql-fill,
+.ql-snow.ql-toolbar button.ql-active .ql-stroke.ql-fill,
+.ql-snow .ql-toolbar button.ql-active .ql-stroke.ql-fill,
+.ql-snow.ql-toolbar .ql-picker-label:hover .ql-stroke.ql-fill,
+.ql-snow .ql-toolbar .ql-picker-label:hover .ql-stroke.ql-fill,
+.ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-stroke.ql-fill,
+.ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-stroke.ql-fill,
+.ql-snow.ql-toolbar .ql-picker-item:hover .ql-stroke.ql-fill,
+.ql-snow .ql-toolbar .ql-picker-item:hover .ql-stroke.ql-fill,
+.ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke.ql-fill,
+.ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke.ql-fill {
+    --tw-bg-opacity: 1;
+    stroke: var(--fallback-a, oklch(var(--a) / var(--tw-bg-opacity)));
+    fill: var(--fallback-a, oklch(var(--a) / var(--tw-bg-opacity)));
+}
+
+.ql-snow.ql-toolbar button:hover .ql-stroke,
+.ql-snow .ql-toolbar button:hover .ql-stroke,
+.ql-snow.ql-toolbar button:focus .ql-stroke,
+.ql-snow .ql-toolbar button:focus .ql-stroke,
+.ql-snow.ql-toolbar button.ql-active .ql-stroke,
+.ql-snow .ql-toolbar button.ql-active .ql-stroke,
+.ql-snow.ql-toolbar .ql-picker-label:hover .ql-stroke,
+.ql-snow .ql-toolbar .ql-picker-label:hover .ql-stroke,
+.ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-stroke,
+.ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-stroke,
+.ql-snow.ql-toolbar .ql-picker-item:hover .ql-stroke,
+.ql-snow .ql-toolbar .ql-picker-item:hover .ql-stroke,
+.ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke,
+.ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke,
+.ql-snow.ql-toolbar button:hover .ql-stroke-miter,
+.ql-snow .ql-toolbar button:hover .ql-stroke-miter,
+.ql-snow.ql-toolbar button:focus .ql-stroke-miter,
+.ql-snow .ql-toolbar button:focus .ql-stroke-miter,
+.ql-snow.ql-toolbar button.ql-active .ql-stroke-miter,
+.ql-snow .ql-toolbar button.ql-active .ql-stroke-miter,
+.ql-snow.ql-toolbar .ql-picker-label:hover .ql-stroke-miter,
+.ql-snow .ql-toolbar .ql-picker-label:hover .ql-stroke-miter,
+.ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-stroke-miter,
+.ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-stroke-miter,
+.ql-snow.ql-toolbar .ql-picker-item:hover .ql-stroke-miter,
+.ql-snow .ql-toolbar .ql-picker-item:hover .ql-stroke-miter,
+.ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke-miter,
+.ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke-miter {
+    --tw-bg-opacity: 1;
+    stroke: var(--fallback-a, oklch(var(--a) / var(--tw-bg-opacity)));
+}
+
+.ql-snow a {
+    --tw-bg-opacity: 1;
+    fill: var(--fallback-a, oklch(var(--a) / var(--tw-bg-opacity)));
+    color: var(--fallback-a, oklch(var(--a) / var(--tw-bg-opacity)));
+}
+
+.ql-snow .ql-editor code,
+.ql-snow .ql-editor .ql-code-block-container {
+    --tw-bg-opacity: 1;
+    background-color: var(
+        --fallback-b3,
+        oklch(var(--b3) / var(--tw-bg-opacity))
+    );
+    border-radius: 3px;
+}
+
+.ql-snow .ql-editor .ql-code-block-container {
+    --tw-bg-opacity: 1;
+    background-color: var(
+        --fallback-b3,
+        oklch(var(--b3) / var(--tw-bg-opacity))
+    );
+    color: var(--fallback-bc, oklch(var(--bc) / var(--tw-text-opacity)));
+    font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+        'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    overflow: visible;
+}
+
+.ql-editor.ql-blank::before {
+    --tw-bg-opacity: 1;
+    color: var(--fallback-bc, oklch(var(--bc) / var(--tw-text-opacity)));
+    content: attr(data-placeholder);
+    font-style: italic;
+    left: 15px;
+    pointer-events: none;
+    position: absolute;
+    right: 15px;
+}
+
+.ql-snow .ql-stroke,
+.ql-snow .ql-fill,
+.ql-snow .ql-stroke.ql-fill {
+    color: var(--fallback-nc, oklch(var(--nc) / 1));
+    stroke: var(--fallback-nc, oklch(var(--nc) / 1));
+    fill: var(--fallback-n, oklch(var(--n) / var(--tw-bg-opacity)));
+}

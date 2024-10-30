@@ -16,6 +16,8 @@ export const ProductsActions = createActionGroup({
         RemoveProductSuccess: props<{ id: string }>(),
         GetProductList: emptyProps(),
         GetProductListSuccess: props<{ products: ProductItemDto[] }>(),
+        GetProductById: props<{ id: string }>(),
+        GetProductByIdSuccess: props<{ product: ProductItemDto }>(),
         ProductFailure: props<{ reason: string }>()
     }
 });

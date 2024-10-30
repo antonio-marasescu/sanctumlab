@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import { TextInputComponent } from './text-input.component';
 import { FormControl, Validators } from '@angular/forms';
+import { TextareaInputComponent } from './textarea-input.component';
 
 const control = new FormControl<string>('', {
     validators: [
@@ -12,9 +12,9 @@ const control = new FormControl<string>('', {
     nonNullable: true
 });
 
-const meta: Meta<TextInputComponent> = {
-    title: 'Atoms/Inputs/TextInput',
-    component: TextInputComponent,
+const meta: Meta<TextareaInputComponent> = {
+    title: 'Atoms/Inputs/TextareaInput',
+    component: TextareaInputComponent,
     render: args => ({
         props: {
             ...args,
@@ -22,24 +22,19 @@ const meta: Meta<TextInputComponent> = {
         }
     }),
     argTypes: {
-        type: {
-            control: { type: 'radio' },
-            options: ['text', 'password', 'textarea']
-        },
         inputStyle: {
             control: { type: 'radio' },
-            options: ['default', 'bordered']
+            options: ['default', 'bordered', 'ghost']
         }
     }
 };
 export default meta;
-type Story = StoryObj<TextInputComponent>;
+type Story = StoryObj<TextareaInputComponent>;
 
 export const Primary: Story = {
     args: {
         id: 'text-input',
         label: 'Label',
-        type: 'text',
         placeholder: 'Text Input',
         autofocus: false,
         inputStyle: 'default'

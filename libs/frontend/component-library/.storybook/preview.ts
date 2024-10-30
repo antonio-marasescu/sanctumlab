@@ -5,9 +5,12 @@ import { provideIcons } from '@ng-icons/core';
 import { matLocalGroceryStoreRound } from '@ng-icons/material-icons/round';
 import {
     matClose,
+    matDelete,
     matLocalBar,
-    matMenu
+    matMenu,
+    matPlus
 } from '@ng-icons/material-icons/baseline';
+import { provideQuillConfig } from 'ngx-quill';
 
 const preview: Preview = {
     decorators: [
@@ -17,7 +20,9 @@ const preview: Preview = {
                     matLocalGroceryStoreRound,
                     matLocalBar,
                     matMenu,
-                    matClose
+                    matClose,
+                    matDelete,
+                    matPlus
                 }),
                 provideInputValidationConfiguration({
                     errors: {
@@ -28,6 +33,25 @@ const preview: Preview = {
                             requiredLength: number;
                         }) => `The required length is ${requiredLength}`,
                         email: () => `Invalid email address format`
+                    }
+                }),
+                provideQuillConfig({
+                    theme: 'snow',
+                    modules: {
+                        syntax: false,
+                        toolbar: [
+                            ['bold', 'italic', 'underline', 'strike'], // toggled buttons
+                            ['blockquote', 'code-block'],
+                            [{ header: 1 }, { header: 2 }], // custom button values
+                            [{ list: 'ordered' }, { list: 'bullet' }],
+                            [{ script: 'sub' }, { script: 'super' }], // superscript/subscript
+                            [{ indent: '-1' }, { indent: '+1' }], // outdent/indent
+                            [{ direction: 'rtl' }], // text direction
+                            [{ size: ['small', false, 'large', 'huge'] }], // custom dropdown
+                            [{ header: [1, 2, 3, 4, 5, 6, false] }],
+                            [{ align: [] }],
+                            ['clean']
+                        ]
                     }
                 })
             ]

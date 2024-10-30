@@ -90,4 +90,24 @@ export class ProductsEffects {
             )
         )
     );
+
+    getProductById$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(ProductsActions.getProductById),
+            exhaustMap(action =>
+                this.client.retrieveProductById(action.id).pipe(
+                    map(product =>
+                        ProductsActions.getProductByIdSuccess({ product })
+                    ),
+                    catchError((error: HttpErrorResponse) =>
+                        of(
+                            ProductsActions.productFailure({
+                                reason: error.message
+                            })
+                        )
+                    )
+                )
+            )
+        )
+    );
 }

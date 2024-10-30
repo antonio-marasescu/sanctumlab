@@ -16,9 +16,11 @@ import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideIcons } from '@ng-icons/core';
 import {
     matClose,
+    matDelete,
     matFastfood,
     matLocalBar,
-    matMenu
+    matMenu,
+    matPlus
 } from '@ng-icons/material-icons/baseline';
 import { environment } from '../environments/environment';
 import {
@@ -33,6 +35,8 @@ import {
 } from '@sanctumlab/fe/auth';
 import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
 import { provideInputValidationConfiguration } from '@sanctumlab/fe/component-library';
+import { MARKED_OPTIONS, provideMarkdown } from 'ngx-markdown';
+import { provideQuillConfig } from 'ngx-quill';
 
 export const appConfig: ApplicationConfig = {
     providers: [
@@ -44,7 +48,9 @@ export const appConfig: ApplicationConfig = {
             matFastfood,
             matLocalBar,
             matMenu,
-            matClose
+            matClose,
+            matDelete,
+            matPlus
         }),
         provideAuthConfiguration({
             cognitoGuestUsername: environment.cognitoGuestUsername,
@@ -74,6 +80,31 @@ export const appConfig: ApplicationConfig = {
             appRoutes,
             withEnabledBlockingInitialNavigation(),
             withComponentInputBinding()
-        )
+        ),
+        provideMarkdown({
+            markedOptions: {
+                provide: MARKED_OPTIONS,
+                useValue: {
+                    gfm: true,
+                    breaks: false,
+                    pedantic: false
+                }
+            }
+        }),
+        provideQuillConfig({
+            theme: 'snow',
+            modules: {
+                syntax: false,
+                toolbar: [
+                    ['bold', 'italic', 'underline', 'strike'], // toggled buttons
+                    ['blockquote'],
+                    [{ header: 1 }, { header: 2 }], // custom button values
+                    [{ list: 'ordered' }, { list: 'bullet' }],
+                    [{ indent: '-1' }, { indent: '+1' }], // outdent/indent
+                    [{ align: [] }],
+                    ['clean']
+                ]
+            }
+        })
     ]
 };

@@ -19,6 +19,17 @@ export const selectProductsByCategory = (category: ProductItemCategory) =>
         );
     });
 
+export const selectProductById = (id: string) =>
+    createSelector(selectProductsFeatureState(), state => {
+        return state.entities[id] as ProductItemDto;
+    });
+
+export const selectCurrentProduct = () =>
+    createSelector(selectProductsFeatureState(), state => {
+        if (!state.currentProductId) return null;
+        return state.entities[state.currentProductId] as ProductItemDto;
+    });
+
 export const selectProductsStateLoading = () =>
     createSelector(selectProductsFeatureState(), state => {
         return state.loading;

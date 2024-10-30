@@ -24,7 +24,8 @@
                 "browserTarget": "component-library:build-storybook",
                 "compodoc": false,
                 "styles": [
-                    "libs/frontend/component-library/.storybook/styles.scss"
+                    "libs/frontend/component-library/.storybook/styles.scss",
+                    "node_modules/quill/dist/quill.snow.css"
                 ]
             },
             "configurations": {
@@ -42,7 +43,8 @@
                 "browserTarget": "component-library:build-storybook",
                 "compodoc": false,
                 "styles": [
-                    "libs/frontend/component-library/.storybook/styles.scss"
+                    "libs/frontend/component-library/.storybook/styles.scss",
+                    "node_modules/quill/dist/quill.snow.css"
                 ]
             },
             "configurations": {
