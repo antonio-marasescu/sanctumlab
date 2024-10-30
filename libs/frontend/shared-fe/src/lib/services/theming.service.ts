@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable({ providedIn: 'root' })
 export class ThemingService {
     protected readonly ColorThemeKey = 'data-theme';
-    protected readonly LightMode = 'corporate';
+    protected readonly LightMode = 'winter';
     protected readonly DarkMode = 'dark';
 
     public isLightMode(): boolean {

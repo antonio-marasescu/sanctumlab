@@ -8,6 +8,7 @@ import { selectMenuStateSelectedItem } from '../../state/menu.selectors';
 import { AsyncPipe } from '@angular/common';
 import { MenuActions } from '../../state/menu.actions';
 import { AppNavigationService } from '@sanctumlab/fe/shared-fe';
+import { ProductApiService } from '@sanctumlab/fe/data-access';
 
 @UntilDestroy()
 @Component({
@@ -22,6 +23,8 @@ import { AppNavigationService } from '@sanctumlab/fe/shared-fe';
                 [opened]="item !== null"
                 (modalClose)="onModalClosed()"
                 (editEvent)="onItemEdit($event)"
+                (enableEvent)="onEnableEvent($event)"
+                (disableEvent)="onDisableEvent($event)"
             />
         }
     `,
@@ -32,7 +35,8 @@ export class MenuItemContainerComponent implements OnInit {
 
     constructor(
         private store: Store,
-        private appNavigationService: AppNavigationService
+        private appNavigationService: AppNavigationService,
+        private productApiService: ProductApiService
     ) {}
 
     ngOnInit() {
@@ -45,5 +49,19 @@ export class MenuItemContainerComponent implements OnInit {
 
     protected async onItemEdit(id: string): Promise<void> {
         await this.appNavigationService.navigateToMenuEditItem(id);
+    }
+
+    protected onEnableEvent(item: ProductItemDto): void {
+        this.productApiService.sendUpdateProduct(item.id, {
+            ...item,
+            available: true
+        });
+    }
+
+    protected onDisableEvent(item: ProductItemDto): void {
+        this.productApiService.sendUpdateProduct(item.id, {
+            ...item,
+            available: false
+        });
     }
 }

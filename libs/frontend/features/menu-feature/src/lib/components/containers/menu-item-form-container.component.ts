@@ -1,13 +1,18 @@
 import {
     ChangeDetectionStrategy,
     Component,
+    EventEmitter,
     Input,
     OnChanges,
     OnInit,
+    Output,
     SimpleChanges
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { ProductItemForm } from '../../types/product-item-form.types';
+import {
+    ProductFormSubmitEvent,
+    ProductItemForm
+} from '../../types/product-item-form.types';
 import { createProductItemForm } from '../../utils/product-item-form.utils';
 import { MenuItemFormViewComponent } from '../views/menu-item-form-view.component';
 import {
@@ -35,6 +40,7 @@ export class MenuItemFormContainerComponent implements OnInit, OnChanges {
     @Input({ required: true }) item?: ProductItemDto | null;
     @Input({ required: true }) title = '';
     @Input({ required: true }) actionLabel = '';
+    @Output() submitEvent = new EventEmitter<ProductFormSubmitEvent>();
 
     protected form!: FormGroup<ProductItemForm>;
     protected readonly categoryOptions: SelectOption[] = [
@@ -79,7 +85,7 @@ export class MenuItemFormContainerComponent implements OnInit, OnChanges {
             return;
         }
         const formValue = this.form.getRawValue();
-        console.log(formValue);
+        this.submitEvent.emit({ form: formValue, id: this.item?.id });
     }
 
     protected async onCloseEvent(): Promise<void> {

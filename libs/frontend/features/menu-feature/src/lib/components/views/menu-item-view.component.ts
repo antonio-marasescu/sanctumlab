@@ -46,7 +46,7 @@ import { AdminRestrictDirective } from '@sanctumlab/fe/auth';
                     </div>
                     <div class="flex gap-2">
                         @for (tag of item.tags; track tag) {
-                            <div class="badge badge-outline">{{ tag }}</div>
+                            <div class="badge badge-accent">{{ tag }}</div>
                         }
                     </div>
 
@@ -71,6 +71,25 @@ import { AdminRestrictDirective } from '@sanctumlab/fe/auth';
                 [size]="'sm'"
                 (clickEvent)="modalClose.emit()"
             />
+            @if (item) {
+                @if (item.available) {
+                    <ngx-clib-button
+                        *ngxAuthAdminRestrict
+                        label="Disable"
+                        [size]="'sm'"
+                        theme="error"
+                        (clickEvent)="disableEvent.emit(item)"
+                    />
+                } @else {
+                    <ngx-clib-button
+                        *ngxAuthAdminRestrict
+                        label="Enable"
+                        [size]="'sm'"
+                        theme="success"
+                        (clickEvent)="enableEvent.emit(item)"
+                    />
+                }
+            }
             <ngx-clib-button
                 *ngxAuthAdminRestrict
                 label="Edit"
@@ -87,4 +106,6 @@ export class MenuItemViewComponent {
     @Input({ required: true }) item!: ProductItemDto | null;
     @Output() modalClose = new EventEmitter<void>();
     @Output() editEvent = new EventEmitter<string>();
+    @Output() disableEvent = new EventEmitter<ProductItemDto>();
+    @Output() enableEvent = new EventEmitter<ProductItemDto>();
 }
