@@ -52,6 +52,11 @@
         },
         "build-storybook": {
             "cache": true
+        },
+        "@nx/vite:build": {
+            "cache": true,
+            "dependsOn": ["^build"],
+            "inputs": ["production", "^production"]
         }
     },
     "generators": {
@@ -83,6 +88,16 @@
                 "buildStorybookTargetName": "build-storybook",
                 "testStorybookTargetName": "test-storybook",
                 "staticStorybookTargetName": "static-storybook"
+            }
+        },
+        {
+            "plugin": "@nx/vite/plugin",
+            "options": {
+                "buildTargetName": "build",
+                "testTargetName": "test",
+                "serveTargetName": "serve",
+                "previewTargetName": "preview",
+                "serveStaticTargetName": "serve-static"
             }
         }
     ]
