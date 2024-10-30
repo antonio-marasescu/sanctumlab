@@ -3,6 +3,10 @@ export * from './lib/auth-feature.routes';
 
 // GUARDS
 export * from './lib/guards/authenticated.guard';
+export * from './lib/guards/admin.guard';
+
+// DIRECTIVES
+export * from './lib/directives/admin-restrict.directive';
 
 // CONFIG
 export * from './lib/config/auth-initializer.config';

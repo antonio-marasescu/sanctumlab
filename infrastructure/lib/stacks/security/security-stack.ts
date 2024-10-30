@@ -2,6 +2,7 @@ import * as cdk from 'aws-cdk-lib';
 import { Duration, RemovalPolicy } from 'aws-cdk-lib';
 import { InfrastructureStackProps } from '../../shared/types/infrastructure-stack.types';
 import {
+    CfnUserPoolGroup,
     ClientAttributes,
     UserPool,
     UserPoolClient,
@@ -9,6 +10,7 @@ import {
     UserPoolResourceServer
 } from 'aws-cdk-lib/aws-cognito';
 import {
+    COGNITO_USER_POOL_ADMIN_GROUP,
     COGNITO_USER_POOL_CLIENT_ID,
     COGNITO_USER_POOL_DOMAIN_ID,
     COGNITO_USER_POOL_DOMAIN_PREFIX,
@@ -31,6 +33,7 @@ export function createSecurityStack(
 
     createResourceServer(userPool, props);
     createSecurityOutputs(stack, userPool, userPoolClient, userPoolDomain);
+    createAdminGroup(stack, props, { userPool });
 
     return userPool;
 }
@@ -120,6 +123,19 @@ function createResourceServer(
             userPoolResourceServerName: COGNITO_USER_POOL_RESOURCE_SERVER(props)
         }
     );
+}
+
+function createAdminGroup(
+    stack: cdk.Stack,
+    props: InfrastructureStackProps,
+    deps: { userPool: UserPool }
+): void {
+    new CfnUserPoolGroup(stack, COGNITO_USER_POOL_ADMIN_GROUP(props), {
+        groupName: 'admin',
+        userPoolId: deps.userPool.userPoolId,
+        description: 'Admin group with elevated permissions',
+        precedence: 1
+    });
 }
 
 function createSecurityOutputs(

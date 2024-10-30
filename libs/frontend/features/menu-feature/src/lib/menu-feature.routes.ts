@@ -4,6 +4,7 @@ import { MenuFeatureRoutes } from '@sanctumlab/fe/shared-fe';
 import { ProductItemCategory } from '@sanctumlab/api-interfaces';
 import { provideState } from '@ngrx/store';
 import { MenuStateFeatureName, menuStateReducer } from './state/menu.reducers';
+import { adminGuard } from '@sanctumlab/fe/auth';
 
 export const menuFeatureRoutes: Routes = [
     {
@@ -36,14 +37,16 @@ export const menuFeatureRoutes: Routes = [
                 loadComponent: () =>
                     import(
                         './components/pages/menu-item-create-page.component'
-                    ).then(mod => mod.MenuItemCreatePageComponent)
+                    ).then(mod => mod.MenuItemCreatePageComponent),
+                canActivate: [adminGuard]
             },
             {
                 path: `${MenuFeatureRoutes.EDIT}/:id`,
                 loadComponent: () =>
                     import(
                         './components/pages/menu-item-edit-page.component'
-                    ).then(mod => mod.MenuItemEditPageComponent)
+                    ).then(mod => mod.MenuItemEditPageComponent),
+                canActivate: [adminGuard]
             },
             {
                 path: '**',

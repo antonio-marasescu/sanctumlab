@@ -65,22 +65,32 @@ export class AuthenticationService {
     public async login(email: string, password: string): Promise<boolean> {
         try {
             const response = await signIn({
-                username: this.authConfiguration.cognitoGuestUsername,
+                username: email,
                 password: password
             });
-
             if (response.nextStep.signInStep === 'DONE') {
                 return true;
             }
 
             return response.isSignedIn;
         } catch (error) {
+            console.error(error);
             return false;
         }
     }
 
     public async signOut(): Promise<void> {
         await signOut();
+    }
+
+    public async isAdmin(): Promise<boolean> {
+        const isAuthenticated = await this.isAuthenticated();
+        if (!isAuthenticated) {
+            return false;
+        }
+
+        const currentUser = await this.getCurrentUser();
+        return currentUser.isAdmin;
     }
 
     private async updateAuthState(): Promise<void> {
@@ -97,6 +107,16 @@ export class AuthenticationService {
         const session = await fetchAuthSession();
         const currentUser = await getCurrentUser();
 
+        let isAdmin = false;
+
+        const cognitoGroups = session?.tokens?.idToken?.payload?.[
+            'cognito:groups'
+        ] as string[];
+        if (cognitoGroups) {
+            isAdmin =
+                cognitoGroups.findIndex(group => group === 'admin') !== -1;
+        }
+
         const username =
             (session.tokens?.idToken?.payload?.['name'] as string) || '';
         const id = currentUser.userId;
@@ -105,7 +125,8 @@ export class AuthenticationService {
         return {
             id,
             email,
-            username
+            username,
+            isAdmin
         };
     }
 

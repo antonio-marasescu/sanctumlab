@@ -10,13 +10,14 @@ import {
     ItemCardComponent
 } from '@sanctumlab/fe/component-library';
 import { ProductItemDto } from '@sanctumlab/api-interfaces';
+import { AdminRestrictDirective } from '@sanctumlab/fe/auth';
 
 @Component({
     selector: 'ngx-menu-list-view',
     standalone: true,
-    imports: [ItemCardComponent, ButtonComponent],
+    imports: [ItemCardComponent, ButtonComponent, AdminRestrictDirective],
     template: ` <div class="m-12">
-        <div class="flex flex-row-reverse">
+        <div class="flex flex-row-reverse" *ngxAuthAdminRestrict>
             <ngx-clib-button
                 label="Create"
                 theme="primary"

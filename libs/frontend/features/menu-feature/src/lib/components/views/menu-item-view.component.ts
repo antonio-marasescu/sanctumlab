@@ -11,11 +11,17 @@ import {
 } from '@sanctumlab/fe/component-library';
 import { ProductItemDto } from '@sanctumlab/api-interfaces';
 import { MarkdownComponent } from 'ngx-markdown';
+import { AdminRestrictDirective } from '@sanctumlab/fe/auth';
 
 @Component({
     selector: 'ngx-menu-item-view',
     standalone: true,
-    imports: [ButtonComponent, ModalComponent, MarkdownComponent],
+    imports: [
+        ButtonComponent,
+        ModalComponent,
+        MarkdownComponent,
+        AdminRestrictDirective
+    ],
     template: ` <ngx-clib-modal
         [opened]="opened"
         (closeEvent)="modalClose.emit()"
@@ -66,6 +72,7 @@ import { MarkdownComponent } from 'ngx-markdown';
                 (clickEvent)="modalClose.emit()"
             />
             <ngx-clib-button
+                *ngxAuthAdminRestrict
                 label="Edit"
                 [size]="'sm'"
                 theme="primary"

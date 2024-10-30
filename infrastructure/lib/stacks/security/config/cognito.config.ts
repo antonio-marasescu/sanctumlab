@@ -17,3 +17,8 @@ export const COGNITO_USER_POOL_RESOURCE_SERVER = (
     props: InfrastructureStackProps
 ) =>
     `${props.stackConfig.appName}-user-pool-resource-server-${props.stackConfig.tenantEnv}`;
+
+export const COGNITO_USER_POOL_ADMIN_GROUP = (
+    props: InfrastructureStackProps
+) =>
+    `${props.stackConfig.appName}-user-pool-admin-group-${props.stackConfig.tenantEnv}`;
