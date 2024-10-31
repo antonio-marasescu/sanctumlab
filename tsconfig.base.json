@@ -21,6 +21,11 @@
             "@sanctumlab/apps/sanctumlab-api": [
                 "apps/sanctumlab-api/src/index.ts"
             ],
+            "@sanctumlab/be/auth-be": ["libs/backend/auth-be/src/index.ts"],
+            "@sanctumlab/be/sanctumlab-authorizer": [
+                "apps/sanctumlab-authorizer/src/index.ts"
+            ],
+            "@sanctumlab/be/shared-be": ["libs/backend/shared-be/src/index.ts"],
             "@sanctumlab/fe/auth": ["libs/frontend/features/auth/src/index.ts"],
             "@sanctumlab/fe/component-library": [
                 "libs/frontend/component-library/src/index.ts"
@@ -34,7 +39,9 @@
             "@sanctumlab/fe/shared-fe": [
                 "libs/frontend/shared-fe/src/index.ts"
             ],
-            "@sanctumlab/be/shared-be": ["libs/backend/shared-be/src/index.ts"]
+            "@sanctumlab/be/products-feature": [
+                "libs/backend/features/products-feature/src/index.ts"
+            ]
         }
     },
     "exclude": ["node_modules", "tmp"]
