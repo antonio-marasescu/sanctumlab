@@ -45,4 +45,5 @@ Thumbs.db
 
 
 storybook-static
+.env
 !/docker/.env

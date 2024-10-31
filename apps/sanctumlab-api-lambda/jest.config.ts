@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-    displayName: 'sanctumlab-api',
+    displayName: 'sanctumlab-api-lambda',
     preset: '../../jest.preset.js',
     testEnvironment: 'node',
     transform: {
@@ -10,5 +10,5 @@ export default {
         ]
     },
     moduleFileExtensions: ['ts', 'js', 'html'],
-    coverageDirectory: '../../coverage/apps/sanctumlab-api'
+    coverageDirectory: '../../coverage/apps/sanctumlab-api-lambda'
 };

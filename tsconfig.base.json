@@ -18,7 +18,7 @@
             "@sanctumlab/api-interfaces": [
                 "libs/shared/api-interfaces/src/index.ts"
             ],
-            "@sanctumlab/apps/sanctumlab-api": [
+            "@sanctumlab/apps/sanctumlab-api-lambda": [
                 "apps/sanctumlab-api/src/index.ts"
             ],
             "@sanctumlab/be/auth-be": ["libs/backend/auth-be/src/index.ts"],

@@ -1,7 +1,7 @@
 {
-    "name": "sanctumlab-api",
+    "name": "sanctumlab-api-lambda",
     "$schema": "../../node_modules/nx/schemas/project-schema.json",
-    "sourceRoot": "apps/sanctumlab-api/src",
+    "sourceRoot": "apps/sanctumlab-api-lambda/src",
     "projectType": "library",
     "tags": [],
     "targets": {
@@ -9,17 +9,17 @@
             "executor": "@nx/vite:build",
             "outputs": ["{options.outputPath}"],
             "options": {
-                "outputPath": "dist/apps/sanctumlab-api",
-                "main": "apps/sanctumlab-api/src/index.ts",
-                "tsConfig": "apps/sanctumlab-api/tsconfig.lib.json",
-                "assets": ["apps/sanctumlab-api/*.md"]
+                "outputPath": "dist/apps/sanctumlab-api-lambda",
+                "main": "apps/sanctumlab-api-lambda/src/index.ts",
+                "tsConfig": "apps/sanctumlab-api-lambda/tsconfig.lib.json",
+                "assets": ["apps/sanctumlab-api-lambda/*.md"]
             }
         },
         "test": {
             "executor": "@nx/jest:jest",
             "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
             "options": {
-                "jestConfig": "apps/sanctumlab-api/jest.config.ts"
+                "jestConfig": "apps/sanctumlab-api-lambda/jest.config.ts"
             }
         }
     }

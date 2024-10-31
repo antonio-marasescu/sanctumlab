@@ -1,4 +1,4 @@
-# sanctumlab-api
+# sanctumlab-api-lambda
 
 This library was generated with [Nx](https://nx.dev).
 
