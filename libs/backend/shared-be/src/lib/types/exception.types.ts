@@ -10,39 +10,30 @@ export interface BaseException {
     message: string;
 }
 
-export class NotAuthorizedException implements BaseException {
+export class NotAuthorizedException extends Error implements BaseException {
     readonly statusCode = 403;
     readonly type = ExceptionType.FORBIDDEN;
-    message = 'Invalid access rights';
 
     constructor(values?: Pick<NotAuthorizedException, 'message'>) {
-        if (values) {
-            this.message = values.message;
-        }
+        super(values?.message || 'Invalid access rights');
     }
 }
 
-export class InvalidPayloadException implements BaseException {
+export class InvalidPayloadException extends Error implements BaseException {
     readonly statusCode = 400;
     readonly type = ExceptionType.INVALID_PAYLOAD;
-    message = 'The payload data was malformed';
 
     constructor(values?: Pick<InvalidPayloadException, 'message'>) {
-        if (values) {
-            this.message = values.message;
-        }
+        super(values?.message || 'The payload data was malformed');
     }
 }
 
-export class NotFoundException implements BaseException {
+export class NotFoundException extends Error implements BaseException {
     readonly statusCode = 404;
     readonly type = ExceptionType.NOT_FOUND;
-    message = 'The requested data could not be found';
 
     constructor(values?: Pick<NotFoundException, 'message'>) {
-        if (values) {
-            this.message = values.message;
-        }
+        super(values?.message || 'The requested data could not be found');
     }
 }
 
