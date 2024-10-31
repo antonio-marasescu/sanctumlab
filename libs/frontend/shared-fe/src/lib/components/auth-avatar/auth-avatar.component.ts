@@ -9,7 +9,7 @@ import { UntilDestroy } from '@ngneat/until-destroy';
 import {
     AuthenticationService,
     selectAuthStateCurrentUser
-} from '@sanctumlab/fe/auth';
+} from '@sanctumlab/fe/auth-fe';
 import { Store } from '@ngrx/store';
 import { map, Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';

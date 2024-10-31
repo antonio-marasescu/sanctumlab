@@ -1,7 +1,7 @@
 {
-    "name": "auth",
-    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-    "sourceRoot": "libs/frontend/features/auth/src",
+    "name": "auth-fe",
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "libs/frontend/auth-fe/src",
     "prefix": "lib",
     "projectType": "library",
     "tags": [],

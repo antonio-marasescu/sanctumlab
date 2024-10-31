@@ -26,7 +26,7 @@
                 "apps/sanctumlab-authorizer/src/index.ts"
             ],
             "@sanctumlab/be/shared-be": ["libs/backend/shared-be/src/index.ts"],
-            "@sanctumlab/fe/auth": ["libs/frontend/features/auth/src/index.ts"],
+            "@sanctumlab/fe/auth-fe": ["libs/frontend/auth-fe/src/index.ts"],
             "@sanctumlab/fe/component-library": [
                 "libs/frontend/component-library/src/index.ts"
             ],

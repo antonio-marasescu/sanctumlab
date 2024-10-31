@@ -4,7 +4,7 @@ import { MenuFeatureRoutes } from '@sanctumlab/fe/shared-fe';
 import { ProductItemCategory } from '@sanctumlab/api-interfaces';
 import { provideState } from '@ngrx/store';
 import { MenuStateFeatureName, menuStateReducer } from './state/menu.reducers';
-import { adminGuard } from '@sanctumlab/fe/auth';
+import { adminGuard } from '@sanctumlab/fe/auth-fe';
 
 export const menuFeatureRoutes: Routes = [
     {

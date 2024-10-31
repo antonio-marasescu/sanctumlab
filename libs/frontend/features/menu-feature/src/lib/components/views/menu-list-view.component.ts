@@ -10,7 +10,7 @@ import {
     ItemCardComponent
 } from '@sanctumlab/fe/component-library';
 import { ProductItemDto } from '@sanctumlab/api-interfaces';
-import { AdminRestrictDirective } from '@sanctumlab/fe/auth';
+import { AdminRestrictDirective } from '@sanctumlab/fe/auth-fe';
 import { FormGroup } from '@angular/forms';
 import { ProductFilterForm } from '../../types/product-filter-form.types';
 import { MenuListFilterViewComponent } from './menu-list-filter-view.component';

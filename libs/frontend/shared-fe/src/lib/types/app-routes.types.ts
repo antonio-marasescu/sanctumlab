@@ -1,4 +1,4 @@
-import { AuthFeatureName, AuthRoutes } from '@sanctumlab/fe/auth';
+import { AuthFeatureName, AuthRoutes } from '@sanctumlab/fe/auth-fe';
 
 export enum AppFeatureRoutes {
     MENU = 'menu',
