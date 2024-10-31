@@ -17,7 +17,7 @@ import {
 import { ModalComponent } from '@sanctumlab/fe/component-library';
 import { Store } from '@ngrx/store';
 import { MenuActions } from '../../state/menu.actions';
-import { AppNavigationService } from '@sanctumlab/fe/shared-fe';
+import { AppNavigationService } from '@sanctumlab/fe/shared';
 import { FormGroup } from '@angular/forms';
 import {
     ProductFilterForm,

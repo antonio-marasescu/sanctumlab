@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { AppSidebarComponent } from '@sanctumlab/fe/shared-fe';
+import { AppSidebarComponent } from '@sanctumlab/fe/shared';
 import { MenuListContainerComponent } from './containers/menu-list-container.component';
 
 @Component({

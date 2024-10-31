@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
 import { MenuRootComponent } from './components/menu-root.component';
-import { MenuFeatureRoutes } from '@sanctumlab/fe/shared-fe';
+import { MenuFeatureRoutes } from '@sanctumlab/fe/shared';
 import { ProductItemCategory } from '@sanctumlab/api-interfaces';
 import { provideState } from '@ngrx/store';
 import { MenuStateFeatureName, menuStateReducer } from './state/menu.reducers';
-import { adminGuard } from '@sanctumlab/fe/auth-fe';
+import { adminGuard } from '@sanctumlab/fe/auth';
 
 export const menuFeatureRoutes: Routes = [
     {

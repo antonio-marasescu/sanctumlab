@@ -20,7 +20,7 @@ import {
     ProductItemDto
 } from '@sanctumlab/api-interfaces';
 import { SelectOption } from '@sanctumlab/fe/component-library';
-import { AppNavigationService } from '@sanctumlab/fe/shared-fe';
+import { AppNavigationService } from '@sanctumlab/fe/shared';
 
 @Component({
     selector: 'ngx-menu-item-form-container',

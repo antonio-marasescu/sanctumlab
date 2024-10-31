@@ -7,7 +7,7 @@ import { Store } from '@ngrx/store';
 import { selectMenuStateSelectedItem } from '../../state/menu.selectors';
 import { AsyncPipe } from '@angular/common';
 import { MenuActions } from '../../state/menu.actions';
-import { AppNavigationService } from '@sanctumlab/fe/shared-fe';
+import { AppNavigationService } from '@sanctumlab/fe/shared';
 import { ProductApiService } from '@sanctumlab/fe/data-access';
 
 @UntilDestroy()

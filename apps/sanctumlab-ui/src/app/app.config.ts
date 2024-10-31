@@ -32,7 +32,7 @@ import {
     provideAuthConfiguration,
     provideAuthentication,
     provideAuthState
-} from '@sanctumlab/fe/auth-fe';
+} from '@sanctumlab/fe/auth';
 import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
 import { provideInputValidationConfiguration } from '@sanctumlab/fe/component-library';
 import { MARKED_OPTIONS, provideMarkdown } from 'ngx-markdown';

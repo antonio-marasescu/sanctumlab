@@ -11,7 +11,7 @@ import {
 } from '@sanctumlab/fe/component-library';
 import { ProductItemDto } from '@sanctumlab/api-interfaces';
 import { MarkdownComponent } from 'ngx-markdown';
-import { AdminRestrictDirective } from '@sanctumlab/fe/auth-fe';
+import { AdminRestrictDirective } from '@sanctumlab/fe/auth';
 
 @Component({
     selector: 'ngx-menu-item-view',

@@ -1,6 +1,6 @@
 import { Route } from '@angular/router';
-import { AppFeatureRoutes } from '@sanctumlab/fe/shared-fe';
-import { authenticatedGuard, authFeatureRoutes } from '@sanctumlab/fe/auth-fe';
+import { AppFeatureRoutes } from '@sanctumlab/fe/shared';
+import { authenticatedGuard, authFeatureRoutes } from '@sanctumlab/fe/auth';
 
 export const appRoutes: Route[] = [
     {

@@ -2,7 +2,7 @@ import { APIGatewayProxyEvent } from 'aws-lambda';
 import {
     baseLambdaHandler,
     InvalidPayloadException
-} from '@sanctumlab/be/shared-be';
+} from '@sanctumlab/be/shared';
 
 export const main = async (mainEvent: APIGatewayProxyEvent) =>
     baseLambdaHandler(mainEvent, async event => {
