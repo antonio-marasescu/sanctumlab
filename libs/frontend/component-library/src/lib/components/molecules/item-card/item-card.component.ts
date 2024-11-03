@@ -74,7 +74,7 @@ import { NgIcon } from '@ng-icons/core';
 export class ItemCardComponent {
     @Input({ required: true }) id!: string;
     @Input({ required: true }) title!: string;
-    @Input({ required: true }) description!: string;
+    @Input({ required: true }) description!: string | undefined;
     @Input({ required: false }) hasIndicator = false;
     @Input({ required: false }) indicatorTheme: ComponentTheme = 'primary';
     @Input({ required: false }) indicator!: string;

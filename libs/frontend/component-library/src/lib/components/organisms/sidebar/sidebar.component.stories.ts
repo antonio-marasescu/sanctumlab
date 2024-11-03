@@ -32,7 +32,7 @@ const meta: Meta<SidebarComponent> = {
         props: {
             ...args,
             avatarItems: [
-                { id: 'login', label: 'Login' },
+                { id: 'settings', label: 'Settings' },
                 { id: 'logout', label: 'Logout' }
             ],
             themeChangerControl

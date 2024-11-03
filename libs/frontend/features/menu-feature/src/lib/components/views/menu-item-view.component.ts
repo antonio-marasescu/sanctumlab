@@ -10,8 +10,8 @@ import {
     ModalComponent
 } from '@sanctumlab/fe/component-library';
 import { ProductItemDto } from '@sanctumlab/api-interfaces';
-import { MarkdownComponent } from 'ngx-markdown';
 import { AdminRestrictDirective } from '@sanctumlab/fe/auth';
+import { QuillViewComponent } from 'ngx-quill';
 
 @Component({
     selector: 'ngx-menu-item-view',
@@ -19,8 +19,8 @@ import { AdminRestrictDirective } from '@sanctumlab/fe/auth';
     imports: [
         ButtonComponent,
         ModalComponent,
-        MarkdownComponent,
-        AdminRestrictDirective
+        AdminRestrictDirective,
+        QuillViewComponent
     ],
     template: ` <ngx-clib-modal
         [opened]="opened"
@@ -58,7 +58,7 @@ import { AdminRestrictDirective } from '@sanctumlab/fe/auth';
                             Recipe
                         </div>
                         <div class="collapse-content">
-                            <markdown>{{ item.recipe }}</markdown>
+                            <quill-view [content]="item.recipe"></quill-view>
                         </div>
                     </div>
                 </div>

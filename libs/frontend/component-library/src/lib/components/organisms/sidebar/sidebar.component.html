@@ -11,7 +11,7 @@
                 <label
                     for="sidebar-drawer"
                     aria-label="open sidebar"
-                    class="btn btn-square btn-ghost"
+                    class="btn btn-square btn-ghost btn-xs md:btn-md"
                 >
                     <ng-icon name="matMenu" size="24"></ng-icon>
                 </label>
@@ -40,10 +40,9 @@
             aria-label="close sidebar"
             class="drawer-overlay"
         ></label>
-        <ul class="menu bg-base-100 min-h-full w-80 p-4">
-            <div class="pl-4 pr-4 pt-2 pb-2 text-start text-balance lg:hidden">
-                <div class="flex items-center">
-                    <div class="flex-grow"></div>
+        <ul class="menu bg-base-100 min-h-full w-full md:w-80">
+            <div class="text-start text-balance lg:hidden">
+                <div class="flex flex-row-reverse items-center pr-2 pt-2">
                     <ngx-clib-icon-button
                         icon="matClose"
                         [size]="'xs'"

@@ -16,7 +16,6 @@ import {
 } from '@sanctumlab/api-interfaces';
 import { ModalComponent } from '@sanctumlab/fe/component-library';
 import { Store } from '@ngrx/store';
-import { MenuActions } from '../../state/menu.actions';
 import { AppNavigationService } from '@sanctumlab/fe/shared';
 import { FormGroup } from '@angular/forms';
 import {
@@ -49,21 +48,23 @@ export class MenuListContainerComponent implements OnInit, OnChanges {
     protected filterForm!: FormGroup<ProductFilterForm>;
 
     constructor(
-        private menuApiService: ProductApiService,
+        private productApiService: ProductApiService,
         private store: Store,
         private appNavigationService: AppNavigationService
     ) {}
 
     ngOnInit() {
         this.filterForm = createProductFilterForm();
-        this.menuApiService.retrieveProductsByCategoryStream(this.category);
+        this.productApiService.retrieveProductsByCategoryStream(this.category);
         this.items$ = combineLatest([
-            this.menuApiService.retrieveProductsByCategoryStream(this.category),
+            this.productApiService.retrieveProductsByCategoryStream(
+                this.category
+            ),
             this.filterForm.valueChanges.pipe(
                 startWith(ProductFilterFormInitialValue)
             )
         ]).pipe(map(([items, filterForm]) => applyFilter(items, filterForm)));
-        this.menuApiService.sendRetrieveProductList();
+        this.productApiService.sendRetrieveProductList();
     }
 
     ngOnChanges(changes: SimpleChanges) {
@@ -71,14 +72,15 @@ export class MenuListContainerComponent implements OnInit, OnChanges {
             changes['category'].previousValue !==
             changes['category'].currentValue
         ) {
-            this.items$ = this.menuApiService.retrieveProductsByCategoryStream(
-                changes['category'].currentValue
-            );
+            this.items$ =
+                this.productApiService.retrieveProductsByCategoryStream(
+                    changes['category'].currentValue
+                );
         }
     }
 
-    protected onItemSelect(item: ProductItemDto): void {
-        this.store.dispatch(MenuActions.selectItem({ item }));
+    protected onItemSelect(id: string): void {
+        this.productApiService.sendSetCurrentProduct(id);
     }
 
     protected async onCreateEvent(): Promise<void> {

@@ -10,7 +10,7 @@ import { ComponentSize } from '../../../types/shared/theme.types';
         @if (!isResponsive) {
             <img
                 [src]="logoUrl"
-                class="me-3 cursor-pointer hover:opacity-85"
+                class="me-3"
                 [ngClass]="{
                     'h-4': size === 'xs',
                     'h-6': size === 'sm',
@@ -23,7 +23,7 @@ import { ComponentSize } from '../../../types/shared/theme.types';
         } @else {
             <img
                 [src]="logoUrl"
-                class="h-6 sm:h-8 me-2 sm:me-3 cursor-pointer hover:opacity-85"
+                class="h-6 sm:h-8 me-2 sm:me-3"
                 [alt]="title"
             />
         }

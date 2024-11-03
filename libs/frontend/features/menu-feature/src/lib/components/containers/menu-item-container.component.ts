@@ -3,10 +3,7 @@ import { ProductItemDto } from '@sanctumlab/api-interfaces';
 import { MenuItemViewComponent } from '../views/menu-item-view.component';
 import { Observable } from 'rxjs';
 import { UntilDestroy } from '@ngneat/until-destroy';
-import { Store } from '@ngrx/store';
-import { selectMenuStateSelectedItem } from '../../state/menu.selectors';
 import { AsyncPipe } from '@angular/common';
-import { MenuActions } from '../../state/menu.actions';
 import { AppNavigationService } from '@sanctumlab/fe/shared';
 import { ProductApiService } from '@sanctumlab/fe/data-access';
 
@@ -34,17 +31,16 @@ export class MenuItemContainerComponent implements OnInit {
     protected item$!: Observable<ProductItemDto | null>;
 
     constructor(
-        private store: Store,
         private appNavigationService: AppNavigationService,
         private productApiService: ProductApiService
     ) {}
 
     ngOnInit() {
-        this.item$ = this.store.select(selectMenuStateSelectedItem());
+        this.item$ = this.productApiService.retrieveCurrentProductStream();
     }
 
     protected onModalClosed(): void {
-        this.store.dispatch(MenuActions.deselectItem());
+        this.productApiService.sendUnsetCurrentProduct();
     }
 
     protected async onItemEdit(id: string): Promise<void> {

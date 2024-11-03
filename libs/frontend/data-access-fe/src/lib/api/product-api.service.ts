@@ -55,4 +55,12 @@ export class ProductApiService {
     public sendRemoveProduct(id: string): void {
         this.store.dispatch(ProductsActions.removeProduct({ id }));
     }
+
+    public sendSetCurrentProduct(id: string): void {
+        this.store.dispatch(ProductsActions.setCurrentProduct({ id }));
+    }
+
+    public sendUnsetCurrentProduct(): void {
+        this.store.dispatch(ProductsActions.unsetCurrentProduct());
+    }
 }

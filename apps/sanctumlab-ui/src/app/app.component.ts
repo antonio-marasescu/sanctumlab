@@ -1,12 +1,19 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
+import { NotificationsListContainerComponent } from '@sanctumlab/notification-feature';
 
 @Component({
     standalone: true,
-    imports: [RouterModule, AmplifyAuthenticatorModule],
+    imports: [
+        RouterModule,
+        AmplifyAuthenticatorModule,
+        NotificationsListContainerComponent
+    ],
     selector: 'app-root',
-    template: `<router-outlet></router-outlet>`,
-    styleUrls: []
+    template: `<ngx-notifications-list-container />
+        <router-outlet></router-outlet>`,
+    styleUrls: [],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {}

@@ -20,7 +20,8 @@ import {
     matFastfood,
     matLocalBar,
     matMenu,
-    matPlus
+    matPlus,
+    matWarning
 } from '@ng-icons/material-icons/baseline';
 import { environment } from '../environments/environment';
 import {
@@ -35,7 +36,6 @@ import {
 } from '@sanctumlab/fe/auth';
 import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
 import { provideInputValidationConfiguration } from '@sanctumlab/fe/component-library';
-import { MARKED_OPTIONS, provideMarkdown } from 'ngx-markdown';
 import { provideQuillConfig } from 'ngx-quill';
 
 export const appConfig: ApplicationConfig = {
@@ -50,7 +50,8 @@ export const appConfig: ApplicationConfig = {
             matMenu,
             matClose,
             matDelete,
-            matPlus
+            matPlus,
+            matWarning
         }),
         provideAuthConfiguration({
             cognitoGuestUsername: environment.cognitoGuestUsername,
@@ -81,16 +82,6 @@ export const appConfig: ApplicationConfig = {
             withEnabledBlockingInitialNavigation(),
             withComponentInputBinding()
         ),
-        provideMarkdown({
-            markedOptions: {
-                provide: MARKED_OPTIONS,
-                useValue: {
-                    gfm: true,
-                    breaks: false,
-                    pedantic: false
-                }
-            }
-        }),
         provideQuillConfig({
             theme: 'snow',
             modules: {

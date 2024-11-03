@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
-import { inject } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { ProductsClientService } from '../../clients/products-client.service';
 import { ProductsActions } from './products.actions';
-import { catchError, exhaustMap, map, of } from 'rxjs';
+import { catchError, exhaustMap, map } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
+import { NotificationsActions } from '../notifications/notifications.actions';
+import { createNotificationHttpError } from '../../utils/notifications.utils';
 
 @Injectable()
 export class ProductsEffects {
@@ -19,13 +20,17 @@ export class ProductsEffects {
                     map(product =>
                         ProductsActions.createProductSuccess({ product })
                     ),
-                    catchError((error: HttpErrorResponse) =>
-                        of(
-                            ProductsActions.productFailure({
-                                reason: error.message
-                            })
-                        )
-                    )
+                    catchError((error: HttpErrorResponse) => [
+                        ProductsActions.productFailure({
+                            reason: error.message
+                        }),
+                        NotificationsActions.addNotification({
+                            notification: createNotificationHttpError(
+                                'Product Creation Failed',
+                                error
+                            )
+                        })
+                    ])
                 )
             )
         )
@@ -39,13 +44,17 @@ export class ProductsEffects {
                     map(product =>
                         ProductsActions.updateProductSuccess({ product })
                     ),
-                    catchError((error: HttpErrorResponse) =>
-                        of(
-                            ProductsActions.productFailure({
-                                reason: error.message
-                            })
-                        )
-                    )
+                    catchError((error: HttpErrorResponse) => [
+                        ProductsActions.productFailure({
+                            reason: error.message
+                        }),
+                        NotificationsActions.addNotification({
+                            notification: createNotificationHttpError(
+                                'Product Update Failed',
+                                error
+                            )
+                        })
+                    ])
                 )
             )
         )
@@ -59,13 +68,17 @@ export class ProductsEffects {
                     map(() =>
                         ProductsActions.removeProductSuccess({ id: action.id })
                     ),
-                    catchError((error: HttpErrorResponse) =>
-                        of(
-                            ProductsActions.productFailure({
-                                reason: error.message
-                            })
-                        )
-                    )
+                    catchError((error: HttpErrorResponse) => [
+                        ProductsActions.productFailure({
+                            reason: error.message
+                        }),
+                        NotificationsActions.addNotification({
+                            notification: createNotificationHttpError(
+                                'Product Remove Failed',
+                                error
+                            )
+                        })
+                    ])
                 )
             )
         )
@@ -79,13 +92,17 @@ export class ProductsEffects {
                     map(products =>
                         ProductsActions.getProductListSuccess({ products })
                     ),
-                    catchError((error: HttpErrorResponse) =>
-                        of(
-                            ProductsActions.productFailure({
-                                reason: error.message
-                            })
-                        )
-                    )
+                    catchError((error: HttpErrorResponse) => [
+                        ProductsActions.productFailure({
+                            reason: error.message
+                        }),
+                        NotificationsActions.addNotification({
+                            notification: createNotificationHttpError(
+                                'Product Get All Failed',
+                                error
+                            )
+                        })
+                    ])
                 )
             )
         )
@@ -99,13 +116,17 @@ export class ProductsEffects {
                     map(product =>
                         ProductsActions.getProductByIdSuccess({ product })
                     ),
-                    catchError((error: HttpErrorResponse) =>
-                        of(
-                            ProductsActions.productFailure({
-                                reason: error.message
-                            })
-                        )
-                    )
+                    catchError((error: HttpErrorResponse) => [
+                        ProductsActions.productFailure({
+                            reason: error.message
+                        }),
+                        NotificationsActions.addNotification({
+                            notification: createNotificationHttpError(
+                                'Product Get Failed',
+                                error
+                            )
+                        })
+                    ])
                 )
             )
         )

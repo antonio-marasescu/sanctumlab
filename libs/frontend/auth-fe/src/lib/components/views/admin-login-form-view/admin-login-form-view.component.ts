@@ -27,7 +27,8 @@ import { AdminForm } from '../../../types/auth-form.types';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AdminLoginFormViewComponent {
-    @Input() form!: FormGroup<AdminForm>;
+    @Input({ required: true }) form!: FormGroup<AdminForm>;
+    @Input({ required: true }) validLogin: boolean | null = true;
     @Output() loginEvent = new EventEmitter<void>();
     @Output() redirectToGuestLogin = new EventEmitter<void>();
 }

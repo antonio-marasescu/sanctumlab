@@ -35,6 +35,13 @@
                             [control]="form.controls.password"
                         />
                     </div>
+
+                    @if (!validLogin) {
+                        <p class="label-text-alt text-error">
+                            Invalid username or password
+                        </p>
+                    }
+
                     <div class="mt-0.5">
                         <ngx-clib-button
                             label="Sign in"
@@ -43,6 +50,7 @@
                             [disabled]="form.invalid"
                         />
                     </div>
+
                     <p class="text-sm font-light text-base-content">
                         Are you a Guest?
                         <span

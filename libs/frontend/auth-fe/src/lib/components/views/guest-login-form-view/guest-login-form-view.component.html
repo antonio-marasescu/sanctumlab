@@ -28,6 +28,12 @@
                         />
                     </div>
 
+                    @if (!validLogin) {
+                        <p class="label-text-alt text-error">
+                            Invalid authentication code
+                        </p>
+                    }
+
                     <div class="mt-0.5">
                         <ngx-clib-button
                             label="Sign in"

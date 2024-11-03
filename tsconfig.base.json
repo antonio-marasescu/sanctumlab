@@ -7,6 +7,8 @@
         "moduleResolution": "node",
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
         "importHelpers": true,
         "target": "es2015",
         "module": "esnext",
@@ -22,6 +24,9 @@
                 "apps/sanctumlab-api/src/index.ts"
             ],
             "@sanctumlab/be/auth": ["libs/backend/auth-be/src/index.ts"],
+            "@sanctumlab/be/data-access": [
+                "libs/backend/data-access-be/src/index.ts"
+            ],
             "@sanctumlab/be/products-feature": [
                 "libs/backend/features/products-feature/src/index.ts"
             ],
@@ -29,9 +34,6 @@
                 "apps/sanctumlab-authorizer/src/index.ts"
             ],
             "@sanctumlab/be/shared": ["libs/backend/shared-be/src/index.ts"],
-            "@sanctumlab/be/data-access": [
-                "libs/backend/data-access-be/src/index.ts"
-            ],
             "@sanctumlab/fe/auth": ["libs/frontend/auth-fe/src/index.ts"],
             "@sanctumlab/fe/component-library": [
                 "libs/frontend/component-library/src/index.ts"
@@ -42,7 +44,10 @@
             "@sanctumlab/fe/menu-feature": [
                 "libs/frontend/features/menu-feature/src/index.ts"
             ],
-            "@sanctumlab/fe/shared": ["libs/frontend/shared-fe/src/index.ts"]
+            "@sanctumlab/fe/shared": ["libs/frontend/shared-fe/src/index.ts"],
+            "@sanctumlab/notification-feature": [
+                "libs/frontend/features/notification-feature/src/index.ts"
+            ]
         }
     },
     "exclude": ["node_modules", "tmp"]

@@ -6,13 +6,22 @@ import { AdminLoginFormViewComponent } from '../views/admin-login-form-view/admi
 import { Router } from '@angular/router';
 import { AuthFeatureName, AuthRoutes } from '../../types/auth-navigation.types';
 import { AdminForm } from '../../types/auth-form.types';
+import { from, Observable, of } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
+import { GuestLoginFormViewComponent } from '../views/guest-login-form-view/guest-login-form-view.component';
 
 @Component({
     selector: 'ngx-auth-admin-login-page',
     standalone: true,
-    imports: [TextInputComponent, AdminLoginFormViewComponent],
+    imports: [
+        TextInputComponent,
+        AdminLoginFormViewComponent,
+        AsyncPipe,
+        GuestLoginFormViewComponent
+    ],
     template: `<ngx-auth-admin-login-form-view
         [form]="adminForm"
+        [validLogin]="validLogin$ | async"
         (loginEvent)="onLogin()"
         (redirectToGuestLogin)="onRedirectToGuestLogin()"
     />`,
@@ -21,6 +30,7 @@ import { AdminForm } from '../../types/auth-form.types';
 })
 export class AdminLoginPageComponent implements OnInit {
     protected adminForm!: FormGroup<AdminForm>;
+    protected validLogin$: Observable<boolean> = of(true);
 
     constructor(
         private authenticationService: AuthenticationService,
@@ -45,7 +55,9 @@ export class AdminLoginPageComponent implements OnInit {
             return;
         }
         const { username, password } = this.adminForm.getRawValue();
-        await this.authenticationService.login(username, password);
+        this.validLogin$ = from(
+            this.authenticationService.login(username, password)
+        );
     }
 
     protected async onRedirectToGuestLogin(): Promise<void> {

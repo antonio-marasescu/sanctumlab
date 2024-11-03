@@ -27,7 +27,8 @@ import { GuestForm } from '../../../types/auth-form.types';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GuestLoginFormViewComponent {
-    @Input() form!: FormGroup<GuestForm>;
+    @Input({ required: true }) form!: FormGroup<GuestForm>;
+    @Input({ required: true }) validLogin: boolean | null = true;
     @Output() loginEvent = new EventEmitter<void>();
     @Output() redirectToAdminLogin = new EventEmitter<void>();
 }

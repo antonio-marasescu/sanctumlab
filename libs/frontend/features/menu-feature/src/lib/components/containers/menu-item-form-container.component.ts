@@ -67,7 +67,6 @@ export class MenuItemFormContainerComponent implements OnInit, OnChanges {
     }
 
     protected updateFormValue(item?: ProductItemDto) {
-        console.log('y', item);
         if (this.form) {
             this.form.patchValue({
                 name: item?.name || '',

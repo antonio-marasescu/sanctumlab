@@ -2,15 +2,15 @@ import { Routes } from '@angular/router';
 import { MenuRootComponent } from './components/menu-root.component';
 import { MenuFeatureRoutes } from '@sanctumlab/fe/shared';
 import { ProductItemCategory } from '@sanctumlab/api-interfaces';
-import { provideState } from '@ngrx/store';
-import { MenuStateFeatureName, menuStateReducer } from './state/menu.reducers';
 import { adminGuard } from '@sanctumlab/fe/auth';
+import { provideEffects } from '@ngrx/effects';
+import { MenuEffects } from './state/menu.effects';
 
 export const menuFeatureRoutes: Routes = [
     {
         path: '',
         component: MenuRootComponent,
-        providers: [provideState(MenuStateFeatureName, menuStateReducer)],
+        providers: [provideEffects(MenuEffects)],
         children: [
             {
                 path: MenuFeatureRoutes.COCKTAILS,

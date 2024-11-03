@@ -86,6 +86,18 @@ export const productsStateReducer = createReducer(
             loading: false
         });
     }),
+    on(ProductsActions.setCurrentProduct, (state, { id }) => {
+        return {
+            ...state,
+            currentProductId: id
+        };
+    }),
+    on(ProductsActions.unsetCurrentProduct, state => {
+        return {
+            ...state,
+            currentProductId: null
+        };
+    }),
     on(ProductsActions.productFailure, (state, { reason }) => {
         return {
             ...state,

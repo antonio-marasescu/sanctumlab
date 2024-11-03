@@ -42,14 +42,14 @@ import { MenuListFilterViewComponent } from './menu-list-filter-view.component';
             >
                 @for (item of items; track item.id) {
                     <ngx-clib-item-card
-                        [id]="item.id"
-                        [title]="item.name"
+                        [id]="item.id || ''"
+                        [title]="item.name || ''"
                         [description]="item.description"
-                        [tags]="item.tags"
+                        [tags]="item.tags || []"
                         [hasIndicator]="!item.available"
                         indicator="unavailable"
                         indicatorTheme="error"
-                        (cardClick)="itemSelect.emit(item)"
+                        (cardClick)="itemSelect.emit(item.id)"
                     />
                 }
             </div>
@@ -61,6 +61,6 @@ import { MenuListFilterViewComponent } from './menu-list-filter-view.component';
 export class MenuListViewComponent {
     @Input({ required: true }) filterForm!: FormGroup<ProductFilterForm>;
     @Input() items: ProductItemDto[] | null = [];
-    @Output() itemSelect = new EventEmitter<ProductItemDto>();
+    @Output() itemSelect = new EventEmitter<string>();
     @Output() createEvent = new EventEmitter<void>();
 }

@@ -14,7 +14,7 @@ export function toDomain(dto: ProductItemDto): Required<ProductModel> {
         id: dto.id,
         name: dto.name,
         description: dto.description,
-        recipe: dto.description,
+        recipe: dto.recipe,
         category: ProductItemCategoryDomain[dto.category],
         tags: dto.tags,
         available: dto.available
@@ -28,7 +28,7 @@ export function toDomainCreate(
         id: crypto.randomUUID(),
         name: dto.name,
         description: dto.description,
-        recipe: dto.description,
+        recipe: dto.recipe,
         category: ProductItemCategoryDomain[dto.category],
         tags: dto.tags,
         available: dto.available
@@ -43,7 +43,7 @@ export function toDomainUpdate(
         id: oldModel.id,
         name: dto.name,
         description: dto.description,
-        recipe: dto.description,
+        recipe: dto.recipe,
         category: ProductItemCategoryDomain[dto.category],
         tags: dto.tags,
         available: dto.available
@@ -55,7 +55,7 @@ export function toDto(model: ProductModel): ProductItemDto {
         id: model.id,
         name: model.name,
         description: model.description,
-        recipe: model.description,
+        recipe: model.recipe,
         category: model.category
             ? ProductItemCategory[model.category]
             : ProductItemCategory.Unknown,

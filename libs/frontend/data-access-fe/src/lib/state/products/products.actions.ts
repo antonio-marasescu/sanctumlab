@@ -18,6 +18,8 @@ export const ProductsActions = createActionGroup({
         GetProductListSuccess: props<{ products: ProductItemDto[] }>(),
         GetProductById: props<{ id: string }>(),
         GetProductByIdSuccess: props<{ product: ProductItemDto }>(),
-        ProductFailure: props<{ reason: string }>()
+        ProductFailure: props<{ reason: string }>(),
+        SetCurrentProduct: props<{ id: string }>(),
+        UnsetCurrentProduct: emptyProps()
     }
 });
