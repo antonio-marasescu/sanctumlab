@@ -36,7 +36,7 @@
                         />
                     </div>
 
-                    @if (!validLogin) {
+                    @if (validLogin !== null && !validLogin) {
                         <p class="label-text-alt text-error">
                             Invalid username or password
                         </p>

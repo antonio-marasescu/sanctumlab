@@ -28,8 +28,9 @@ import {
     provideApiEndpointConfiguration,
     provideDataAccessState
 } from '@sanctumlab/fe/data-access';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import {
+    authInterceptor,
     provideAuthConfiguration,
     provideAuthentication,
     provideAuthState
@@ -40,7 +41,6 @@ import { provideQuillConfig } from 'ngx-quill';
 
 export const appConfig: ApplicationConfig = {
     providers: [
-        provideHttpClient(),
         provideEffects(),
         provideStore(),
         provideStoreDevtools({ maxAge: 50, logOnly: !isDevMode() }),
@@ -67,6 +67,7 @@ export const appConfig: ApplicationConfig = {
         importProvidersFrom(AmplifyAuthenticatorModule),
         provideAuthentication(),
         provideAuthState(),
+        provideHttpClient(withInterceptors([authInterceptor])),
         provideInputValidationConfiguration({
             errors: {
                 required: () => 'This field is required',

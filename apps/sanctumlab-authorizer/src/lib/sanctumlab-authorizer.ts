@@ -3,7 +3,7 @@ import {
     APIGatewayRequestAuthorizerEvent
 } from 'aws-lambda';
 import { AuthorizerIamServiceInstance } from './services/authorizer-iam.service';
-import { AuthVerifierApiInstance } from '@sanctumlab/be/auth-be';
+import { AuthVerifierApiInstance } from '@sanctumlab/be/auth';
 
 const { COGNITO_USER_POOL_ID, COGNITO_CLIENT_ID } = process.env;
 
@@ -36,7 +36,7 @@ export async function main(
                 event.methodArn
             );
         }
-    } catch (err: any) {
+    } catch (err: unknown) {
         console.error('Error during token validation:', err);
     }
 

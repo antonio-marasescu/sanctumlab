@@ -10,7 +10,8 @@ import { Store } from '@ngrx/store';
 import {
     selectCurrentProduct,
     selectProductById,
-    selectProductsByCategory
+    selectProductsByCategory,
+    selectProductsStateLoading
 } from '../state/products/products.selectors';
 import { ProductsActions } from '../state/products/products.actions';
 
@@ -22,6 +23,10 @@ export class ProductApiService {
         category: ProductItemCategory
     ): Observable<ProductItemDto[]> {
         return this.store.select(selectProductsByCategory(category));
+    }
+
+    public retrieveProductsIsLoadingStream(): Observable<boolean> {
+        return this.store.select(selectProductsStateLoading());
     }
 
     public retrieveProductByIdStream(id: string): Observable<ProductItemDto> {

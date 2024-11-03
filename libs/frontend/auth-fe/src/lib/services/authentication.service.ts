@@ -1,19 +1,19 @@
 import { Inject, Injectable } from '@angular/core';
 import { AUTH_CONFIG, AuthConfiguration } from '../config/auth-settings.config';
 import { Amplify, ResourcesConfig } from 'aws-amplify';
-import { defaultStorage } from 'aws-amplify/utils';
+import { defaultStorage, Hub } from 'aws-amplify/utils';
 import {
     cognitoUserPoolsTokenProvider,
     getCurrentUser
 } from 'aws-amplify/auth/cognito';
-import { signIn, signOut, fetchAuthSession } from 'aws-amplify/auth';
-import { Hub } from 'aws-amplify/utils';
+import { fetchAuthSession, signIn, signOut } from 'aws-amplify/auth';
 import { Router } from '@angular/router';
 import { AuthFeatureName, AuthRoutes } from '../types/auth-navigation.types';
 import { AuthUser } from '../types/auth.types';
 import { Store } from '@ngrx/store';
 import { AuthState } from '../state/auth.reducers';
 import { AuthActions } from '../state/auth.actions';
+import { JWT } from '@aws-amplify/core';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -91,6 +91,11 @@ export class AuthenticationService {
 
         const currentUser = await this.getCurrentUser();
         return currentUser.isAdmin;
+    }
+
+    public async getIdToken(): Promise<JWT | undefined> {
+        const session = await fetchAuthSession();
+        return session.tokens?.idToken;
     }
 
     private async updateAuthState(): Promise<void> {

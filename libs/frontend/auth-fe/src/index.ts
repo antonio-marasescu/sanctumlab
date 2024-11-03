@@ -5,6 +5,9 @@ export * from './lib/auth-feature.routes';
 export * from './lib/guards/authenticated.guard';
 export * from './lib/guards/admin.guard';
 
+// INTERCEPTORS
+export * from './lib/interceptors/auth.interceptor';
+
 // DIRECTIVES
 export * from './lib/directives/admin-restrict.directive';
 

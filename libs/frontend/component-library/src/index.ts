@@ -6,6 +6,7 @@ export * from './lib/components/atoms/icon-button/icon-button.component';
 export * from './lib/components/atoms/loading-indicator/loading-indicator.component';
 export * from './lib/components/atoms/logo/logo.component';
 export * from './lib/components/atoms/notification/notification.component';
+export * from './lib/components/atoms/placeholder/placeholder.component';
 export * from './lib/components/atoms/inputs/list-input/list-input.component';
 export * from './lib/components/atoms/inputs/markdown-input/markdown-input.component';
 export * from './lib/components/atoms/inputs/select-input/select-input.component';

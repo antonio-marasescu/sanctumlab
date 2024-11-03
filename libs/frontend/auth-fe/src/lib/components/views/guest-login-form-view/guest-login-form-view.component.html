@@ -28,7 +28,7 @@
                         />
                     </div>
 
-                    @if (!validLogin) {
+                    @if (validLogin !== null && !validLogin) {
                         <p class="label-text-alt text-error">
                             Invalid authentication code
                         </p>

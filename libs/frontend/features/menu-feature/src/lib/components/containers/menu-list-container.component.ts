@@ -14,8 +14,10 @@ import {
     ProductItemCategory,
     ProductItemDto
 } from '@sanctumlab/api-interfaces';
-import { ModalComponent } from '@sanctumlab/fe/component-library';
-import { Store } from '@ngrx/store';
+import {
+    LoadingIndicatorComponent,
+    ModalComponent
+} from '@sanctumlab/fe/component-library';
 import { AppNavigationService } from '@sanctumlab/fe/shared';
 import { FormGroup } from '@angular/forms';
 import {
@@ -32,30 +34,39 @@ import { UntilDestroy } from '@ngneat/until-destroy';
 @Component({
     selector: 'ngx-menu-list-container',
     standalone: true,
-    imports: [MenuListViewComponent, AsyncPipe, ModalComponent],
-    template: `<ngx-menu-list-view
-        [filterForm]="filterForm"
-        [items]="items$ | async"
-        (itemSelect)="onItemSelect($event)"
-        (createEvent)="onCreateEvent()"
-    /> `,
+    imports: [
+        MenuListViewComponent,
+        AsyncPipe,
+        ModalComponent,
+        LoadingIndicatorComponent
+    ],
+    template: ` @if (isLoading$ | async) {
+            <ngx-clib-loading-indicator [isOverlay]="true" />
+        }
+        <ngx-menu-list-view
+            [filterForm]="filterForm"
+            [items]="items$ | async"
+            (itemSelect)="onItemSelect($event)"
+            (createEvent)="onCreateEvent()"
+        />`,
     styleUrls: [],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MenuListContainerComponent implements OnInit, OnChanges {
     @Input() category!: ProductItemCategory;
     protected items$!: Observable<ProductItemDto[]>;
+    protected isLoading$!: Observable<boolean>;
     protected filterForm!: FormGroup<ProductFilterForm>;
 
     constructor(
         private productApiService: ProductApiService,
-        private store: Store,
         private appNavigationService: AppNavigationService
     ) {}
 
     ngOnInit() {
         this.filterForm = createProductFilterForm();
-        this.productApiService.retrieveProductsByCategoryStream(this.category);
+        this.isLoading$ =
+            this.productApiService.retrieveProductsIsLoadingStream();
         this.items$ = combineLatest([
             this.productApiService.retrieveProductsByCategoryStream(
                 this.category

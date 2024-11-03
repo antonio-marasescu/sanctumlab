@@ -1,9 +1,10 @@
 import express from 'express';
 import { ProductsApiInstance } from '@sanctumlab/be/products-feature';
+import { AuthenticatedRequest } from '../../types/request.types';
 
 const productsRouter = express.Router();
 
-productsRouter.post('', async (req, res) => {
+productsRouter.post('', async (req: AuthenticatedRequest, res) => {
     try {
         const newProduct = await ProductsApiInstance.create(req.body);
         res.status(201).json(newProduct);
@@ -12,7 +13,7 @@ productsRouter.post('', async (req, res) => {
     }
 });
 
-productsRouter.get('', async (req, res) => {
+productsRouter.get('', async (req: AuthenticatedRequest, res) => {
     try {
         const products = await ProductsApiInstance.retrieveAll();
         res.status(200).json(products);
@@ -21,7 +22,7 @@ productsRouter.get('', async (req, res) => {
     }
 });
 
-productsRouter.get(`/:id`, async (req, res) => {
+productsRouter.get(`/:id`, async (req: AuthenticatedRequest, res) => {
     try {
         const product = await ProductsApiInstance.retrieveById(req.params.id);
         res.status(200).json(product);
@@ -30,7 +31,7 @@ productsRouter.get(`/:id`, async (req, res) => {
     }
 });
 
-productsRouter.put(`/:id`, async (req, res) => {
+productsRouter.put(`/:id`, async (req: AuthenticatedRequest, res) => {
     try {
         const updatedProduct = await ProductsApiInstance.update(
             req.params.id,
@@ -42,7 +43,7 @@ productsRouter.put(`/:id`, async (req, res) => {
     }
 });
 
-productsRouter.delete(`/:id`, async (req, res) => {
+productsRouter.delete(`/:id`, async (req: AuthenticatedRequest, res) => {
     try {
         const isRemoved = await ProductsApiInstance.removeById(req.params.id);
         res.status(200).json({ ok: isRemoved });

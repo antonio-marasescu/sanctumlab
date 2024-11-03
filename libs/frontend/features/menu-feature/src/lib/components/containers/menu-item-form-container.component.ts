@@ -19,21 +19,30 @@ import {
     ProductItemCategory,
     ProductItemDto
 } from '@sanctumlab/api-interfaces';
-import { SelectOption } from '@sanctumlab/fe/component-library';
+import {
+    LoadingIndicatorComponent,
+    SelectOption
+} from '@sanctumlab/fe/component-library';
 import { AppNavigationService } from '@sanctumlab/fe/shared';
+import { AsyncPipe } from '@angular/common';
+import { ProductApiService } from '@sanctumlab/fe/data-access';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'ngx-menu-item-form-container',
     standalone: true,
-    imports: [MenuItemFormViewComponent],
-    template: `<ngx-menu-item-form-view
-        [form]="form"
-        [categoryOptions]="categoryOptions"
-        [title]="title"
-        [actionLabel]="actionLabel"
-        (closeEvent)="onCloseEvent()"
-        (submitEvent)="onSubmitEvent()"
-    />`,
+    imports: [MenuItemFormViewComponent, AsyncPipe, LoadingIndicatorComponent],
+    template: ` @if (isLoading$ | async) {
+            <ngx-clib-loading-indicator [isOverlay]="true" />
+        }
+        <ngx-menu-item-form-view
+            [form]="form"
+            [categoryOptions]="categoryOptions"
+            [title]="title"
+            [actionLabel]="actionLabel"
+            (closeEvent)="onCloseEvent()"
+            (submitEvent)="onSubmitEvent()"
+        />`,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MenuItemFormContainerComponent implements OnInit, OnChanges {
@@ -42,6 +51,7 @@ export class MenuItemFormContainerComponent implements OnInit, OnChanges {
     @Input({ required: true }) actionLabel = '';
     @Output() submitEvent = new EventEmitter<ProductFormSubmitEvent>();
 
+    protected isLoading$!: Observable<boolean>;
     protected form!: FormGroup<ProductItemForm>;
     protected readonly categoryOptions: SelectOption[] = [
         {
@@ -54,9 +64,14 @@ export class MenuItemFormContainerComponent implements OnInit, OnChanges {
         }
     ];
 
-    constructor(private appNavigationService: AppNavigationService) {}
+    constructor(
+        private productApiService: ProductApiService,
+        private appNavigationService: AppNavigationService
+    ) {}
 
     ngOnInit() {
+        this.isLoading$ =
+            this.productApiService.retrieveProductsIsLoadingStream();
         this.form = createProductItemForm(this.item);
     }
 
