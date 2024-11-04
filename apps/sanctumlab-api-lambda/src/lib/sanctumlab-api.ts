@@ -1,19 +1,14 @@
-import { APIGatewayProxyEvent } from 'aws-lambda';
-import {
-    baseLambdaHandler,
-    InvalidPayloadException
-} from '@sanctumlab/be/shared';
+import { baseLambdaHandler, LambdaRequestPayload } from '@sanctumlab/be/shared';
+import { handleProductsRoute, ProductsRoute } from './routes/products-router';
 
-export const main = async (mainEvent: APIGatewayProxyEvent) =>
+export const main = async (mainEvent: LambdaRequestPayload) =>
     baseLambdaHandler(mainEvent, async event => {
-        const id = event.pathParameters?.['id'];
-        if (!id) {
-            throw new InvalidPayloadException();
+        if (event.resource.includes(ProductsRoute)) {
+            return handleProductsRoute(event);
         }
 
-        const response = { ok: true };
         return {
-            body: JSON.stringify(response),
-            statusCode: 200
+            body: 'Resource not found',
+            statusCode: 404
         };
     });

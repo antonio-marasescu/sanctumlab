@@ -7,6 +7,8 @@
         "serve:api-dev": "nx serve sanctumlab-api-server",
         "storybook:clib": "nx storybook component-library",
         "scripts:db-setup": "node scripts/create-table.mjs",
+        "build:api-lambda": "nx build sanctumlab-api-lambda",
+        "build:authorizer": "nx build sanctumlab-authorizer",
         "test": "nx run-many --target=test --passWithNoTests",
         "lint": "nx run-many --target=lint",
         "prepare": "husky"

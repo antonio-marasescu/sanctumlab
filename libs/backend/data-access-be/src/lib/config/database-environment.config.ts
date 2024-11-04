@@ -11,8 +11,11 @@ const DynamoDBClientRegion: string | undefined =
         ? process.env['DYNAMODB_CLIENT_REGION']
         : undefined;
 
+const DynamoDBLocalEnv: boolean = process.env['DYNAMODB_LOCAL_ENV'] === 'true';
+
 export const DatabaseConfig = {
     tableId: DynamoDBTableId,
     endpoint: DynamoDBClientEndpoint,
-    region: DynamoDBClientRegion
+    region: DynamoDBClientRegion,
+    localEnv: DynamoDBLocalEnv
 };

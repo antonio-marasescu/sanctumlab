@@ -1,13 +1,29 @@
 import * as cdk from 'aws-cdk-lib';
+import { Tags } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-import { UserPool } from 'aws-cdk-lib/aws-cognito';
 import { InfrastructureStackProps } from './shared/types/infrastructure-stack.types';
 import { createSecurityStack } from './stacks/security/security-stack';
+import { createPersistenceStack } from './stacks/persistance/persistance-stack';
+import { createBackendStack } from './stacks/backend/backend-stack';
+import {
+    ENVIRONMENT_TAG_NAME,
+    PROJECT_TAG_NAME
+} from './shared/config/infrastructure.config';
 
 export class InfrastructureStack extends cdk.Stack {
     constructor(scope: Construct, id: string, props: InfrastructureStackProps) {
         super(scope, id, props);
 
-        createSecurityStack(this, props, { cfnDomainName: null });
+        const database = createPersistenceStack(this, props);
+        const userPool = createSecurityStack(this, props, {
+            cfnDomainName: null
+        });
+        createBackendStack(this, props, {
+            database,
+            userPool
+        });
+
+        Tags.of(this).add(PROJECT_TAG_NAME, props.stackConfig.appName);
+        Tags.of(this).add(ENVIRONMENT_TAG_NAME, props.stackConfig.tenantEnv);
     }
 }

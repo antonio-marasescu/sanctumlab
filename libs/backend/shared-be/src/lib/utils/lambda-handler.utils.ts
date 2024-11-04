@@ -1,11 +1,14 @@
-import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
-import { LambdaHandler } from '../types/lambda-handler.types';
+import {
+    LambdaHandler,
+    LambdaRequestPayload,
+    LambdaResponsePayload
+} from '../types/lambda-handler.types';
 import { BaseException } from '../types/exception.types';
 
 export async function baseLambdaHandler(
-    event: APIGatewayProxyEvent,
+    event: LambdaRequestPayload,
     callback: LambdaHandler
-): Promise<APIGatewayProxyResult> {
+): Promise<LambdaResponsePayload> {
     try {
         return await callback(event);
     } catch (error: unknown) {
