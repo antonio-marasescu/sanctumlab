@@ -1,6 +1,15 @@
-name: Deploy API
+name: Deploy Lambda
 
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      lambda:
+        type: choice
+        required: true
+        description: Lambda to deploy
+        options:
+          - sanctumlab-api-lambda
+          - sanctumlab-authorizer
 
 permissions:
   id-token: write
@@ -45,3 +54,22 @@ jobs:
           fi
       - name: Build sources
         run: npm run build:api
+      - name: Package API Lambda
+        run: |
+          cd dist/${{ github.event.inputs.lambda }}
+          zip -r ../${{ github.event.inputs.lambda }}.zip .
+
+        # Assign LAMBDA_FUNCTION_NAME based on the input lambda choice
+      - name: Set Lambda Function Name for sanctumlab-api-lambda
+        if: ${{ github.event.inputs.lambda == 'sanctumlab-api-lambda' }}
+        run: echo "LAMBDA_FUNCTION_NAME=${{ secrets.AWS_LAMBDA_API_ARN }}" >> $GITHUB_ENV
+
+      - name: Set Lambda Function Name for sanctumlab-authorizer
+        if: ${{ github.event.inputs.lambda == 'sanctumlab-authorizer' }}
+        run: echo "LAMBDA_FUNCTION_NAME=${{ secrets.AWS_LAMBDA_AUTHORIZER_ARN }}" >> $GITHUB_ENV
+
+      - name: Deploy sanctumlab-api-lambda
+        run: |
+          aws lambda update-function-code \
+            --function-name $LAMBDA_FUNCTION_NAME \
+            --zip-file fileb://dist/${{ github.event.inputs.lambda }}.zip
