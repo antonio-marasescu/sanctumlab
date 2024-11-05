@@ -1,4 +1,4 @@
-name: Continuous Integration Workflow
+name: Deploy API
 
 on: workflow_dispatch
 
