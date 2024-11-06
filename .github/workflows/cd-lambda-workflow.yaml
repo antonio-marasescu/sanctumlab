@@ -53,7 +53,7 @@ jobs:
             npm ci
           fi
       - name: Build sources
-        run: npm run build:api
+        run: npm run build:${{ github.event.inputs.lambda }}
       - name: Package API Lambda
         run: |
           cd dist/${{ github.event.inputs.lambda }}
@@ -72,4 +72,4 @@ jobs:
         run: |
           aws lambda update-function-code \
             --function-name $LAMBDA_FUNCTION_NAME \
-            --zip-file fileb://dist/${{ github.event.inputs.lambda }}.zip
+            --zip-file fileb://dist/apps/${{ github.event.inputs.lambda }}.zip
