@@ -1,6 +1,6 @@
 import {
     APIGatewayAuthorizerResult,
-    APIGatewayRequestAuthorizerEvent
+    APIGatewayTokenAuthorizerEvent
 } from 'aws-lambda';
 import { AuthorizerIamServiceInstance } from './services/authorizer-iam.service';
 import { AuthVerifierApiInstance } from '@sanctumlab/be/auth';
@@ -8,11 +8,10 @@ import { AuthVerifierApiInstance } from '@sanctumlab/be/auth';
 const { COGNITO_USER_POOL_ID, COGNITO_CLIENT_ID } = process.env;
 
 export async function main(
-    event: APIGatewayRequestAuthorizerEvent
+    event: APIGatewayTokenAuthorizerEvent
 ): Promise<APIGatewayAuthorizerResult> {
     try {
-        console.log(event);
-        const authorizationToken = event.headers?.['Authorization'];
+        const authorizationToken = event.authorizationToken;
         if (!authorizationToken) {
             console.error('Token not found');
             return AuthorizerIamServiceInstance.generateDeny(
