@@ -1,4 +1,5 @@
 export const AppLambdas = {
     DEFAULT: 'default',
-    API: 'api'
+    API: 'api',
+    AUTHORIZER: 'authorizer'
 };

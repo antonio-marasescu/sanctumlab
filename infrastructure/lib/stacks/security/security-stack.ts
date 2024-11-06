@@ -24,7 +24,7 @@ export function createSecurityStack(
     deps: {
         cfnDomainName: string | null;
     }
-): UserPool {
+): { userPool: UserPool; userPoolClient: UserPoolClient } {
     const callbackUrls = getCallBackUrls(deps.cfnDomainName);
 
     const userPool = createUserPool(stack, props);
@@ -35,7 +35,7 @@ export function createSecurityStack(
     createSecurityOutputs(stack, userPool, userPoolClient, userPoolDomain);
     createAdminGroup(stack, props, { userPool });
 
-    return userPool;
+    return { userPool, userPoolClient };
 }
 
 function createUserPool(

@@ -16,16 +16,14 @@ export function createApiModule(
         api: apigw.LambdaRestApi;
         database: Table;
         userPool: UserPool;
-        authorizer: apigw.CfnAuthorizer;
+        authorizer: apigw.TokenAuthorizer;
     },
-    useAuthorizer: boolean
+    enableAuth: boolean
 ): void {
-    const authorizationOptions = useAuthorizer
+    const authorizationOptions = enableAuth
         ? {
-              authorizationType: apigw.AuthorizationType.COGNITO,
-              authorizer: {
-                  authorizerId: deps.authorizer.ref
-              }
+              authorizationType: apigw.AuthorizationType.CUSTOM,
+              authorizer: deps.authorizer
           }
         : undefined;
 

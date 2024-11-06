@@ -7,7 +7,7 @@ import {
     API_GATEWAY_ID
 } from './config/api-gateway.config';
 import { Table } from 'aws-cdk-lib/aws-dynamodb';
-import { UserPool } from 'aws-cdk-lib/aws-cognito';
+import { UserPool, UserPoolClient } from 'aws-cdk-lib/aws-cognito';
 import { InfrastructureStackProps } from '../../shared/types/infrastructure-stack.types';
 import { createLambda } from '../../shared/utils/lambda.utils';
 import { createApiModule } from './backend-modules-stack';
@@ -18,11 +18,16 @@ export function createBackendStack(
     deps: {
         database: Table;
         userPool: UserPool;
+        userPoolClient: UserPoolClient;
     },
-    useAuthorizer = true
+    enableAuth = true
 ): apigw.LambdaRestApi {
     const api = createApiGateway(stack, props);
-    const authorizer = createAuthorizer(stack, props, deps.userPool, api);
+    const authorizer = createAuthorizer(stack, props, {
+        userPool: deps.userPool,
+        userPoolClient: deps.userPoolClient,
+        api
+    });
 
     createApiModule(
         stack,
@@ -33,7 +38,7 @@ export function createBackendStack(
             userPool: deps.userPool,
             authorizer
         },
-        useAuthorizer
+        enableAuth
     );
     createBackendOutputs(stack, api);
 
@@ -71,14 +76,18 @@ function createApiGateway(
 export function createAuthorizer(
     stack: cdk.Stack,
     props: InfrastructureStackProps,
-    userPool: UserPool,
-    api: apigw.LambdaRestApi
-): apigw.CfnAuthorizer {
-    return new apigw.CfnAuthorizer(stack, API_COGNITO_AUTHORIZER_ID(props), {
-        restApiId: api.restApiId,
-        type: 'COGNITO_USER_POOLS',
-        name: API_COGNITO_AUTHORIZER_ID(props),
-        providerArns: [userPool.userPoolArn],
+    deps: {
+        userPool: UserPool;
+        userPoolClient: UserPoolClient;
+        api: apigw.LambdaRestApi;
+    }
+): apigw.TokenAuthorizer {
+    const lambdaAuthorizer = createLambda(AppLambdas.AUTHORIZER, stack, props, {
+        COGNITO_CLIENT_ID: deps.userPoolClient.userPoolClientId,
+        COGNITO_USER_POOL_ID: deps.userPool.userPoolId
+    });
+    return new apigw.TokenAuthorizer(stack, API_COGNITO_AUTHORIZER_ID(props), {
+        handler: lambdaAuthorizer,
         identitySource: 'method.request.header.Authorization'
     });
 }

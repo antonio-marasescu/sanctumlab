@@ -68,7 +68,7 @@ jobs:
         if: ${{ github.event.inputs.lambda == 'sanctumlab-authorizer' }}
         run: echo "LAMBDA_FUNCTION_NAME=${{ secrets.AWS_LAMBDA_AUTHORIZER_ARN }}" >> $GITHUB_ENV
 
-      - name: Deploy sanctumlab-api-lambda
+      - name: Deploy Lambda
         run: |
           aws lambda update-function-code \
             --function-name $LAMBDA_FUNCTION_NAME \

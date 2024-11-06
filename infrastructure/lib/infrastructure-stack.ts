@@ -15,12 +15,13 @@ export class InfrastructureStack extends cdk.Stack {
         super(scope, id, props);
 
         const database = createPersistenceStack(this, props);
-        const userPool = createSecurityStack(this, props, {
+        const { userPool, userPoolClient } = createSecurityStack(this, props, {
             cfnDomainName: null
         });
         createBackendStack(this, props, {
             database,
-            userPool
+            userPool,
+            userPoolClient
         });
 
         Tags.of(this).add(PROJECT_TAG_NAME, props.stackConfig.appName);
