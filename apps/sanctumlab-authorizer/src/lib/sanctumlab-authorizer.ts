@@ -11,6 +11,7 @@ export async function main(
     event: APIGatewayRequestAuthorizerEvent
 ): Promise<APIGatewayAuthorizerResult> {
     try {
+        console.log(event);
         const authorizationToken = event.headers?.['Authorization'];
         if (!authorizationToken) {
             console.error('Token not found');
