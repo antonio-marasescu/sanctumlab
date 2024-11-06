@@ -56,7 +56,7 @@ jobs:
         run: npm run build:${{ github.event.inputs.lambda }}
       - name: Package API Lambda
         run: |
-          cd dist/${{ github.event.inputs.lambda }}
+          cd dist/apps/${{ github.event.inputs.lambda }}
           zip -r ../${{ github.event.inputs.lambda }}.zip .
 
         # Assign LAMBDA_FUNCTION_NAME based on the input lambda choice
