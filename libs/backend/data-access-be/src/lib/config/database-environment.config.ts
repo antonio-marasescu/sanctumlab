@@ -1,5 +1,5 @@
 const DynamoDBTableId: string =
-    process.env['DYNAMODB_TABLE_ID'] || 'default-db';
+    process.env['DYNAMODB_TABLE_ID'] ?? 'default-db';
 
 const DynamoDBClientEndpoint: string | undefined =
     process.env['DYNAMODB_CLIENT_ENDPOINT'] !== 'undefined'

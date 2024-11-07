@@ -32,6 +32,7 @@ import { retrieveErrorMessage } from '../../../../utils/validation.utils';
             </div>
             <input
                 class="input w-full"
+                tabindex="0"
                 [type]="type"
                 [attr.id]="id"
                 [attr.name]="id"
@@ -73,8 +74,8 @@ export class TextInputComponent implements OnInit {
 
     constructor(
         @Inject(InputValidationConfigToken)
-        private validationConfiguration: InputValidationConfiguration,
-        private changeDetectorRef: ChangeDetectorRef
+        private readonly validationConfiguration: InputValidationConfiguration,
+        private readonly changeDetectorRef: ChangeDetectorRef
     ) {}
 
     ngOnInit() {

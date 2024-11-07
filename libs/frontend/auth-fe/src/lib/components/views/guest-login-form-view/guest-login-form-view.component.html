@@ -44,12 +44,14 @@
                     </div>
                     <p class="text-sm font-light text-base-content">
                         Are you an administrator?
-                        <span
+                        <a
+                            tabindex="0"
                             (click)="redirectToAdminLogin.emit()"
+                            (keydown.enter)="redirectToAdminLogin.emit()"
                             class="font-medium text-base-content hover:underline cursor-pointer"
                         >
                             Login as admin
-                        </span>
+                        </a>
                     </p>
                 </form>
             </div>

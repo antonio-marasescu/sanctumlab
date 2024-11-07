@@ -65,7 +65,7 @@ export class MenuAvatarComponent {
     @Input({ required: false }) rightSide = false;
     @Output() menuClick = new EventEmitter<string>();
 
-    constructor(private elementRef: ElementRef) {}
+    constructor(private readonly elementRef: ElementRef) {}
 
     protected menuActive = false;
 

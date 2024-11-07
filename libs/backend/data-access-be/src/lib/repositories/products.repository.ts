@@ -9,7 +9,7 @@ export class ProductsRepository {
     }
 
     public async retrieveById(id: string): Promise<ProductModel | undefined> {
-        const response = this.table.get({ id });
+        const response = await this.table.get({ id });
         if (!response) {
             return undefined;
         }

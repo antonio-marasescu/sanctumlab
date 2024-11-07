@@ -30,6 +30,7 @@ import { NgClass } from '@angular/common';
                 <span class="label-text">{{ label }}</span>
             </div>
             <textarea
+                tabindex="0"
                 class="textarea w-full"
                 [attr.id]="id"
                 [attr.name]="id"
@@ -69,8 +70,8 @@ export class TextareaInputComponent implements OnInit {
 
     constructor(
         @Inject(InputValidationConfigToken)
-        private validationConfiguration: InputValidationConfiguration,
-        private changeDetectorRef: ChangeDetectorRef
+        private readonly validationConfiguration: InputValidationConfiguration,
+        private readonly changeDetectorRef: ChangeDetectorRef
     ) {}
 
     ngOnInit() {

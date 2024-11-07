@@ -18,6 +18,7 @@ import {
     template: `
         @if (!isResponsive) {
             <button
+                tabindex="0"
                 class="btn"
                 [disabled]="disabled"
                 [ngClass]="{
@@ -39,11 +40,13 @@ import {
                     'btn-circle': isCircle
                 }"
                 (click)="clickEvent.emit()"
+                (keydown.enter)="clickEvent.emit()"
             >
                 {{ label }}
             </button>
         } @else {
             <button
+                tabindex="0"
                 class="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg"
                 [disabled]="disabled"
                 [ngClass]="{
@@ -61,6 +64,7 @@ import {
                     'btn-circle': isCircle
                 }"
                 (click)="clickEvent.emit()"
+                (keydown.enter)="clickEvent.emit()"
             >
                 {{ label }}
             </button>

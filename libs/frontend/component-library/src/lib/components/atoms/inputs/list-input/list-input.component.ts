@@ -32,6 +32,7 @@ import { NgIcon } from '@ng-icons/core';
             </div>
             <div class="flex gap-2">
                 <input
+                    tabindex="0"
                     class="input w-full"
                     type="text"
                     [attr.id]="id"
@@ -101,8 +102,8 @@ export class ListInputComponent implements OnInit {
 
     constructor(
         @Inject(InputValidationConfigToken)
-        private validationConfiguration: InputValidationConfiguration,
-        private changeDetectorRef: ChangeDetectorRef
+        private readonly validationConfiguration: InputValidationConfiguration,
+        private readonly changeDetectorRef: ChangeDetectorRef
     ) {}
 
     ngOnInit() {

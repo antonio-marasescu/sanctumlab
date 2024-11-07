@@ -38,7 +38,7 @@ export function applyFilter(
                 attribute
                     .toString()
                     .toLowerCase()
-                    .includes(filter.search?.toLowerCase() || '')
+                    .includes(filter.search?.toLowerCase() ?? '')
             )
         );
     }

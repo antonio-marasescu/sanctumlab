@@ -24,7 +24,7 @@ export class ProductsService {
         product: Required<ProductModel>
     ): Promise<Required<ProductModel>> {
         try {
-            return ProductsRepositoryInstance.create(product);
+            return await ProductsRepositoryInstance.create(product);
         } catch (error) {
             throw new InvalidPayloadException();
         }
@@ -35,7 +35,7 @@ export class ProductsService {
         product: ProductModel
     ): Promise<Required<ProductModel>> {
         try {
-            return ProductsRepositoryInstance.update(id, product);
+            return await ProductsRepositoryInstance.update(id, product);
         } catch (error) {
             throw new InvalidPayloadException();
         }
@@ -43,7 +43,7 @@ export class ProductsService {
 
     public async removeById(id: string): Promise<boolean> {
         try {
-            return ProductsRepositoryInstance.removeById(id);
+            return await ProductsRepositoryInstance.removeById(id);
         } catch (error) {
             throw new InvalidPayloadException();
         }

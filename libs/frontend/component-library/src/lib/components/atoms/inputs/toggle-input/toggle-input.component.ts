@@ -11,6 +11,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
         </div>
         <div class="min-h-12">
             <input
+                tabindex="0"
                 type="checkbox"
                 [formControl]="control"
                 class="toggle toggle-primary"

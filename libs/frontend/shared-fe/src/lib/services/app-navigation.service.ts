@@ -8,7 +8,7 @@ import {
 
 @Injectable({ providedIn: 'root' })
 export class AppNavigationService {
-    constructor(private router: Router) {}
+    constructor(private readonly router: Router) {}
 
     public async navigateToMenuFeature(): Promise<void> {
         await this.router.navigate([AppFeatureRoutes.MENU]);

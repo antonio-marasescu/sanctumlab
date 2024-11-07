@@ -15,7 +15,7 @@ export class NotAuthorizedException extends Error implements BaseException {
     readonly type = ExceptionType.FORBIDDEN;
 
     constructor(values?: Pick<NotAuthorizedException, 'message'>) {
-        super(values?.message || 'Invalid access rights');
+        super(values?.message ?? 'Invalid access rights');
     }
 }
 
@@ -24,7 +24,7 @@ export class InvalidPayloadException extends Error implements BaseException {
     readonly type = ExceptionType.INVALID_PAYLOAD;
 
     constructor(values?: Pick<InvalidPayloadException, 'message'>) {
-        super(values?.message || 'The payload data was malformed');
+        super(values?.message ?? 'The payload data was malformed');
     }
 }
 
@@ -33,7 +33,7 @@ export class NotFoundException extends Error implements BaseException {
     readonly type = ExceptionType.NOT_FOUND;
 
     constructor(values?: Pick<NotFoundException, 'message'>) {
-        super(values?.message || 'The requested data could not be found');
+        super(values?.message ?? 'The requested data could not be found');
     }
 }
 

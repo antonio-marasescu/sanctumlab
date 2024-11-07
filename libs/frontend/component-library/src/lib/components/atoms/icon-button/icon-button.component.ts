@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    EventEmitter,
+    Input,
+    Output
+} from '@angular/core';
 import { NgIcon } from '@ng-icons/core';
 import { NgClass } from '@angular/common';
 import {
@@ -11,6 +17,7 @@ import {
     standalone: true,
     imports: [NgIcon, NgClass],
     template: `<button
+        tabindex="0"
         class="btn"
         [disabled]="disabled"
         [ngClass]="{
@@ -30,6 +37,8 @@ import {
             'btn-md': size === 'md',
             'btn-lg': size === 'lg'
         }"
+        (click)="clickEvent.emit()"
+        (keydown.enter)="clickEvent.emit()"
     >
         <ng-icon [name]="icon" [size]="iconSize"></ng-icon>
     </button>`,
@@ -42,6 +51,7 @@ export class IconButtonComponent {
     @Input({ required: false }) isCircle = true;
     @Input({ required: false }) isOutlined = false;
     @Input({ required: false }) disabled = false;
+    @Output() clickEvent = new EventEmitter<void>();
 
     protected get iconSize(): string {
         switch (this.size) {

@@ -7,6 +7,7 @@ import authGuard from './guards/auth.guard';
 
 configDotenv();
 const app = express();
+app.disable('x-powered-by');
 const baseRoute = '/api';
 
 app.use(

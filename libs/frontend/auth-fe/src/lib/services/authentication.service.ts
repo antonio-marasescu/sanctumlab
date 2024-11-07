@@ -18,9 +18,10 @@ import { JWT } from '@aws-amplify/core';
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
     constructor(
-        @Inject(AUTH_CONFIG) private authConfiguration: AuthConfiguration,
-        private router: Router,
-        private store: Store<AuthState>
+        @Inject(AUTH_CONFIG)
+        private readonly authConfiguration: AuthConfiguration,
+        private readonly router: Router,
+        private readonly store: Store<AuthState>
     ) {}
 
     public async init(): Promise<void> {
@@ -123,9 +124,9 @@ export class AuthenticationService {
         }
 
         const username =
-            (session.tokens?.idToken?.payload?.['name'] as string) || '';
+            (session.tokens?.idToken?.payload?.['name'] as string) ?? '';
         const id = currentUser.userId;
-        const email = currentUser.signInDetails?.loginId || '';
+        const email = currentUser.signInDetails?.loginId ?? '';
 
         return {
             id,

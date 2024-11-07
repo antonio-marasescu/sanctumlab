@@ -31,6 +31,7 @@ import { NgClass } from '@angular/common';
             <span class="label-text">{{ label }}</span>
         </div>
         <quill-editor
+            tabindex="0"
             class="border rounded-xl"
             [ngClass]="{
                 'border-primary': this.controlState === InputState.Valid,
@@ -62,8 +63,8 @@ export class MarkdownInputComponent implements OnInit {
 
     constructor(
         @Inject(InputValidationConfigToken)
-        private validationConfiguration: InputValidationConfiguration,
-        private changeDetectorRef: ChangeDetectorRef
+        private readonly validationConfiguration: InputValidationConfiguration,
+        private readonly changeDetectorRef: ChangeDetectorRef
     ) {}
 
     ngOnInit() {

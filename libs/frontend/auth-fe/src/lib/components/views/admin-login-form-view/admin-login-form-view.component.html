@@ -53,10 +53,12 @@
 
                     <p class="text-sm font-light text-base-content">
                         Are you a Guest?
-                        <span
+                        <a
+                            tabindex="0"
                             (click)="redirectToGuestLogin.emit()"
+                            (keydown.enter)="redirectToGuestLogin.emit()"
                             class="font-medium text-base-content hover:underline dark:text-primary-500 cursor-pointer"
-                            >Login as guest</span
+                            >Login as guest</a
                         >
                     </p>
                 </form>

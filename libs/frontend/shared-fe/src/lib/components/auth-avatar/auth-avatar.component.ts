@@ -45,14 +45,14 @@ export class AuthAvatarComponent implements OnInit {
     ];
 
     constructor(
-        private authService: AuthenticationService,
-        private store: Store
+        private readonly authService: AuthenticationService,
+        private readonly store: Store
     ) {}
 
     ngOnInit() {
         this.username$ = this.store
             .select(selectAuthStateCurrentUser())
-            .pipe(map(user => user?.username?.slice(0, 2) || ''));
+            .pipe(map(user => user?.username?.slice(0, 2) ?? ''));
     }
 
     protected async onMenuClick(id: string): Promise<void> {

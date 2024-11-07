@@ -13,11 +13,11 @@ import {
 
 @Injectable({ providedIn: 'root' })
 export class ProductsClientService {
-    private baseRoute: string;
+    private readonly baseRoute: string;
     constructor(
         @Inject(API_ENDPOINT_CONFIG)
-        private apiEndpointConfiguration: ApiEndpointConfiguration,
-        private httpClient: HttpClient
+        private readonly apiEndpointConfiguration: ApiEndpointConfiguration,
+        private readonly httpClient: HttpClient
     ) {
         this.baseRoute = `${this.apiEndpointConfiguration.address}/products`;
     }

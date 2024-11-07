@@ -35,9 +35,7 @@ export class ModalComponent implements OnChanges, AfterViewInit {
     @Input({ required: false }) opened = false;
     @Output() closeEvent = new EventEmitter<void>();
     @ViewChild('modal')
-    private modal?: ElementRef<HTMLDialogElement>;
-
-    constructor(private elementRef: ElementRef) {}
+    private readonly modal?: ElementRef<HTMLDialogElement>;
 
     ngAfterViewInit() {
         if (this.opened) {

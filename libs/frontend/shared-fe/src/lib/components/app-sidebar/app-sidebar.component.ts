@@ -53,8 +53,8 @@ export class AppSidebarComponent implements OnInit {
     protected themeControl!: FormControl<boolean>;
 
     constructor(
-        private appNavigationService: AppNavigationService,
-        private themingService: ThemingService
+        private readonly appNavigationService: AppNavigationService,
+        private readonly themingService: ThemingService
     ) {}
 
     ngOnInit() {

@@ -6,23 +6,23 @@ export function createProductItemForm(
     initialValues?: ProductItemDto | null
 ): FormGroup<ProductItemForm> {
     return new FormGroup<ProductItemForm>({
-        name: new FormControl<string>(initialValues?.name || '', {
+        name: new FormControl<string>(initialValues?.name ?? '', {
             nonNullable: true,
             validators: [Validators.required]
         }),
-        description: new FormControl<string>(initialValues?.description || '', {
+        description: new FormControl<string>(initialValues?.description ?? '', {
             nonNullable: true,
             validators: [Validators.required]
         }),
-        category: new FormControl<string>(initialValues?.category || '', {
+        category: new FormControl<string>(initialValues?.category ?? '', {
             nonNullable: true,
             validators: [Validators.required]
         }),
-        recipe: new FormControl<string>(initialValues?.recipe || '', {
+        recipe: new FormControl<string>(initialValues?.recipe ?? '', {
             nonNullable: true,
             validators: [Validators.required]
         }),
-        tags: new FormControl<string[]>(initialValues?.tags || [], {
+        tags: new FormControl<string[]>(initialValues?.tags ?? [], {
             nonNullable: true,
             validators: [Validators.required]
         }),

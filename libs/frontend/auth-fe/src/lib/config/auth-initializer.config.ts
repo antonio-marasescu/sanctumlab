@@ -7,7 +7,7 @@ import {
 
 export function authInitializerFactory(
     amplifyAuthService: AuthenticationService
-): () => void {
+): () => Promise<void> {
     return () => amplifyAuthService.init();
 }
 

@@ -30,7 +30,7 @@ export class MenuItemEditPageComponent implements OnInit {
     @Input() id!: string;
     protected currentItem$!: Observable<ProductItemDto | null>;
 
-    constructor(private productApiService: ProductApiService) {}
+    constructor(private readonly productApiService: ProductApiService) {}
 
     ngOnInit() {
         this.currentItem$ =

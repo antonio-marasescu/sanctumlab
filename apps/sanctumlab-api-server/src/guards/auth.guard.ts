@@ -14,15 +14,15 @@ async function authGuard(
         console.error('Header not found');
         return res.status(401).json({ message: 'Unauthorized' });
     }
-    const token = authHeader && authHeader.split(' ')[1];
+    const token = authHeader?.split(' ')[1];
     if (!token) {
         console.error('Token not found');
         return res.status(401).json({ message: 'Unauthorized' });
     }
 
     const verifiedToken = await AuthVerifierApiInstance.authorize(token, {
-        userPoolId: COGNITO_USER_POOL_ID as string,
-        userPoolClientId: COGNITO_CLIENT_ID as string
+        userPoolId: COGNITO_USER_POOL_ID,
+        userPoolClientId: COGNITO_CLIENT_ID
     });
 
     if (!verifiedToken) {

@@ -17,7 +17,7 @@ import { ProductItemCategory } from '@sanctumlab/api-interfaces';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MenuItemCreatePageComponent {
-    constructor(private productApiService: ProductApiService) {}
+    constructor(private readonly productApiService: ProductApiService) {}
 
     protected onSubmitEvent({ form }: ProductFormSubmitEvent) {
         this.productApiService.sendCreateProduct({

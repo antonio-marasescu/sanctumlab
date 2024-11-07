@@ -1,7 +1,7 @@
 import * as cdk from 'aws-cdk-lib';
 import { RemovalPolicy } from 'aws-cdk-lib';
 import { InfrastructureStackProps } from '../../shared/types/infrastructure-stack.types';
-import { Bucket } from 'aws-cdk-lib/aws-s3';
+import { BlockPublicAccess, Bucket } from 'aws-cdk-lib/aws-s3';
 import {
     CLOUDFRONT_DISTRIBUTION_ID,
     ORIGIN_ACCESS_IDENTITY_ID,
@@ -21,7 +21,9 @@ export function createFrontendStack(
     const websiteBucket = new Bucket(stack, WEBSITE_BUCKET_ID(props), {
         publicReadAccess: false,
         removalPolicy: RemovalPolicy.DESTROY,
-        autoDeleteObjects: true
+        autoDeleteObjects: true,
+        blockPublicAccess: BlockPublicAccess.BLOCK_ALL,
+        enforceSSL: true
     });
 
     const originAccessIdentity = new OriginAccessIdentity(

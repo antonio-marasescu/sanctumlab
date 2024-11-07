@@ -65,8 +65,8 @@ export class MenuItemFormContainerComponent implements OnInit, OnChanges {
     ];
 
     constructor(
-        private productApiService: ProductApiService,
-        private appNavigationService: AppNavigationService
+        private readonly productApiService: ProductApiService,
+        private readonly appNavigationService: AppNavigationService
     ) {}
 
     ngOnInit() {
@@ -84,12 +84,12 @@ export class MenuItemFormContainerComponent implements OnInit, OnChanges {
     protected updateFormValue(item?: ProductItemDto) {
         if (this.form) {
             this.form.patchValue({
-                name: item?.name || '',
-                description: item?.description || '',
-                category: item?.category || '',
-                tags: item?.tags || [],
-                recipe: item?.recipe || '',
-                available: item?.available || false
+                name: item?.name ?? '',
+                description: item?.description ?? '',
+                category: item?.category ?? '',
+                tags: item?.tags ?? [],
+                recipe: item?.recipe ?? '',
+                available: item?.available ?? false
             });
         }
     }

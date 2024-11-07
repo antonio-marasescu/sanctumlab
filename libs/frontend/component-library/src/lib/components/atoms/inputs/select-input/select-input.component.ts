@@ -31,6 +31,7 @@ import { SelectOption } from '../../../../types/atoms/select.types';
         </div>
         <select
             [attr.id]="id"
+            tabindex="0"
             class="select w-full"
             [autofocus]="autofocus"
             [ngClass]="{
@@ -70,8 +71,8 @@ export class SelectInputComponent implements OnInit {
 
     constructor(
         @Inject(InputValidationConfigToken)
-        private validationConfiguration: InputValidationConfiguration,
-        private changeDetectorRef: ChangeDetectorRef
+        private readonly validationConfiguration: InputValidationConfiguration,
+        private readonly changeDetectorRef: ChangeDetectorRef
     ) {}
 
     ngOnInit() {

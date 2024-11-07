@@ -12,9 +12,9 @@ import { AuthenticationService } from '../services/authentication.service';
 })
 export class AdminRestrictDirective implements OnInit {
     constructor(
-        private authService: AuthenticationService,
-        private templateRef: TemplateRef<any>,
-        private viewContainer: ViewContainerRef
+        private readonly authService: AuthenticationService,
+        private readonly templateRef: TemplateRef<any>,
+        private readonly viewContainer: ViewContainerRef
     ) {}
 
     ngOnInit() {

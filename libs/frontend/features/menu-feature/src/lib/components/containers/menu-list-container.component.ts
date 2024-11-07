@@ -59,8 +59,8 @@ export class MenuListContainerComponent implements OnInit, OnChanges {
     protected filterForm!: FormGroup<ProductFilterForm>;
 
     constructor(
-        private productApiService: ProductApiService,
-        private appNavigationService: AppNavigationService
+        private readonly productApiService: ProductApiService,
+        private readonly appNavigationService: AppNavigationService
     ) {}
 
     ngOnInit() {

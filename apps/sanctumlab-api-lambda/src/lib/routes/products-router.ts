@@ -12,7 +12,7 @@ export async function handleProductsRoute(
 ): Promise<LambdaResponsePayload> {
     const httpMethod = event.httpMethod;
     const id = event.pathParameters?.['id'];
-    const body = JSON.parse(event.body || '{}');
+    const body = JSON.parse(event.body ?? '{}');
 
     switch (httpMethod) {
         case 'GET': {

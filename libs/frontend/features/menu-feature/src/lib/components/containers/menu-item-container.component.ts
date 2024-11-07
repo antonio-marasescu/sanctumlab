@@ -31,8 +31,8 @@ export class MenuItemContainerComponent implements OnInit {
     protected item$!: Observable<ProductItemDto | null>;
 
     constructor(
-        private appNavigationService: AppNavigationService,
-        private productApiService: ProductApiService
+        private readonly appNavigationService: AppNavigationService,
+        private readonly productApiService: ProductApiService
     ) {}
 
     ngOnInit() {

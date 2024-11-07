@@ -14,6 +14,7 @@ import { NgClass } from '@angular/common';
     standalone: true,
     imports: [NgIcon, NgClass],
     template: `<div
+        tabindex="-1"
         [id]="id"
         role="alert"
         class="alert p-2 md:p-3 shadow-lg gap-2 md:gap-4 animate-pop"

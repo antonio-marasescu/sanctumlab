@@ -30,7 +30,7 @@ import { Router } from '@angular/router';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UnauthorizedPageComponent {
-    constructor(private router: Router) {}
+    constructor(private readonly router: Router) {}
 
     protected async onBack(): Promise<void> {
         await this.router.navigate(['/']);

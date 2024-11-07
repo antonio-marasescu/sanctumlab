@@ -33,8 +33,8 @@ export class AdminLoginPageComponent implements OnInit {
     protected validLogin$: Observable<boolean> = of(true);
 
     constructor(
-        private authenticationService: AuthenticationService,
-        private router: Router
+        private readonly authenticationService: AuthenticationService,
+        private readonly router: Router
     ) {}
 
     ngOnInit() {

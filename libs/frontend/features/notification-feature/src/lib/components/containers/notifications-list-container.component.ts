@@ -20,7 +20,9 @@ import { AsyncPipe } from '@angular/common';
 export class NotificationsListContainerComponent implements OnInit {
     protected notifications$!: Observable<NotificationDto[]>;
 
-    constructor(private notificationsApiService: NotificationsApiService) {}
+    constructor(
+        private readonly notificationsApiService: NotificationsApiService
+    ) {}
 
     ngOnInit() {
         this.notifications$ =
