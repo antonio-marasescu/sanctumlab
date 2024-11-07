@@ -63,7 +63,10 @@ function createFrontendOutputs(
         value: deps.distribution.distributionDomainName,
         description: 'The Distribution Domain Name'
     });
-
+    new cdk.CfnOutput(stack, 'DistributionId', {
+        value: deps.distribution.distributionId,
+        description: 'The Distribution Id'
+    });
     new cdk.CfnOutput(stack, 'WebsiteBucketName', {
         value: deps.websiteBucket.bucketName,
         description: 'The Website Bucket Name'
