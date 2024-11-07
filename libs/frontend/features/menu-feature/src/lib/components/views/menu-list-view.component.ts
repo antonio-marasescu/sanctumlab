@@ -32,7 +32,7 @@ import { MenuListFilterViewComponent } from './menu-list-filter-view.component';
                 *ngxAuthAdminRestrict
                 label="Create"
                 theme="primary"
-                [size]="'sm'"
+                [isResponsive]="true"
                 (clickEvent)="createEvent.emit()"
             />
         </div>

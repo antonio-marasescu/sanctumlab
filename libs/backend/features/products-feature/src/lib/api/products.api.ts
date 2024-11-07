@@ -12,26 +12,34 @@ import {
     toDto,
     toDtoList
 } from '../mappers/products.mappers';
+import { AppLogger } from '@sanctumlab/be/shared';
 
 export class ProductsApi {
     public async retrieveAll(): Promise<ProductItemDto[]> {
+        AppLogger.info(`[ProductsApi] Retrieve All `);
         const response = await ProductsServiceInstance.retrieveAll();
-        console.log('model', response);
+        AppLogger.info(`[ProductsApi] Retrieve All Success`, {
+            length: response.length
+        });
         return toDtoList(response);
     }
 
     public async retrieveById(id: string): Promise<ProductItemDto> {
+        AppLogger.info(`[ProductsApi] Retrieve By Id `, { id });
         const response = await ProductsServiceInstance.retrieveById(id);
-        console.log('model', response);
+        AppLogger.info(`[ProductsApi] Retrieve By Id Success`, {
+            retrievedId: response.id
+        });
         return toDto(response);
     }
 
     public async create(dto: CreateProductItemDto): Promise<ProductItemDto> {
+        AppLogger.info(`[ProductsApi] Create `, { dto });
         const validatedDto = CreateProductItemDtoSchema.parse(dto);
         const response = await ProductsServiceInstance.create(
             toDomainCreate(validatedDto)
         );
-        console.log('model', response);
+        AppLogger.info(`[ProductsApi] Create Success`, { response });
         return toDto(response);
     }
 
@@ -39,6 +47,7 @@ export class ProductsApi {
         id: string,
         dto: UpdateProductItemDto
     ): Promise<ProductItemDto> {
+        AppLogger.info(`[ProductsApi] Update `, { id, dto });
         const validatedDto = UpdateProductItemDtoSchema.parse(dto);
         const oldModel = await ProductsServiceInstance.retrieveById(id);
 
@@ -46,12 +55,15 @@ export class ProductsApi {
             id,
             toDomainUpdate(oldModel, validatedDto)
         );
-        console.log('model', response);
+        AppLogger.info(`[ProductsApi] Update Success`, { response });
         return toDto(response);
     }
 
     public async removeById(id: string): Promise<boolean> {
-        return ProductsServiceInstance.removeById(id);
+        AppLogger.info(`[ProductsApi] Remove By Id`, { id });
+        const success = await ProductsServiceInstance.removeById(id);
+        AppLogger.info(`[ProductsApi] Remove By Id Success`, { success });
+        return success;
     }
 }
 

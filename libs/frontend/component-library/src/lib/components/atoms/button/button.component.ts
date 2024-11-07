@@ -47,7 +47,7 @@ import {
         } @else {
             <button
                 tabindex="0"
-                class="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg"
+                class="btn btn-sm md:btn-md"
                 [disabled]="disabled"
                 [ngClass]="{
                     'btn-primary': theme === 'primary',

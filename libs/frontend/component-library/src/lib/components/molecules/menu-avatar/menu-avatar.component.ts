@@ -37,7 +37,7 @@ import { MenuItem } from '../../../types/molecules/menu.types';
                         }"
                     >
                         <ul
-                            class="menu menu-sm bg-base-200 rounded-box w-24 md:w-32 dark:shadow-neutral dark:shadow-sm"
+                            class="menu menu-md bg-base-200 rounded-box w-32 md:w-44 dark:shadow-neutral dark:shadow-sm"
                         >
                             @for (item of items; track item.id) {
                                 <li

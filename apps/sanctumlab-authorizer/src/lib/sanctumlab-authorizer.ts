@@ -4,6 +4,7 @@ import {
 } from 'aws-lambda';
 import { AuthorizerIamServiceInstance } from './services/authorizer-iam.service';
 import { AuthVerifierApiInstance } from '@sanctumlab/be/auth';
+import { AppLogger } from '@sanctumlab/be/shared';
 
 const { COGNITO_USER_POOL_ID, COGNITO_CLIENT_ID } = process.env;
 
@@ -13,7 +14,7 @@ export async function main(
     try {
         const authorizationToken = event?.authorizationToken?.split(' ')[1];
         if (!authorizationToken) {
-            console.error('Token not found');
+            AppLogger.error('Token not found');
             return AuthorizerIamServiceInstance.generateDeny(
                 'default',
                 event.methodArn
@@ -28,17 +29,17 @@ export async function main(
             }
         );
 
-        console.debug('Token is valid. Token: ', verifiedToken);
+        AppLogger.debug('Token is valid. Token: ', { verifiedToken });
         if (verifiedToken) {
             const policy = await AuthorizerIamServiceInstance.generateAllow(
                 verifiedToken['cognito:username'],
                 event.methodArn
             );
-            console.debug('Policy', policy);
+            AppLogger.debug('Access Policy', { policy });
             return policy;
         }
     } catch (err: unknown) {
-        console.error('Error during token validation:', err);
+        AppLogger.error('Error during token validation:', { err });
     }
 
     return AuthorizerIamServiceInstance.generateDeny(

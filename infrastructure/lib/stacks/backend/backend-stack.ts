@@ -57,6 +57,7 @@ function createApiGateway(
         description: `The ${props.stackConfig.appName} API for the ${props.stackConfig.tenantEnv} environment.`,
         handler: defaultLambda,
         proxy: false,
+        deploy: true,
         defaultCorsPreflightOptions: {
             allowHeaders: [
                 'Content-Type',

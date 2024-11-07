@@ -22,6 +22,7 @@ import { ProductApiService } from '@sanctumlab/fe/data-access';
                 (editEvent)="onItemEdit($event)"
                 (enableEvent)="onEnableEvent($event)"
                 (disableEvent)="onDisableEvent($event)"
+                (deleteEvent)="onDeleteEvent($event)"
             />
         }
     `,
@@ -45,6 +46,11 @@ export class MenuItemContainerComponent implements OnInit {
 
     protected async onItemEdit(id: string): Promise<void> {
         await this.appNavigationService.navigateToMenuEditItem(id);
+    }
+
+    protected onDeleteEvent(id: string): void {
+        this.productApiService.sendUnsetCurrentProduct();
+        this.productApiService.sendRemoveProduct(id);
     }
 
     protected onEnableEvent(item: ProductItemDto): void {

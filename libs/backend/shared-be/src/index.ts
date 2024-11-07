@@ -7,3 +7,4 @@ export * from './lib/types/lambda-handler.types';
 
 export * from './lib/utils/lambda-handler.utils';
 export * from './lib/utils/lambda-response.utils';
+export * from './lib/utils/logging.utils';

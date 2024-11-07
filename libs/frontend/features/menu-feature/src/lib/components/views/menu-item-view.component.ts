@@ -64,27 +64,34 @@ import { QuillViewComponent } from 'ngx-quill';
                 </div>
             }
         </div>
-        <div actions class="flex gap-4">
+        <div actions class="flex flex-wrap justify-end gap-4">
             <ngx-clib-button
                 label="Close"
                 theme="ghost"
-                [size]="'sm'"
+                [isResponsive]="true"
                 (clickEvent)="modalClose.emit()"
             />
             @if (item) {
+                <ngx-clib-button
+                    *ngxAuthAdminRestrict
+                    label="Delete"
+                    [isResponsive]="true"
+                    theme="error"
+                    (clickEvent)="deleteEvent.emit(item.id)"
+                />
                 @if (item.available) {
                     <ngx-clib-button
                         *ngxAuthAdminRestrict
                         label="Disable"
-                        [size]="'sm'"
-                        theme="error"
+                        [isResponsive]="true"
+                        theme="secondary"
                         (clickEvent)="disableEvent.emit(item)"
                     />
                 } @else {
                     <ngx-clib-button
                         *ngxAuthAdminRestrict
                         label="Enable"
-                        [size]="'sm'"
+                        [isResponsive]="true"
                         theme="success"
                         (clickEvent)="enableEvent.emit(item)"
                     />
@@ -92,8 +99,8 @@ import { QuillViewComponent } from 'ngx-quill';
             }
             <ngx-clib-button
                 *ngxAuthAdminRestrict
-                label="Edit"
-                [size]="'sm'"
+                label="Update"
+                [isResponsive]="true"
                 theme="primary"
                 (clickEvent)="editEvent.emit(item?.id || '')"
             />
@@ -108,4 +115,5 @@ export class MenuItemViewComponent {
     @Output() editEvent = new EventEmitter<string>();
     @Output() disableEvent = new EventEmitter<ProductItemDto>();
     @Output() enableEvent = new EventEmitter<ProductItemDto>();
+    @Output() deleteEvent = new EventEmitter<string>();
 }
