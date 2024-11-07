@@ -46,7 +46,7 @@ export async function handleProductsRoute(
         case 'POST': {
             console.info('Event Product Create');
             const product = await ProductsApiInstance.create(body);
-            return buildOkResponse({ product });
+            return buildOkResponse(product);
         }
     }
 

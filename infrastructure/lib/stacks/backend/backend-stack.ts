@@ -11,6 +11,7 @@ import { UserPool, UserPoolClient } from 'aws-cdk-lib/aws-cognito';
 import { InfrastructureStackProps } from '../../shared/types/infrastructure-stack.types';
 import { createLambda } from '../../shared/utils/lambda.utils';
 import { createApiModule } from './backend-modules-stack';
+import { Duration } from 'aws-cdk-lib/core';
 
 export function createBackendStack(
     stack: cdk.Stack,
@@ -88,7 +89,8 @@ export function createAuthorizer(
     });
     return new apigw.TokenAuthorizer(stack, API_COGNITO_AUTHORIZER_ID(props), {
         handler: lambdaAuthorizer,
-        identitySource: 'method.request.header.Authorization'
+        identitySource: 'method.request.header.Authorization',
+        resultsCacheTtl: Duration.seconds(0)
     });
 }
 
