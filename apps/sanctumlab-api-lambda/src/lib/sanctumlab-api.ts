@@ -1,4 +1,8 @@
-import { baseLambdaHandler, LambdaRequestPayload } from '@sanctumlab/be/shared';
+import {
+    baseLambdaHandler,
+    buildPathNotFoundResponse,
+    LambdaRequestPayload
+} from '@sanctumlab/be/shared';
 import { handleProductsRoute, ProductsRoute } from './routes/products-router';
 
 export const main = async (mainEvent: LambdaRequestPayload) =>
@@ -7,8 +11,5 @@ export const main = async (mainEvent: LambdaRequestPayload) =>
             return handleProductsRoute(event);
         }
 
-        return {
-            body: 'Resource not found',
-            statusCode: 404
-        };
+        return buildPathNotFoundResponse();
     });

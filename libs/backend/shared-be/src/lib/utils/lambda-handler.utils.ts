@@ -4,6 +4,7 @@ import {
     LambdaResponsePayload
 } from '../types/lambda-handler.types';
 import { BaseException } from '../types/exception.types';
+import { buildErrorResponse } from './lambda-response.utils';
 
 export async function baseLambdaHandler(
     event: LambdaRequestPayload,
@@ -14,12 +15,9 @@ export async function baseLambdaHandler(
     } catch (error: unknown) {
         const exception = error as BaseException;
         console.error('Exception occurred', error);
-        return {
-            statusCode: exception.statusCode,
-            body: JSON.stringify({
-                message: exception.message,
-                type: exception.type
-            })
-        };
+        return buildErrorResponse(exception.statusCode, {
+            message: exception.message,
+            type: exception.type
+        });
     }
 }
