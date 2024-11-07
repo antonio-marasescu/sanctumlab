@@ -9,6 +9,7 @@ import {
     ENVIRONMENT_TAG_NAME,
     PROJECT_TAG_NAME
 } from './shared/config/infrastructure.config';
+import { createFrontendStack } from './stacks/frontend/frontend-stack';
 
 export class InfrastructureStack extends cdk.Stack {
     constructor(scope: Construct, id: string, props: InfrastructureStackProps) {
@@ -23,6 +24,7 @@ export class InfrastructureStack extends cdk.Stack {
             userPool,
             userPoolClient
         });
+        createFrontendStack(this, props);
 
         Tags.of(this).add(PROJECT_TAG_NAME, props.stackConfig.appName);
         Tags.of(this).add(ENVIRONMENT_TAG_NAME, props.stackConfig.tenantEnv);
