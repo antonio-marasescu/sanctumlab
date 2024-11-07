@@ -30,10 +30,12 @@ export async function main(
 
         console.debug('Token is valid. Token: ', verifiedToken);
         if (verifiedToken) {
-            return AuthorizerIamServiceInstance.generateAllow(
+            const policy = AuthorizerIamServiceInstance.generateAllow(
                 verifiedToken['cognito:username'],
                 event.methodArn
             );
+            console.debug('Policy', policy);
+            return policy;
         }
     } catch (err: unknown) {
         console.error('Error during token validation:', err);
