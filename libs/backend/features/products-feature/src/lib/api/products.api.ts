@@ -16,11 +16,13 @@ import {
 export class ProductsApi {
     public async retrieveAll(): Promise<ProductItemDto[]> {
         const response = await ProductsServiceInstance.retrieveAll();
+        console.log('model', response);
         return toDtoList(response);
     }
 
     public async retrieveById(id: string): Promise<ProductItemDto> {
         const response = await ProductsServiceInstance.retrieveById(id);
+        console.log('model', response);
         return toDto(response);
     }
 
@@ -29,6 +31,7 @@ export class ProductsApi {
         const response = await ProductsServiceInstance.create(
             toDomainCreate(validatedDto)
         );
+        console.log('model', response);
         return toDto(response);
     }
 
@@ -43,6 +46,7 @@ export class ProductsApi {
             id,
             toDomainUpdate(oldModel, validatedDto)
         );
+        console.log('model', response);
         return toDto(response);
     }
 
