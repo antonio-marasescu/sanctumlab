@@ -44,6 +44,18 @@ jobs:
             echo "Cache miss: Running 'npm ci'"
             npm ci
           fi
+      - name: Set environment Variables
+        uses: iamazeem/substitute-action@v1
+        env:
+          API_URL: ${{ secrets.API_URL }}
+          COGNITO_GUEST_EMAIL: ${{ secrets.COGNITO_GUEST_EMAIL }}
+          COGNITO_REDIRECT_SIGN_IN: ${{ secrets.COGNITO_REDIRECT_SIGN_IN }}
+          COGNITO_REDIRECT_SIGN_OUT: ${{ secrets.COGNITO_REDIRECT_SIGN_OUT }}
+          COGNITO_DOMAIN: ${{ secrets.COGNITO_DOMAIN }}
+          COGNITO_USER_POOL_CLIENT_ID: ${{ secrets.COGNITO_USER_POOL_CLIENT_ID }}
+          COGNITO_USER_POOL_ID: ${{ secrets.COGNITO_USER_POOL_ID }}
+        with:
+          input-files: apps/sanctumlab-ui/src/environments/environment.production.ts
       - name: Build sources
         run: npm run build:ui
       - name: Publish website

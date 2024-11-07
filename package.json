@@ -7,7 +7,7 @@
         "serve:api-dev": "nx serve sanctumlab-api-server",
         "storybook:clib": "nx storybook component-library",
         "scripts:db-setup": "node scripts/create-table.mjs",
-        "build:ui": "nx build sanctumlab-ui",
+        "build:ui": "nx build sanctumlab-ui --configuration=production",
         "build:api": "nx run-many --target=build --projects=sanctumlab-api-lambda,sanctumlab-authorizer",
         "build:sanctumlab-authorizer": "nx build sanctumlab-authorizer",
         "build:sanctumlab-api-lambda": "nx build sanctumlab-api-lambda",
