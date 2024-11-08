@@ -15,16 +15,19 @@ export class InfrastructureStack extends cdk.Stack {
     constructor(scope: Construct, id: string, props: InfrastructureStackProps) {
         super(scope, id, props);
 
-        const database = createPersistenceStack(this, props);
         const { userPool, userPoolClient } = createSecurityStack(this, props, {
             cfnDomainName: null
         });
-        createBackendStack(this, props, {
-            database,
-            userPool,
-            userPoolClient
-        });
-        createFrontendStack(this, props);
+
+        if (props.stackConfig.production) {
+            const database = createPersistenceStack(this, props);
+            createBackendStack(this, props, {
+                database,
+                userPool,
+                userPoolClient
+            });
+            createFrontendStack(this, props);
+        }
 
         Tags.of(this).add(PROJECT_TAG_NAME, props.stackConfig.appName);
         Tags.of(this).add(ENVIRONMENT_TAG_NAME, props.stackConfig.tenantEnv);

@@ -4,5 +4,6 @@ export interface InfrastructureStackProps extends StackProps {
     stackConfig: {
         appName: string;
         tenantEnv: string;
+        production: boolean;
     };
 }
