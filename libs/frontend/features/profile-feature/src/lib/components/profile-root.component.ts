@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { AppSidebarComponent } from '@sanctumlab/fe/shared';
 
 @Component({
-    selector: 'ngx-menu-root',
+    selector: 'ngx-profile-root',
     standalone: true,
     imports: [RouterOutlet, AppSidebarComponent],
     template: `<ngx-shared-app-sidebar
@@ -12,4 +12,4 @@ import { AppSidebarComponent } from '@sanctumlab/fe/shared';
     styleUrls: [],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MenuRootComponent {}
+export class ProfileRootComponent {}

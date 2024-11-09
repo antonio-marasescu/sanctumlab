@@ -16,6 +16,11 @@ export class ThemingService {
         return colorTheme === this.DarkMode;
     }
 
+    public isNoThemeSelected(): boolean {
+        const colorTheme = localStorage.getItem(this.ColorThemeKey);
+        return colorTheme !== this.DarkMode && colorTheme !== this.LightMode;
+    }
+
     public toggleDarkMode(): void {
         document.documentElement.setAttribute(
             this.ColorThemeKey,

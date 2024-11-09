@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
-import { NotificationsListContainerComponent } from '@sanctumlab/notification-feature';
+import { NotificationsListContainerComponent } from '@sanctumlab/fe/notification-feature';
 
 @Component({
     standalone: true,

@@ -13,6 +13,7 @@ import {
 import { Store } from '@ngrx/store';
 import { map, Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
+import { AppNavigationService } from '../../services/app-navigation.service';
 
 @UntilDestroy()
 @Component({
@@ -46,6 +47,7 @@ export class AuthAvatarComponent implements OnInit {
 
     constructor(
         private readonly authService: AuthenticationService,
+        private readonly appNavigationService: AppNavigationService,
         private readonly store: Store
     ) {}
 
@@ -58,6 +60,9 @@ export class AuthAvatarComponent implements OnInit {
     protected async onMenuClick(id: string): Promise<void> {
         if (id === 'sign-out') {
             await this.authService.signOut();
+        }
+        if (id === 'settings') {
+            await this.appNavigationService.navigateToProfileSettings();
         }
     }
 }

@@ -12,6 +12,14 @@ export const appRoutes: Route[] = [
         canActivate: [authenticatedGuard]
     },
     {
+        path: AppFeatureRoutes.PROFILE,
+        loadChildren: () =>
+            import('@sanctumlab/fe/profile-feature').then(
+                feat => feat.profileFeatureRoutes
+            ),
+        canActivate: [authenticatedGuard]
+    },
+    {
         path: AppFeatureRoutes.AUTH,
         children: [...authFeatureRoutes]
     },

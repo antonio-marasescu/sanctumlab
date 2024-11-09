@@ -2,7 +2,8 @@ import { AuthFeatureName, AuthRoutes } from '@sanctumlab/fe/auth';
 
 export enum AppFeatureRoutes {
     MENU = 'menu',
-    AUTH = AuthFeatureName
+    AUTH = AuthFeatureName,
+    PROFILE = 'profile'
 }
 
 export enum MenuFeatureRoutes {
@@ -10,6 +11,10 @@ export enum MenuFeatureRoutes {
     SNACKS = 'snacks',
     CREATE = 'create',
     EDIT = 'edit'
+}
+
+export enum ProfileFeatureRoutes {
+    SETTINGS = 'settings'
 }
 
 export enum AuthFeatureRoutes {

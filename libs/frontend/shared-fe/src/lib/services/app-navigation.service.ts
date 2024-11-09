@@ -1,14 +1,22 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import {
+    ActivatedRoute,
+    Params,
+    QueryParamsHandling,
+    Router
+} from '@angular/router';
 import {
     AppFeatureRoutes,
-    AuthFeatureRoutes,
-    MenuFeatureRoutes
+    MenuFeatureRoutes,
+    ProfileFeatureRoutes
 } from '../types/app-routes.types';
 
 @Injectable({ providedIn: 'root' })
 export class AppNavigationService {
-    constructor(private readonly router: Router) {}
+    constructor(
+        private readonly router: Router,
+        private activatedRoute: ActivatedRoute
+    ) {}
 
     public async navigateToMenuFeature(): Promise<void> {
         await this.router.navigate([AppFeatureRoutes.MENU]);
@@ -43,10 +51,21 @@ export class AppNavigationService {
         ]);
     }
 
-    public async navigateToLoginPage(): Promise<void> {
+    public async navigateToProfileSettings(): Promise<void> {
         await this.router.navigate([
-            AppFeatureRoutes.AUTH,
-            AuthFeatureRoutes.LOGIN
+            AppFeatureRoutes.PROFILE,
+            ProfileFeatureRoutes.SETTINGS
         ]);
+    }
+
+    public async applyQueryParamsToRoute(
+        params: Params,
+        strategy: QueryParamsHandling = 'replace'
+    ): Promise<void> {
+        await this.router.navigate([], {
+            relativeTo: this.activatedRoute,
+            queryParams: params,
+            queryParamsHandling: strategy
+        });
     }
 }

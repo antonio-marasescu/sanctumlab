@@ -59,8 +59,10 @@ export class AppSidebarComponent implements OnInit {
 
     ngOnInit() {
         const isDarkMode = this.themingService.isDarkMode();
+        const isNoThemeSelected = this.themingService.isNoThemeSelected();
 
-        this.themeControl = new FormControl<boolean>(isDarkMode, {
+        const initialTheme = isNoThemeSelected ? true : isDarkMode;
+        this.themeControl = new FormControl<boolean>(initialTheme, {
             nonNullable: true
         });
 

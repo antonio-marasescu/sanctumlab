@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { MenuListViewComponent } from '../views/menu-list-view.component';
 import { ProductApiService } from '@sanctumlab/fe/data-access';
-import { combineLatest, map, Observable, startWith } from 'rxjs';
+import { combineLatest, debounceTime, map, Observable, startWith } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import {
     ProductItemCategory,
@@ -26,9 +26,13 @@ import {
 } from '../../types/product-filter-form.types';
 import {
     applyFilter,
-    createProductFilterForm
+    createProductFilterForm,
+    filterFormToQueryParams,
+    getFilterFormInitialValues,
+    queryParamsToFilterForm
 } from '../../utils/product-filter-form.utils';
-import { UntilDestroy } from '@ngneat/until-destroy';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { ActivatedRoute } from '@angular/router';
 
 @UntilDestroy()
 @Component({
@@ -60,21 +64,37 @@ export class MenuListContainerComponent implements OnInit, OnChanges {
 
     constructor(
         private readonly productApiService: ProductApiService,
-        private readonly appNavigationService: AppNavigationService
+        private readonly appNavigationService: AppNavigationService,
+        private readonly activatedRoute: ActivatedRoute
     ) {}
 
     ngOnInit() {
-        this.filterForm = createProductFilterForm();
+        const filterParams = queryParamsToFilterForm(
+            this.activatedRoute.snapshot.queryParamMap
+        );
+        this.filterForm = createProductFilterForm(filterParams);
         this.isLoading$ =
             this.productApiService.retrieveProductsIsLoadingStream();
+
         this.items$ = combineLatest([
             this.productApiService.retrieveProductsByCategoryStream(
                 this.category
             ),
             this.filterForm.valueChanges.pipe(
-                startWith(ProductFilterFormInitialValue)
+                startWith(getFilterFormInitialValues(filterParams))
             )
         ]).pipe(map(([items, filterForm]) => applyFilter(items, filterForm)));
+
+        this.filterForm.valueChanges
+            .pipe(debounceTime(400), untilDestroyed(this))
+            .subscribe(async value => {
+                if (value) {
+                    await this.appNavigationService.applyQueryParamsToRoute(
+                        filterFormToQueryParams(value)
+                    );
+                }
+            });
+
         this.productApiService.sendRetrieveProductList();
     }
 

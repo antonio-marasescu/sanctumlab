@@ -45,8 +45,11 @@
                 "libs/frontend/features/menu-feature/src/index.ts"
             ],
             "@sanctumlab/fe/shared": ["libs/frontend/shared-fe/src/index.ts"],
-            "@sanctumlab/notification-feature": [
+            "@sanctumlab/fe/notification-feature": [
                 "libs/frontend/features/notification-feature/src/index.ts"
+            ],
+            "@sanctumlab/fe/profile-feature": [
+                "libs/frontend/features/profile-feature/src/index.ts"
             ]
         }
     },
