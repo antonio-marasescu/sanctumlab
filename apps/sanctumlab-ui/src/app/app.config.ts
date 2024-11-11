@@ -74,7 +74,6 @@ export const appConfig: ApplicationConfig = {
         provideAuthState(),
         provideHttpClient(withInterceptors([authInterceptor])),
         provideInputValidationConfiguration(validationConfigFactory()),
-        provideZoneChangeDetection({ eventCoalescing: true }),
         provideDataAccessState(),
         provideRouter(
             appRoutes,
@@ -95,6 +94,7 @@ export const appConfig: ApplicationConfig = {
                     ['clean']
                 ]
             }
-        })
+        }),
+        provideZoneChangeDetection({ eventCoalescing: true })
     ]
 };

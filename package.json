@@ -7,6 +7,7 @@
         "serve:api-dev": "nx serve sanctumlab-api-server --inspect",
         "storybook:clib": "nx storybook component-library",
         "scripts:db-setup": "node scripts/create-table.mjs",
+        "scripts:access-code": "node scripts/generate-access-code.mjs",
         "build:ui": "nx build sanctumlab-ui --configuration=production",
         "build:api": "nx run-many --target=build --projects=sanctumlab-api-lambda,sanctumlab-authorizer",
         "build:sanctumlab-authorizer": "nx build sanctumlab-authorizer",
@@ -85,7 +86,8 @@
         "vite": "^5.0.0",
         "vite-plugin-dts": "~3.8.1",
         "vitest": "^1.3.1",
-        "webpack-cli": "^5.1.4"
+        "webpack-cli": "^5.1.4",
+        "yargs": "^17.7.2"
     },
     "dependencies": {
         "@angular/animations": "~18.2.0",

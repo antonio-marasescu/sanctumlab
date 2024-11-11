@@ -12,6 +12,8 @@ import {
     matWarning
 } from '@ng-icons/material-icons/baseline';
 import { provideQuillConfig } from 'ngx-quill';
+import { validationConfigFactory } from './custom-validation';
+import { provideInternationalization } from './custom-internationalization';
 
 const preview: Preview = {
     decorators: [
@@ -26,17 +28,8 @@ const preview: Preview = {
                     matPlus,
                     matWarning
                 }),
-                provideInputValidationConfiguration({
-                    errors: {
-                        required: () => 'This field is required',
-                        minlength: ({
-                            requiredLength
-                        }: {
-                            requiredLength: number;
-                        }) => `The required length is ${requiredLength}`,
-                        email: () => `Invalid email address format`
-                    }
-                }),
+                provideInputValidationConfiguration(validationConfigFactory()),
+                provideInternationalization(),
                 provideQuillConfig({
                     theme: 'snow',
                     modules: {
