@@ -2,9 +2,11 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    EnvironmentInjector,
     Inject,
     Input,
-    OnInit
+    OnInit,
+    runInInjectionContext
 } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
@@ -18,16 +20,17 @@ import {
     InputStateType
 } from '../../../../types/internal/input-internal.types';
 import { NgClass } from '@angular/common';
+import { I18NextModule } from 'angular-i18next';
 
 @UntilDestroy()
 @Component({
     selector: 'ngx-clib-textarea-input',
     standalone: true,
-    imports: [FormsModule, ReactiveFormsModule, NgClass],
+    imports: [FormsModule, ReactiveFormsModule, NgClass, I18NextModule],
     template: `<div>
         <label class="form-control w-full">
             <div class="label">
-                <span class="label-text">{{ label }}</span>
+                <span class="label-text">{{ label | i18nextEager }}</span>
             </div>
             <textarea
                 tabindex="0"
@@ -35,7 +38,7 @@ import { NgClass } from '@angular/common';
                 [attr.id]="id"
                 [attr.name]="id"
                 [formControl]="control"
-                [placeholder]="placeholder"
+                [placeholder]="placeholder | i18nextEager"
                 [attr.aria-label]="label"
                 [autofocus]="autofocus"
                 autocomplete="false"
@@ -61,7 +64,7 @@ export class TextareaInputComponent implements OnInit {
     @Input({ required: true }) id!: string;
     @Input({ required: true }) label!: string;
     @Input({ required: true }) control!: FormControl<string>;
-    @Input({ required: false }) placeholder?: string = '';
+    @Input({ required: true }) placeholder!: string;
     @Input({ required: false }) autofocus = false;
     @Input({ required: false }) inputStyle: 'default' | 'bordered' | 'ghost' =
         'default';
@@ -71,14 +74,14 @@ export class TextareaInputComponent implements OnInit {
     constructor(
         @Inject(InputValidationConfigToken)
         private readonly validationConfiguration: InputValidationConfiguration,
-        private readonly changeDetectorRef: ChangeDetectorRef
+        private readonly changeDetectorRef: ChangeDetectorRef,
+        private readonly injector: EnvironmentInjector
     ) {}
 
     ngOnInit() {
         this.control.statusChanges.pipe(untilDestroyed(this)).subscribe(() => {
-            this.errorMessage = retrieveErrorMessage(
-                this.validationConfiguration,
-                this.control
+            this.errorMessage = runInInjectionContext(this.injector, () =>
+                retrieveErrorMessage(this.validationConfiguration, this.control)
             );
             this.changeDetectorRef.markForCheck();
         });

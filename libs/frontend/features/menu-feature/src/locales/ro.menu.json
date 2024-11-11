@@ -1,0 +1,53 @@
+{
+    "pages": {
+        "create": {
+            "title": "Creează Produs",
+            "mainAction": "Creează"
+        },
+        "edit": {
+            "title": "Editează Produs",
+            "mainAction": "Actualizează"
+        },
+        "list": {
+            "redirectToCreate": "Creează",
+            "indicator": {
+                "unavailable": "INDISPONIBIL"
+            },
+            "view": {
+                "recipe": "Rețetă",
+                "actions": {
+                    "close": "Închide",
+                    "delete": "Șterge",
+                    "disable": "Dezactivează",
+                    "enable": "Activează",
+                    "update": "Actualizează"
+                }
+            },
+            "placeholder": {
+                "title": "Niciun rezultat găsit",
+                "message": "Încercați să ajustați căutarea sau filtrul pentru a găsi ceea ce căutați"
+            }
+        }
+    },
+    "filter": {
+        "showAll": "Afișează Tot",
+        "search": "Caută",
+        "searchPlaceholder": "Cuvânt cheie..."
+    },
+    "form": {
+        "name": "Nume",
+        "namePlaceholder": "Adaugă un nume",
+        "available": "Disponibil",
+        "category": "Categorie",
+        "categoryPlaceholder": "Selectează o categorie",
+        "description": "Descriere",
+        "descriptionPlaceholder": "Introdu o descriere",
+        "tags": "Etichete",
+        "tagsPlaceholder": "Adaugă o etichetă",
+        "recipe": "Rețetă",
+        "recipePlaceholder": "Introdu o rețetă",
+        "actions": {
+            "close": "Închide"
+        }
+    }
+}

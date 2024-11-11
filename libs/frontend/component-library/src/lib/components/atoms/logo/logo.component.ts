@@ -23,7 +23,7 @@ import { ComponentSize } from '../../../types/shared/theme.types';
         } @else {
             <img
                 [src]="logoUrl"
-                class="h-6 sm:h-8 me-2 sm:me-3"
+                class="h-8 sm:h-10 me-2 sm:me-3"
                 [alt]="title"
             />
         }

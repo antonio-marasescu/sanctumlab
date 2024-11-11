@@ -1,0 +1,37 @@
+{
+    "unauthorized": {
+        "message": "You are not authorized to access this resource",
+        "actions": {
+            "back": "Back"
+        }
+    },
+    "guest": {
+        "title": "Sign in to your account (Guest)",
+        "form": {
+            "code": "Code",
+            "invalid": "Invalid authentication code"
+        },
+        "actions": {
+            "signIn": "Sign in",
+            "redirect": {
+                "message": "Are you an administrator?",
+                "action": "Login as admin"
+            }
+        }
+    },
+    "admin": {
+        "title": "Sign in to your account (Admin)",
+        "form": {
+            "username": "Username",
+            "password": "Password",
+            "invalid": "Invalid username or password"
+        },
+        "actions": {
+            "signIn": "Sign in",
+            "redirect": {
+                "message": "Are you an guest?",
+                "action": "Login as guest"
+            }
+        }
+    }
+}

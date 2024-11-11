@@ -1,0 +1,53 @@
+{
+    "pages": {
+        "create": {
+            "title": "Create Product",
+            "mainAction": "Create"
+        },
+        "edit": {
+            "title": "Edit Product",
+            "mainAction": "Update"
+        },
+        "list": {
+            "redirectToCreate": "Create",
+            "indicator": {
+                "unavailable": "UNAVAILABLE"
+            },
+            "view": {
+                "recipe": "Recipe",
+                "actions": {
+                    "close": "Close",
+                    "delete": "Delete",
+                    "disable": "Disable",
+                    "enable": "Enable",
+                    "update": "Update"
+                }
+            },
+            "placeholder": {
+                "title": "No results found",
+                "message": "Try adjusting your search or filter to find what you're looking for"
+            }
+        }
+    },
+    "filter": {
+        "showAll": "Show All",
+        "search": "Search",
+        "searchPlaceholder": "Keyword..."
+    },
+    "form": {
+        "name": "Name",
+        "namePlaceholder": "Add a name",
+        "available": "Available",
+        "category": "Category",
+        "categoryPlaceholder": "Select a category",
+        "description": "Description",
+        "descriptionPlaceholder": "Enter a description",
+        "tags": "Tags",
+        "tagsPlaceholder": "Add a tag",
+        "recipe": "Recipe",
+        "recipePlaceholder": "Enter a recipe",
+        "actions": {
+            "close": "Close"
+        }
+    }
+}

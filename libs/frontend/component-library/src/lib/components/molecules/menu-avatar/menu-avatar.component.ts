@@ -11,11 +11,12 @@ import { ComponentSize } from '../../../types/shared/theme.types';
 import { AvatarComponent } from '../../atoms/avatar/avatar.component';
 import { NgClass } from '@angular/common';
 import { MenuItem } from '../../../types/molecules/menu.types';
+import { I18NextModule } from 'angular-i18next';
 
 @Component({
     selector: 'ngx-clib-menu-avatar',
     standalone: true,
-    imports: [AvatarComponent, NgClass],
+    imports: [AvatarComponent, NgClass, I18NextModule],
     template: `
         <div class="w-full">
             <div class="relative w-fit">
@@ -44,7 +45,7 @@ import { MenuItem } from '../../../types/molecules/menu.types';
                                     [id]="item.id"
                                     (click)="onMenuClick(item.id)"
                                 >
-                                    <span>{{ item.label }}</span>
+                                    <span>{{ item.label | i18nextEager }}</span>
                                 </li>
                             }
                         </ul>

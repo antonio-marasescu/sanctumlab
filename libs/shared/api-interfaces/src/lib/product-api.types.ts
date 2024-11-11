@@ -14,8 +14,10 @@ export const ProductItemCategoryValues = [
 
 export const ProductItemDtoSchema = z.object({
     id: z.string(),
-    name: z.string(),
-    description: z.string(),
+    name: z.string().min(1, 'Name is required and cannot be empty'),
+    description: z
+        .string()
+        .min(1, 'Description is required and cannot be empty'),
     category: z.enum(ProductItemCategoryValues),
     recipe: z.string(),
     tags: z.array(z.string()),

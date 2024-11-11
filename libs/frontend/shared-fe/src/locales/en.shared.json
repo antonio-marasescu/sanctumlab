@@ -1,0 +1,20 @@
+{
+    "avatar": {
+        "actions": {
+            "settings": "Settings",
+            "signOut": "Sign Out"
+        }
+    },
+    "sidebar": {
+        "actions": {
+            "menus": "Menus",
+            "cocktails": "Cocktails",
+            "snacks": "Snacks"
+        }
+    },
+    "validations": {
+        "required": "This field is required",
+        "minlength": "The required length is {{requiredLength}}",
+        "email": "Invalid email address format"
+    }
+}

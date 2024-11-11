@@ -10,8 +10,8 @@ import { ProductItemCategory } from '@sanctumlab/api-interfaces';
     imports: [MenuItemFormContainerComponent],
     template: `<ngx-menu-item-form-container
         [item]="null"
-        title="Create Product"
-        actionLabel="Create"
+        title="menu:pages.create.title"
+        actionLabel="menu:pages.create.mainAction"
         (submitEvent)="onSubmitEvent($event)"
     />`,
     changeDetection: ChangeDetectionStrategy.OnPush

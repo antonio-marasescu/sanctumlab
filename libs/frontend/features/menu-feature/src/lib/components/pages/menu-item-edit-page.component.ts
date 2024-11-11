@@ -20,8 +20,8 @@ import { ProductFormSubmitEvent } from '../../types/product-item-form.types';
     imports: [MenuItemFormContainerComponent, AsyncPipe],
     template: `<ngx-menu-item-form-container
         [item]="currentItem$ | async"
-        title="Edit Product"
-        actionLabel="Update"
+        title="menu:pages.edit.title"
+        actionLabel="menu:pages.edit.mainAction"
         (submitEvent)="onSubmitEvent($event)"
     />`,
     changeDetection: ChangeDetectionStrategy.OnPush

@@ -2,9 +2,11 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    EnvironmentInjector,
     Inject,
     Input,
-    OnInit
+    OnInit,
+    runInInjectionContext
 } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import {
@@ -19,16 +21,17 @@ import {
 } from '../../../../types/internal/input-internal.types';
 import { NgClass } from '@angular/common';
 import { NgIcon } from '@ng-icons/core';
+import { I18NextModule } from 'angular-i18next';
 
 @UntilDestroy()
 @Component({
     selector: 'ngx-clib-list-input',
     standalone: true,
-    imports: [ReactiveFormsModule, NgClass, NgIcon],
+    imports: [ReactiveFormsModule, NgClass, NgIcon, I18NextModule],
     template: `<div>
         <label class="form-control w-full">
             <div class="label">
-                <span class="label-text">{{ label }}</span>
+                <span class="label-text">{{ label | i18nextEager }}</span>
             </div>
             <div class="flex gap-2">
                 <input
@@ -38,7 +41,7 @@ import { NgIcon } from '@ng-icons/core';
                     [attr.id]="id"
                     [attr.name]="id"
                     [formControl]="internalFormControl"
-                    [placeholder]="placeholder"
+                    [placeholder]="placeholder | i18nextEager"
                     [attr.aria-label]="label"
                     [autofocus]="autofocus"
                     autocomplete="false"
@@ -88,7 +91,7 @@ export class ListInputComponent implements OnInit {
     @Input({ required: true }) id!: string;
     @Input({ required: true }) label!: string;
     @Input({ required: true }) control!: FormControl<string[]>;
-    @Input({ required: false }) placeholder?: string = '';
+    @Input({ required: true }) placeholder!: string;
     @Input({ required: false }) autofocus = false;
     @Input({ required: false }) inputStyle: 'default' | 'bordered' | 'ghost' =
         'default';
@@ -103,14 +106,14 @@ export class ListInputComponent implements OnInit {
     constructor(
         @Inject(InputValidationConfigToken)
         private readonly validationConfiguration: InputValidationConfiguration,
-        private readonly changeDetectorRef: ChangeDetectorRef
+        private readonly changeDetectorRef: ChangeDetectorRef,
+        private readonly injector: EnvironmentInjector
     ) {}
 
     ngOnInit() {
         this.control.statusChanges.pipe(untilDestroyed(this)).subscribe(() => {
-            this.errorMessage = retrieveErrorMessage(
-                this.validationConfiguration,
-                this.control
+            this.errorMessage = runInInjectionContext(this.injector, () =>
+                retrieveErrorMessage(this.validationConfiguration, this.control)
             );
             this.changeDetectorRef.markForCheck();
         });

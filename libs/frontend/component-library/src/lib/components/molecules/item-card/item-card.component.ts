@@ -8,11 +8,18 @@ import {
 import { NgClass, NgOptimizedImage, NgTemplateOutlet } from '@angular/common';
 import { ComponentTheme } from '../../../types/shared/theme.types';
 import { NgIcon } from '@ng-icons/core';
+import { I18NextModule } from 'angular-i18next';
 
 @Component({
     selector: 'ngx-clib-item-card',
     standalone: true,
-    imports: [NgOptimizedImage, NgClass, NgTemplateOutlet, NgIcon],
+    imports: [
+        NgOptimizedImage,
+        NgClass,
+        NgTemplateOutlet,
+        NgIcon,
+        I18NextModule
+    ],
     template: `
         @if (hasIndicator) {
             <div
@@ -36,7 +43,7 @@ import { NgIcon } from '@ng-icons/core';
                         'badge-error text-error-content':
                             indicatorTheme === 'error'
                     }"
-                    >{{ indicator.toUpperCase() }}</span
+                    >{{ indicator | i18nextEager }}</span
                 >
                 <ng-container *ngTemplateOutlet="card"></ng-container>
             </div>

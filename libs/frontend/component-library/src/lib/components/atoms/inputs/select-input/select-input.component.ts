@@ -2,9 +2,11 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    EnvironmentInjector,
     Inject,
     Input,
-    OnInit
+    OnInit,
+    runInInjectionContext
 } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import {
@@ -19,15 +21,16 @@ import {
 } from '../../../../config/input-validation.config';
 import { NgClass } from '@angular/common';
 import { SelectOption } from '../../../../types/atoms/select.types';
+import { I18NextModule } from 'angular-i18next';
 
 @UntilDestroy()
 @Component({
     selector: 'ngx-clib-select-input',
     standalone: true,
-    imports: [ReactiveFormsModule, NgClass],
+    imports: [ReactiveFormsModule, NgClass, I18NextModule],
     template: `<label class="form-control w-full">
         <div class="label">
-            <span class="label-text">{{ label }}</span>
+            <span class="label-text">{{ label | i18nextEager }}</span>
         </div>
         <select
             [attr.id]="id"
@@ -42,7 +45,9 @@ import { SelectOption } from '../../../../types/atoms/select.types';
             }"
             [formControl]="control"
         >
-            <option value="" disabled selected>{{ placeholder }}</option>
+            <option value="" disabled selected>
+                {{ placeholder | i18nextEager }}
+            </option>
             @for (option of options; track option.id) {
                 <option [value]="option.id">{{ option.label }}</option>
             }
@@ -62,7 +67,7 @@ export class SelectInputComponent implements OnInit {
     @Input({ required: true }) label!: string;
     @Input({ required: true }) control!: FormControl<string>;
     @Input({ required: true }) options: SelectOption[] = [];
-    @Input({ required: false }) placeholder?: string = '';
+    @Input({ required: true }) placeholder!: string;
     @Input({ required: false }) autofocus = false;
     @Input({ required: false }) inputStyle: 'default' | 'bordered' | 'ghost' =
         'default';
@@ -72,14 +77,14 @@ export class SelectInputComponent implements OnInit {
     constructor(
         @Inject(InputValidationConfigToken)
         private readonly validationConfiguration: InputValidationConfiguration,
-        private readonly changeDetectorRef: ChangeDetectorRef
+        private readonly changeDetectorRef: ChangeDetectorRef,
+        private readonly injector: EnvironmentInjector
     ) {}
 
     ngOnInit() {
         this.control.statusChanges.pipe(untilDestroyed(this)).subscribe(() => {
-            this.errorMessage = retrieveErrorMessage(
-                this.validationConfiguration,
-                this.control
+            this.errorMessage = runInInjectionContext(this.injector, () =>
+                retrieveErrorMessage(this.validationConfiguration, this.control)
             );
             this.changeDetectorRef.markForCheck();
         });

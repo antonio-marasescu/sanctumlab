@@ -38,12 +38,17 @@ import {
 import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
 import { provideInputValidationConfiguration } from '@sanctumlab/fe/component-library';
 import { provideQuillConfig } from 'ngx-quill';
+import {
+    provideInternationalization,
+    validationConfigFactory
+} from '@sanctumlab/fe/shared';
 
 export const appConfig: ApplicationConfig = {
     providers: [
         provideEffects(),
         provideStore(),
         provideStoreDevtools({ maxAge: 50, logOnly: !isDevMode() }),
+        provideInternationalization(),
         provideIcons({
             matFastfood,
             matLocalBar,
@@ -68,14 +73,7 @@ export const appConfig: ApplicationConfig = {
         provideAuthentication(),
         provideAuthState(),
         provideHttpClient(withInterceptors([authInterceptor])),
-        provideInputValidationConfiguration({
-            errors: {
-                required: () => 'This field is required',
-                minlength: ({ requiredLength }: { requiredLength: number }) =>
-                    `The required length is ${requiredLength}`,
-                email: () => `Invalid email address format`
-            }
-        }),
+        provideInputValidationConfiguration(validationConfigFactory()),
         provideZoneChangeDetection({ eventCoalescing: true }),
         provideDataAccessState(),
         provideRouter(

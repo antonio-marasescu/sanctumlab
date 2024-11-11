@@ -1,6 +1,7 @@
 import express from 'express';
 import { ProductsApiInstance } from '@sanctumlab/be/products-feature';
 import { AuthenticatedRequest } from '../../types/request.types';
+import { handleException } from '@sanctumlab/be/shared';
 
 const productsRouter = express.Router();
 
@@ -9,7 +10,8 @@ productsRouter.post('', async (req: AuthenticatedRequest, res) => {
         const newProduct = await ProductsApiInstance.create(req.body);
         res.status(201).json(newProduct);
     } catch (error) {
-        res.status(400).json(error);
+        const exception = handleException(error);
+        res.status(exception.statusCode).json(exception);
     }
 });
 
@@ -18,7 +20,8 @@ productsRouter.get('', async (req: AuthenticatedRequest, res) => {
         const products = await ProductsApiInstance.retrieveAll();
         res.status(200).json(products);
     } catch (error) {
-        res.status(400).json(error);
+        const exception = handleException(error);
+        res.status(exception.statusCode).json(exception);
     }
 });
 
@@ -27,7 +30,8 @@ productsRouter.get(`/:id`, async (req: AuthenticatedRequest, res) => {
         const product = await ProductsApiInstance.retrieveById(req.params.id);
         res.status(200).json(product);
     } catch (error) {
-        res.status(400).json(error);
+        const exception = handleException(error);
+        res.status(exception.statusCode).json(exception);
     }
 });
 
@@ -39,7 +43,8 @@ productsRouter.put(`/:id`, async (req: AuthenticatedRequest, res) => {
         );
         res.status(200).json(updatedProduct);
     } catch (error) {
-        res.status(400).json(error);
+        const exception = handleException(error);
+        res.status(exception.statusCode).json(exception);
     }
 });
 
@@ -48,7 +53,8 @@ productsRouter.delete(`/:id`, async (req: AuthenticatedRequest, res) => {
         const isRemoved = await ProductsApiInstance.removeById(req.params.id);
         res.status(200).json({ ok: isRemoved });
     } catch (error) {
-        res.status(400).json(error);
+        const exception = handleException(error);
+        res.status(exception.statusCode).json(exception);
     }
 });
 

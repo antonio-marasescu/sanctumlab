@@ -4,9 +4,12 @@ import {
     makeEnvironmentProviders
 } from '@angular/core';
 
-export interface InputValidationConfiguration {
-    errors: Record<string, (args: any) => string>;
-}
+export type InputValidationConfiguration = {
+    getMessageByError: (
+        key: string,
+        args: Record<string, string>
+    ) => string | undefined;
+};
 
 export const InputValidationConfigToken =
     new InjectionToken<InputValidationConfiguration>(

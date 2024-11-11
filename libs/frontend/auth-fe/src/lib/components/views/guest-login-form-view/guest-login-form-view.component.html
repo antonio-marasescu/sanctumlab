@@ -14,14 +14,14 @@
                 <h1
                     class="text-xl font-bold leading-tight tracking-tight text-base-content md:text-2xl"
                 >
-                    Sign in to your account (Guest)
+                    {{ 'auth:guest.title' | i18nextEager }}
                 </h1>
                 <form class="space-y-4 md:space-y-6" [formGroup]="form">
                     <div>
                         <ngx-clib-text-input
                             id="code"
                             type="password"
-                            label="Code"
+                            label="auth:guest.form.code"
                             placeholder="••••••••"
                             [autofocus]="true"
                             [control]="form.controls.code"
@@ -30,27 +30,32 @@
 
                     @if (validLogin !== null && !validLogin) {
                         <p class="label-text-alt text-error">
-                            Invalid authentication code
+                            {{ 'auth:guest.form.invalid' | i18nextEager }}
                         </p>
                     }
 
                     <div class="mt-0.5">
                         <ngx-clib-button
-                            label="Sign in"
+                            label="auth:guest.actions.signIn"
                             (clickEvent)="loginEvent.emit()"
                             [isWide]="true"
                             [disabled]="form.invalid"
                         />
                     </div>
                     <p class="text-sm font-light text-base-content">
-                        Are you an administrator?
+                        {{
+                            'auth:guest.actions.redirect.message' | i18nextEager
+                        }}
                         <a
                             tabindex="0"
                             (click)="redirectToAdminLogin.emit()"
                             (keydown.enter)="redirectToAdminLogin.emit()"
                             class="font-medium text-base-content hover:underline cursor-pointer"
                         >
-                            Login as admin
+                            {{
+                                'auth:guest.actions.redirect.action'
+                                    | i18nextEager
+                            }}
                         </a>
                     </p>
                 </form>

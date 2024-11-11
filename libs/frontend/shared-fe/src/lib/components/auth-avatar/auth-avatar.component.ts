@@ -41,8 +41,8 @@ export class AuthAvatarComponent implements OnInit {
     protected username$!: Observable<string>;
 
     protected readonly items: MenuItem[] = [
-        { id: 'settings', label: 'Settings' },
-        { id: 'sign-out', label: 'Sign Out' }
+        { id: 'settings', label: 'shared:avatar.actions.settings' },
+        { id: 'sign-out', label: 'shared:avatar.actions.signOut' }
     ];
 
     constructor(

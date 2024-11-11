@@ -25,6 +25,36 @@
                         "glob": "**/*",
                         "input": "apps/sanctumlab-ui/src/assets",
                         "output": "assets"
+                    },
+                    {
+                        "glob": "**/*",
+                        "input": "apps/sanctumlab-ui/src/locales",
+                        "output": "locales"
+                    },
+                    {
+                        "glob": "*",
+                        "input": "libs/frontend/auth-fe/src/locales",
+                        "output": "locales"
+                    },
+                    {
+                        "glob": "*",
+                        "input": "libs/frontend/shared-fe/src/locales",
+                        "output": "locales"
+                    },
+                    {
+                        "glob": "*",
+                        "input": "libs/frontend/features/menu-feature/src/locales",
+                        "output": "locales"
+                    },
+                    {
+                        "glob": "*",
+                        "input": "libs/frontend/features/notification-feature/src/locales",
+                        "output": "locales"
+                    },
+                    {
+                        "glob": "*",
+                        "input": "libs/frontend/features/profile-feature/src/locales",
+                        "output": "locales"
                     }
                 ],
                 "styles": [

@@ -12,6 +12,7 @@ import {
 } from '@sanctumlab/fe/component-library';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AdminForm } from '../../../types/auth-form.types';
+import { I18NextModule } from 'angular-i18next';
 
 @Component({
     selector: 'ngx-auth-admin-login-form-view',
@@ -20,7 +21,8 @@ import { AdminForm } from '../../../types/auth-form.types';
         TextInputComponent,
         LogoComponent,
         ButtonComponent,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        I18NextModule
     ],
     templateUrl: 'admin-login-form-view.component.html',
     styleUrls: [],

@@ -10,10 +10,11 @@ import {
     ComponentSize,
     ComponentTheme
 } from '../../../types/shared/theme.types';
+import { I18NextModule } from 'angular-i18next';
 
 @Component({
     selector: 'ngx-clib-button',
-    imports: [NgClass],
+    imports: [NgClass, I18NextModule],
     standalone: true,
     template: `
         @if (!isResponsive) {
@@ -42,7 +43,7 @@ import {
                 (click)="clickEvent.emit()"
                 (keydown.enter)="clickEvent.emit()"
             >
-                {{ label }}
+                {{ label | i18nextEager }}
             </button>
         } @else {
             <button
@@ -66,7 +67,7 @@ import {
                 (click)="clickEvent.emit()"
                 (keydown.enter)="clickEvent.emit()"
             >
-                {{ label }}
+                {{ label | i18nextEager }}
             </button>
         }
     `,

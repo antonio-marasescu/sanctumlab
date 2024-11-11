@@ -20,10 +20,7 @@ import {
 } from '@sanctumlab/fe/component-library';
 import { AppNavigationService } from '@sanctumlab/fe/shared';
 import { FormGroup } from '@angular/forms';
-import {
-    ProductFilterForm,
-    ProductFilterFormInitialValue
-} from '../../types/product-filter-form.types';
+import { ProductFilterForm } from '../../types/product-filter-form.types';
 import {
     applyFilter,
     createProductFilterForm,

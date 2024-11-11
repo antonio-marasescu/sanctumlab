@@ -10,10 +10,13 @@ export function retrieveErrorMessage(
     }
     const firstErrorKey = Object.keys(control.errors)[0];
 
-    const errorMessageFn = validationConfiguration.errors[firstErrorKey];
-    if (!errorMessageFn) {
+    const errorMessage = validationConfiguration.getMessageByError(
+        firstErrorKey,
+        { ...control.errors[firstErrorKey] }
+    );
+    if (!errorMessage) {
         return firstErrorKey;
     }
 
-    return errorMessageFn(control.errors[firstErrorKey]);
+    return errorMessage;
 }

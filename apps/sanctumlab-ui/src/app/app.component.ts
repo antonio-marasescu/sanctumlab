@@ -12,6 +12,7 @@ import { NotificationsListContainerComponent } from '@sanctumlab/fe/notification
     ],
     selector: 'app-root',
     template: `<ngx-notifications-list-container />
+
         <router-outlet></router-outlet>`,
     styleUrls: [],
     changeDetection: ChangeDetectionStrategy.OnPush

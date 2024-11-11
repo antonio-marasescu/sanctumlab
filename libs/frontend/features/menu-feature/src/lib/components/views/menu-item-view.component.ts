@@ -12,6 +12,7 @@ import {
 import { ProductItemDto } from '@sanctumlab/api-interfaces';
 import { AdminRestrictDirective } from '@sanctumlab/fe/auth';
 import { QuillViewComponent } from 'ngx-quill';
+import { I18NextModule } from 'angular-i18next';
 
 @Component({
     selector: 'ngx-menu-item-view',
@@ -20,7 +21,8 @@ import { QuillViewComponent } from 'ngx-quill';
         ButtonComponent,
         ModalComponent,
         AdminRestrictDirective,
-        QuillViewComponent
+        QuillViewComponent,
+        I18NextModule
     ],
     template: ` <ngx-clib-modal
         [opened]="opened"
@@ -39,7 +41,10 @@ import { QuillViewComponent } from 'ngx-quill';
                                 <div
                                     class="badge badge-error badge-sm md:badge-md"
                                 >
-                                    UNAVAILABLE
+                                    {{
+                                        'menu:pages.list.indicator.unavailable'
+                                            | i18nextEager
+                                    }}
                                 </div>
                             </div>
                         }
@@ -55,7 +60,7 @@ import { QuillViewComponent } from 'ngx-quill';
                     <div class="collapse bg-base-200 collapse-open">
                         <input type="checkbox" />
                         <div class="collapse-title text-xl font-medium">
-                            Recipe
+                            {{ 'menu:pages.list.view.recipe' | i18nextEager }}
                         </div>
                         <div class="collapse-content">
                             <quill-view [content]="item.recipe"></quill-view>
@@ -66,7 +71,7 @@ import { QuillViewComponent } from 'ngx-quill';
         </div>
         <div actions class="flex flex-wrap justify-end gap-4">
             <ngx-clib-button
-                label="Close"
+                label="menu:pages.list.view.actions.close"
                 theme="ghost"
                 [isResponsive]="true"
                 (clickEvent)="modalClose.emit()"
@@ -74,7 +79,7 @@ import { QuillViewComponent } from 'ngx-quill';
             @if (item) {
                 <ngx-clib-button
                     *ngxAuthAdminRestrict
-                    label="Delete"
+                    label="menu:pages.list.view.actions.delete"
                     [isResponsive]="true"
                     theme="error"
                     (clickEvent)="deleteEvent.emit(item.id)"
@@ -82,7 +87,7 @@ import { QuillViewComponent } from 'ngx-quill';
                 @if (item.available) {
                     <ngx-clib-button
                         *ngxAuthAdminRestrict
-                        label="Disable"
+                        label="menu:pages.list.view.actions.disable"
                         [isResponsive]="true"
                         theme="secondary"
                         (clickEvent)="disableEvent.emit(item)"
@@ -90,7 +95,7 @@ import { QuillViewComponent } from 'ngx-quill';
                 } @else {
                     <ngx-clib-button
                         *ngxAuthAdminRestrict
-                        label="Enable"
+                        label="menu:pages.list.view.actions.enable"
                         [isResponsive]="true"
                         theme="success"
                         (clickEvent)="enableEvent.emit(item)"
@@ -99,7 +104,7 @@ import { QuillViewComponent } from 'ngx-quill';
             }
             <ngx-clib-button
                 *ngxAuthAdminRestrict
-                label="Update"
+                label="menu:pages.list.view.actions.update"
                 [isResponsive]="true"
                 theme="primary"
                 (clickEvent)="editEvent.emit(item?.id || '')"

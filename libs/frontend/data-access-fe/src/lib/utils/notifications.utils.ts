@@ -1,16 +1,20 @@
 import { NotificationDto } from '../types/notifications.types';
 import dayjs from 'dayjs';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ExceptionDto } from '@sanctumlab/api-interfaces';
 
 export function createNotification({
+    id,
     title,
     message,
+    code,
     type
-}: Omit<NotificationDto, 'id' | 'timestamp'>): NotificationDto {
+}: Omit<NotificationDto, 'timestamp'>): NotificationDto {
     return {
-        id: crypto.randomUUID(),
+        id,
         title,
         message,
+        code,
         type,
         timestamp: dayjs().date()
     };
@@ -18,7 +22,14 @@ export function createNotification({
 
 export function createNotificationHttpError(
     title: string,
-    error: HttpErrorResponse
+    payload: HttpErrorResponse
 ): NotificationDto {
-    return createNotification({ title, message: error.message, type: 'error' });
+    const error = payload.error as ExceptionDto;
+    return createNotification({
+        id: error.id,
+        code: error.type,
+        title,
+        message: error.message,
+        type: 'error'
+    });
 }

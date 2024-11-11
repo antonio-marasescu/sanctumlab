@@ -8,7 +8,7 @@ export function createProductItemForm(
     return new FormGroup<ProductItemForm>({
         name: new FormControl<string>(initialValues?.name ?? '', {
             nonNullable: true,
-            validators: [Validators.required]
+            validators: []
         }),
         description: new FormControl<string>(initialValues?.description ?? '', {
             nonNullable: true,

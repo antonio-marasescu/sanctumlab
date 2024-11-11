@@ -19,13 +19,13 @@ import {
             <ngx-clib-text-input
                 id="search"
                 inputStyle="bordered"
-                placeholder="Keyword..."
-                label="Search"
+                placeholder="menu:filter.searchPlaceholder"
+                label="menu:filter.search"
                 [control]="form.controls.search"
             />
         </div>
         <ngx-clib-toggle-input
-            label="Show All"
+            label="menu:filter.showAll"
             [control]="form.controls.showUnavailable"
         />
         <div class="flex-grow"></div>

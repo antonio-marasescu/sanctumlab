@@ -26,7 +26,7 @@ export class ProductsEffects {
                         }),
                         NotificationsActions.addNotification({
                             notification: createNotificationHttpError(
-                                'Product Creation Failed',
+                                'PRODUCT_CREATE_FAILURE',
                                 error
                             )
                         })
@@ -50,7 +50,7 @@ export class ProductsEffects {
                         }),
                         NotificationsActions.addNotification({
                             notification: createNotificationHttpError(
-                                'Product Update Failed',
+                                'PRODUCT_UPDATE_FAILURE',
                                 error
                             )
                         })
@@ -74,7 +74,7 @@ export class ProductsEffects {
                         }),
                         NotificationsActions.addNotification({
                             notification: createNotificationHttpError(
-                                'Product Remove Failed',
+                                'PRODUCT_REMOVE_FAILURE',
                                 error
                             )
                         })
@@ -98,7 +98,7 @@ export class ProductsEffects {
                         }),
                         NotificationsActions.addNotification({
                             notification: createNotificationHttpError(
-                                'Product Get All Failed',
+                                'PRODUCT_RETRIEVE_ALL_FAILURE',
                                 error
                             )
                         })
@@ -122,7 +122,7 @@ export class ProductsEffects {
                         }),
                         NotificationsActions.addNotification({
                             notification: createNotificationHttpError(
-                                'Product Get Failed',
+                                'PRODUCT_RETRIEVE_FAILURE',
                                 error
                             )
                         })

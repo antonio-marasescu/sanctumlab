@@ -35,17 +35,17 @@ export class AppSidebarComponent implements OnInit {
     protected readonly appNavigationItems: SidebarCategoryItem[] = [
         {
             id: 'menus',
-            label: 'Menus',
+            label: 'shared:sidebar.actions.menus',
             items: [
                 {
                     id: 'cocktails',
                     icon: 'matLocalBar',
-                    label: 'Cocktails'
+                    label: 'shared:sidebar.actions.cocktails'
                 },
                 {
                     id: 'snacks',
                     icon: 'matFastfood',
-                    label: 'Snacks'
+                    label: 'shared:sidebar.actions.snacks'
                 }
             ]
         }

@@ -8,11 +8,12 @@ import {
 import { NgIcon } from '@ng-icons/core';
 import { ComponentTheme } from '../../../types/shared/theme.types';
 import { NgClass } from '@angular/common';
+import { I18NextModule } from 'angular-i18next';
 
 @Component({
     selector: 'ngx-clib-notification',
     standalone: true,
-    imports: [NgIcon, NgClass],
+    imports: [NgIcon, NgClass, I18NextModule],
     template: `<div
         tabindex="-1"
         [id]="id"
@@ -32,9 +33,9 @@ import { NgClass } from '@angular/common';
             <ng-icon [name]="icon" size="24" />
         }
         <div>
-            <h2 class="font-bold">{{ label }}</h2>
+            <h2 class="font-bold">{{ label | i18nextEager }}</h2>
             @if (description) {
-                <div class="text-xs">{{ description }}</div>
+                <div class="text-xs">{{ description | i18nextEager }}</div>
             }
         </div>
         <button class="btn btn-xs btn-ghost" (click)="closeEvent.emit(id)">
@@ -47,11 +48,11 @@ export class NotificationComponent {
     @Input({ required: true }) id!: string;
     @Input({ required: true }) label!: string;
     @Input({ required: true }) icon!: string;
+    @Input({ required: true }) description!: string;
     @Input({ required: false }) theme: Omit<
         ComponentTheme,
         'primary' | 'secondary' | 'accent'
     > = 'info';
     @Input({ required: false }) closeLabel = 'Close';
-    @Input({ required: false }) description!: string | undefined;
     @Output() closeEvent = new EventEmitter<string>();
 }

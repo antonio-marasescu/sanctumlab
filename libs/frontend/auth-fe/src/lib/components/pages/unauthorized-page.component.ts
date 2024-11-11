@@ -4,11 +4,12 @@ import {
     LogoComponent
 } from '@sanctumlab/fe/component-library';
 import { Router } from '@angular/router';
+import { I18NextModule } from 'angular-i18next';
 
 @Component({
     selector: 'ngx-auth-unauthorized-page',
     standalone: true,
-    imports: [LogoComponent, ButtonComponent],
+    imports: [LogoComponent, ButtonComponent, I18NextModule],
     template: ` <div
         class="flex flex-col gap-2 h-screen w-screen justify-center items-center"
     >
@@ -18,10 +19,10 @@ import { Router } from '@angular/router';
             size="md"
         />
         <div class="p-2 text-center">
-            You are not authorized to access this resource
+            {{ 'auth:unauthorized.message' | i18nextEager }}
         </div>
         <ngx-clib-button
-            label="Back"
+            label="auth:unauthorized.actions.back"
             theme="ghost"
             [size]="'sm'"
             (clickEvent)="onBack()"

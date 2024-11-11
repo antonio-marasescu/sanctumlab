@@ -1,0 +1,7 @@
+{
+    "title": "Personal Settings",
+    "form": {
+        "language": "Language",
+        "languagePlaceholder": "Select a language"
+    }
+}

@@ -18,7 +18,7 @@
             </div>
 
             <div class="mx-2 flex-1 px-2">
-                <div>
+                <div class="hidden md:block">
                     <ngx-clib-logo
                         [logoUrl]="logoUrl"
                         [title]="title"
@@ -42,7 +42,7 @@
         ></label>
         <ul class="menu bg-base-100 min-h-full w-full md:w-80">
             <div class="text-start text-balance lg:hidden">
-                <div class="flex flex-row-reverse items-center pr-2 pt-2">
+                <div class="flex flex-row-reverse items-center p-4">
                     <ngx-clib-icon-button
                         icon="matClose"
                         [size]="'xs'"
@@ -51,18 +51,26 @@
                         [isOutlined]="false"
                         (clickEvent)="onCloseSidebar()"
                     />
+                    <div class="flex-grow"></div>
+                    <ngx-clib-logo
+                        [logoUrl]="logoUrl"
+                        [title]="title"
+                        [isResponsive]="true"
+                    />
                 </div>
             </div>
 
             @for (category of itemCategories; track category.id) {
                 <li [id]="category.id">
-                    <h2 class="menu-title">{{ category.label }}</h2>
+                    <h2 class="menu-title">
+                        {{ category.label | i18nextEager }}
+                    </h2>
                     <ul class="menu bg-base-100">
                         @for (item of category.items; track item.id) {
                             <li>
                                 <a (click)="onNavigate(item.id)">
                                     <ng-icon [name]="item.icon" size="16" />{{
-                                        item.label
+                                        item.label | i18nextEager
                                     }}
                                 </a>
                             </li>

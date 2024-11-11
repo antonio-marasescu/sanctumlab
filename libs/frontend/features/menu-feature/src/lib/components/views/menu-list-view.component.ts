@@ -30,7 +30,7 @@ import { MenuListFilterViewComponent } from './menu-list-filter-view.component';
         <div class="flex flex-row-reverse">
             <ngx-clib-button
                 *ngxAuthAdminRestrict
-                label="Create"
+                label="menu:pages.list.redirectToCreate"
                 theme="primary"
                 [isResponsive]="true"
                 (clickEvent)="createEvent.emit()"
@@ -49,7 +49,7 @@ import { MenuListFilterViewComponent } from './menu-list-filter-view.component';
                         [description]="item.description"
                         [tags]="item.tags || []"
                         [hasIndicator]="!item.available"
-                        indicator="unavailable"
+                        indicator="menu:pages.list.indicator.unavailable"
                         indicatorTheme="error"
                         (cardClick)="itemSelect.emit(item.id)"
                     />
@@ -58,8 +58,8 @@ import { MenuListFilterViewComponent } from './menu-list-filter-view.component';
         } @else {
             <div class="pt-12 w-full flex justify-center">
                 <ngx-clib-placeholder
-                    label="Try adjusting your search or filter to find what you're looking for"
-                    title="No results found"
+                    title="menu:pages.list.placeholder.title"
+                    label="menu:pages.list.placeholder.message"
                 />
             </div>
         }

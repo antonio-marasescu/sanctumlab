@@ -25,10 +25,10 @@ import { NotificationComponent } from '@sanctumlab/fe/component-library';
                     #notificationElement
                     tabindex="-1"
                     [id]="notification.id"
-                    [label]="notification.title"
+                    [label]="'notification:titles.' + notification.title"
                     icon="matWarning"
                     [theme]="notification.type"
-                    [description]="notification.message"
+                    [description]="'notification:errors.' + notification.code"
                     (closeEvent)="notificationClose.emit($event)"
                 />
             }
