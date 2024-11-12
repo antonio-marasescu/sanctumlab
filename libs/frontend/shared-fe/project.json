@@ -4,7 +4,7 @@
     "sourceRoot": "libs/frontend/shared-fe/src",
     "prefix": "lib",
     "projectType": "library",
-    "tags": [],
+    "tags": ["scope:project-frontend", "scope:shared"],
     "targets": {
         "test": {
             "executor": "@nx/jest:jest",

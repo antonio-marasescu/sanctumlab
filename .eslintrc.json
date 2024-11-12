@@ -13,8 +13,69 @@
                         "allow": [],
                         "depConstraints": [
                             {
-                                "sourceTag": "*",
-                                "onlyDependOnLibsWithTags": ["*"]
+                                "sourceTag": "scope:project-frontend",
+                                "onlyDependOnLibsWithTags": [
+                                    "scope:project-frontend",
+                                    "scope:project-shared"
+                                ]
+                            },
+                            {
+                                "sourceTag": "scope:project-backend",
+                                "onlyDependOnLibsWithTags": [
+                                    "scope:project-backend",
+                                    "scope:project-shared"
+                                ]
+                            },
+                            {
+                                "sourceTag": "scope:project-shared",
+                                "onlyDependOnLibsWithTags": [
+                                    "scope:project-shared"
+                                ]
+                            },
+                            {
+                                "sourceTag": "scope:auth",
+                                "onlyDependOnLibsWithTags": [
+                                    "scope:component-lib"
+                                ]
+                            },
+                            {
+                                "sourceTag": "scope:data-access",
+                                "onlyDependOnLibsWithTags": [
+                                    "scope:project-shared"
+                                ]
+                            },
+                            {
+                                "sourceTag": "scope:shared",
+                                "onlyDependOnLibsWithTags": [
+                                    "scope:auth",
+                                    "scope:data-access",
+                                    "scope:component-lib",
+                                    "scope:shared"
+                                ]
+                            },
+                            {
+                                "sourceTag": "scope:component-lib",
+                                "onlyDependOnLibsWithTags": []
+                            },
+                            {
+                                "sourceTag": "scope:feature",
+                                "onlyDependOnLibsWithTags": [
+                                    "scope:feature",
+                                    "scope:shared",
+                                    "scope:data-access",
+                                    "scope:auth",
+                                    "scope:component-lib"
+                                ]
+                            },
+                            {
+                                "sourceTag": "scope:app",
+                                "onlyDependOnLibsWithTags": [
+                                    "scope:feature",
+                                    "scope:shared",
+                                    "scope:data-access",
+                                    "scope:auth",
+                                    "scope:component-lib"
+                                ]
                             }
                         ]
                     }

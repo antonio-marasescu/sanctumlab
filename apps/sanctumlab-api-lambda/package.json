@@ -1,7 +1,10 @@
 {
     "name": "@sanctumlab/sanctumlab-api-lambda",
     "version": "0.0.1",
-    "dependencies": {},
+    "dependencies": {
+        "@sanctumlab/products-feature": "^0.0.1",
+        "@sanctumlab/shared-be": "^0.0.1"
+    },
     "main": "./index.js",
     "module": "./index.mjs",
     "typings": "./index.d.ts",

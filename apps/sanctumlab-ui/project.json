@@ -4,7 +4,7 @@
     "projectType": "application",
     "prefix": "app",
     "sourceRoot": "apps/sanctumlab-ui/src",
-    "tags": [],
+    "tags": ["scope:project-frontend", "scope:app"],
     "targets": {
         "build": {
             "executor": "@angular-devkit/build-angular:application",

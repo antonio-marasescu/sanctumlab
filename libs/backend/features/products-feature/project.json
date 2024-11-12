@@ -3,7 +3,7 @@
     "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/backend/features/products-feature/src",
     "projectType": "library",
-    "tags": [],
+    "tags": ["scope:project-backend", "scope:feature"],
     "targets": {
         "build": {
             "executor": "@nx/vite:build",
@@ -21,6 +21,9 @@
             "options": {
                 "jestConfig": "libs/backend/features/products-feature/jest.config.ts"
             }
+        },
+        "lint": {
+            "executor": "@nx/eslint:lint"
         }
     }
 }

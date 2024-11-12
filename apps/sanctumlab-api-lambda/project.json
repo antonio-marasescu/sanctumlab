@@ -3,7 +3,7 @@
     "$schema": "../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "apps/sanctumlab-api-lambda/src",
     "projectType": "library",
-    "tags": [],
+    "tags": ["scope:project-backend", "scope:app"],
     "targets": {
         "build": {
             "executor": "@nx/vite:build",
@@ -21,6 +21,9 @@
             "options": {
                 "jestConfig": "apps/sanctumlab-api-lambda/jest.config.ts"
             }
+        },
+        "lint": {
+            "executor": "@nx/eslint:lint"
         }
     }
 }

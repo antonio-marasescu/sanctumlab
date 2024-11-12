@@ -4,7 +4,7 @@
     "sourceRoot": "libs/frontend/data-access-fe/src",
     "prefix": "lib",
     "projectType": "library",
-    "tags": [],
+    "tags": ["scope:project-frontend", "scope:data-access"],
     "targets": {
         "test": {
             "executor": "@nx/jest:jest",
