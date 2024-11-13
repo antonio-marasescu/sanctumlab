@@ -3,6 +3,7 @@ import { RemovalPolicy } from 'aws-cdk-lib';
 import { InfrastructureStackProps } from '../../shared/types/infrastructure-stack.types';
 import { BlockPublicAccess, Bucket } from 'aws-cdk-lib/aws-s3';
 import {
+    CLOUDFRONT_DISTRIBUTION_CERTIFICATE_ID,
     CLOUDFRONT_DISTRIBUTION_ID,
     ORIGIN_ACCESS_IDENTITY_ID,
     WEBSITE_BUCKET_ID
@@ -13,11 +14,12 @@ import {
     ViewerProtocolPolicy
 } from 'aws-cdk-lib/aws-cloudfront';
 import { S3Origin } from 'aws-cdk-lib/aws-cloudfront-origins';
+import { Certificate } from 'aws-cdk-lib/aws-certificatemanager';
 
 export function createFrontendStack(
     stack: cdk.Stack,
     props: InfrastructureStackProps
-): Distribution {
+): { distribution: Distribution; primaryDomain: string | undefined } {
     const websiteBucket = new Bucket(stack, WEBSITE_BUCKET_ID(props), {
         publicReadAccess: false,
         removalPolicy: RemovalPolicy.DESTROY,
@@ -31,6 +33,16 @@ export function createFrontendStack(
         ORIGIN_ACCESS_IDENTITY_ID(props)
     );
     websiteBucket.grantRead(originAccessIdentity);
+
+    const certificate = props.stackConfig.certificateArn
+        ? Certificate.fromCertificateArn(
+              stack,
+              CLOUDFRONT_DISTRIBUTION_CERTIFICATE_ID(props),
+              props.stackConfig.certificateArn
+          )
+        : undefined;
+
+    const { domainNames, primaryDomain } = getDomainConfig(props);
 
     const distribution = new Distribution(
         stack,
@@ -48,13 +60,35 @@ export function createFrontendStack(
                 }
             ],
             defaultRootObject: 'index.html',
-            comment: `${props.stackConfig.appName} website cloudfront distribution ${props.stackConfig.tenantEnv}`
+            comment: `${props.stackConfig.appName} website cloudfront distribution ${props.stackConfig.tenantEnv}`,
+            domainNames,
+            certificate
         }
     );
 
     createFrontendOutputs(stack, { distribution, websiteBucket });
 
-    return distribution;
+    return { distribution, primaryDomain };
+}
+
+function getDomainConfig(props: InfrastructureStackProps): {
+    domainNames: string[] | undefined;
+    primaryDomain: string | undefined;
+} {
+    if (!props.stackConfig.domainName) {
+        return {
+            domainNames: undefined,
+            primaryDomain: undefined
+        };
+    }
+
+    const primaryDomain = `www.${props.stackConfig.domainName}`;
+    const domainNames = [primaryDomain];
+
+    return {
+        domainNames,
+        primaryDomain
+    };
 }
 
 function createFrontendOutputs(

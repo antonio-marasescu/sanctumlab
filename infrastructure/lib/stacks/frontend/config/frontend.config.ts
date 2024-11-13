@@ -8,3 +8,8 @@ export const ORIGIN_ACCESS_IDENTITY_ID = (props: InfrastructureStackProps) =>
 
 export const CLOUDFRONT_DISTRIBUTION_ID = (props: InfrastructureStackProps) =>
     `${props.stackConfig.appName}-cf-distribution-${props.stackConfig.tenantEnv}`;
+
+export const CLOUDFRONT_DISTRIBUTION_CERTIFICATE_ID = (
+    props: InfrastructureStackProps
+) =>
+    `${props.stackConfig.appName}-cf-distribution-certificate-${props.stackConfig.tenantEnv}`;

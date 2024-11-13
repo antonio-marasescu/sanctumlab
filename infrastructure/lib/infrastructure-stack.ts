@@ -15,8 +15,14 @@ export class InfrastructureStack extends cdk.Stack {
     constructor(scope: Construct, id: string, props: InfrastructureStackProps) {
         super(scope, id, props);
 
+        let domainName: string | undefined = undefined;
+        if (props.stackConfig.production) {
+            const { primaryDomain } = createFrontendStack(this, props);
+            domainName = primaryDomain;
+        }
+
         const { userPool, userPoolClient } = createSecurityStack(this, props, {
-            cfnDomainName: null
+            domainName
         });
 
         if (props.stackConfig.production) {
@@ -26,7 +32,6 @@ export class InfrastructureStack extends cdk.Stack {
                 userPool,
                 userPoolClient
             });
-            createFrontendStack(this, props);
         }
 
         Tags.of(this).add(PROJECT_TAG_NAME, props.stackConfig.appName);

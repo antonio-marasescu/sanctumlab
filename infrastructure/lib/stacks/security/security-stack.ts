@@ -22,10 +22,10 @@ export function createSecurityStack(
     stack: cdk.Stack,
     props: InfrastructureStackProps,
     deps: {
-        cfnDomainName: string | null;
+        domainName: string | undefined;
     }
 ): { userPool: UserPool; userPoolClient: UserPoolClient } {
-    const callbackUrls = getCallBackUrls(deps.cfnDomainName);
+    const callbackUrls = getCallBackUrls(deps.domainName);
 
     const userPool = createUserPool(stack, props);
     const userPoolClient = createUserPoolClient(userPool, props, callbackUrls);
@@ -159,6 +159,6 @@ function createSecurityOutputs(
     });
 }
 
-function getCallBackUrls(domainName: string | null): string[] {
+function getCallBackUrls(domainName?: string): string[] {
     return domainName ? ['https://' + domainName] : ['http://localhost:4200'];
 }

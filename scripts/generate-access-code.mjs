@@ -1,6 +1,5 @@
 import { configDotenv } from 'dotenv';
 import { execSync } from 'child_process';
-import { randomBytes } from 'node:crypto';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 
@@ -24,7 +23,9 @@ const argv = yargs(hideBin(process.argv))
     .help().argv;
 
 function generateRandomPassword(length = 12) {
-    return randomBytes(length).toString('base64').slice(0, length);
+    return Array.from({ length }, () => Math.floor(Math.random() * 10)).join(
+        ''
+    );
 }
 
 function generateAccessCode() {
@@ -44,7 +45,10 @@ function generateAccessCode() {
         --username  ${cognitoUsername} \
         --password ${password} \
         --permanent`);
-        console.log('Access code generated successfully.');
+        console.log(
+            'Access code generated successfully. Access Code: ',
+            password
+        );
     } catch (error) {
         console.error('Failed to generate access code:', error);
         process.exit(1);

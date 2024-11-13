@@ -10,6 +10,12 @@ on:
         options:
           - sanctumlab-api-lambda
           - sanctumlab-authorizer
+      environment:
+        type: choice
+        required: true
+        description: Deployment environment
+        options:
+          - production
 
 permissions:
   id-token: write
@@ -21,6 +27,7 @@ jobs:
     permissions:
       id-token: write
       contents: read
+    environment: ${{ github.event.inputs.environment }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
