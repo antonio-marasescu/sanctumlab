@@ -21,6 +21,7 @@ export const Primary: Story = {
         title: 'Sanctum Lab',
         useTitle: true,
         size: 'md',
-        isResponsive: false
+        isResponsive: false,
+        interactable: false
     }
 };

@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    EventEmitter,
+    Input,
+    Output
+} from '@angular/core';
 import { NgClass } from '@angular/common';
 import { ComponentSize } from '../../../types/shared/theme.types';
 
@@ -6,7 +12,11 @@ import { ComponentSize } from '../../../types/shared/theme.types';
     selector: 'ngx-clib-logo',
     standalone: true,
     imports: [NgClass],
-    template: ` <div class="flex">
+    template: ` <div
+        class="flex"
+        [ngClass]="{ 'hover:opacity-85 cursor-pointer': interactable }"
+        (click)="onClickEvent()"
+    >
         @if (!isResponsive) {
             <img
                 [src]="logoUrl"
@@ -43,4 +53,12 @@ export class LogoComponent {
     @Input({ required: false }) useTitle = true;
     @Input({ required: false }) size: ComponentSize = 'md';
     @Input({ required: false }) isResponsive = false;
+    @Input({ required: false }) interactable = false;
+    @Output() clickEvent = new EventEmitter<void>();
+
+    protected onClickEvent(): void {
+        if (this.interactable) {
+            this.clickEvent.emit();
+        }
+    }
 }

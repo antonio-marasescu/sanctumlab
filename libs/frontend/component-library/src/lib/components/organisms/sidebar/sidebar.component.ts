@@ -42,6 +42,11 @@ export class SidebarComponent {
         this.sidebarControl.setValue(false);
     }
 
+    protected onNavigateHome(): void {
+        this.navigateHome.emit();
+        this.sidebarControl.setValue(false);
+    }
+
     protected onCloseSidebar(): void {
         this.sidebarControl.setValue(false);
     }

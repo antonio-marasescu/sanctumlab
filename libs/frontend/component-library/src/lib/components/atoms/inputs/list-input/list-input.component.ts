@@ -69,7 +69,7 @@ import { I18NextModule } from 'angular-i18next';
                 </div>
             }
         </label>
-        <div class="flex pt-2 gap-3">
+        <div class="flex pt-3 gap-3">
             @for (item of control.value; track item) {
                 <div class="flex items-center gap-1">
                     <div class="badge  badge-primary badge-lg">
