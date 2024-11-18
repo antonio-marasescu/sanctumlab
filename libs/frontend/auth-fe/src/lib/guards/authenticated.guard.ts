@@ -1,14 +1,16 @@
 import { inject } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRouteSnapshot, Router } from '@angular/router';
 import { AuthFeatureName, AuthRoutes } from '../types/auth-navigation.types';
 
-export const authenticatedGuard = async (): Promise<boolean> => {
+export const authenticatedGuard = async (
+    activatedRouteSnapshot: ActivatedRouteSnapshot
+): Promise<boolean> => {
     const authService = inject(AuthenticationService);
-    const route = inject(ActivatedRoute);
     const router = inject(Router);
 
-    const queryParams = route.snapshot.queryParams;
+    const queryParams = activatedRouteSnapshot.queryParams;
+
     const isAuthenticated = await authService.isAuthenticated();
 
     if (!isAuthenticated) {
