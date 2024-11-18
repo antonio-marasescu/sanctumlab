@@ -65,8 +65,8 @@ export class AppQrCodeComponent implements OnInit {
             startWith(''),
             map(value =>
                 value
-                    ? `${this.protocol}${this.hostname}?code=${value}`
-                    : `${this.protocol}${this.hostname}`
+                    ? `${this.protocol}//${this.hostname}?code=${value}`
+                    : `${this.protocol}//${this.hostname}`
             )
         );
     }
