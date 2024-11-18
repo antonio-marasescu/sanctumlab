@@ -9,6 +9,7 @@ import {
     matLocalBar,
     matMenu,
     matPlus,
+    matQrCode,
     matWarning
 } from '@ng-icons/material-icons/baseline';
 import { provideQuillConfig } from 'ngx-quill';
@@ -26,7 +27,8 @@ const preview: Preview = {
                     matClose,
                     matDelete,
                     matPlus,
-                    matWarning
+                    matWarning,
+                    matQrCode
                 }),
                 provideInputValidationConfiguration(validationConfigFactory()),
                 provideInternationalization(),

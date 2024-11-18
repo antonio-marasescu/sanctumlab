@@ -5,8 +5,8 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
     selector: 'ngx-clib-theme-changer',
     standalone: true,
     imports: [ReactiveFormsModule],
-    template: `<div class="flex items-center mx-2">
-        <label class="swap swap-rotate  hover:opacity-80">
+    template: `<div class="btn btn-circle btn-sm btn-ghost">
+        <label class="swap swap-rotate">
             <input
                 type="checkbox"
                 class="theme-controller"
@@ -15,7 +15,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
             <!-- sun icon -->
             <svg
-                class="swap-off h-6 w-6 fill-current"
+                class="swap-off h-5 w-5 fill-current"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
             >
@@ -26,7 +26,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
             <!-- moon icon -->
             <svg
-                class="swap-on h-6 w-6 fill-current"
+                class="swap-on h-5 w-5 fill-current"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
             >

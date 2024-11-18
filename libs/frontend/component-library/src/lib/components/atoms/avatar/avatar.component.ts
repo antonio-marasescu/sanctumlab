@@ -27,6 +27,7 @@ import { NgClass } from '@angular/common';
             >
                 @if (isPlaceholder && placeholder) {
                     <span
+                        class="cursor-pointer"
                         [ngClass]="{
                             'text-xs': size === 'xs',
                             'text-sm': size === 'sm',

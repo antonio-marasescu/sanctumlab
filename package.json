@@ -91,6 +91,7 @@
     },
     "dependencies": {
         "@angular/animations": "~18.2.0",
+        "@angular/cdk": "^18.2.13",
         "@angular/common": "~18.2.0",
         "@angular/compiler": "~18.2.0",
         "@angular/core": "~18.2.0",
@@ -110,6 +111,7 @@
         "@ngrx/store": "^18.0.1",
         "@tailwindcss/line-clamp": "^0.4.4",
         "angular-i18next": "^18.0.0",
+        "angularx-qrcode": "^18.0.2",
         "aws-amplify": "^6.6.5",
         "aws-jwt-verify": "^4.0.1",
         "axios": "^1.6.0",

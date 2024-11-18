@@ -28,6 +28,7 @@ export const Primary: Story = {
     args: {
         icon: 'matMenu',
         size: 'md',
+        iconSize: 16,
         theme: 'primary',
         isOutlined: false,
         isCircle: false,

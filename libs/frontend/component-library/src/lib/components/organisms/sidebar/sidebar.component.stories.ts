@@ -3,6 +3,7 @@ import { SidebarComponent } from './sidebar.component';
 import { MenuAvatarComponent } from '../../molecules/menu-avatar/menu-avatar.component';
 import { ThemeChangerComponent } from '../../atoms/inputs/theme-changer/theme-changer.component';
 import { FormControl } from '@angular/forms';
+import { IconButtonComponent } from '../../atoms/icon-button/icon-button.component';
 
 const themeChangerControl = new FormControl<boolean>(false, {
     nonNullable: true
@@ -14,13 +15,18 @@ const meta: Meta<SidebarComponent> = {
     decorators: [
         moduleMetadata({
             declarations: [],
-            imports: [MenuAvatarComponent, ThemeChangerComponent]
+            imports: [
+                MenuAvatarComponent,
+                ThemeChangerComponent,
+                IconButtonComponent
+            ]
         })
     ],
     render: args => ({
         template: `
           <ngx-clib-sidebar [logoUrl]="logoUrl" [title]="title" [itemCategories]="itemCategories">
-            <div theme>
+            <div menu-content>
+                <ngx-clib-icon-button icon="matQrCode" theme="ghost" size="sm"  />
                 <ngx-clib-theme-changer [control]="themeChangerControl"/>
             </div>
             <div avatar>

@@ -26,6 +26,7 @@ import { I18NextModule } from 'angular-i18next';
     ],
     template: ` <ngx-clib-modal
         [opened]="opened"
+        [positionBottom]="true"
         (closeEvent)="modalClose.emit()"
     >
         <div content>

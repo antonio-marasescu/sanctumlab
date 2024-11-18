@@ -12,27 +12,39 @@ import {
 } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { fromEvent } from 'rxjs';
+import { NgClass } from '@angular/common';
 
 @UntilDestroy()
 @Component({
     selector: 'ngx-clib-modal',
     standalone: true,
-    imports: [],
-    template: `<dialog #modal id="active-modal" class="modal modal-bottom">
-        <div class="modal-box">
-            <ng-content select="[content]"></ng-content>
-            <div class="modal-action">
-                <ng-content select="[actions]"></ng-content>
+    imports: [NgClass],
+    template: `
+        <dialog
+            #modal
+            id="active-modal"
+            class="modal"
+            [ngClass]="{ 'modal-bottom': positionBottom }"
+        >
+            <div class="modal-box">
+                <ng-content select="[content]"></ng-content>
+                @if (hasActions) {
+                    <div class="modal-action">
+                        <ng-content select="[actions]"></ng-content>
+                    </div>
+                }
             </div>
-        </div>
-        <form method="dialog" class="modal-backdrop">
-            <button>close</button>
-        </form>
-    </dialog>`,
+            <form method="dialog" class="modal-backdrop">
+                <button>close</button>
+            </form>
+        </dialog>
+    `,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ModalComponent implements OnChanges, AfterViewInit {
-    @Input({ required: false }) opened = false;
+    @Input({ required: true }) positionBottom = false;
+    @Input({ required: true }) opened = false;
+    @Input({ required: false }) hasActions = true;
     @Output() closeEvent = new EventEmitter<void>();
     @ViewChild('modal')
     private readonly modal?: ElementRef<HTMLDialogElement>;

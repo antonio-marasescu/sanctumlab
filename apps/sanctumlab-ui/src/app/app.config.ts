@@ -21,6 +21,7 @@ import {
     matLocalBar,
     matMenu,
     matPlus,
+    matQrCode,
     matWarning
 } from '@ng-icons/material-icons/baseline';
 import { environment } from '../environments/environment';
@@ -56,7 +57,8 @@ export const appConfig: ApplicationConfig = {
             matClose,
             matDelete,
             matPlus,
-            matWarning
+            matWarning,
+            matQrCode
         }),
         provideAuthConfiguration({
             cognitoGuestUsername: environment.cognitoGuestUsername,

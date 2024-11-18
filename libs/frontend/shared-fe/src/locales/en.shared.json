@@ -10,6 +10,9 @@
             "menus": "Menus",
             "cocktails": "Cocktails",
             "snacks": "Snacks"
+        },
+        "qr": {
+            "code": "Code"
         }
     },
     "validations": {

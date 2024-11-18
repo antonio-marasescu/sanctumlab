@@ -3,13 +3,15 @@ import { TextInputComponent } from '@sanctumlab/fe/component-library';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication.service';
 import { GuestLoginFormViewComponent } from '../views/guest-login-form-view/guest-login-form-view.component';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthFeatureName, AuthRoutes } from '../../types/auth-navigation.types';
 import { GuestForm } from '../../types/auth-form.types';
 import { AdminLoginFormViewComponent } from '../views/admin-login-form-view/admin-login-form-view.component';
 import { from, Observable, of } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
     selector: 'ngx-auth-guest-login-page',
     standalone: true,
@@ -34,6 +36,7 @@ export class GuestLoginPageComponent implements OnInit {
 
     constructor(
         private readonly authenticationService: AuthenticationService,
+        private readonly activatedRoute: ActivatedRoute,
         private readonly router: Router
     ) {}
 
@@ -44,6 +47,13 @@ export class GuestLoginPageComponent implements OnInit {
                 validators: [Validators.required, Validators.minLength(3)]
             })
         });
+        this.activatedRoute.queryParams
+            .pipe(untilDestroyed(this))
+            .subscribe(value => {
+                if (value['code']) {
+                    this.guestForm.patchValue({ code: value['code'] });
+                }
+            });
     }
 
     protected async onLogin(): Promise<void> {

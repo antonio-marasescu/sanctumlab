@@ -40,7 +40,7 @@ import {
         (click)="clickEvent.emit()"
         (keydown.enter)="clickEvent.emit()"
     >
-        <ng-icon [name]="icon" [size]="iconSize"></ng-icon>
+        <ng-icon [name]="icon" [size]="iconSize.toString()"></ng-icon>
     </button>`,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -48,21 +48,9 @@ export class IconButtonComponent {
     @Input({ required: true }) icon!: string;
     @Input({ required: false }) theme: ComponentTheme | 'ghost' = 'primary';
     @Input({ required: false }) size: Omit<ComponentSize, 'xl'> = 'md';
+    @Input({ required: false }) iconSize = 14;
     @Input({ required: false }) isCircle = true;
     @Input({ required: false }) isOutlined = false;
     @Input({ required: false }) disabled = false;
     @Output() clickEvent = new EventEmitter<void>();
-
-    protected get iconSize(): string {
-        switch (this.size) {
-            case 'xs':
-                return '12';
-            case 'sm':
-                return '14;';
-            case 'lg':
-                return '24';
-            default:
-                return '16';
-        }
-    }
 }

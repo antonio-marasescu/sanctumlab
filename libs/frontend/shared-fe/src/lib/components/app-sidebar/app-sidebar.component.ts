@@ -1,5 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import {
+    IconButtonComponent,
+    ModalComponent,
+    QRDisplayComponent,
     SidebarCategoryItem,
     SidebarComponent,
     ThemeChangerComponent
@@ -9,23 +12,51 @@ import { AuthAvatarComponent } from '../auth-avatar/auth-avatar.component';
 import { ThemingService } from '../../services/theming.service';
 import { FormControl } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { AppQrCodeComponent } from '../app-qr-code/app-qr-code.component';
 
 @UntilDestroy()
 @Component({
     selector: 'ngx-shared-app-sidebar',
     standalone: true,
-    imports: [SidebarComponent, AuthAvatarComponent, ThemeChangerComponent],
-    template: `<ngx-clib-sidebar
-        [itemCategories]="appNavigationItems"
-        [title]="appTitle"
-        [logoUrl]="appLogoUrl"
-        (navigate)="onNavigate($event)"
-        (navigateHome)="onNavigateHome()"
-    >
-        <ngx-clib-theme-changer theme [control]="themeControl" />
-        <ng-container avatar><ngx-shared-auth-avatar /></ng-container>
-        <ng-container content><ng-content></ng-content></ng-container
-    ></ngx-clib-sidebar>`,
+    imports: [
+        SidebarComponent,
+        AuthAvatarComponent,
+        ThemeChangerComponent,
+        IconButtonComponent,
+        ModalComponent,
+        QRDisplayComponent,
+        AppQrCodeComponent
+    ],
+    template: `
+        <ngx-clib-sidebar
+            [itemCategories]="appNavigationItems"
+            [title]="appTitle"
+            [logoUrl]="appLogoUrl"
+            (navigate)="onNavigate($event)"
+            (navigateHome)="onNavigateHome()"
+        >
+            <div menu-content class="flex gap-1 mx-2">
+                <ngx-clib-icon-button
+                    icon="matQrCode"
+                    [size]="'sm'"
+                    [iconSize]="20"
+                    theme="ghost"
+                    (clickEvent)="onOpenModal()"
+                />
+                <ngx-clib-theme-changer [control]="themeControl" />
+            </div>
+            <ng-container avatar>
+                <ngx-shared-auth-avatar />
+            </ng-container>
+            <ng-container content>
+                <ng-content></ng-content>
+            </ng-container>
+        </ngx-clib-sidebar>
+        <ngx-shared-app-qr-code
+            [modalOpened]="modalOpened"
+            (modalClose)="onCloseModal()"
+        />
+    `,
     styleUrls: [],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -50,6 +81,7 @@ export class AppSidebarComponent implements OnInit {
             ]
         }
     ];
+    protected modalOpened = false;
     protected themeControl!: FormControl<boolean>;
 
     constructor(
@@ -88,5 +120,13 @@ export class AppSidebarComponent implements OnInit {
 
     protected async onNavigateHome(): Promise<void> {
         await this.appNavigationService.navigateToMenuFeature();
+    }
+
+    protected onOpenModal(): void {
+        this.modalOpened = true;
+    }
+
+    protected onCloseModal(): void {
+        this.modalOpened = false;
     }
 }

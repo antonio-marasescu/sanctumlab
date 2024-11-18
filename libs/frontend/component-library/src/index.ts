@@ -7,6 +7,7 @@ export * from './lib/components/atoms/loading-indicator/loading-indicator.compon
 export * from './lib/components/atoms/logo/logo.component';
 export * from './lib/components/atoms/notification/notification.component';
 export * from './lib/components/atoms/placeholder/placeholder.component';
+export * from './lib/components/atoms/qr-display/qr-display.component';
 export * from './lib/components/atoms/inputs/list-input/list-input.component';
 export * from './lib/components/atoms/inputs/markdown-input/markdown-input.component';
 export * from './lib/components/atoms/inputs/select-input/select-input.component';
