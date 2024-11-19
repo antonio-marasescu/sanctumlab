@@ -1,20 +1,5 @@
-import {
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    EnvironmentInjector,
-    Inject,
-    Input,
-    OnInit,
-    runInInjectionContext
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import {
-    InputValidationConfigToken,
-    InputValidationConfiguration
-} from '../../../../config/input-validation.config';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { retrieveErrorMessage } from '../../../../utils/validation.utils';
 import {
     InputState,
     InputStateType
@@ -22,12 +7,18 @@ import {
 import { NgClass } from '@angular/common';
 import { NgIcon } from '@ng-icons/core';
 import { I18NextModule } from 'angular-i18next';
+import { InputValidationComponent } from '../../../internal/input-validation.component';
 
-@UntilDestroy()
 @Component({
     selector: 'ngx-clib-list-input',
     standalone: true,
-    imports: [ReactiveFormsModule, NgClass, NgIcon, I18NextModule],
+    imports: [
+        ReactiveFormsModule,
+        NgClass,
+        NgIcon,
+        I18NextModule,
+        InputValidationComponent
+    ],
     template: `<div>
         <label class="form-control w-full">
             <div class="label">
@@ -61,13 +52,10 @@ import { I18NextModule } from 'angular-i18next';
                 </button>
             </div>
 
-            @if (controlState === InputState.Invalid && errorMessage) {
-                <div class="label">
-                    <span class="label-text-alt text-error"
-                        >{{ errorMessage }}
-                    </span>
-                </div>
-            }
+            <ngx-clib-input-validation
+                [control]="control"
+                (controlStateChange)="controlState = $event"
+            />
         </label>
         <div class="flex pt-3 gap-3">
             @for (item of control.value; track item) {
@@ -87,7 +75,7 @@ import { I18NextModule } from 'angular-i18next';
     </div>`,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ListInputComponent implements OnInit {
+export class ListInputComponent {
     @Input({ required: true }) id!: string;
     @Input({ required: true }) label!: string;
     @Input({ required: true }) control!: FormControl<string[]>;
@@ -101,23 +89,7 @@ export class ListInputComponent implements OnInit {
         nonNullable: true,
         validators: [Validators.minLength(1), Validators.required]
     });
-    protected errorMessage = '';
-
-    constructor(
-        @Inject(InputValidationConfigToken)
-        private readonly validationConfiguration: InputValidationConfiguration,
-        private readonly changeDetectorRef: ChangeDetectorRef,
-        private readonly injector: EnvironmentInjector
-    ) {}
-
-    ngOnInit() {
-        this.control.statusChanges.pipe(untilDestroyed(this)).subscribe(() => {
-            this.errorMessage = runInInjectionContext(this.injector, () =>
-                retrieveErrorMessage(this.validationConfiguration, this.control)
-            );
-            this.changeDetectorRef.markForCheck();
-        });
-    }
+    protected controlState: InputStateType = InputState.Valid;
 
     protected onAddItem(): void {
         const newItem = this.internalFormControl.getRawValue();
@@ -133,24 +105,5 @@ export class ListInputComponent implements OnInit {
         this.control.markAsTouched();
         this.control.patchValue([...newValue]);
         this.internalFormControl.reset();
-    }
-
-    protected get hasError(): boolean {
-        return this.control.invalid && !this.control.untouched;
-    }
-
-    protected get disabled(): boolean {
-        return this.control.disabled;
-    }
-
-    protected get controlState(): InputStateType {
-        if (this.disabled) {
-            return InputState.Disabled;
-        }
-        if (this.hasError) {
-            return InputState.Invalid;
-        }
-
-        return InputState.Valid;
     }
 }
