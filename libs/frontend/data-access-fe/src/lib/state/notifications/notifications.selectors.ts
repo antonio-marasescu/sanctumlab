@@ -5,12 +5,16 @@ import {
 } from './notifications.reducers';
 import { NotificationDto } from '../../types/notifications.types';
 
-export const selectNotificationsFeatureState = () =>
+const selectNotificationsFeatureState = () =>
     createFeatureSelector<NotificationsState>(NotificationsStateFeatureName);
 
-export const selectNotifications = () =>
+const selectNotifications = () =>
     createSelector(selectNotificationsFeatureState(), state => {
         return (
             (state.ids.map(id => state.entities[id]) as NotificationDto[]) || []
         );
     });
+
+export const NotificationsSelectors = {
+    selectNotifications
+};

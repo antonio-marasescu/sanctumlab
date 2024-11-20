@@ -5,10 +5,10 @@ import {
     ProductItemDto
 } from '@sanctumlab/api-interfaces';
 
-export const selectProductsFeatureState = () =>
+const selectProductsFeatureState = () =>
     createFeatureSelector<ProductsState>(ProductsStateFeatureName);
 
-export const selectProductsByCategory = (category: ProductItemCategory) =>
+const selectProductsByCategory = (category: ProductItemCategory) =>
     createSelector(selectProductsFeatureState(), state => {
         return (
             (state.ids
@@ -19,23 +19,31 @@ export const selectProductsByCategory = (category: ProductItemCategory) =>
         );
     });
 
-export const selectProductById = (id: string) =>
+const selectProductById = (id: string) =>
     createSelector(selectProductsFeatureState(), state => {
         return state.entities[id] as ProductItemDto;
     });
 
-export const selectCurrentProduct = () =>
+const selectCurrentProduct = () =>
     createSelector(selectProductsFeatureState(), state => {
         if (!state.currentProductId) return null;
         return state.entities[state.currentProductId] as ProductItemDto;
     });
 
-export const selectProductsStateLoading = () =>
+const selectProductsStateLoading = () =>
     createSelector(selectProductsFeatureState(), state => {
         return state.loading;
     });
 
-export const selectProductsStateErrorReason = () =>
+const selectProductsStateErrorReason = () =>
     createSelector(selectProductsFeatureState(), state => {
         return state.errorReason ?? null;
     });
+
+export const ProductsSelectors = {
+    selectProductsByCategory,
+    selectProductById,
+    selectCurrentProduct,
+    selectProductsStateLoading,
+    selectProductsStateErrorReason
+};

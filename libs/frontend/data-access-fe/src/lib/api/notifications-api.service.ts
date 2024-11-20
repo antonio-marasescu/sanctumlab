@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { NotificationDto } from '../types/notifications.types';
-import { selectNotifications } from '../state/notifications/notifications.selectors';
+import { NotificationsSelectors } from '../state/notifications/notifications.selectors';
 import { NotificationsActions } from '../state/notifications/notifications.actions';
 
 @Injectable({ providedIn: 'root' })
@@ -10,7 +10,7 @@ export class NotificationsApiService {
     private readonly store = inject(Store);
 
     public retrieveNotificationsStream(): Observable<NotificationDto[]> {
-        return this.store.select(selectNotifications());
+        return this.store.select(NotificationsSelectors.selectNotifications());
     }
 
     public setNotifications(notifications: NotificationDto[]): void {

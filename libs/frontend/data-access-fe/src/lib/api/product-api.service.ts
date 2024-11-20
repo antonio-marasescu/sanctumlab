@@ -7,12 +7,7 @@ import {
 } from '@sanctumlab/api-interfaces';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import {
-    selectCurrentProduct,
-    selectProductById,
-    selectProductsByCategory,
-    selectProductsStateLoading
-} from '../state/products/products.selectors';
+import { ProductsSelectors } from '../state/products/products.selectors';
 import { ProductsActions } from '../state/products/products.actions';
 
 @Injectable({ providedIn: 'root' })
@@ -22,19 +17,23 @@ export class ProductApiService {
     public retrieveProductsByCategoryStream(
         category: ProductItemCategory
     ): Observable<ProductItemDto[]> {
-        return this.store.select(selectProductsByCategory(category));
+        return this.store.select(
+            ProductsSelectors.selectProductsByCategory(category)
+        );
     }
 
     public retrieveProductsIsLoadingStream(): Observable<boolean> {
-        return this.store.select(selectProductsStateLoading());
+        return this.store.select(
+            ProductsSelectors.selectProductsStateLoading()
+        );
     }
 
     public retrieveProductByIdStream(id: string): Observable<ProductItemDto> {
-        return this.store.select(selectProductById(id));
+        return this.store.select(ProductsSelectors.selectProductById(id));
     }
 
     public retrieveCurrentProductStream(): Observable<ProductItemDto | null> {
-        return this.store.select(selectCurrentProduct());
+        return this.store.select(ProductsSelectors.selectCurrentProduct());
     }
 
     public sendRetrieveProductList(): void {
