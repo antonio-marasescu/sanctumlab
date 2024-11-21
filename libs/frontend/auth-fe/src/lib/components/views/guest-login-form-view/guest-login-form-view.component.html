@@ -1,0 +1,70 @@
+<section class="bg-base-100 h-screen">
+    <div
+        class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 gap-8"
+    >
+        <ngx-clib-logo
+            logoUrl="assets/logo-bg.png"
+            title="Sanctum Lab"
+            size="md"
+        />
+        <div
+            class="w-full bg-base-200 rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0"
+        >
+            <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+                <h1
+                    class="text-xl font-bold leading-tight tracking-tight text-base-content md:text-2xl"
+                >
+                    {{ 'auth:guest.title' | i18nextEager }}
+                </h1>
+                <form class="space-y-4 md:space-y-6" [formGroup]="form">
+                    <div>
+                        <ngx-clib-text-input
+                            id="code"
+                            type="password"
+                            label="auth:guest.form.code"
+                            placeholder="••••••••"
+                            [autofocus]="true"
+                            [control]="form.controls.code"
+                        />
+                    </div>
+
+                    @if (validLogin !== null && !validLogin) {
+                        <p
+                            id="form-error-message"
+                            class="label-text-alt text-error"
+                        >
+                            {{ 'auth:guest.form.invalid' | i18nextEager }}
+                        </p>
+                    }
+
+                    <div class="mt-0.5">
+                        <ngx-clib-button
+                            id="login-button"
+                            label="auth:guest.actions.signIn"
+                            (clickEvent)="loginEvent.emit()"
+                            [isWide]="true"
+                            [disabled]="form.invalid"
+                        />
+                    </div>
+                    <p class="text-sm font-light text-base-content">
+                        {{
+                            'auth:guest.actions.redirect.message' | i18nextEager
+                        }}
+                        <a
+                            id="redirect-link"
+                            tabindex="0"
+                            (click)="redirectToAdminLogin.emit()"
+                            (keydown.enter)="redirectToAdminLogin.emit()"
+                            class="font-medium text-base-content hover:underline cursor-pointer"
+                        >
+                            {{
+                                'auth:guest.actions.redirect.action'
+                                    | i18nextEager
+                            }}
+                        </a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

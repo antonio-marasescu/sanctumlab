@@ -1,0 +1,72 @@
+name: Deploy UI
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: choice
+        required: true
+        description: Deployment environment
+        options:
+          - production
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy-ui:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    environment: ${{ github.event.inputs.environment }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+          cache: npm
+      - name: Configure Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_IAM }}
+          aws-region: ${{ secrets.AWS_REGION }}
+      - name: Cache Dependencies
+        id: cache-dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: Install dependencies
+        run: |
+          if [ ${{ steps.cache-dependencies.outputs.cache-hit }} == 'true' ]; then
+            echo "Cache hit: Running 'npm install'"
+            npm install
+          else
+            echo "Cache miss: Running 'npm ci'"
+            npm ci
+          fi
+      - name: Set environment Variables
+        uses: iamazeem/substitute-action@v1
+        env:
+          API_URL: ${{ secrets.API_URL }}
+          COGNITO_GUEST_EMAIL: ${{ secrets.COGNITO_GUEST_EMAIL }}
+          COGNITO_REDIRECT_SIGN_IN: ${{ secrets.COGNITO_REDIRECT_SIGN_IN }}
+          COGNITO_REDIRECT_SIGN_OUT: ${{ secrets.COGNITO_REDIRECT_SIGN_OUT }}
+          COGNITO_DOMAIN: ${{ secrets.COGNITO_DOMAIN }}
+          COGNITO_USER_POOL_CLIENT_ID: ${{ secrets.COGNITO_USER_POOL_CLIENT_ID }}
+          COGNITO_USER_POOL_ID: ${{ secrets.COGNITO_USER_POOL_ID }}
+        with:
+          input-files: apps/sanctumlab-ui/src/environments/environment.production.ts
+      - name: Build sources
+        run: npm run build:ui
+      - name: Publish website
+        run: aws s3 sync ./dist/apps/sanctumlab-ui/browser s3://${{ secrets.AWS_WEBSITE_BUCKET_NAME }} --delete
+      - name: Invalidate Cloudfront
+        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"

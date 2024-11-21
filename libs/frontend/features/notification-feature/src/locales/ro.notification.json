@@ -1,0 +1,15 @@
+{
+    "errors": {
+        "INVALID_PAYLOAD": "Datele încărcate sunt invalide",
+        "FORBIDDEN": "Nu sunteți autorizat să efectuați această operațiune",
+        "NOT_FOUND": "Resursa solicitată nu a fost găsită",
+        "UNKNOWN": "A apărut o eroare neașteptată"
+    },
+    "titles": {
+        "PRODUCT_CREATE_FAILURE": "Crearea produsului a eșuat",
+        "PRODUCT_UPDATE_FAILURE": "Actualizarea produsului a eșuat",
+        "PRODUCT_REMOVE_FAILURE": "Ștergerea produsului a eșuat",
+        "PRODUCT_RETRIEVE_ALL_FAILURE": "Eșec la obținerea listei de produse",
+        "PRODUCT_RETRIEVE_FAILURE": "Obținerea produsului a eșuat"
+    }
+}

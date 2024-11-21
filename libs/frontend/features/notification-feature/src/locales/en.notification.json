@@ -1,0 +1,15 @@
+{
+    "errors": {
+        "INVALID_PAYLOAD": "The payload data was invalid",
+        "FORBIDDEN": "You are not authorized to perform this operation",
+        "NOT_FOUND": "The requested resource could not be found",
+        "UNKNOWN": "An unexpected error occurred"
+    },
+    "titles": {
+        "PRODUCT_CREATE_FAILURE": "Product creation failed",
+        "PRODUCT_UPDATE_FAILURE": "Product update failed",
+        "PRODUCT_REMOVE_FAILURE": "Product delete failed",
+        "PRODUCT_RETRIEVE_ALL_FAILURE": "Product list retrieve failed",
+        "PRODUCT_RETRIEVE_FAILURE": "Product retrieval failed"
+    }
+}

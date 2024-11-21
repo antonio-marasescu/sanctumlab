@@ -1,0 +1,37 @@
+{
+    "unauthorized": {
+        "message": "Nu sunteți autorizat să accesați această resursă",
+        "actions": {
+            "back": "Înapoi"
+        }
+    },
+    "guest": {
+        "title": "Conectați-vă la contul dvs. (Oaspete)",
+        "form": {
+            "code": "Cod",
+            "invalid": "Cod de autentificare invalid"
+        },
+        "actions": {
+            "signIn": "Conectare",
+            "redirect": {
+                "message": "Ești administrator?",
+                "action": "Autentificare ca administrator"
+            }
+        }
+    },
+    "admin": {
+        "title": "Conectați-vă la contul dvs. (Administrator)",
+        "form": {
+            "username": "Nume de utilizator",
+            "password": "Parolă",
+            "invalid": "Nume de utilizator sau parolă invalidă"
+        },
+        "actions": {
+            "signIn": "Conectare",
+            "redirect": {
+                "message": "Ești oaspete?",
+                "action": "Autentificare ca oaspete"
+            }
+        }
+    }
+}

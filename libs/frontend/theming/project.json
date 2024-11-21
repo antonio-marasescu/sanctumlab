@@ -1,0 +1,6 @@
+{
+    "projectType": "library",
+    "sourceRoot": "libs/frontend/theming",
+    "targets": {},
+    "tags": ["scope:project-frontend", "scope:shared"]
+}

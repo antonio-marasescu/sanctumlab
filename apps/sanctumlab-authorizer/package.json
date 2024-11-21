@@ -1,0 +1,12 @@
+{
+    "name": "@sanctumlab/sanctumlab-authorizer",
+    "version": "0.0.1",
+    "dependencies": {
+        "@sanctumlab/auth-be": "^0.0.1",
+        "@sanctumlab/shared-be": "^0.0.1"
+    },
+    "main": "./index.js",
+    "module": "./index.mjs",
+    "typings": "./index.d.ts",
+    "private": true
+}

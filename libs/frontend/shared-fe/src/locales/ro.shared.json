@@ -1,0 +1,23 @@
+{
+    "avatar": {
+        "actions": {
+            "settings": "Setări",
+            "signOut": "Deconectare"
+        }
+    },
+    "sidebar": {
+        "actions": {
+            "menus": "Meniuri",
+            "cocktails": "Cocktailuri",
+            "snacks": "Gustări"
+        },
+        "qr": {
+            "code": "Cod"
+        }
+    },
+    "validations": {
+        "required": "Acest câmp este obligatoriu",
+        "minlength": "Lungimea necesară este {{requiredLength}}",
+        "email": "Formatul adresei de email este invalid"
+    }
+}

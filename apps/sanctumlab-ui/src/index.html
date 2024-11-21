@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+    <head>
+        <meta charset="utf-8" />
+        <title>Sanctum Lab</title>
+        <base href="/" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" type="image/x-icon" href="favicon.ico" />
+        <meta property="application-name" content="Sanctum Lab" />
+        <meta name="title" property="og:title" content="Sanctum Lab" />
+        <meta property="og:type" content="website" />
+        <meta
+            name="description"
+            property="og:description"
+            content="The home personal sanctuary website for various needs"
+        />
+        <meta name="image" property="og:image" content="assets/logo-bg.png" />
+        <meta name="image" property="og:image:alt" content="Sanctum Lab" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <script>
+            const colorThemeKey = 'data-theme';
+            const colorTheme = localStorage.getItem(colorThemeKey);
+            if (colorTheme) {
+                document.documentElement.setAttribute(
+                    colorThemeKey,
+                    colorTheme
+                );
+            }
+        </script>
+    </head>
+    <body>
+        <app-root></app-root>
+    </body>
+</html>

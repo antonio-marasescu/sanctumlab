@@ -1,0 +1,57 @@
+{
+    "compileOnSave": false,
+    "compilerOptions": {
+        "rootDir": ".",
+        "sourceMap": true,
+        "declaration": false,
+        "moduleResolution": "node",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "importHelpers": true,
+        "target": "es2015",
+        "module": "esnext",
+        "lib": ["es2020", "dom"],
+        "skipLibCheck": true,
+        "skipDefaultLibCheck": true,
+        "baseUrl": ".",
+        "paths": {
+            "@sanctumlab/api-interfaces": [
+                "libs/shared/api-interfaces/src/index.ts"
+            ],
+            "@sanctumlab/apps/sanctumlab-api-lambda": [
+                "apps/sanctumlab-api/src/index.ts"
+            ],
+            "@sanctumlab/be/auth": ["libs/backend/auth-be/src/index.ts"],
+            "@sanctumlab/be/data-access": [
+                "libs/backend/data-access-be/src/index.ts"
+            ],
+            "@sanctumlab/be/products-feature": [
+                "libs/backend/features/products-feature/src/index.ts"
+            ],
+            "@sanctumlab/be/sanctumlab-authorizer": [
+                "apps/sanctumlab-authorizer/src/index.ts"
+            ],
+            "@sanctumlab/be/shared": ["libs/backend/shared-be/src/index.ts"],
+            "@sanctumlab/fe/auth": ["libs/frontend/auth-fe/src/index.ts"],
+            "@sanctumlab/fe/component-library": [
+                "libs/frontend/component-library/src/index.ts"
+            ],
+            "@sanctumlab/fe/data-access": [
+                "libs/frontend/data-access-fe/src/index.ts"
+            ],
+            "@sanctumlab/fe/menu-feature": [
+                "libs/frontend/features/menu-feature/src/index.ts"
+            ],
+            "@sanctumlab/fe/notification-feature": [
+                "libs/frontend/features/notification-feature/src/index.ts"
+            ],
+            "@sanctumlab/fe/profile-feature": [
+                "libs/frontend/features/profile-feature/src/index.ts"
+            ],
+            "@sanctumlab/fe/shared": ["libs/frontend/shared-fe/src/index.ts"]
+        }
+    },
+    "exclude": ["node_modules", "tmp"]
+}

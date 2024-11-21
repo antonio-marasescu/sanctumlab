@@ -1,0 +1,57 @@
+{
+    "name": "component-library",
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "libs/frontend/component-library/src",
+    "prefix": "lib",
+    "projectType": "library",
+    "tags": ["scope:project-frontend", "scope:component-lib"],
+    "targets": {
+        "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+            "options": {
+                "jestConfig": "libs/frontend/component-library/jest.config.ts"
+            }
+        },
+        "lint": {
+            "executor": "@nx/eslint:lint"
+        },
+        "storybook": {
+            "executor": "@storybook/angular:start-storybook",
+            "options": {
+                "port": 4400,
+                "configDir": "libs/frontend/component-library/.storybook",
+                "browserTarget": "component-library:build-storybook",
+                "compodoc": false,
+                "styles": [
+                    "libs/frontend/component-library/.storybook/styles.scss",
+                    "node_modules/quill/dist/quill.snow.css"
+                ]
+            },
+            "configurations": {
+                "ci": {
+                    "quiet": true
+                }
+            }
+        },
+        "build-storybook": {
+            "executor": "@storybook/angular:build-storybook",
+            "outputs": ["{options.outputDir}"],
+            "options": {
+                "outputDir": "dist/storybook/component-library",
+                "configDir": "libs/frontend/component-library/.storybook",
+                "browserTarget": "component-library:build-storybook",
+                "compodoc": false,
+                "styles": [
+                    "libs/frontend/component-library/.storybook/styles.scss",
+                    "node_modules/quill/dist/quill.snow.css"
+                ]
+            },
+            "configurations": {
+                "ci": {
+                    "quiet": true
+                }
+            }
+        }
+    }
+}
