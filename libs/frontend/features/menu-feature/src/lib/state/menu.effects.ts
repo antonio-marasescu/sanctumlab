@@ -18,7 +18,7 @@ export class MenuEffects {
         { dispatch: false }
     );
 
-    editProductSuccess$ = createEffect(
+    updateProductSuccess$ = createEffect(
         () =>
             this.actions$.pipe(
                 ofType(ProductsActions.updateProductSuccess),

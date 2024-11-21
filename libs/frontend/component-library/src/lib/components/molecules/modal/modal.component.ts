@@ -75,10 +75,14 @@ export class ModalComponent implements OnChanges, AfterViewInit {
     }
 
     protected openModal(): void {
-        this.modal?.nativeElement.showModal();
+        if (this.modal?.nativeElement?.showModal) {
+            this.modal.nativeElement.showModal();
+        }
     }
 
     protected closeModal(): void {
-        this.modal?.nativeElement.close();
+        if (this.modal?.nativeElement?.close) {
+            this.modal.nativeElement.close();
+        }
     }
 }

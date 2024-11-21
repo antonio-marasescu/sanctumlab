@@ -33,7 +33,7 @@ import { I18NextModule } from 'angular-i18next';
         ListInputComponent,
         I18NextModule
     ],
-    template: ` <div class="p-8">
+    template: `<div class="p-8">
             <h1 class="text-xl md:text-2xl">{{ title | i18nextEager }}</h1>
             <form
                 class="grid grid-cols-1 gap-8 pt-4"
@@ -88,12 +88,14 @@ import { I18NextModule } from 'angular-i18next';
             class="sticky bottom-0 flex flex-row-reverse justify-between bg-base-100 pt-4 pb-4 pr-6 pl-6 gap-4"
         >
             <ngx-clib-button
+                id="submit-button"
                 [label]="actionLabel"
                 [size]="'sm'"
                 theme="neutral"
                 (clickEvent)="submitEvent.emit()"
             />
             <ngx-clib-button
+                id="close-button"
                 label="menu:form.actions.close"
                 [size]="'sm'"
                 theme="ghost"
