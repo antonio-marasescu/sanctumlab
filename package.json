@@ -114,7 +114,7 @@
         "@tailwindcss/line-clamp": "^0.4.4",
         "angular-i18next": "^18.0.0",
         "angularx-qrcode": "^18.0.2",
-        "aws-amplify": "^6.6.5",
+        "aws-amplify": "^6.7.0",
         "aws-jwt-verify": "^4.0.1",
         "axios": "^1.6.0",
         "cors": "^2.8.5",
