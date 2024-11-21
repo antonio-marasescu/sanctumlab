@@ -92,7 +92,7 @@
         "yargs": "^17.7.2"
     },
     "dependencies": {
-        "@angular/animations": "~18.2.0",
+        "@angular/animations": "~18.2.10",
         "@angular/cdk": "^18.2.13",
         "@angular/common": "~18.2.0",
         "@angular/compiler": "~18.2.0",
