@@ -26,7 +26,7 @@ export function createProductItemForm(
             nonNullable: true,
             validators: [Validators.required]
         }),
-        available: new FormControl<boolean>(false, {
+        available: new FormControl<boolean>(initialValues?.available ?? false, {
             nonNullable: true,
             validators: [Validators.required]
         })

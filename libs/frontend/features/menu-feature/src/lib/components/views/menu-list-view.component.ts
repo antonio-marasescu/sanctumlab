@@ -29,6 +29,7 @@ import { MenuListFilterViewComponent } from './menu-list-filter-view.component';
     template: `<div class="m-12">
         <div class="flex flex-row-reverse">
             <ngx-clib-button
+                id="create-button"
                 *ngxAuthAdminRestrict
                 label="menu:pages.list.redirectToCreate"
                 theme="primary"

@@ -23,14 +23,16 @@ describe('ProductsEffects', () => {
     const initialState = createMockDataAccessInitialState();
     let actions$ = new Observable<Action>();
     let effects: ProductsEffects;
-    let clientServiceMock = beforeEach(() => {
+    let clientServiceMock: Partial<ProductsClientService>;
+
+    beforeEach(() => {
         clientServiceMock = {
             createProduct: jest.fn(),
             updateProduct: jest.fn(),
             removeProduct: jest.fn(),
             retrieveProductById: jest.fn(),
             retrieveProducts: jest.fn()
-        };
+        } as unknown as ProductsClientService;
         actions$ = new Observable<Action>();
 
         TestBed.configureTestingModule({
@@ -53,7 +55,9 @@ describe('ProductsEffects', () => {
         it('should emit create product success after create product', () => {
             const payloadCreate = createMockCreateProductItemDto();
             const payloadSuccess = createMockProductItemDto();
-            clientServiceMock.createProduct.mockReturnValue(of(payloadSuccess));
+            jest.spyOn(clientServiceMock, 'createProduct').mockReturnValue(
+                of(payloadSuccess)
+            );
 
             actions$ = hot('-a', {
                 a: ProductsActions.createProduct({
@@ -75,7 +79,7 @@ describe('ProductsEffects', () => {
             const payloadHttpError = new HttpErrorResponse({
                 error: payloadError
             });
-            clientServiceMock.createProduct.mockReturnValue(
+            jest.spyOn(clientServiceMock, 'createProduct').mockReturnValue(
                 throwError(() => payloadHttpError)
             );
 
@@ -105,7 +109,9 @@ describe('ProductsEffects', () => {
             const payloadId = '1234';
             const payloadUpdate = createMockUpdateProductItemDto();
             const payloadSuccess = createMockProductItemDto({ id: payloadId });
-            clientServiceMock.updateProduct.mockReturnValue(of(payloadSuccess));
+            jest.spyOn(clientServiceMock, 'updateProduct').mockReturnValue(
+                of(payloadSuccess)
+            );
 
             actions$ = hot('-a', {
                 a: ProductsActions.updateProduct({
@@ -129,7 +135,7 @@ describe('ProductsEffects', () => {
             const payloadHttpError = new HttpErrorResponse({
                 error: payloadError
             });
-            clientServiceMock.updateProduct.mockReturnValue(
+            jest.spyOn(clientServiceMock, 'updateProduct').mockReturnValue(
                 throwError(() => payloadHttpError)
             );
 
@@ -158,7 +164,9 @@ describe('ProductsEffects', () => {
     describe('removeProduct$', () => {
         it('should emit remove product success after remove product', () => {
             const payloadId = '1234';
-            clientServiceMock.removeProduct.mockReturnValue(of(null));
+            jest.spyOn(clientServiceMock, 'removeProduct').mockReturnValue(
+                of(null) as any
+            );
 
             actions$ = hot('-a', {
                 a: ProductsActions.removeProduct({
@@ -180,7 +188,7 @@ describe('ProductsEffects', () => {
             const payloadHttpError = new HttpErrorResponse({
                 error: payloadError
             });
-            clientServiceMock.removeProduct.mockReturnValue(
+            jest.spyOn(clientServiceMock, 'removeProduct').mockReturnValue(
                 throwError(() => payloadHttpError)
             );
 
@@ -208,7 +216,7 @@ describe('ProductsEffects', () => {
     describe('getProductList$', () => {
         it('should emit get product list success after get product list', () => {
             const payloadSuccess = createMockProductItemDto();
-            clientServiceMock.retrieveProducts.mockReturnValue(
+            jest.spyOn(clientServiceMock, 'retrieveProducts').mockReturnValue(
                 of([payloadSuccess])
             );
 
@@ -229,7 +237,7 @@ describe('ProductsEffects', () => {
             const payloadHttpError = new HttpErrorResponse({
                 error: payloadError
             });
-            clientServiceMock.retrieveProducts.mockReturnValue(
+            jest.spyOn(clientServiceMock, 'retrieveProducts').mockReturnValue(
                 throwError(() => payloadHttpError)
             );
 
@@ -256,9 +264,10 @@ describe('ProductsEffects', () => {
         it('should emit get product by id success after get product by id', () => {
             const payloadId = '1234';
             const payloadSuccess = createMockProductItemDto({ id: payloadId });
-            clientServiceMock.retrieveProductById.mockReturnValue(
-                of(payloadSuccess)
-            );
+            jest.spyOn(
+                clientServiceMock,
+                'retrieveProductById'
+            ).mockReturnValue(of(payloadSuccess));
 
             actions$ = hot('-a', {
                 a: ProductsActions.getProductById({ id: payloadId })
@@ -278,9 +287,10 @@ describe('ProductsEffects', () => {
             const payloadHttpError = new HttpErrorResponse({
                 error: payloadError
             });
-            clientServiceMock.retrieveProductById.mockReturnValue(
-                throwError(() => payloadHttpError)
-            );
+            jest.spyOn(
+                clientServiceMock,
+                'retrieveProductById'
+            ).mockReturnValue(throwError(() => payloadHttpError));
 
             actions$ = hot('-a', {
                 a: ProductsActions.getProductById({ id: payloadId })
