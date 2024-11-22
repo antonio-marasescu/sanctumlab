@@ -5,7 +5,10 @@ import {
     UpdateProductItemDto,
     UpdateProductItemDtoSchema
 } from '@sanctumlab/api-interfaces';
-import { ProductsServiceInstance } from '../services/products.service';
+import {
+    ProductsService,
+    ProductsServiceInstance
+} from '../services/products.service';
 import {
     toDomainCreate,
     toDomainUpdate,
@@ -15,9 +18,11 @@ import {
 import { AppLogger } from '@sanctumlab/be/shared';
 
 export class ProductsApi {
+    constructor(private readonly productsService: ProductsService) {}
+
     public async retrieveAll(): Promise<ProductItemDto[]> {
         AppLogger.info(`[ProductsApi] Retrieve All `);
-        const response = await ProductsServiceInstance.retrieveAll();
+        const response = await this.productsService.retrieveAll();
         AppLogger.info(`[ProductsApi] Retrieve All Success`, {
             length: response.length
         });
@@ -26,7 +31,7 @@ export class ProductsApi {
 
     public async retrieveById(id: string): Promise<ProductItemDto> {
         AppLogger.info(`[ProductsApi] Retrieve By Id `, { id });
-        const response = await ProductsServiceInstance.retrieveById(id);
+        const response = await this.productsService.retrieveById(id);
         AppLogger.info(`[ProductsApi] Retrieve By Id Success`, {
             retrievedId: response.id
         });
@@ -36,7 +41,7 @@ export class ProductsApi {
     public async create(dto: CreateProductItemDto): Promise<ProductItemDto> {
         AppLogger.info(`[ProductsApi] Create `, { dto });
         const validatedDto = CreateProductItemDtoSchema.parse(dto);
-        const response = await ProductsServiceInstance.create(
+        const response = await this.productsService.create(
             toDomainCreate(validatedDto)
         );
         AppLogger.info(`[ProductsApi] Create Success`, { response });
@@ -49,9 +54,9 @@ export class ProductsApi {
     ): Promise<ProductItemDto> {
         AppLogger.info(`[ProductsApi] Update `, { id, dto });
         const validatedDto = UpdateProductItemDtoSchema.parse(dto);
-        const oldModel = await ProductsServiceInstance.retrieveById(id);
+        const oldModel = await this.productsService.retrieveById(id);
 
-        const response = await ProductsServiceInstance.update(
+        const response = await this.productsService.update(
             id,
             toDomainUpdate(oldModel, validatedDto)
         );
@@ -61,10 +66,10 @@ export class ProductsApi {
 
     public async removeById(id: string): Promise<boolean> {
         AppLogger.info(`[ProductsApi] Remove By Id`, { id });
-        const success = await ProductsServiceInstance.removeById(id);
+        const success = await this.productsService.removeById(id);
         AppLogger.info(`[ProductsApi] Remove By Id Success`, { success });
         return success;
     }
 }
 
-export const ProductsApiInstance = new ProductsApi();
+export const ProductsApiInstance = new ProductsApi(ProductsServiceInstance);

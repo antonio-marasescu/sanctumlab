@@ -1,5 +1,6 @@
 import {
     ProductModel,
+    ProductsRepository,
     ProductsRepositoryInstance
 } from '@sanctumlab/be/data-access';
 import {
@@ -8,12 +9,14 @@ import {
 } from '@sanctumlab/be/shared';
 
 export class ProductsService {
+    constructor(private readonly productsRepository: ProductsRepository) {}
+
     public async retrieveAll(): Promise<ProductModel[]> {
-        return ProductsRepositoryInstance.retrieveAll();
+        return this.productsRepository.retrieveAll();
     }
 
     public async retrieveById(id: string): Promise<ProductModel> {
-        const item = await ProductsRepositoryInstance.retrieveById(id);
+        const item = await this.productsRepository.retrieveById(id);
         if (!item) {
             throw new NotFoundException();
         }
@@ -24,7 +27,7 @@ export class ProductsService {
         product: Required<ProductModel>
     ): Promise<Required<ProductModel>> {
         try {
-            return await ProductsRepositoryInstance.create(product);
+            return await this.productsRepository.create(product);
         } catch (error) {
             throw new InvalidPayloadException();
         }
@@ -35,7 +38,7 @@ export class ProductsService {
         product: ProductModel
     ): Promise<Required<ProductModel>> {
         try {
-            return await ProductsRepositoryInstance.update(id, product);
+            return await this.productsRepository.update(id, product);
         } catch (error) {
             throw new InvalidPayloadException();
         }
@@ -43,11 +46,13 @@ export class ProductsService {
 
     public async removeById(id: string): Promise<boolean> {
         try {
-            return await ProductsRepositoryInstance.removeById(id);
+            return await this.productsRepository.removeById(id);
         } catch (error) {
             throw new InvalidPayloadException();
         }
     }
 }
 
-export const ProductsServiceInstance = new ProductsService();
+export const ProductsServiceInstance = new ProductsService(
+    ProductsRepositoryInstance
+);

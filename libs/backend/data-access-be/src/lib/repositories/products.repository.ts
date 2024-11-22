@@ -1,8 +1,9 @@
 import { DatabaseClientInstance } from '../clients/database.client';
 import { ProductModel } from '../domain/database-types.domain';
+import { Model } from 'dynamodb-onetable';
 
 export class ProductsRepository {
-    private readonly table = DatabaseClientInstance.productsTable;
+    constructor(private readonly table: Model<ProductModel>) {}
 
     public async retrieveAll(): Promise<ProductModel[]> {
         return this.table.find();
@@ -44,4 +45,6 @@ export class ProductsRepository {
     }
 }
 
-export const ProductsRepositoryInstance = new ProductsRepository();
+export const ProductsRepositoryInstance = new ProductsRepository(
+    DatabaseClientInstance.productsTable
+);
