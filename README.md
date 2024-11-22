@@ -13,17 +13,17 @@
 
 ## Key Features
 
-| **Feature**                | **Description**                         | **Status**         |
-| -------------------------- | --------------------------------------- | ------------------ |
-| **Menu**                   | Manage and display bar menu content.    | ✅ Implemented     |
-| **Event Management**       | Check-in and manage home events.        | ❌ Not Implemented |
-| **Dashboard**              | Admin statistics and insights.          | ❌ Not Implemented |
-| **Social Login**           | Easy registration via social accounts.  | ❌ Not Implemented |
-| **Guest Access**           | Secure features for guest interactions. | ✅ Implemented     |
-| **Admin Access**           | Admin login functionality.              | ✅ Implemented     |
-| **Internationalization**   | Multi-language content support.         | ✅ Implemented     |
-| **Modular Design**         | Extendable for future features.         | ✅ Implemented     |
-| **Infrastructure as Code** | Manage cloud deployment via code.       | ✅ Implemented     |
+| **Feature**                | **Description**                         | **Status**           |
+| -------------------------- | --------------------------------------- | -------------------- |
+| **Menu**                   | Manage and display bar menu content.    | ✅ Implemented       |
+| **Event Management**       | Check-in and manage home events.        | 🚧 Under Development |
+| **Dashboard**              | Admin statistics and insights.          | ❌ Not Implemented   |
+| **Social Login**           | Easy registration via social accounts.  | ❌ Not Implemented   |
+| **Guest Access**           | Secure features for guest interactions. | ✅ Implemented       |
+| **Admin Access**           | Admin login functionality.              | ✅ Implemented       |
+| **Internationalization**   | Multi-language content support.         | ✅ Implemented       |
+| **Modular Design**         | Extendable for future features.         | ✅ Implemented       |
+| **Infrastructure as Code** | Manage cloud deployment via code.       | ✅ Implemented       |
 
 ## Primary Tools Used
 
