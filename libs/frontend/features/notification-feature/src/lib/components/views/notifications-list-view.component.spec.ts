@@ -51,7 +51,7 @@ describe('NotificationsListViewComponent', () => {
 
         for (const notification of notifications) {
             const notificationEl = fixture.debugElement.query(
-                By.css(`${notification.id}`)
+                By.css(`#${notification.id}`)
             );
             expect(notificationEl).toBeDefined();
         }
