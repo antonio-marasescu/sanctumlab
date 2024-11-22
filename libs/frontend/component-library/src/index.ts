@@ -35,4 +35,5 @@ export * from './lib/types/shared/theme.types';
 export * from './lib/utils/validators.utils';
 
 // MOCKS
+export * from './lib/components/atoms/inputs/markdown-input/_mocks/mock-markdown-input.component';
 export * from './lib/config/_mocks/input-validation.config.mocks';
