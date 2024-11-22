@@ -79,6 +79,7 @@ import { I18NextModule } from 'angular-i18next';
             />
             @if (item) {
                 <ngx-clib-button
+                    id="delete-button"
                     *ngxAuthAdminRestrict
                     label="menu:pages.list.view.actions.delete"
                     [isResponsive]="true"
@@ -87,6 +88,7 @@ import { I18NextModule } from 'angular-i18next';
                 />
                 @if (item.available) {
                     <ngx-clib-button
+                        id="disable-button"
                         *ngxAuthAdminRestrict
                         label="menu:pages.list.view.actions.disable"
                         [isResponsive]="true"
@@ -95,6 +97,7 @@ import { I18NextModule } from 'angular-i18next';
                     />
                 } @else {
                     <ngx-clib-button
+                        id="enable-button"
                         *ngxAuthAdminRestrict
                         label="menu:pages.list.view.actions.enable"
                         [isResponsive]="true"
@@ -105,6 +108,7 @@ import { I18NextModule } from 'angular-i18next';
             }
             <ngx-clib-button
                 *ngxAuthAdminRestrict
+                id="update-button"
                 label="menu:pages.list.view.actions.update"
                 [isResponsive]="true"
                 theme="primary"
