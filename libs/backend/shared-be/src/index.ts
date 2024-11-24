@@ -11,4 +11,4 @@ export * from './lib/utils/lambda-response.utils';
 export * from './lib/utils/logging.utils';
 
 // MOCKS
-export * from './lib/utils/_mocks/logging.utils.mocks.spec';
+export * from './lib/utils/_mocks/logging.utils.mocks';

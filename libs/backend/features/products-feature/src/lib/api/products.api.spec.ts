@@ -24,7 +24,7 @@ describe('ProductsApi', () => {
     let productsApi: ProductsApi;
 
     beforeEach(() => {
-        mockAppLogger();
+        mockAppLogger(jest);
         productsServiceMock = mock<ProductsService>();
         productsApi = new ProductsApi(productsServiceMock);
     });
