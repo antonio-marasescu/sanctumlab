@@ -4,11 +4,13 @@ export class AuthorizerIamService {
     private async generatePolicyResult(
         principalId: string,
         effect: 'Allow' | 'Deny',
-        resource: string
+        resource: string,
+        additionalContext: Record<string, string | string[]>
     ): Promise<APIGatewayAuthorizerResult> {
         return {
             principalId,
             context: {
+                ...additionalContext,
                 userId: principalId
             },
             policyDocument: {
@@ -26,16 +28,21 @@ export class AuthorizerIamService {
 
     public async generateAllow(
         principalId: string,
-        resource: string
+        resource: string,
+        roles: string[],
+        email: string
     ): Promise<APIGatewayAuthorizerResult> {
-        return this.generatePolicyResult(principalId, 'Allow', resource);
+        return this.generatePolicyResult(principalId, 'Allow', resource, {
+            roles,
+            email
+        });
     }
 
     public async generateDeny(
         principalId: string,
         resource: string
     ): Promise<APIGatewayAuthorizerResult> {
-        return this.generatePolicyResult(principalId, 'Deny', resource);
+        return this.generatePolicyResult(principalId, 'Deny', resource, {});
     }
 }
 
