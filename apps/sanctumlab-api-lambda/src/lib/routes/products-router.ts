@@ -14,7 +14,6 @@ export async function handleProductsRoute(
     const httpMethod = event.httpMethod;
     const id = event.pathParameters?.['id'];
     const body = JSON.parse(event.body ?? '{}');
-    console.log('requestContext', event.requestContext);
 
     switch (httpMethod) {
         case 'GET': {
@@ -31,7 +30,11 @@ export async function handleProductsRoute(
         case 'PUT': {
             console.info('Event Product Update');
             if (id) {
-                const product = await ProductsApiInstance.update(id, body);
+                const product = await ProductsApiInstance.update(
+                    id,
+                    body,
+                    event.requestContext?.authorizer
+                );
                 return buildOkResponse(product);
             }
             break;
@@ -39,14 +42,20 @@ export async function handleProductsRoute(
         case 'DELETE': {
             console.info('Event Product Delete');
             if (id) {
-                const ok = await ProductsApiInstance.removeById(id);
+                const ok = await ProductsApiInstance.removeById(
+                    id,
+                    event.requestContext?.authorizer
+                );
                 return buildOkResponse({ ok });
             }
             break;
         }
         case 'POST': {
             console.info('Event Product Create');
-            const product = await ProductsApiInstance.create(body);
+            const product = await ProductsApiInstance.create(
+                body,
+                event.requestContext?.authorizer
+            );
             return buildOkResponse(product);
         }
     }
