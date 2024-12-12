@@ -4,12 +4,18 @@ import { provideInputValidationConfiguration } from '../src/lib/config/input-val
 import { provideIcons } from '@ng-icons/core';
 import { matLocalGroceryStoreRound } from '@ng-icons/material-icons/round';
 import {
+    matArrowDropUp,
+    matArrowForward,
     matClose,
     matDelete,
     matLocalBar,
+    matLock,
     matMenu,
+    matMouse,
     matPlus,
     matQrCode,
+    matRemove,
+    matWallpaper,
     matWarning
 } from '@ng-icons/material-icons/baseline';
 import { provideQuillConfig } from 'ngx-quill';
@@ -26,7 +32,11 @@ const preview: Preview = {
                     matMenu,
                     matClose,
                     matDelete,
+                    matRemove,
                     matPlus,
+                    matWallpaper,
+                    matLock,
+                    matMouse,
                     matWarning,
                     matQrCode
                 }),
