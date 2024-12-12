@@ -1,4 +1,6 @@
 import { Request } from 'express';
-import { CognitoIdTokenPayload } from 'aws-jwt-verify/jwt-model';
+import { VerifiedTokenContext } from '@sanctumlab/be/auth';
 
-export type AuthenticatedRequest = Request & { user: CognitoIdTokenPayload };
+export type AuthenticatedRequest = Request & {
+    userContext: VerifiedTokenContext;
+};

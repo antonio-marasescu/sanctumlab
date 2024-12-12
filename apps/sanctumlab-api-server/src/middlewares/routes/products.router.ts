@@ -7,7 +7,10 @@ const productsRouter = express.Router();
 
 productsRouter.post('', async (req: AuthenticatedRequest, res) => {
     try {
-        const newProduct = await ProductsApiInstance.create(req.body);
+        const newProduct = await ProductsApiInstance.create(
+            req.body,
+            req.userContext
+        );
         res.status(201).json(newProduct);
     } catch (error) {
         const exception = handleException(error);
@@ -39,7 +42,8 @@ productsRouter.put(`/:id`, async (req: AuthenticatedRequest, res) => {
     try {
         const updatedProduct = await ProductsApiInstance.update(
             req.params.id,
-            req.body
+            req.body,
+            req.userContext
         );
         res.status(200).json(updatedProduct);
     } catch (error) {
@@ -50,7 +54,10 @@ productsRouter.put(`/:id`, async (req: AuthenticatedRequest, res) => {
 
 productsRouter.delete(`/:id`, async (req: AuthenticatedRequest, res) => {
     try {
-        const isRemoved = await ProductsApiInstance.removeById(req.params.id);
+        const isRemoved = await ProductsApiInstance.removeById(
+            req.params.id,
+            req.userContext
+        );
         res.status(200).json({ ok: isRemoved });
     } catch (error) {
         const exception = handleException(error);
