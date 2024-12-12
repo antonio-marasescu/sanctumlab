@@ -14,6 +14,7 @@ export async function handleProductsRoute(
     const httpMethod = event.httpMethod;
     const id = event.pathParameters?.['id'];
     const body = JSON.parse(event.body ?? '{}');
+    console.log('requestContext', event.requestContext);
 
     switch (httpMethod) {
         case 'GET': {
