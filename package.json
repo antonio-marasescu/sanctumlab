@@ -128,6 +128,7 @@
         "i18next-http-backend": "^2.6.2",
         "marked": "^12.0.0",
         "ngx-quill": "^26.0.8",
+        "pixi.js": "^8.6.1",
         "quill": "^2.0.2",
         "rxjs": "~7.8.0",
         "tslib": "^2.3.0",
