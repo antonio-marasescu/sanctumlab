@@ -9,6 +9,7 @@ import {
 import {
     InvalidPayloadException,
     mockAppLogger,
+    NotAuthorizedException,
     NotFoundException
 } from '@sanctumlab/be/shared';
 import { ProductsApi } from './products.api';
@@ -18,6 +19,7 @@ import {
     ProductModel
 } from '@sanctumlab/be/data-access';
 import { ZodError } from 'zod';
+import { createMockVerifiedContext } from '@sanctumlab/be/auth';
 
 describe('ProductsApi', () => {
     let productsServiceMock = mock<ProductsService>();
@@ -88,7 +90,10 @@ describe('ProductsApi', () => {
         it('should remove a product by id', async () => {
             productsServiceMock.removeById.mockResolvedValue(true);
 
-            const result = await productsApi.removeById('1');
+            const result = await productsApi.removeById(
+                '1',
+                createMockVerifiedContext()
+            );
 
             expect(result).toBe(true);
             expect(productsServiceMock.removeById).toHaveBeenCalledWith('1');
@@ -99,9 +104,18 @@ describe('ProductsApi', () => {
                 new InvalidPayloadException()
             );
 
-            await expect(productsApi.removeById('1')).rejects.toThrow(
-                new InvalidPayloadException()
-            );
+            await expect(
+                productsApi.removeById('1', createMockVerifiedContext())
+            ).rejects.toThrow(new InvalidPayloadException());
+        });
+
+        it('should throw NotAuthorized on user context without ADMIN role', async () => {
+            await expect(
+                productsApi.removeById(
+                    '1',
+                    createMockVerifiedContext({ roles: 'user' })
+                )
+            ).rejects.toThrow(new NotAuthorizedException());
         });
     });
 
@@ -139,7 +153,10 @@ describe('ProductsApi', () => {
 
             productsServiceMock.create.mockResolvedValue(mockProductModel);
 
-            const result = await productsApi.create(mockCreateDto);
+            const result = await productsApi.create(
+                mockCreateDto,
+                createMockVerifiedContext()
+            );
 
             expect(result).toEqual(mockExpectedProduct);
             expect(productsServiceMock.create).toHaveBeenCalledWith(
@@ -153,9 +170,9 @@ describe('ProductsApi', () => {
                 description: ''
             });
 
-            await expect(productsApi.create(mockCreateDto)).rejects.toThrow(
-                ZodError
-            );
+            await expect(
+                productsApi.create(mockCreateDto, createMockVerifiedContext())
+            ).rejects.toThrow(ZodError);
         });
 
         it('should throw InvalidPayloadException on create failure', async () => {
@@ -164,9 +181,20 @@ describe('ProductsApi', () => {
                 new InvalidPayloadException()
             );
 
-            await expect(productsApi.create(mockCreateDto)).rejects.toThrow(
-                InvalidPayloadException
-            );
+            await expect(
+                productsApi.create(mockCreateDto, createMockVerifiedContext())
+            ).rejects.toThrow(InvalidPayloadException);
+        });
+
+        it('should throw NotAuthorized on user context without ADMIN role', async () => {
+            const mockCreateDto = createMockCreateProductItemDto();
+
+            await expect(
+                productsApi.create(
+                    mockCreateDto,
+                    createMockVerifiedContext({ roles: 'user' })
+                )
+            ).rejects.toThrow(NotAuthorizedException);
         });
     });
 
@@ -217,7 +245,11 @@ describe('ProductsApi', () => {
             );
             productsServiceMock.update.mockResolvedValue(mockProductModel);
 
-            const result = await productsApi.update('1', mockUpdateDto);
+            const result = await productsApi.update(
+                '1',
+                mockUpdateDto,
+                createMockVerifiedContext()
+            );
 
             expect(result).toEqual(mockExpectedProduct);
             expect(productsServiceMock.update).toHaveBeenCalledWith(
@@ -239,7 +271,11 @@ describe('ProductsApi', () => {
             );
 
             await expect(
-                productsApi.update('1', mockUpdateDto)
+                productsApi.update(
+                    '1',
+                    mockUpdateDto,
+                    createMockVerifiedContext()
+                )
             ).rejects.toThrow(InvalidPayloadException);
         });
 
@@ -250,7 +286,11 @@ describe('ProductsApi', () => {
             );
 
             await expect(
-                productsApi.update('1', mockUpdateDto)
+                productsApi.update(
+                    '1',
+                    mockUpdateDto,
+                    createMockVerifiedContext()
+                )
             ).rejects.toThrow(NotFoundException);
         });
 
@@ -261,8 +301,27 @@ describe('ProductsApi', () => {
             });
 
             await expect(
-                productsApi.update('1', mockUpdateDto)
+                productsApi.update(
+                    '1',
+                    mockUpdateDto,
+                    createMockVerifiedContext()
+                )
             ).rejects.toThrow(ZodError);
+        });
+
+        it('should throw NotAuthorized on user context without ADMIN role', async () => {
+            const mockUpdateDto = createMockUpdateProductItemDto({
+                name: undefined,
+                description: ''
+            });
+
+            await expect(
+                productsApi.update(
+                    '1',
+                    mockUpdateDto,
+                    createMockVerifiedContext({ roles: 'user' })
+                )
+            ).rejects.toThrow(NotAuthorizedException);
         });
     });
 });

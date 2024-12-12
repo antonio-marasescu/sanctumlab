@@ -7,6 +7,10 @@ export type VerifiedTokenContext = {
     email: string;
     tokenType: string;
     sub: string;
-    roles: string;
+    roles: string | undefined;
     name: string;
 };
+
+export enum UserRole {
+    ADMIN = 'admin'
+}

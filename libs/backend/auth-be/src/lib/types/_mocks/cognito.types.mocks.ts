@@ -1,5 +1,5 @@
 import { CognitoIdTokenPayload } from 'aws-jwt-verify/jwt-model';
-import { CognitoConfig } from '../cognito.types';
+import { CognitoConfig, VerifiedTokenContext } from '../cognito.types';
 
 export const createMockCognitoIdToken = (
     overwriteValues: Partial<CognitoIdTokenPayload> = {}
@@ -37,5 +37,16 @@ export const createMockCognitoConfig = (
 ): CognitoConfig => ({
     userPoolId: 'us-east-1_123456789',
     userPoolClientId: 'client_id_123456',
+    ...overwriteValues
+});
+
+export const createMockVerifiedContext = (
+    overwriteValues: Partial<VerifiedTokenContext> = {}
+): VerifiedTokenContext => ({
+    sub: '23fhg8h6-h011-7456-6w1d-dabbrbb51145',
+    roles: 'admin',
+    name: 'Test User',
+    tokenType: 'id',
+    email: 'test-user@sanctum.com',
     ...overwriteValues
 });

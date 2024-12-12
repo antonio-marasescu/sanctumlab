@@ -3,7 +3,8 @@
     "version": "0.0.1",
     "dependencies": {
         "@sanctumlab/shared-be": "^0.0.1",
-        "@sanctumlab/data-access-be": "^0.0.1"
+        "@sanctumlab/data-access-be": "^0.0.1",
+        "@sanctumlab/auth-be": "^0.0.1"
     },
     "main": "./index.js",
     "module": "./index.mjs",

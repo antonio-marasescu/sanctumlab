@@ -15,7 +15,8 @@ import {
     toDto,
     toDtoList
 } from '../mappers/products.mappers';
-import { AppLogger } from '@sanctumlab/be/shared';
+import { AppLogger, hasRoleOrThrow } from '@sanctumlab/be/shared';
+import { UserRole, VerifiedTokenContext } from '@sanctumlab/be/auth';
 
 export class ProductsApi {
     constructor(private readonly productsService: ProductsService) {}
@@ -38,7 +39,11 @@ export class ProductsApi {
         return toDto(response);
     }
 
-    public async create(dto: CreateProductItemDto): Promise<ProductItemDto> {
+    public async create(
+        dto: CreateProductItemDto,
+        ctx: VerifiedTokenContext
+    ): Promise<ProductItemDto> {
+        hasRoleOrThrow(ctx, UserRole.ADMIN);
         AppLogger.info(`[ProductsApi] Create `, { dto });
         const validatedDto = CreateProductItemDtoSchema.parse(dto);
         const response = await this.productsService.create(
@@ -50,8 +55,10 @@ export class ProductsApi {
 
     public async update(
         id: string,
-        dto: UpdateProductItemDto
+        dto: UpdateProductItemDto,
+        ctx: VerifiedTokenContext
     ): Promise<ProductItemDto> {
+        hasRoleOrThrow(ctx, UserRole.ADMIN);
         AppLogger.info(`[ProductsApi] Update `, { id, dto });
         const validatedDto = UpdateProductItemDtoSchema.parse(dto);
         const oldModel = await this.productsService.retrieveById(id);
@@ -64,7 +71,11 @@ export class ProductsApi {
         return toDto(response);
     }
 
-    public async removeById(id: string): Promise<boolean> {
+    public async removeById(
+        id: string,
+        ctx: VerifiedTokenContext
+    ): Promise<boolean> {
+        hasRoleOrThrow(ctx, UserRole.ADMIN);
         AppLogger.info(`[ProductsApi] Remove By Id`, { id });
         const success = await this.productsService.removeById(id);
         AppLogger.info(`[ProductsApi] Remove By Id Success`, { success });

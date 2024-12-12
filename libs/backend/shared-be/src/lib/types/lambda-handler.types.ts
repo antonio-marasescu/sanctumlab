@@ -1,10 +1,10 @@
 import {
-    APIGatewayEventRequestContextJWTAuthorizer,
     APIGatewayProxyResult,
     APIGatewayProxyWithLambdaAuthorizerEvent
 } from 'aws-lambda';
+import { VerifiedTokenContext } from '@sanctumlab/be/auth';
 
-export type AuthorizerContext = APIGatewayEventRequestContextJWTAuthorizer;
+export type AuthorizerContext = VerifiedTokenContext;
 export type LambdaRequestPayload =
     APIGatewayProxyWithLambdaAuthorizerEvent<AuthorizerContext>;
 export type LambdaResponsePayload = APIGatewayProxyResult;

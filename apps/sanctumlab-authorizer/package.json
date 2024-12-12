@@ -3,7 +3,8 @@
     "version": "0.0.1",
     "dependencies": {
         "@sanctumlab/auth-be": "^0.0.1",
-        "@sanctumlab/shared-be": "^0.0.1"
+        "@sanctumlab/shared-be": "^0.0.1",
+        "aws-jwt-verify": "^4.0.1"
     },
     "main": "./index.js",
     "module": "./index.mjs",
