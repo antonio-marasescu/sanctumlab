@@ -39,7 +39,7 @@ export async function main(
                 tokenType: verifiedToken.token_use,
                 sub: verifiedToken.sub,
                 name: (verifiedToken as JsonObject)['name'] as string,
-                roles: verifiedToken['cognito:roles'].toString(),
+                roles: verifiedToken['cognito:groups']?.toString() || '[]',
                 email: (verifiedToken as JsonObject)['email'] as string
             };
             const policy = await AuthorizerIamServiceInstance.generateAllow(
