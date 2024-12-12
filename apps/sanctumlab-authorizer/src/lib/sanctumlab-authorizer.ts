@@ -3,8 +3,12 @@ import {
     APIGatewayTokenAuthorizerEvent
 } from 'aws-lambda';
 import { AuthorizerIamServiceInstance } from './services/authorizer-iam.service';
-import { AuthVerifierApiInstance } from '@sanctumlab/be/auth';
+import {
+    AuthVerifierApiInstance,
+    VerifiedTokenContext
+} from '@sanctumlab/be/auth';
 import { AppLogger } from '@sanctumlab/be/shared';
+import { JsonObject } from 'aws-jwt-verify/safe-json-parse';
 
 const { COGNITO_USER_POOL_ID, COGNITO_CLIENT_ID } = process.env;
 
@@ -31,9 +35,17 @@ export async function main(
 
         AppLogger.debug('Token is valid. Token: ', { verifiedToken });
         if (verifiedToken) {
+            const additionalContext: VerifiedTokenContext = {
+                tokenType: verifiedToken.token_use,
+                sub: verifiedToken.sub,
+                name: (verifiedToken as JsonObject)['name'] as string,
+                roles: verifiedToken['cognito:roles'].toString(),
+                email: (verifiedToken as JsonObject)['email'] as string
+            };
             const policy = await AuthorizerIamServiceInstance.generateAllow(
                 verifiedToken['cognito:username'],
-                event.methodArn
+                event.methodArn,
+                additionalContext
             );
             AppLogger.debug('Access Policy', { policy });
             return policy;

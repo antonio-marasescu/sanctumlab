@@ -1,11 +1,12 @@
 import { APIGatewayAuthorizerResult } from 'aws-lambda/trigger/api-gateway-authorizer';
+import { VerifiedTokenContext } from '@sanctumlab/be/auth';
 
 export class AuthorizerIamService {
     private async generatePolicyResult(
         principalId: string,
         effect: 'Allow' | 'Deny',
         resource: string,
-        additionalContext: Record<string, string | string[]>
+        additionalContext: VerifiedTokenContext | Record<string, string> = {}
     ): Promise<APIGatewayAuthorizerResult> {
         return {
             principalId,
@@ -29,20 +30,21 @@ export class AuthorizerIamService {
     public async generateAllow(
         principalId: string,
         resource: string,
-        roles: string[],
-        email: string
+        additionalContext: VerifiedTokenContext
     ): Promise<APIGatewayAuthorizerResult> {
-        return this.generatePolicyResult(principalId, 'Allow', resource, {
-            roles,
-            email
-        });
+        return this.generatePolicyResult(
+            principalId,
+            'Allow',
+            resource,
+            additionalContext
+        );
     }
 
     public async generateDeny(
         principalId: string,
         resource: string
     ): Promise<APIGatewayAuthorizerResult> {
-        return this.generatePolicyResult(principalId, 'Deny', resource, {});
+        return this.generatePolicyResult(principalId, 'Deny', resource);
     }
 }
 
