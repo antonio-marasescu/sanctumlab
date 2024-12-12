@@ -43,7 +43,9 @@ jobs:
           fi
       - name: Prettier Check
         run: npm run prettier -- --check .
-      - name: Build sources
-        run: npm run build
+      - name: Lint
+        run: npm run lint
       - name: Test
         run: npm run test
+      - name: Build sources
+        run: npm run build
