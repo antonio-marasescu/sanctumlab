@@ -13,17 +13,17 @@
 
 ## Key Features
 
-| **Feature**                | **Description**                                                | **Status**           |
-| -------------------------- | -------------------------------------------------------------- | -------------------- |
-| **Menu**                   | Manage and display bar menu content.                           | ✅ Implemented       |
-| **Recipe Management**      | Managing recipes and ingredients for various foods and drinks. | 🚧 Under Development |
-| **Dashboard**              | Admin statistics and insights.                                 | ❌ Not Implemented   |
-| **Social Login**           | Easy registration via social accounts.                         | ❌ Not Implemented   |
-| **Guest Access**           | Secure features for guest interactions.                        | ✅ Implemented       |
-| **Admin Access**           | Admin login functionality.                                     | ✅ Implemented       |
-| **Internationalization**   | Multi-language content support.                                | ✅ Implemented       |
-| **Modular Design**         | Extendable for future features.                                | ✅ Implemented       |
-| **Infrastructure as Code** | Manage cloud deployment via code.                              | ✅ Implemented       |
+| **Feature**                   | **Description**                                                | **Status**           |
+| ----------------------------- | -------------------------------------------------------------- | -------------------- |
+| **Recipe Management Feature** | Managing recipes and ingredients for various foods and drinks. | 🚧 Under Development |
+| **Dashboard**                 | Admin statistics and insights.                                 | ❌ Not Implemented   |
+| **Admin MFA**                 | Add multi-factor authentication to admin login.                | ❌ Not Implemented   |
+| **Menu Feature**              | Manage and display bar menu content.                           | ✅ Implemented       |
+| **Guest Access**              | Secure features for guest interactions.                        | ✅ Implemented       |
+| **Admin Access**              | Admin login functionality.                                     | ✅ Implemented       |
+| **Internationalization**      | Multi-language content support.                                | ✅ Implemented       |
+| **Modular Design**            | Extendable for future features.                                | ✅ Implemented       |
+| **Infrastructure as Code**    | Manage cloud deployment via code.                              | ✅ Implemented       |
 
 ## Primary Tools Used
 
