@@ -7,7 +7,7 @@ import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 export default defineConfig({
     root: __dirname,
     cacheDir:
-        '../../../../node_modules/.vite/libs/backend/features/recipe-api-feature',
+        '../../../../node_modules/.vite/libs/backend/features/recipes-management-api-feature',
 
     plugins: [
         nxViteTsPaths(),
@@ -25,7 +25,7 @@ export default defineConfig({
     // Configuration for building your library.
     // See: https://vitejs.dev/guide/build.html#library-mode
     build: {
-        outDir: '../../../../dist/libs/backend/features/recipe-api-feature',
+        outDir: '../../../../dist/libs/backend/features/recipes-management-api-feature',
         emptyOutDir: true,
         reportCompressedSize: true,
         commonjsOptions: {
@@ -34,7 +34,7 @@ export default defineConfig({
         lib: {
             // Could also be a dictionary or array of multiple entry points.
             entry: 'src/index.ts',
-            name: 'recipe-api-feature',
+            name: 'recipes-management-api-feature',
             fileName: 'index',
             // Change this to the formats you want to support.
             // Don't forget to update your package.json as well.

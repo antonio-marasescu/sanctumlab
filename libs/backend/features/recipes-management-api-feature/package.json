@@ -1,5 +1,5 @@
 {
-    "name": "@sanctumlab/recipe-api-feature",
+    "name": "@sanctumlab/recipes-management-api-feature",
     "version": "0.0.1",
     "dependencies": {
         "@sanctumlab/shared-be": "^0.0.1",

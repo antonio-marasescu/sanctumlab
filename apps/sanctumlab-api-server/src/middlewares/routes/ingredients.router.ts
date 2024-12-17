@@ -1,7 +1,7 @@
 import express from 'express';
 import { AuthenticatedRequest } from '../../types/request.types';
 import { handleException } from '@sanctumlab/be/shared';
-import { IngredientsApiInstance } from '@sanctumlab/be/recipe-api-feature';
+import { IngredientsApiInstance } from '@sanctumlab/be/recipes-management-api-feature';
 
 const ingredientsRouter = express.Router();
 

@@ -1,7 +1,7 @@
 {
-    "name": "recipe-api-feature",
+    "name": "recipes-management-api-feature",
     "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-    "sourceRoot": "libs/backend/features/recipe-api-feature/src",
+    "sourceRoot": "libs/backend/features/recipes-management-api-feature/src",
     "projectType": "library",
     "tags": ["scope:project-backend", "scope:feature"],
     "targets": {
@@ -9,9 +9,9 @@
             "executor": "@nx/vite:build",
             "outputs": ["{options.outputPath}"],
             "options": {
-                "outputPath": "dist/libs/backend/features/recipe-api-feature",
-                "main": "libs/backend/features/recipe-api-feature/src/index.ts",
-                "tsConfig": "libs/backend/features/recipe-api-feature/tsconfig.lib.json",
+                "outputPath": "dist/libs/backend/features/recipes-management-api-feature",
+                "main": "libs/backend/features/recipes-management-api-feature/src/index.ts",
+                "tsConfig": "libs/backend/features/recipes-management-api-feature/tsconfig.lib.json",
                 "assets": []
             }
         },
@@ -19,7 +19,7 @@
             "executor": "@nx/jest:jest",
             "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
             "options": {
-                "jestConfig": "libs/backend/features/recipe-api-feature/jest.config.ts"
+                "jestConfig": "libs/backend/features/recipes-management-api-feature/jest.config.ts"
             }
         }
     }
