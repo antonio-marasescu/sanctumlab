@@ -2,7 +2,8 @@
     "name": "@sanctumlab/auth-be",
     "version": "0.0.1",
     "dependencies": {
-        "aws-jwt-verify": "^4.0.1"
+        "aws-jwt-verify": "^4.0.1",
+        "zod": "^3.23.8"
     },
     "main": "./index.js",
     "module": "./index.mjs",

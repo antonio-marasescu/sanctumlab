@@ -4,7 +4,7 @@ import {
     LambdaRequestPayload,
     LambdaResponsePayload
 } from '@sanctumlab/be/shared';
-import { ProductsApiInstance } from '@sanctumlab/be/products-feature';
+import { ProductsApiInstance } from '@sanctumlab/be/products-api-feature';
 
 export const ProductsRoute = '/products';
 

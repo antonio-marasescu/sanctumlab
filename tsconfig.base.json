@@ -27,13 +27,16 @@
             "@sanctumlab/be/data-access": [
                 "libs/backend/data-access-be/src/index.ts"
             ],
-            "@sanctumlab/be/products-feature": [
-                "libs/backend/features/products-feature/src/index.ts"
+            "@sanctumlab/be/products-api-feature": [
+                "libs/backend/features/products-api-feature/src/index.ts"
             ],
             "@sanctumlab/be/sanctumlab-authorizer": [
                 "apps/sanctumlab-authorizer/src/index.ts"
             ],
             "@sanctumlab/be/shared": ["libs/backend/shared-be/src/index.ts"],
+            "@sanctumlab/be/recipe-api-feature": [
+                "libs/backend/features/recipe-api-feature/src/index.ts"
+            ],
             "@sanctumlab/fe/auth": ["libs/frontend/auth-fe/src/index.ts"],
             "@sanctumlab/fe/component-library": [
                 "libs/frontend/component-library/src/index.ts"

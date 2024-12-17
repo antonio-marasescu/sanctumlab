@@ -13,7 +13,7 @@ describe('ProductsRepository', () => {
         productsRepository = new ProductsRepository(mockTable);
     });
 
-    it('should retrieve all products', async () => {
+    it('should retrieve all Products', async () => {
         const mockProducts: ProductModel[] = [
             createMockProductModel({ id: '1', name: 'Product A' }),
             createMockProductModel({ id: '2', name: 'Product B' })
@@ -27,7 +27,7 @@ describe('ProductsRepository', () => {
     });
 
     describe('retrieveById', () => {
-        it('should retrieve a product by ID', async () => {
+        it('should retrieve a Product by ID', async () => {
             const mockProduct: ProductModel = createMockProductModel({
                 id: '1',
                 name: 'Product A'
@@ -41,7 +41,7 @@ describe('ProductsRepository', () => {
             expect(mockTable.get).toHaveBeenCalledTimes(1);
         });
 
-        it('should return undefined when product not found', async () => {
+        it('should return undefined when Product not found', async () => {
             mockTable.get.mockResolvedValue(undefined);
 
             const result = await productsRepository.retrieveById('1');
@@ -52,7 +52,7 @@ describe('ProductsRepository', () => {
         });
     });
 
-    it('should create a product', async () => {
+    it('should create a Product', async () => {
         const mockProduct: ProductModel = createMockProductModel({
             id: '1',
             name: 'Product A'
@@ -66,7 +66,7 @@ describe('ProductsRepository', () => {
         expect(mockTable.create).toHaveBeenCalledTimes(1);
     });
 
-    it('should update a product', async () => {
+    it('should update a Product', async () => {
         const id = '1';
         const mockProduct: ProductModel = createMockProductModel({
             id,
@@ -82,7 +82,7 @@ describe('ProductsRepository', () => {
     });
 
     describe('removeById', () => {
-        it('should remove a product by ID', async () => {
+        it('should remove a Product by ID', async () => {
             mockTable.remove.mockResolvedValue(
                 createMockProductModel({
                     id: '1',
@@ -97,7 +97,7 @@ describe('ProductsRepository', () => {
             expect(mockTable.remove).toHaveBeenCalledTimes(1);
         });
 
-        it('should return false when trying to remove a non-existent product', async () => {
+        it('should return false when trying to remove a non-existent Product', async () => {
             mockTable.remove.mockResolvedValue(undefined);
 
             const result =

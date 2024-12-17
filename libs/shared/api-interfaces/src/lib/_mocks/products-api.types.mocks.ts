@@ -3,7 +3,7 @@ import {
     ProductItemCategory,
     ProductItemDto,
     UpdateProductItemDto
-} from '../product-api.types';
+} from '../products-api.types';
 
 export const createMockProductItemDto = (
     overwriteValues: Partial<ProductItemDto> = {}

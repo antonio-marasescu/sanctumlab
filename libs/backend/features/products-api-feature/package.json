@@ -1,5 +1,5 @@
 {
-    "name": "@sanctumlab/products-feature",
+    "name": "@sanctumlab/products-api-feature",
     "version": "0.0.1",
     "dependencies": {
         "@sanctumlab/shared-be": "^0.0.1",

@@ -2,7 +2,8 @@
     "name": "@sanctumlab/sanctumlab-api-lambda",
     "version": "0.0.1",
     "dependencies": {
-        "@sanctumlab/products-feature": "^0.0.1",
+        "@sanctumlab/products-api-feature": "^0.0.1",
+        "@sanctumlab/recipe-api-feature": "^0.0.1",
         "@sanctumlab/shared-be": "^0.0.1"
     },
     "main": "./index.js",

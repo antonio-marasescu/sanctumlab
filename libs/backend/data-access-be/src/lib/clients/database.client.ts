@@ -3,7 +3,13 @@ import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import DatabaseSchema from '../domain/database-schema.domain';
 import { Model, Table } from 'dynamodb-onetable';
 import { ProductsTableName } from '../domain/tables/products-table.domain';
-import { ProductModel } from '../domain/database-types.domain';
+import {
+    IngredientModel,
+    ProductModel,
+    RecipeModel
+} from '../domain/database-types.domain';
+import { RecipesTableName } from '../domain/tables/recipes-table.domain';
+import { IngredientsTableName } from '../domain/tables/ingredients-table.domain';
 
 export class DatabaseClient {
     private readonly client = this.clientFactory();
@@ -35,6 +41,14 @@ export class DatabaseClient {
 
     public get productsTable(): Model<ProductModel> {
         return this.databaseTable.getModel(ProductsTableName);
+    }
+
+    public get ingredientsTable(): Model<IngredientModel> {
+        return this.databaseTable.getModel(IngredientsTableName);
+    }
+
+    public get recipesTable(): Model<RecipeModel> {
+        return this.databaseTable.getModel(RecipesTableName);
     }
 }
 

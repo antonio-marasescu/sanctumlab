@@ -4,6 +4,8 @@ import productsRouter from './middlewares/routes/products.router';
 import { configDotenv } from 'dotenv';
 import cors from 'cors';
 import authGuard from './guards/auth.guard';
+import recipesRouter from './middlewares/routes/recipes.router';
+import ingredientsRouter from './middlewares/routes/ingredients.router';
 
 configDotenv();
 const app = express();
@@ -18,6 +20,8 @@ app.use(
 app.use(express.json());
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 app.use(`${baseRoute}/products`, authGuard, productsRouter);
+app.use(`${baseRoute}/ingredients`, authGuard, ingredientsRouter);
+app.use(`${baseRoute}/recipes`, authGuard, recipesRouter);
 
 const port = process.env.PORT || 3333;
 const server = app.listen(port, () => {

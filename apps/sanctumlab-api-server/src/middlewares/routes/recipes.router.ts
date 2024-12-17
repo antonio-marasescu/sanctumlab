@@ -1,60 +1,63 @@
 import express from 'express';
-import { ProductsApiInstance } from '@sanctumlab/be/products-api-feature';
 import { AuthenticatedRequest } from '../../types/request.types';
 import { handleException } from '@sanctumlab/be/shared';
+import { RecipesApiInstance } from '@sanctumlab/be/recipe-api-feature';
 
-const productsRouter = express.Router();
+const recipesRouter = express.Router();
 
-productsRouter.post('', async (req: AuthenticatedRequest, res) => {
+recipesRouter.post('', async (req: AuthenticatedRequest, res) => {
     try {
-        const newProduct = await ProductsApiInstance.create(
+        const newRecipe = await RecipesApiInstance.create(
             req.body,
             req.userContext
         );
-        res.status(201).json(newProduct);
+        res.status(201).json(newRecipe);
     } catch (error) {
         const exception = handleException(error);
         res.status(exception.statusCode).json(exception);
     }
 });
 
-productsRouter.get('', async (req: AuthenticatedRequest, res) => {
+recipesRouter.get('', async (req: AuthenticatedRequest, res) => {
     try {
-        const products = await ProductsApiInstance.retrieveAll();
-        res.status(200).json(products);
+        const recipes = await RecipesApiInstance.retrieveAll(req.userContext);
+        res.status(200).json(recipes);
     } catch (error) {
         const exception = handleException(error);
         res.status(exception.statusCode).json(exception);
     }
 });
 
-productsRouter.get(`/:id`, async (req: AuthenticatedRequest, res) => {
+recipesRouter.get(`/:id`, async (req: AuthenticatedRequest, res) => {
     try {
-        const product = await ProductsApiInstance.retrieveById(req.params.id);
-        res.status(200).json(product);
+        const recipe = await RecipesApiInstance.retrieveById(
+            req.params.id,
+            req.userContext
+        );
+        res.status(200).json(recipe);
     } catch (error) {
         const exception = handleException(error);
         res.status(exception.statusCode).json(exception);
     }
 });
 
-productsRouter.put(`/:id`, async (req: AuthenticatedRequest, res) => {
+recipesRouter.put(`/:id`, async (req: AuthenticatedRequest, res) => {
     try {
-        const updatedProduct = await ProductsApiInstance.update(
+        const updatedRecipe = await RecipesApiInstance.update(
             req.params.id,
             req.body,
             req.userContext
         );
-        res.status(200).json(updatedProduct);
+        res.status(200).json(updatedRecipe);
     } catch (error) {
         const exception = handleException(error);
         res.status(exception.statusCode).json(exception);
     }
 });
 
-productsRouter.delete(`/:id`, async (req: AuthenticatedRequest, res) => {
+recipesRouter.delete(`/:id`, async (req: AuthenticatedRequest, res) => {
     try {
-        const isRemoved = await ProductsApiInstance.removeById(
+        const isRemoved = await RecipesApiInstance.removeById(
             req.params.id,
             req.userContext
         );
@@ -65,4 +68,4 @@ productsRouter.delete(`/:id`, async (req: AuthenticatedRequest, res) => {
     }
 });
 
-export default productsRouter;
+export default recipesRouter;

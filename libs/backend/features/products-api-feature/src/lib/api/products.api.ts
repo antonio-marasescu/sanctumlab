@@ -15,7 +15,7 @@ import {
     toDto,
     toDtoList
 } from '../mappers/products.mappers';
-import { AppLogger, hasRoleOrThrow } from '@sanctumlab/be/shared';
+import { AppLogger, RequiresRole } from '@sanctumlab/be/shared';
 import { UserRole, VerifiedTokenContext } from '@sanctumlab/be/auth';
 
 export class ProductsApi {
@@ -39,27 +39,30 @@ export class ProductsApi {
         return toDto(response);
     }
 
+    @RequiresRole(UserRole.ADMIN)
     public async create(
         dto: CreateProductItemDto,
         ctx: VerifiedTokenContext
     ): Promise<ProductItemDto> {
-        hasRoleOrThrow(ctx, UserRole.ADMIN);
-        AppLogger.info(`[ProductsApi] Create `, { dto });
+        AppLogger.info(`[ProductsApi] Create `, { dto, user: ctx.sub });
         const validatedDto = CreateProductItemDtoSchema.parse(dto);
         const response = await this.productsService.create(
             toDomainCreate(validatedDto)
         );
-        AppLogger.info(`[ProductsApi] Create Success`, { response });
+        AppLogger.info(`[ProductsApi] Create Success`, {
+            response,
+            user: ctx.sub
+        });
         return toDto(response);
     }
 
+    @RequiresRole(UserRole.ADMIN)
     public async update(
         id: string,
         dto: UpdateProductItemDto,
         ctx: VerifiedTokenContext
     ): Promise<ProductItemDto> {
-        hasRoleOrThrow(ctx, UserRole.ADMIN);
-        AppLogger.info(`[ProductsApi] Update `, { id, dto });
+        AppLogger.info(`[ProductsApi] Update `, { id, dto, user: ctx.sub });
         const validatedDto = UpdateProductItemDtoSchema.parse(dto);
         const oldModel = await this.productsService.retrieveById(id);
 
@@ -67,18 +70,24 @@ export class ProductsApi {
             id,
             toDomainUpdate(oldModel, validatedDto)
         );
-        AppLogger.info(`[ProductsApi] Update Success`, { response });
+        AppLogger.info(`[ProductsApi] Update Success`, {
+            response,
+            user: ctx.sub
+        });
         return toDto(response);
     }
 
+    @RequiresRole(UserRole.ADMIN)
     public async removeById(
         id: string,
         ctx: VerifiedTokenContext
     ): Promise<boolean> {
-        hasRoleOrThrow(ctx, UserRole.ADMIN);
-        AppLogger.info(`[ProductsApi] Remove By Id`, { id });
+        AppLogger.info(`[ProductsApi] Remove By Id`, { id, user: ctx.sub });
         const success = await this.productsService.removeById(id);
-        AppLogger.info(`[ProductsApi] Remove By Id Success`, { success });
+        AppLogger.info(`[ProductsApi] Remove By Id Success`, {
+            success,
+            user: ctx.sub
+        });
         return success;
     }
 }

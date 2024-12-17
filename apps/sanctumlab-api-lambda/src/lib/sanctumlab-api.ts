@@ -5,6 +5,11 @@ import {
     LambdaRequestPayload
 } from '@sanctumlab/be/shared';
 import { handleProductsRoute, ProductsRoute } from './routes/products-router';
+import { handleRecipesRoute, RecipesRoute } from './routes/recipes-router';
+import {
+    handleIngredientsRoute,
+    IngredientsRoute
+} from './routes/ingredients-router';
 
 export const main = async (mainEvent: LambdaRequestPayload) =>
     baseLambdaHandler(mainEvent, async event => {
@@ -18,6 +23,14 @@ export const main = async (mainEvent: LambdaRequestPayload) =>
         if (event.resource.includes(ProductsRoute)) {
             AppLogger.info('[Handler] Products Routing');
             return handleProductsRoute(event);
+        }
+        if (event.resource.includes(RecipesRoute)) {
+            AppLogger.info('[Handler] Recipes Routing');
+            return handleRecipesRoute(event);
+        }
+        if (event.resource.includes(IngredientsRoute)) {
+            AppLogger.info('[Handler] Ingredients Routing');
+            return handleIngredientsRoute(event);
         }
 
         return buildPathNotFoundResponse();

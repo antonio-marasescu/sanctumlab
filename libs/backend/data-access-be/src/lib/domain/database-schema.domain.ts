@@ -1,4 +1,6 @@
 import { ProductsTableSchema } from './tables/products-table.domain';
+import { IngredientsTableSchema } from './tables/ingredients-table.domain';
+import { RecipesTableSchema } from './tables/recipes-table.domain';
 
 export const GSI1 = 'gsi1';
 
@@ -10,9 +12,9 @@ const DatabaseSchema = {
         gsi1: { hash: `${GSI1}pk`, sort: `${GSI1}sk`, follow: true }
     },
     models: {
-        Products: {
-            ...ProductsTableSchema
-        }
+        Products: { ...ProductsTableSchema },
+        Ingredients: { ...IngredientsTableSchema },
+        Recipes: { ...RecipesTableSchema }
     },
     params: {
         isoDates: true,

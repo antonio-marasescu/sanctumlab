@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-    displayName: 'products-feature',
+    displayName: 'recipe-api-feature',
     preset: '../../../../jest.preset.js',
     testEnvironment: 'node',
     transform: {
@@ -11,5 +11,5 @@ export default {
     },
     moduleFileExtensions: ['ts', 'js', 'html'],
     coverageDirectory:
-        '../../../../coverage/libs/backend/features/products-feature'
+        '../../../../coverage/libs/backend/features/recipe-api-feature'
 };

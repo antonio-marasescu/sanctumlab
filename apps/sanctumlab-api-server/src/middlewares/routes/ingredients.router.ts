@@ -1,60 +1,65 @@
 import express from 'express';
-import { ProductsApiInstance } from '@sanctumlab/be/products-api-feature';
 import { AuthenticatedRequest } from '../../types/request.types';
 import { handleException } from '@sanctumlab/be/shared';
+import { IngredientsApiInstance } from '@sanctumlab/be/recipe-api-feature';
 
-const productsRouter = express.Router();
+const ingredientsRouter = express.Router();
 
-productsRouter.post('', async (req: AuthenticatedRequest, res) => {
+ingredientsRouter.post('', async (req: AuthenticatedRequest, res) => {
     try {
-        const newProduct = await ProductsApiInstance.create(
+        const newIngredient = await IngredientsApiInstance.create(
             req.body,
             req.userContext
         );
-        res.status(201).json(newProduct);
+        res.status(201).json(newIngredient);
     } catch (error) {
         const exception = handleException(error);
         res.status(exception.statusCode).json(exception);
     }
 });
 
-productsRouter.get('', async (req: AuthenticatedRequest, res) => {
+ingredientsRouter.get('', async (req: AuthenticatedRequest, res) => {
     try {
-        const products = await ProductsApiInstance.retrieveAll();
-        res.status(200).json(products);
+        const ingredients = await IngredientsApiInstance.retrieveAll(
+            req.userContext
+        );
+        res.status(200).json(ingredients);
     } catch (error) {
         const exception = handleException(error);
         res.status(exception.statusCode).json(exception);
     }
 });
 
-productsRouter.get(`/:id`, async (req: AuthenticatedRequest, res) => {
+ingredientsRouter.get(`/:id`, async (req: AuthenticatedRequest, res) => {
     try {
-        const product = await ProductsApiInstance.retrieveById(req.params.id);
-        res.status(200).json(product);
+        const ingredient = await IngredientsApiInstance.retrieveById(
+            req.params.id,
+            req.userContext
+        );
+        res.status(200).json(ingredient);
     } catch (error) {
         const exception = handleException(error);
         res.status(exception.statusCode).json(exception);
     }
 });
 
-productsRouter.put(`/:id`, async (req: AuthenticatedRequest, res) => {
+ingredientsRouter.put(`/:id`, async (req: AuthenticatedRequest, res) => {
     try {
-        const updatedProduct = await ProductsApiInstance.update(
+        const updatedIngredient = await IngredientsApiInstance.update(
             req.params.id,
             req.body,
             req.userContext
         );
-        res.status(200).json(updatedProduct);
+        res.status(200).json(updatedIngredient);
     } catch (error) {
         const exception = handleException(error);
         res.status(exception.statusCode).json(exception);
     }
 });
 
-productsRouter.delete(`/:id`, async (req: AuthenticatedRequest, res) => {
+ingredientsRouter.delete(`/:id`, async (req: AuthenticatedRequest, res) => {
     try {
-        const isRemoved = await ProductsApiInstance.removeById(
+        const isRemoved = await IngredientsApiInstance.removeById(
             req.params.id,
             req.userContext
         );
@@ -65,4 +70,4 @@ productsRouter.delete(`/:id`, async (req: AuthenticatedRequest, res) => {
     }
 });
 
-export default productsRouter;
+export default ingredientsRouter;

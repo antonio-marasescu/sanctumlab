@@ -8,6 +8,9 @@ import {
     createLambdaIntegration
 } from '../../shared/utils/lambda.utils';
 import { AppLambdas } from './config/api-lambda.config';
+import { ApiRestResourceConfig } from './types/api-modules.types';
+import * as lambda from 'aws-cdk-lib/aws-lambda';
+import { API_REST_CONFIG } from './config/api-modules.config';
 
 export function createApiModule(
     stack: cdk.Stack,
@@ -20,45 +23,50 @@ export function createApiModule(
     },
     enableAuth: boolean
 ): void {
-    const authorizationOptions = enableAuth
+    const authorizationOptions: apigw.MethodOptions | undefined = enableAuth
         ? {
               authorizationType: apigw.AuthorizationType.CUSTOM,
               authorizer: deps.authorizer
           }
         : undefined;
 
-    const lambda = createLambda(AppLambdas.API, stack, props, {
+    const apiLambda = createLambda(AppLambdas.API, stack, props, {
         DYNAMODB_TABLE_ID: deps.database.tableName,
         DYNAMODB_CLIENT_REGION: stack.region
     });
-    deps.database.grantReadWriteData(lambda);
+    deps.database.grantReadWriteData(apiLambda);
+    addApiResources(
+        deps.api.root,
+        API_REST_CONFIG,
+        authorizationOptions,
+        apiLambda
+    );
+}
 
-    const productsResource = deps.api.root.addResource('products');
-    productsResource.addMethod(
-        'POST',
-        createLambdaIntegration(lambda),
-        authorizationOptions
-    );
-    productsResource.addMethod(
-        'GET',
-        createLambdaIntegration(lambda),
-        authorizationOptions
-    );
+function addApiResources(
+    parentResource: apigw.IResource,
+    config: ApiRestResourceConfig,
+    authorizationOptions: apigw.MethodOptions | undefined,
+    mainLambda: lambda.Function
+): void {
+    Object.entries(config).forEach(([resourcePath, resourceConfig]) => {
+        const resource = parentResource.addResource(resourcePath);
 
-    const productsByIdResource = productsResource.addResource('{id}');
-    productsByIdResource.addMethod(
-        'PUT',
-        createLambdaIntegration(lambda),
-        authorizationOptions
-    );
-    productsByIdResource.addMethod(
-        'DELETE',
-        createLambdaIntegration(lambda),
-        authorizationOptions
-    );
-    productsByIdResource.addMethod(
-        'GET',
-        createLambdaIntegration(lambda),
-        authorizationOptions
-    );
+        resourceConfig.methods.forEach(method => {
+            resource.addMethod(
+                method,
+                createLambdaIntegration(mainLambda),
+                authorizationOptions
+            );
+        });
+
+        if (resourceConfig.subResources) {
+            addApiResources(
+                resource,
+                resourceConfig.subResources,
+                authorizationOptions,
+                mainLambda
+            );
+        }
+    });
 }
