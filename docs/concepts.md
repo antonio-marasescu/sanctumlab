@@ -12,23 +12,23 @@ While this approach isn't a perfect solution for all scenarios, it effectively a
 
 We utilize Nx libraries to organize and separate concerns within our application. The primary directories include:
 
--   [Backend Folder](../libs/backend): Contains backend logic, including data access, authentication, and feature libraries.
--   [Frontend Folder](../libs/frontend): Contains UI logic, such as the component library, data access, and feature libraries.
--   [Shared Folder](../libs/shared): Houses shared API interfaces used by both the frontend and backend.
+- [Backend Folder](../libs/backend): Contains backend logic, including data access, authentication, and feature libraries.
+- [Frontend Folder](../libs/frontend): Contains UI logic, such as the component library, data access, and feature libraries.
+- [Shared Folder](../libs/shared): Houses shared API interfaces used by both the frontend and backend.
 
 Most libraries are tagged with `scope` tags to enforce separation rules, which are managed through `eslint`.
 
 Types of libraries:
 
--   [Angular Library](https://nx.dev/nx-api/angular/generators/library).
--   [JS/TS Library](https://nx.dev/nx-api/js/generators/library) which use [Vite](https://vite.dev/) as bundler.
+- [Angular Library](https://nx.dev/nx-api/angular/generators/library).
+- [JS/TS Library](https://nx.dev/nx-api/js/generators/library) which use [Vite](https://vite.dev/) as bundler.
 
 The project adheres to the **Nx** recommended approach for dependency separation, as outlined [here](https://nx.dev/concepts/decisions/project-dependency-rules). Libraries are organized into:
 
--   **Feature Libraries**
--   **UI Libraries** (Component Library)
--   **Data-Access Libraries**
--   **Utility Libraries** (Shared)
+- **Feature Libraries**
+- **UI Libraries** (Component Library)
+- **Data-Access Libraries**
+- **Utility Libraries** (Shared)
 
 ## Internationalization
 

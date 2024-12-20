@@ -39,40 +39,40 @@
 
 1. **Install Prerequisites**:
 
--   Ensure **Node.js v20+** is installed.
--   Install **Nx** globally: `npm add --global nx@latest`
--   Install **Docker**: [Windows](https://docs.docker.com/desktop/setup/install/windows-install/) | [Linux](https://docs.docker.com/desktop/setup/install/linux/)
--   Install **AWS CDK** globally: `npm install -g aws-cdk`
--   Install **AWS CLI**: [Installation Guide](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+- Ensure **Node.js v20+** is installed.
+- Install **Nx** globally: `npm add --global nx@latest`
+- Install **Docker**: [Windows](https://docs.docker.com/desktop/setup/install/windows-install/) | [Linux](https://docs.docker.com/desktop/setup/install/linux/)
+- Install **AWS CDK** globally: `npm install -g aws-cdk`
+- Install **AWS CLI**: [Installation Guide](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 
 2. **Set Up the Project**:
 
--   Clone the repository: `git clone <repo-url>`
--   Navigate to the root folder and run: `npm install`
+- Clone the repository: `git clone <repo-url>`
+- Navigate to the root folder and run: `npm install`
 
 3. **Run Local DynamoDB**:
 
--   Navigate to the `docker` folder: `cd docker`
--   Start the container: `docker-compose up -d`
+- Navigate to the `docker` folder: `cd docker`
+- Start the container: `docker-compose up -d`
 
 4. **Deploy Infrastructure**:
 
--   Navigate to the `infrastructure` folder: `cd infrastructure`
--   Run: `npm install`
--   Configure AWS CLI: `aws configure`
--   Deploy to AWS: `cdk deploy -c appName=<your_app_name> -c tenantEnv=dev -c production=false`
+- Navigate to the `infrastructure` folder: `cd infrastructure`
+- Run: `npm install`
+- Configure AWS CLI: `aws configure`
+- Deploy to AWS: `cdk deploy -c appName=<your_app_name> -c tenantEnv=dev -c production=false`
 
 5. **Set Up Cognito Users**:
 
--   Create guest and admin users in the AWS dashboard.
--   Set passwords:
+- Create guest and admin users in the AWS dashboard.
+- Set passwords:
     ```sh
     aws cognito-idp admin-set-user-password --user-pool-id <user_pool_id> --username <your_user> --password <new_password> --permanent
     ```
 
 6. **Configure Environment Variables**:
 
--   Create a `.env` file in the root directory with:
+- Create a `.env` file in the root directory with:
     ```dotenv
     DYNAMODB_TABLE_ID=<any_table_id_for_local_development>
     DYNAMODB_CLIENT_ENDPOINT=http://localhost:8000
@@ -82,22 +82,22 @@
     COGNITO_CLIENT_ID=<your_created_cognito_user_pool_client_id>
     COGNITO_GUEST_USERNAME=<your_created_cognito_user_pool_guest_username>
     ```
--   In `apps/sanctumlab-ui/src/environments`, create `environment.development.ts` and configure similar to `environment.ts`.
+- In `apps/sanctumlab-ui/src/environments`, create `environment.development.ts` and configure similar to `environment.ts`.
 
 7. **Run Scripts and Services**:
 
--   Setup local DynamoDB: `npm run scripts:db-setup`
--   Generate guest access code: `npm run scripts:access-code`
--   Open Storybook: `npm run storybook:clib`
--   Start local API server: `npm run serve:api-dev`
--   Start UI server: `npm run serve:ui`
--   Build all applications: `npm run build`
+- Setup local DynamoDB: `npm run scripts:db-setup`
+- Generate guest access code: `npm run scripts:access-code`
+- Open Storybook: `npm run storybook:clib`
+- Start local API server: `npm run serve:api-dev`
+- Start UI server: `npm run serve:ui`
+- Build all applications: `npm run build`
 
 ## Documentation
 
--   [Architecture Overview](docs/architecture.md)
--   [Pipelines](docs/pipelines.md)
--   [Project Concepts](docs/concepts.md)
+- [Architecture Overview](docs/architecture.md)
+- [Pipelines](docs/pipelines.md)
+- [Project Concepts](docs/concepts.md)
 
 ## License
 
