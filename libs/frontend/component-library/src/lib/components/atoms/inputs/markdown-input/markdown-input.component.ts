@@ -11,22 +11,21 @@ import {
     InputStateType
 } from '../../../../types/internal/input-internal.types';
 import { NgClass } from '@angular/common';
-import { I18NextModule } from 'angular-i18next';
 import { InputValidationComponent } from '../../../internal/input-validation.component';
+import { I18nPipe } from '../../../../pipes/i18n.pipe';
 
 @Component({
     selector: 'ngx-clib-markdown-input',
-    standalone: true,
     imports: [
         QuillEditorComponent,
         ReactiveFormsModule,
         NgClass,
-        I18NextModule,
-        InputValidationComponent
+        InputValidationComponent,
+        I18nPipe
     ],
     template: `<div class="form-control w-full" [id]="id">
         <div class="label">
-            <span class="label-text">{{ label | i18nextEager }}</span>
+            <span class="label-text">{{ label | i18nTranslate }}</span>
         </div>
         <quill-editor
             tabindex="0"
@@ -36,7 +35,7 @@ import { InputValidationComponent } from '../../../internal/input-validation.com
                 'border-error': this.controlState === InputState.Invalid
             }"
             [formControl]="control"
-            [placeholder]="placeholder | i18nextEager"
+            [placeholder]="placeholder | i18nTranslate"
         ></quill-editor>
 
         <ngx-clib-input-validation

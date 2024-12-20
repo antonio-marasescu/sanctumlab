@@ -6,7 +6,6 @@ import { ProductItemCategory } from '@sanctumlab/api-interfaces';
 
 @Component({
     selector: 'ngx-menu-item-create-page',
-    standalone: true,
     imports: [MenuItemFormContainerComponent],
     template: `<ngx-menu-item-form-container
         [item]="null"

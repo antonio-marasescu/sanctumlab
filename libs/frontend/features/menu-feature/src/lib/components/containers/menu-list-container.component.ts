@@ -14,10 +14,7 @@ import {
     ProductItemCategory,
     ProductItemDto
 } from '@sanctumlab/api-interfaces';
-import {
-    LoadingIndicatorComponent,
-    ModalComponent
-} from '@sanctumlab/fe/component-library';
+import { LoadingIndicatorComponent } from '@sanctumlab/fe/component-library';
 import { AppNavigationService } from '@sanctumlab/fe/shared';
 import { FormGroup } from '@angular/forms';
 import { ProductFilterForm } from '../../types/product-filter-form.types';
@@ -34,13 +31,7 @@ import { ActivatedRoute } from '@angular/router';
 @UntilDestroy()
 @Component({
     selector: 'ngx-menu-list-container',
-    standalone: true,
-    imports: [
-        MenuListViewComponent,
-        AsyncPipe,
-        ModalComponent,
-        LoadingIndicatorComponent
-    ],
+    imports: [MenuListViewComponent, AsyncPipe, LoadingIndicatorComponent],
     template: ` @if (isLoading$ | async) {
             <ngx-clib-loading-indicator [isOverlay]="true" />
         }

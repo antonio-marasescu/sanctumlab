@@ -3,7 +3,6 @@ import { NgClass } from '@angular/common';
 
 @Component({
     selector: 'ngx-clib-loading-indicator',
-    standalone: true,
     imports: [NgClass],
     template: `
         @if (isOverlay) {

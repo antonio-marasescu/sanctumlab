@@ -18,7 +18,6 @@ import { MenuListFilterViewComponent } from './menu-list-filter-view.component';
 
 @Component({
     selector: 'ngx-menu-list-view',
-    standalone: true,
     imports: [
         ItemCardComponent,
         ButtonComponent,

@@ -10,7 +10,6 @@ import { ProductApiService } from '@sanctumlab/fe/data-access';
 @UntilDestroy()
 @Component({
     selector: `ngx-menu-item-container`,
-    standalone: true,
     imports: [MenuItemViewComponent, AsyncPipe],
     template: `
         @if (item$) {

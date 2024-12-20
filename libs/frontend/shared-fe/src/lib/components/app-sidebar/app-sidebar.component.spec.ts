@@ -5,8 +5,6 @@ import {
     tick,
     waitForAsync
 } from '@angular/core/testing';
-import { importProvidersFrom } from '@angular/core';
-import { I18NextModule } from 'angular-i18next';
 import { provideMockInputValidationConfiguration } from '@sanctumlab/fe/component-library';
 import { AppSidebarComponent } from './app-sidebar.component';
 import { AppNavigationService } from '../../services/app-navigation.service';
@@ -49,7 +47,6 @@ describe('AppSidebarComponent', () => {
             declarations: [],
             imports: [AppSidebarComponent],
             providers: [
-                importProvidersFrom(I18NextModule.forRoot()),
                 provideMockInputValidationConfiguration(),
                 provideMockStore({
                     initialState: {

@@ -1,6 +1,4 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { importProvidersFrom } from '@angular/core';
-import { I18NextModule } from 'angular-i18next';
 import { provideMockInputValidationConfiguration } from '@sanctumlab/fe/component-library';
 import { AppQrCodeComponent } from './app-qr-code.component';
 
@@ -11,10 +9,7 @@ describe('AppQrCodeComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [AppQrCodeComponent],
-            providers: [
-                importProvidersFrom(I18NextModule.forRoot()),
-                provideMockInputValidationConfiguration()
-            ]
+            providers: [provideMockInputValidationConfiguration()]
         }).compileComponents();
     }));
 

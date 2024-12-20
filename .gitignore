@@ -47,3 +47,5 @@ Thumbs.db
 storybook-static
 .env
 !/docker/.env
+
+vite.config.*.timestamp*

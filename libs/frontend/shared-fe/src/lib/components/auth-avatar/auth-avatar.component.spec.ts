@@ -1,6 +1,4 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { importProvidersFrom } from '@angular/core';
-import { I18NextModule } from 'angular-i18next';
 import { provideMockInputValidationConfiguration } from '@sanctumlab/fe/component-library';
 import { provideMockStore } from '@ngrx/store/testing';
 import { createMockDataAccessInitialState } from '@sanctumlab/fe/data-access';
@@ -29,7 +27,6 @@ describe('AuthAvatarComponent', () => {
             declarations: [],
             imports: [AuthAvatarComponent],
             providers: [
-                importProvidersFrom(I18NextModule.forRoot()),
                 provideMockInputValidationConfiguration(),
                 provideMockStore({
                     initialState: {

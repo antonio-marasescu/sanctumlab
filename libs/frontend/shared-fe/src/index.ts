@@ -8,6 +8,7 @@ export * from './lib/config/validation.config';
 // SERVICES
 export * from './lib/services/app-navigation.service';
 export * from './lib/services/theming.service';
+export * from './lib/services/i18n-translate.service';
 
 // TYPES
 export * from './lib/types/app-routes.types';

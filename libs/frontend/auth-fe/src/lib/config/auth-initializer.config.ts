@@ -1,8 +1,9 @@
 import { AuthenticationService } from '../services/authentication.service';
 import {
-    APP_INITIALIZER,
     EnvironmentProviders,
-    makeEnvironmentProviders
+    makeEnvironmentProviders,
+    inject,
+    provideAppInitializer
 } from '@angular/core';
 
 export function authInitializerFactory(
@@ -13,11 +14,11 @@ export function authInitializerFactory(
 
 export function provideAuthentication(): EnvironmentProviders {
     return makeEnvironmentProviders([
-        {
-            provide: APP_INITIALIZER,
-            useFactory: authInitializerFactory,
-            deps: [AuthenticationService],
-            multi: true
-        }
+        provideAppInitializer(() => {
+            const initializerFn = authInitializerFactory(
+                inject(AuthenticationService)
+            );
+            return initializerFn();
+        })
     ]);
 }

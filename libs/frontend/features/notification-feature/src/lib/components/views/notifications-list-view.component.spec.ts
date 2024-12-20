@@ -1,6 +1,4 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { importProvidersFrom } from '@angular/core';
-import { I18NextModule } from 'angular-i18next';
 import { provideMockInputValidationConfiguration } from '@sanctumlab/fe/component-library';
 import { NotificationsListViewComponent } from './notifications-list-view.component';
 import { By } from '@angular/platform-browser';
@@ -15,7 +13,6 @@ describe('NotificationsListViewComponent', () => {
         TestBed.configureTestingModule({
             imports: [NotificationsListViewComponent],
             providers: [
-                importProvidersFrom(I18NextModule.forRoot()),
                 provideMockInputValidationConfiguration(),
                 provideIcons({
                     matWarning

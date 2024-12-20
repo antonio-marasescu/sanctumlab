@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { Component, importProvidersFrom, Input } from '@angular/core';
-import { I18NextModule } from 'angular-i18next';
+import { Component, Input } from '@angular/core';
 import { provideMockInputValidationConfiguration } from '@sanctumlab/fe/component-library';
 import { provideMockStore } from '@ngrx/store/testing';
 import {
@@ -53,7 +52,6 @@ describe('MenuItemContainerComponent', () => {
         TestBed.configureTestingModule({
             imports: [MenuItemContainerComponent],
             providers: [
-                importProvidersFrom(I18NextModule.forRoot()),
                 provideMockInputValidationConfiguration(),
                 provideMockStore({
                     initialState: {

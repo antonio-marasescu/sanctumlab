@@ -1,18 +1,17 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import {
+    I18nPipe,
     SelectInputComponent,
     SelectOption
 } from '@sanctumlab/fe/component-library';
-import { I18NextModule } from 'angular-i18next';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ProfileSettingsForm } from '../../types/profile-settings-form.types';
 
 @Component({
     selector: 'ngx-profile-settings-view',
-    standalone: true,
-    imports: [SelectInputComponent, I18NextModule, ReactiveFormsModule],
+    imports: [SelectInputComponent, ReactiveFormsModule, I18nPipe],
     template: `<div class="m-12">
-        <h2 class="text-xl">{{ 'profile:title' | i18nextEager }}</h2>
+        <h2 class="text-xl">{{ 'profile:title' | i18nTranslate }}</h2>
         <form
             [formGroup]="form"
             novalidate

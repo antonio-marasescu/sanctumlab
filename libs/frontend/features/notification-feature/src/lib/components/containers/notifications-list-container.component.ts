@@ -9,7 +9,6 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'ngx-notifications-list-container',
-    standalone: true,
     imports: [NotificationsListViewComponent, AsyncPipe],
     template: `<ngx-notifications-list-view
         [notifications]="notifications$ | async"

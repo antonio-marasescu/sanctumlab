@@ -1,11 +1,9 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { QRCodeModule } from 'angularx-qrcode';
-import { AsyncPipe } from '@angular/common';
+import { QRCodeComponent } from 'angularx-qrcode';
 
 @Component({
     selector: 'ngx-clib-qr-display',
-    standalone: true,
-    imports: [QRCodeModule, AsyncPipe],
+    imports: [QRCodeComponent],
     template: `
         <div class="flex flex-col gap-1 items-center align-middle">
             @if (!isResponsive) {

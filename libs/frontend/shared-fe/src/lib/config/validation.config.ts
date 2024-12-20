@@ -1,6 +1,5 @@
 import { InputValidationConfiguration } from '@sanctumlab/fe/component-library';
-import { inject } from '@angular/core';
-import { I18NextPipe } from 'angular-i18next';
+import i18next from 'i18next';
 
 export const standardValidations: Record<string, string> = {
     required: 'shared:validations.required',
@@ -15,7 +14,6 @@ export const validationConfigFactory = (
         key: string,
         args: Record<string, string>
     ): string | undefined => {
-        const i18NextPipe = inject(I18NextPipe);
-        return i18NextPipe.transform(validations[key], { ...args });
+        return i18next.t(validations[key], { ...args });
     }
 });

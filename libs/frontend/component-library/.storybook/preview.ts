@@ -14,7 +14,7 @@ import {
 } from '@ng-icons/material-icons/baseline';
 import { provideQuillConfig } from 'ngx-quill';
 import { validationConfigFactory } from './custom-validation';
-import { provideInternationalization } from './custom-internationalization';
+import { provideInternationalizationStorybook } from './custom-internationalization';
 
 const preview: Preview = {
     decorators: [
@@ -31,7 +31,7 @@ const preview: Preview = {
                     matQrCode
                 }),
                 provideInputValidationConfiguration(validationConfigFactory()),
-                provideInternationalization(),
+                provideInternationalizationStorybook(),
                 provideQuillConfig({
                     theme: 'snow',
                     modules: {

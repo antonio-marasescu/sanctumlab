@@ -1,12 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { TextInputComponent } from '@sanctumlab/fe/component-library';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication.service';
 import { GuestLoginFormViewComponent } from '../views/guest-login-form-view/guest-login-form-view.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthFeatureName, AuthRoutes } from '../../types/auth-navigation.types';
 import { GuestForm } from '../../types/auth-form.types';
-import { AdminLoginFormViewComponent } from '../views/admin-login-form-view/admin-login-form-view.component';
 import { from, Observable, of } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -14,13 +12,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 @UntilDestroy()
 @Component({
     selector: 'ngx-auth-guest-login-page',
-    standalone: true,
-    imports: [
-        TextInputComponent,
-        GuestLoginFormViewComponent,
-        AdminLoginFormViewComponent,
-        AsyncPipe
-    ],
+    imports: [GuestLoginFormViewComponent, AsyncPipe],
     template: `<ngx-auth-guest-login-form-view
         [form]="guestForm"
         [validLogin]="validLogin$ | async"

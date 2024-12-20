@@ -1,6 +1,4 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { importProvidersFrom } from '@angular/core';
-import { I18NextModule } from 'angular-i18next';
 import { provideMockInputValidationConfiguration } from '@sanctumlab/fe/component-library';
 import { provideIcons } from '@ng-icons/core';
 import { matWarning } from '@ng-icons/material-icons/baseline';
@@ -25,7 +23,6 @@ describe('NotificationsListContainerComponent', () => {
         TestBed.configureTestingModule({
             imports: [NotificationsListContainerComponent],
             providers: [
-                importProvidersFrom(I18NextModule.forRoot()),
                 provideMockInputValidationConfiguration(),
                 provideIcons({
                     matWarning

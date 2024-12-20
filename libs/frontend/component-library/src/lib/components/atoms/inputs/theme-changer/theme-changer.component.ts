@@ -3,7 +3,6 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
     selector: 'ngx-clib-theme-changer',
-    standalone: true,
     imports: [ReactiveFormsModule],
     template: `<div class="btn btn-circle btn-sm btn-ghost">
         <label class="swap swap-rotate">

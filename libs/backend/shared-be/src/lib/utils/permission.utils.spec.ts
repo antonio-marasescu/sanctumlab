@@ -8,6 +8,7 @@ describe('permissionUtils', () => {
 
         class TestClass {
             @RequiresRole(UserRole.ADMIN)
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             testMethod(ctx: VerifiedTokenContext): string {
                 mockMethod();
                 return 'Success';

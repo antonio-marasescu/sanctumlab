@@ -1,8 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import {
     IconButtonComponent,
-    ModalComponent,
-    QRDisplayComponent,
     SidebarCategoryItem,
     SidebarComponent,
     ThemeChangerComponent
@@ -17,14 +15,11 @@ import { AppQrCodeComponent } from '../app-qr-code/app-qr-code.component';
 @UntilDestroy()
 @Component({
     selector: 'ngx-shared-app-sidebar',
-    standalone: true,
     imports: [
         SidebarComponent,
         AuthAvatarComponent,
         ThemeChangerComponent,
         IconButtonComponent,
-        ModalComponent,
-        QRDisplayComponent,
         AppQrCodeComponent
     ],
     template: `

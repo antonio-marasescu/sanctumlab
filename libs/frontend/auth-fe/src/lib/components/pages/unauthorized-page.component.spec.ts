@@ -1,6 +1,4 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { importProvidersFrom } from '@angular/core';
-import { I18NextModule } from 'angular-i18next';
 import { provideMockInputValidationConfiguration } from '@sanctumlab/fe/component-library';
 import { UnauthorizedPageComponent } from './unauthorized-page.component';
 import { Router } from '@angular/router';
@@ -17,7 +15,6 @@ describe('UnauthorizedPageComponent', () => {
         TestBed.configureTestingModule({
             imports: [UnauthorizedPageComponent],
             providers: [
-                importProvidersFrom(I18NextModule.forRoot()),
                 provideMockInputValidationConfiguration(),
                 { provide: Router, useValue: mockRouter }
             ]

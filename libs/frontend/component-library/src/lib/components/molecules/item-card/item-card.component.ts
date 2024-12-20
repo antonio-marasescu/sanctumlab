@@ -5,21 +5,13 @@ import {
     Input,
     Output
 } from '@angular/core';
-import { NgClass, NgOptimizedImage, NgTemplateOutlet } from '@angular/common';
+import { NgClass, NgTemplateOutlet } from '@angular/common';
 import { ComponentTheme } from '../../../types/shared/theme.types';
-import { NgIcon } from '@ng-icons/core';
-import { I18NextModule } from 'angular-i18next';
+import { I18nPipe } from '../../../pipes/i18n.pipe';
 
 @Component({
     selector: 'ngx-clib-item-card',
-    standalone: true,
-    imports: [
-        NgOptimizedImage,
-        NgClass,
-        NgTemplateOutlet,
-        NgIcon,
-        I18NextModule
-    ],
+    imports: [NgClass, NgTemplateOutlet, I18nPipe],
     template: `
         @if (hasIndicator) {
             <div
@@ -43,7 +35,7 @@ import { I18NextModule } from 'angular-i18next';
                         'badge-error text-error-content':
                             indicatorTheme === 'error'
                     }"
-                    >{{ indicator | i18nextEager }}</span
+                    >{{ indicator | i18nTranslate }}</span
                 >
                 <ng-container *ngTemplateOutlet="card"></ng-container>
             </div>

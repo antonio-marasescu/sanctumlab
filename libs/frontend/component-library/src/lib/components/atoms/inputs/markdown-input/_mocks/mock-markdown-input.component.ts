@@ -3,7 +3,6 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
     selector: 'ngx-clib-markdown-input',
-    standalone: true,
     imports: [ReactiveFormsModule],
     template: `
         <input

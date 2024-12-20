@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { TextInputComponent } from '@sanctumlab/fe/component-library';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication.service';
 import { AdminLoginFormViewComponent } from '../views/admin-login-form-view/admin-login-form-view.component';
@@ -8,17 +7,10 @@ import { AuthFeatureName, AuthRoutes } from '../../types/auth-navigation.types';
 import { AdminForm } from '../../types/auth-form.types';
 import { from, Observable, of } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
-import { GuestLoginFormViewComponent } from '../views/guest-login-form-view/guest-login-form-view.component';
 
 @Component({
     selector: 'ngx-auth-admin-login-page',
-    standalone: true,
-    imports: [
-        TextInputComponent,
-        AdminLoginFormViewComponent,
-        AsyncPipe,
-        GuestLoginFormViewComponent
-    ],
+    imports: [AdminLoginFormViewComponent, AsyncPipe],
     template: `<ngx-auth-admin-login-form-view
         [form]="adminForm"
         [validLogin]="validLogin$ | async"

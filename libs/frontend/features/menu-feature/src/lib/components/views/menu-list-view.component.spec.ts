@@ -1,6 +1,4 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { importProvidersFrom } from '@angular/core';
-import { I18NextModule } from 'angular-i18next';
 import { provideMockInputValidationConfiguration } from '@sanctumlab/fe/component-library';
 import { MenuListViewComponent } from './menu-list-view.component';
 import {
@@ -25,7 +23,6 @@ describe('MenuListViewComponent', () => {
         TestBed.configureTestingModule({
             imports: [MenuListViewComponent],
             providers: [
-                importProvidersFrom(I18NextModule.forRoot()),
                 provideMockInputValidationConfiguration(),
                 provideMockAuthConfiguration(),
                 {

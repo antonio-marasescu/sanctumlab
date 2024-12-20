@@ -7,8 +7,6 @@ import {
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AdminForm } from '../../../types/auth-form.types';
 import { AdminLoginFormViewComponent } from './admin-login-form-view.component';
-import { importProvidersFrom } from '@angular/core';
-import { I18NextModule } from 'angular-i18next';
 import { provideMockInputValidationConfiguration } from '@sanctumlab/fe/component-library';
 import { By } from '@angular/platform-browser';
 
@@ -20,10 +18,7 @@ describe('AdminLoginFormViewComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [AdminLoginFormViewComponent],
-            providers: [
-                importProvidersFrom(I18NextModule.forRoot()),
-                provideMockInputValidationConfiguration()
-            ]
+            providers: [provideMockInputValidationConfiguration()]
         }).compileComponents();
     }));
 

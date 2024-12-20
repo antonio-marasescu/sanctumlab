@@ -1,15 +1,8 @@
 import {
-    I18NEXT_SERVICE,
-    I18NextModule,
-    ITranslationService
-} from 'angular-i18next';
-import {
-    APP_INITIALIZER,
     EnvironmentProviders,
-    importProvidersFrom,
     isDevMode,
-    LOCALE_ID,
-    makeEnvironmentProviders
+    makeEnvironmentProviders,
+    provideAppInitializer
 } from '@angular/core';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import HttpApi from 'i18next-http-backend';
@@ -18,35 +11,29 @@ import {
     SUPPORTED_LANGUAGES,
     TRANSLATION_NAMESPACES
 } from '../types/i18n.types';
+import i18next from 'i18next';
+import { I18nTranslateService } from '../services/i18n-translate.service';
+
+export const i18NextFactory = async () => {
+    return i18next
+        .use(LanguageDetector)
+        .use(HttpApi)
+        .init({
+            supportedLngs: [
+                ...SUPPORTED_LANGUAGES.map(language => language.id)
+            ],
+            fallbackLng: FALLBACK_LANGUAGE,
+            debug: isDevMode(),
+            returnEmptyString: false,
+            ns: [...TRANSLATION_NAMESPACES],
+            backend: {
+                loadPath: 'locales/{{lng}}.{{ns}}.json'
+            }
+        });
+};
 
 export const provideInternationalization = (): EnvironmentProviders =>
     makeEnvironmentProviders([
-        importProvidersFrom(I18NextModule.forRoot()),
-        {
-            provide: APP_INITIALIZER,
-            useFactory: (i18next: ITranslationService) => () =>
-                i18next
-                    .use(HttpApi)
-                    .use(LanguageDetector)
-                    .init({
-                        supportedLngs: [
-                            ...SUPPORTED_LANGUAGES.map(language => language.id)
-                        ],
-                        fallbackLng: FALLBACK_LANGUAGE,
-                        debug: isDevMode(),
-                        returnEmptyString: false,
-                        ns: [...TRANSLATION_NAMESPACES],
-                        backend: {
-                            loadPath: 'locales/{{lng}}.{{ns}}.json'
-                        }
-                    }),
-            deps: [I18NEXT_SERVICE],
-
-            multi: true
-        },
-        {
-            provide: LOCALE_ID,
-            deps: [I18NEXT_SERVICE],
-            useFactory: (i18next: ITranslationService) => i18next.language
-        }
+        provideAppInitializer(async () => await i18NextFactory()),
+        I18nTranslateService
     ]);

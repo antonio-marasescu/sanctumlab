@@ -1,6 +1,4 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { importProvidersFrom } from '@angular/core';
-import { I18NextModule } from 'angular-i18next';
 import { provideMockInputValidationConfiguration } from '@sanctumlab/fe/component-library';
 import { provideMockAuthConfiguration } from '@sanctumlab/fe/auth';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -16,7 +14,6 @@ describe('MenuListFilterViewComponent', () => {
         TestBed.configureTestingModule({
             imports: [MenuListFilterViewComponent],
             providers: [
-                importProvidersFrom(I18NextModule.forRoot()),
                 provideMockInputValidationConfiguration(),
                 provideMockAuthConfiguration()
             ]

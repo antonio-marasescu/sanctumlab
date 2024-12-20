@@ -3,7 +3,6 @@ import { ProfileSettingsContainerComponent } from '../containers/profile-setting
 
 @Component({
     selector: 'ngx-profile-settings-page',
-    standalone: true,
     imports: [ProfileSettingsContainerComponent],
     template: `<ngx-profile-settings-container />`,
     changeDetection: ChangeDetectionStrategy.OnPush

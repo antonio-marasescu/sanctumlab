@@ -14,7 +14,6 @@ import { NotificationComponent } from '@sanctumlab/fe/component-library';
 
 @Component({
     selector: 'ngx-notifications-list-view',
-    standalone: true,
     imports: [NotificationComponent],
     template: `@if (notifications && notifications.length > 0) {
         <div

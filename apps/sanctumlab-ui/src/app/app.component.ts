@@ -4,7 +4,6 @@ import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
 import { NotificationsListContainerComponent } from '@sanctumlab/fe/notification-feature';
 
 @Component({
-    standalone: true,
     imports: [
         RouterModule,
         AmplifyAuthenticatorModule,

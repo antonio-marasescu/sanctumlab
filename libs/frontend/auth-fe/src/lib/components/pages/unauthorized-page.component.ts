@@ -1,15 +1,14 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
     ButtonComponent,
+    I18nPipe,
     LogoComponent
 } from '@sanctumlab/fe/component-library';
 import { Router } from '@angular/router';
-import { I18NextModule } from 'angular-i18next';
 
 @Component({
     selector: 'ngx-auth-unauthorized-page',
-    standalone: true,
-    imports: [LogoComponent, ButtonComponent, I18NextModule],
+    imports: [LogoComponent, ButtonComponent, I18nPipe],
     template: ` <div
         class="flex flex-col gap-2 h-screen w-screen justify-center items-center"
     >
@@ -19,7 +18,7 @@ import { I18NextModule } from 'angular-i18next';
             size="md"
         />
         <div class="p-2 text-center">
-            {{ 'auth:unauthorized.message' | i18nextEager }}
+            {{ 'auth:unauthorized.message' | i18nTranslate }}
         </div>
         <ngx-clib-button
             id="back-button"

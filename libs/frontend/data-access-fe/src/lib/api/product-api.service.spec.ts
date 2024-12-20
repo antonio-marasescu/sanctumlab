@@ -106,7 +106,7 @@ describe('ProductApiService', () => {
     });
 
     it('should dispatch retrieve product list', () => {
-        const dispatchSpy = jest.spyOn(store, 'dispatch').mockReturnValue();
+        const dispatchSpy = jest.spyOn(store, 'dispatch').mockImplementation();
         service.sendRetrieveProductList();
         expect(dispatchSpy).toHaveBeenCalledWith(
             ProductsActions.getProductList()
@@ -115,7 +115,7 @@ describe('ProductApiService', () => {
 
     it('should dispatch retrieve product by id', () => {
         const payload = '1234';
-        const dispatchSpy = jest.spyOn(store, 'dispatch').mockReturnValue();
+        const dispatchSpy = jest.spyOn(store, 'dispatch').mockImplementation();
         service.sendRetrieveProductById(payload);
         expect(dispatchSpy).toHaveBeenCalledWith(
             ProductsActions.getProductById({ id: payload })
@@ -124,7 +124,7 @@ describe('ProductApiService', () => {
 
     it('should dispatch create product', () => {
         const payload = createMockCreateProductItemDto();
-        const dispatchSpy = jest.spyOn(store, 'dispatch').mockReturnValue();
+        const dispatchSpy = jest.spyOn(store, 'dispatch').mockImplementation();
         service.sendCreateProduct(payload);
         expect(dispatchSpy).toHaveBeenCalledWith(
             ProductsActions.createProduct({ product: payload })
@@ -134,7 +134,7 @@ describe('ProductApiService', () => {
     it('should dispatch update product', () => {
         const payloadId = '1234';
         const payloadBody = createMockUpdateProductItemDto();
-        const dispatchSpy = jest.spyOn(store, 'dispatch').mockReturnValue();
+        const dispatchSpy = jest.spyOn(store, 'dispatch').mockImplementation();
         service.sendUpdateProduct(payloadId, payloadBody);
         expect(dispatchSpy).toHaveBeenCalledWith(
             ProductsActions.updateProduct({
@@ -146,7 +146,7 @@ describe('ProductApiService', () => {
 
     it('should dispatch remove product', () => {
         const payloadId = '1234';
-        const dispatchSpy = jest.spyOn(store, 'dispatch').mockReturnValue();
+        const dispatchSpy = jest.spyOn(store, 'dispatch').mockImplementation();
         service.sendRemoveProduct(payloadId);
         expect(dispatchSpy).toHaveBeenCalledWith(
             ProductsActions.removeProduct({
@@ -157,7 +157,7 @@ describe('ProductApiService', () => {
 
     it('should dispatch set current product', () => {
         const payloadId = '1234';
-        const dispatchSpy = jest.spyOn(store, 'dispatch').mockReturnValue();
+        const dispatchSpy = jest.spyOn(store, 'dispatch').mockImplementation();
         service.sendSetCurrentProduct(payloadId);
         expect(dispatchSpy).toHaveBeenCalledWith(
             ProductsActions.setCurrentProduct({
@@ -167,7 +167,7 @@ describe('ProductApiService', () => {
     });
 
     it('should dispatch unset current product', () => {
-        const dispatchSpy = jest.spyOn(store, 'dispatch').mockReturnValue();
+        const dispatchSpy = jest.spyOn(store, 'dispatch').mockImplementation();
         service.sendUnsetCurrentProduct();
         expect(dispatchSpy).toHaveBeenCalledWith(
             ProductsActions.unsetCurrentProduct()

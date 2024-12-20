@@ -17,7 +17,6 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'ngx-shared-app-qr-code',
-    standalone: true,
     imports: [
         ModalComponent,
         QRDisplayComponent,

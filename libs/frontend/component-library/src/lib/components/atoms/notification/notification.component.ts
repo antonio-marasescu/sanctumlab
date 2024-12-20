@@ -8,12 +8,11 @@ import {
 import { NgIcon } from '@ng-icons/core';
 import { ComponentTheme } from '../../../types/shared/theme.types';
 import { NgClass } from '@angular/common';
-import { I18NextModule } from 'angular-i18next';
+import { I18nPipe } from '../../../pipes/i18n.pipe';
 
 @Component({
     selector: 'ngx-clib-notification',
-    standalone: true,
-    imports: [NgIcon, NgClass, I18NextModule],
+    imports: [NgIcon, NgClass, I18nPipe],
     template: `<div
         tabindex="-1"
         [id]="id"
@@ -33,9 +32,9 @@ import { I18NextModule } from 'angular-i18next';
             <ng-icon [name]="icon" size="24" />
         }
         <div>
-            <h2 class="font-bold">{{ label | i18nextEager }}</h2>
+            <h2 class="font-bold">{{ label | i18nTranslate }}</h2>
             @if (description) {
-                <div class="text-xs">{{ description | i18nextEager }}</div>
+                <div class="text-xs">{{ description | i18nTranslate }}</div>
             }
         </div>
         <button class="btn btn-xs btn-ghost" (click)="closeEvent.emit(id)">

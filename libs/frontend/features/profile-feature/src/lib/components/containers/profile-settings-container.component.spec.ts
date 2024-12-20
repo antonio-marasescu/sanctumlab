@@ -5,33 +5,31 @@ import {
     tick,
     waitForAsync
 } from '@angular/core/testing';
-import { importProvidersFrom } from '@angular/core';
-import {
-    I18NEXT_SERVICE,
-    I18NextModule,
-    ITranslationService
-} from 'angular-i18next';
 import { provideMockInputValidationConfiguration } from '@sanctumlab/fe/component-library';
 import { ProfileSettingsContainerComponent } from './profile-settings-container.component';
+import { I18nTranslateService } from '@sanctumlab/fe/shared';
 
 describe('ProfileSettingsContainerComponent', () => {
     let component: ProfileSettingsContainerComponent;
     let fixture: ComponentFixture<ProfileSettingsContainerComponent>;
-    let translationService: ITranslationService;
+    let translationService: I18nTranslateService;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [ProfileSettingsContainerComponent],
             providers: [
-                importProvidersFrom(I18NextModule.forRoot()),
-                provideMockInputValidationConfiguration()
+                provideMockInputValidationConfiguration(),
+                {
+                    provide: I18nTranslateService,
+                    useValue: { changeLanguage: jest.fn(), language: jest.fn() }
+                }
             ]
         }).compileComponents();
     }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(ProfileSettingsContainerComponent);
-        translationService = TestBed.inject(I18NEXT_SERVICE);
+        translationService = TestBed.inject(I18nTranslateService);
         component = fixture.componentInstance;
     });
 

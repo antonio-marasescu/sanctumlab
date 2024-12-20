@@ -5,8 +5,6 @@ import {
     tick,
     waitForAsync
 } from '@angular/core/testing';
-import { importProvidersFrom } from '@angular/core';
-import { I18NextModule } from 'angular-i18next';
 import { provideMockInputValidationConfiguration } from '@sanctumlab/fe/component-library';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
@@ -28,7 +26,6 @@ describe('AdminLoginPageComponent', () => {
         TestBed.configureTestingModule({
             imports: [AdminLoginPageComponent],
             providers: [
-                importProvidersFrom(I18NextModule.forRoot()),
                 provideMockInputValidationConfiguration(),
                 { provide: Router, useValue: mockRouter },
                 {

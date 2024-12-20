@@ -7,22 +7,21 @@ import {
 } from '@angular/core';
 import {
     ButtonComponent,
+    I18nPipe,
     ModalComponent
 } from '@sanctumlab/fe/component-library';
 import { ProductItemDto } from '@sanctumlab/api-interfaces';
 import { AdminRestrictDirective } from '@sanctumlab/fe/auth';
 import { QuillViewComponent } from 'ngx-quill';
-import { I18NextModule } from 'angular-i18next';
 
 @Component({
     selector: 'ngx-menu-item-view',
-    standalone: true,
     imports: [
         ButtonComponent,
         ModalComponent,
         AdminRestrictDirective,
         QuillViewComponent,
-        I18NextModule
+        I18nPipe
     ],
     template: ` <ngx-clib-modal
         [opened]="opened"
@@ -44,7 +43,7 @@ import { I18NextModule } from 'angular-i18next';
                                 >
                                     {{
                                         'menu:pages.list.indicator.unavailable'
-                                            | i18nextEager
+                                            | i18nTranslate
                                     }}
                                 </div>
                             </div>
@@ -61,7 +60,7 @@ import { I18NextModule } from 'angular-i18next';
                     <div class="collapse bg-base-200 collapse-open">
                         <input type="checkbox" />
                         <div class="collapse-title text-xl font-medium">
-                            {{ 'menu:pages.list.view.recipe' | i18nextEager }}
+                            {{ 'menu:pages.list.view.recipe' | i18nTranslate }}
                         </div>
                         <div class="collapse-content">
                             <quill-view [content]="item.recipe"></quill-view>

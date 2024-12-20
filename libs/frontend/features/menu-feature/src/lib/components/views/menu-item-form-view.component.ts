@@ -9,6 +9,7 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ProductItemForm } from '../../types/product-item-form.types';
 import {
     ButtonComponent,
+    I18nPipe,
     ListInputComponent,
     MarkdownInputComponent,
     SelectInputComponent,
@@ -17,11 +18,9 @@ import {
     TextInputComponent,
     ToggleInputComponent
 } from '@sanctumlab/fe/component-library';
-import { I18NextModule } from 'angular-i18next';
 
 @Component({
     selector: 'ngx-menu-item-form-view',
-    standalone: true,
     imports: [
         TextInputComponent,
         TextareaInputComponent,
@@ -31,10 +30,10 @@ import { I18NextModule } from 'angular-i18next';
         ReactiveFormsModule,
         SelectInputComponent,
         ListInputComponent,
-        I18NextModule
+        I18nPipe
     ],
     template: `<div class="p-8">
-            <h1 class="text-xl md:text-2xl">{{ title | i18nextEager }}</h1>
+            <h1 class="text-xl md:text-2xl">{{ title | i18nTranslate }}</h1>
             <form
                 class="grid grid-cols-1 gap-8 pt-4"
                 [formGroup]="form"

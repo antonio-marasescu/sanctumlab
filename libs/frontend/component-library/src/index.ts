@@ -23,6 +23,9 @@ export * from './lib/components/organisms/sidebar/sidebar.component';
 // CONFIG
 export * from './lib/config/input-validation.config';
 
+// PIPES
+export * from './lib/pipes/i18n.pipe';
+
 // TYPES
 export * from './lib/types/atoms/button.types';
 export * from './lib/types/atoms/text-input.types';

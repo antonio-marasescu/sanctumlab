@@ -3,11 +3,8 @@ import {
     ComponentFixture,
     fakeAsync,
     TestBed,
-    tick,
     waitForAsync
 } from '@angular/core/testing';
-import { importProvidersFrom } from '@angular/core';
-import { I18NextModule } from 'angular-i18next';
 import { provideMockInputValidationConfiguration } from '@sanctumlab/fe/component-library';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { GuestForm } from '../../../types/auth-form.types';
@@ -21,10 +18,7 @@ describe('GuestLoginFormViewComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [GuestLoginFormViewComponent],
-            providers: [
-                importProvidersFrom(I18NextModule.forRoot()),
-                provideMockInputValidationConfiguration()
-            ]
+            providers: [provideMockInputValidationConfiguration()]
         }).compileComponents();
     }));
 

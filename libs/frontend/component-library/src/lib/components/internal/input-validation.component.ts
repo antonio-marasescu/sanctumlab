@@ -25,7 +25,6 @@ import {
 @UntilDestroy()
 @Component({
     selector: 'ngx-clib-input-validation',
-    standalone: true,
     imports: [],
     template: `@if (controlState === InputState.Invalid && errorMessage) {
         <div class="label">

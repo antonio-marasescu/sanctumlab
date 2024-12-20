@@ -10,7 +10,6 @@ import { ComponentSize } from '../../../types/shared/theme.types';
 
 @Component({
     selector: 'ngx-clib-logo',
-    standalone: true,
     imports: [NgClass],
     template: ` <div
         class="flex"

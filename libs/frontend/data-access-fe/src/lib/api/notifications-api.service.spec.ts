@@ -51,7 +51,7 @@ describe('NotificationsApiService', () => {
         const expectedNotifications: NotificationDto[] = [
             createMockNotification({ id: '1234' })
         ];
-        const dispatchSpy = jest.spyOn(store, 'dispatch').mockReturnValue();
+        const dispatchSpy = jest.spyOn(store, 'dispatch').mockImplementation();
         service.setNotifications(expectedNotifications);
         expect(dispatchSpy).toHaveBeenCalledWith(
             NotificationsActions.addNotifications({
@@ -62,7 +62,7 @@ describe('NotificationsApiService', () => {
 
     it('should dispatch remove notifications', () => {
         const expectedId = '1234';
-        const dispatchSpy = jest.spyOn(store, 'dispatch').mockReturnValue();
+        const dispatchSpy = jest.spyOn(store, 'dispatch').mockImplementation();
         service.removeNotificationById(expectedId);
         expect(dispatchSpy).toHaveBeenCalledWith(
             NotificationsActions.removeNotification({
@@ -72,7 +72,7 @@ describe('NotificationsApiService', () => {
     });
 
     it('should dispatch clear notifications', () => {
-        const dispatchSpy = jest.spyOn(store, 'dispatch').mockReturnValue();
+        const dispatchSpy = jest.spyOn(store, 'dispatch').mockImplementation();
         service.clearNotifications();
         expect(dispatchSpy).toHaveBeenCalledWith(
             NotificationsActions.clearNotifications()

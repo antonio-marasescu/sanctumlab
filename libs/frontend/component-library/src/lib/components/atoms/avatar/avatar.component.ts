@@ -4,7 +4,6 @@ import { NgClass } from '@angular/common';
 
 @Component({
     selector: 'ngx-clib-avatar',
-    standalone: true,
     imports: [NgClass],
     template: `
         <div

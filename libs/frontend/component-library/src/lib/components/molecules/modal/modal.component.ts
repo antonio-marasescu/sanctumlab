@@ -17,7 +17,6 @@ import { NgClass } from '@angular/common';
 @UntilDestroy()
 @Component({
     selector: 'ngx-clib-modal',
-    standalone: true,
     imports: [NgClass],
     template: `
         <dialog

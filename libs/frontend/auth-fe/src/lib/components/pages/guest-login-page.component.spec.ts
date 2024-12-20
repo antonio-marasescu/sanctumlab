@@ -5,8 +5,6 @@ import {
     tick,
     waitForAsync
 } from '@angular/core/testing';
-import { importProvidersFrom } from '@angular/core';
-import { I18NextModule } from 'angular-i18next';
 import { provideMockInputValidationConfiguration } from '@sanctumlab/fe/component-library';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GuestLoginPageComponent } from './guest-login-page.component';
@@ -31,7 +29,6 @@ describe('GuestLoginPageComponent', () => {
         TestBed.configureTestingModule({
             imports: [GuestLoginPageComponent],
             providers: [
-                importProvidersFrom(I18NextModule.forRoot()),
                 provideMockInputValidationConfiguration(),
                 { provide: Router, useValue: mockRouter },
                 { provide: ActivatedRoute, useValue: mockActivateRoute },

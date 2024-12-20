@@ -1,9 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import {
     MenuAvatarComponent,
-    MenuItem,
-    ThemeChangerComponent,
-    ToggleInputComponent
+    MenuItem
 } from '@sanctumlab/fe/component-library';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import {
@@ -18,13 +16,7 @@ import { AppNavigationService } from '../../services/app-navigation.service';
 @UntilDestroy()
 @Component({
     selector: 'ngx-shared-auth-avatar',
-    standalone: true,
-    imports: [
-        ToggleInputComponent,
-        MenuAvatarComponent,
-        ThemeChangerComponent,
-        AsyncPipe
-    ],
+    imports: [MenuAvatarComponent, AsyncPipe],
     template: ` <ngx-clib-menu-avatar
         [size]="'xs'"
         [isPlaceholder]="true"

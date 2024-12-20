@@ -16,7 +16,6 @@ import { ProductFormSubmitEvent } from '../../types/product-item-form.types';
 
 @Component({
     selector: 'ngx-menu-item-edit-page',
-    standalone: true,
     imports: [MenuItemFormContainerComponent, AsyncPipe],
     template: `<ngx-menu-item-form-container
         [item]="currentItem$ | async"

@@ -14,7 +14,6 @@ import {
 
 @Component({
     selector: `ngx-clib-icon-button`,
-    standalone: true,
     imports: [NgIcon, NgClass],
     template: `<button
         tabindex="0"

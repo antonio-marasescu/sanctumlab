@@ -1,14 +1,13 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { I18NextModule } from 'angular-i18next';
+import { I18nPipe } from '../../../../pipes/i18n.pipe';
 
 @Component({
     selector: 'ngx-clib-toggle-input',
-    standalone: true,
-    imports: [ReactiveFormsModule, I18NextModule],
+    imports: [ReactiveFormsModule, I18nPipe],
     template: ` <label class="form-control h-full">
         <div class="label">
-            <span class="label-text">{{ label | i18nextEager }}</span>
+            <span class="label-text">{{ label | i18nTranslate }}</span>
         </div>
         <div class="min-h-12">
             <input

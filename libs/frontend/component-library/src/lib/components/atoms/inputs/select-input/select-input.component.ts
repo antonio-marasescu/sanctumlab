@@ -7,22 +7,16 @@ import {
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { NgClass } from '@angular/common';
 import { SelectOption } from '../../../../types/atoms/select.types';
-import { I18NextModule } from 'angular-i18next';
 import { InputValidationComponent } from '../../../internal/input-validation.component';
+import { I18nPipe } from '../../../../pipes/i18n.pipe';
 
 @UntilDestroy()
 @Component({
     selector: 'ngx-clib-select-input',
-    standalone: true,
-    imports: [
-        ReactiveFormsModule,
-        NgClass,
-        I18NextModule,
-        InputValidationComponent
-    ],
+    imports: [ReactiveFormsModule, NgClass, InputValidationComponent, I18nPipe],
     template: `<label class="form-control w-full">
         <div class="label">
-            <span class="label-text">{{ label | i18nextEager }}</span>
+            <span class="label-text">{{ label | i18nTranslate }}</span>
         </div>
         <select
             [attr.id]="id"
@@ -38,7 +32,7 @@ import { InputValidationComponent } from '../../../internal/input-validation.com
             [formControl]="control"
         >
             <option value="" disabled selected>
-                {{ placeholder | i18nextEager }}
+                {{ placeholder | i18nTranslate }}
             </option>
             @for (option of options; track option.id) {
                 <option [value]="option.id">{{ option.label }}</option>

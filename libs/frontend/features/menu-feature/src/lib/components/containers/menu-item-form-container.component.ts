@@ -30,7 +30,6 @@ import { Observable } from 'rxjs';
 
 @Component({
     selector: 'ngx-menu-item-form-container',
-    standalone: true,
     imports: [MenuItemFormViewComponent, AsyncPipe, LoadingIndicatorComponent],
     template: ` @if (isLoading$ | async) {
             <ngx-clib-loading-indicator [isOverlay]="true" />

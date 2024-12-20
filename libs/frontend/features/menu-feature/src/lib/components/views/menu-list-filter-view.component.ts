@@ -8,7 +8,6 @@ import {
 
 @Component({
     selector: 'ngx-menu-list-filter-view',
-    standalone: true,
     imports: [ReactiveFormsModule, ToggleInputComponent, TextInputComponent],
     template: `<form
         [formGroup]="form"

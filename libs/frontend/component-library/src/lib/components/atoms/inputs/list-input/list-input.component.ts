@@ -6,23 +6,22 @@ import {
 } from '../../../../types/internal/input-internal.types';
 import { NgClass } from '@angular/common';
 import { NgIcon } from '@ng-icons/core';
-import { I18NextModule } from 'angular-i18next';
 import { InputValidationComponent } from '../../../internal/input-validation.component';
+import { I18nPipe } from '../../../../pipes/i18n.pipe';
 
 @Component({
     selector: 'ngx-clib-list-input',
-    standalone: true,
     imports: [
         ReactiveFormsModule,
         NgClass,
         NgIcon,
-        I18NextModule,
-        InputValidationComponent
+        InputValidationComponent,
+        I18nPipe
     ],
     template: `<div>
         <label class="form-control w-full">
             <div class="label">
-                <span class="label-text">{{ label | i18nextEager }}</span>
+                <span class="label-text">{{ label | i18nTranslate }}</span>
             </div>
             <div class="flex gap-2">
                 <input
@@ -32,7 +31,7 @@ import { InputValidationComponent } from '../../../internal/input-validation.com
                     [attr.id]="id"
                     [attr.name]="id"
                     [formControl]="internalFormControl"
-                    [placeholder]="placeholder | i18nextEager"
+                    [placeholder]="placeholder | i18nTranslate"
                     [attr.aria-label]="label"
                     [autofocus]="autofocus"
                     autocomplete="false"

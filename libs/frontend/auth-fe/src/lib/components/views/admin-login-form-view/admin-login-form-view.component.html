@@ -14,7 +14,7 @@
                 <h1
                     class="text-xl font-bold leading-tight tracking-tight text-base-content md:text-2xl"
                 >
-                    {{ 'auth:admin.title' | i18nextEager }}
+                    {{ 'auth:admin.title' | i18nTranslate }}
                 </h1>
                 <form class="space-y-4 md:space-y-6" [formGroup]="form">
                     <div>
@@ -41,7 +41,7 @@
                             id="form-error-message"
                             class="label-text-alt text-error"
                         >
-                            {{ 'auth:admin.form.invalid' | i18nextEager }}
+                            {{ 'auth:admin.form.invalid' | i18nTranslate }}
                         </p>
                     }
 
@@ -57,7 +57,8 @@
 
                     <p class="text-sm font-light text-base-content">
                         {{
-                            'auth:admin.actions.redirect.message' | i18nextEager
+                            'auth:admin.actions.redirect.message'
+                                | i18nTranslate
                         }}
                         <a
                             id="redirect-link"
@@ -68,7 +69,7 @@
                         >
                             {{
                                 'auth:admin.actions.redirect.action'
-                                    | i18nextEager
+                                    | i18nTranslate
                             }}</a
                         >
                     </p>

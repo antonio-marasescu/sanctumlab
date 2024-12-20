@@ -1,6 +1,4 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { importProvidersFrom } from '@angular/core';
-import { I18NextModule } from 'angular-i18next';
 import { provideMockInputValidationConfiguration } from '@sanctumlab/fe/component-library';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ProfileSettingsForm } from '../../types/profile-settings-form.types';
@@ -14,10 +12,7 @@ describe('ProfileSettingsViewComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [ProfileSettingsViewComponent],
-            providers: [
-                importProvidersFrom(I18NextModule.forRoot()),
-                provideMockInputValidationConfiguration()
-            ]
+            providers: [provideMockInputValidationConfiguration()]
         }).compileComponents();
     }));
 
