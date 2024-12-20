@@ -2,6 +2,7 @@
     "name": "@sanctumlab/shared-be",
     "version": "0.0.1",
     "dependencies": {
+        "zod": "^3.23.8",
         "@sanctumlab/auth-be": "^0.0.1"
     },
     "main": "./index.js",
