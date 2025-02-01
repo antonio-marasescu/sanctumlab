@@ -30,7 +30,7 @@ import { AsyncPipe } from '@angular/common';
         (closeEvent)="modalClose.emit()"
     >
         <div content class="flex flex-col gap-4 items-center">
-            <div class="w-[256px] sm:w-full">
+            <form class="w-[256px] sm:w-full">
                 <ngx-clib-text-input
                     [control]="codeControl"
                     id="qr-code-control"
@@ -38,7 +38,7 @@ import { AsyncPipe } from '@angular/common';
                     type="password"
                     placeholder="••••••••"
                 />
-            </div>
+            </form>
             <ngx-clib-qr-display
                 [data]="(qrCode$ | async) || ''"
                 [isResponsive]="true"

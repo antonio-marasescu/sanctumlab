@@ -2,33 +2,17 @@ import type { Preview } from '@storybook/angular';
 import { applicationConfig } from '@storybook/angular';
 import { provideInputValidationConfiguration } from '../src/lib/config/input-validation.config';
 import { provideIcons } from '@ng-icons/core';
-import { matLocalGroceryStoreRound } from '@ng-icons/material-icons/round';
-import {
-    matClose,
-    matDelete,
-    matLocalBar,
-    matMenu,
-    matPlus,
-    matQrCode,
-    matWarning
-} from '@ng-icons/material-icons/baseline';
 import { provideQuillConfig } from 'ngx-quill';
 import { validationConfigFactory } from './custom-validation';
 import { provideInternationalizationStorybook } from './custom-internationalization';
+import { LibraryIcons } from '../src/lib/types/iconography/iconography.types';
 
 const preview: Preview = {
     decorators: [
         applicationConfig({
             providers: [
                 provideIcons({
-                    matLocalGroceryStoreRound,
-                    matLocalBar,
-                    matMenu,
-                    matClose,
-                    matDelete,
-                    matPlus,
-                    matWarning,
-                    matQrCode
+                    ...LibraryIcons
                 }),
                 provideInputValidationConfiguration(validationConfigFactory()),
                 provideInternationalizationStorybook(),
