@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { I18nPipe } from '../../../../pipes/i18n.pipe';
 
@@ -7,13 +7,13 @@ import { I18nPipe } from '../../../../pipes/i18n.pipe';
     imports: [ReactiveFormsModule, I18nPipe],
     template: ` <label class="form-control h-full">
         <div class="label">
-            <span class="label-text">{{ label | i18nTranslate }}</span>
+            <span class="label-text">{{ label() | i18nTranslate }}</span>
         </div>
         <div class="min-h-12">
             <input
                 tabindex="0"
                 type="checkbox"
-                [formControl]="control"
+                [formControl]="control()"
                 class="toggle toggle-primary"
                 checked="checked"
             />
@@ -23,6 +23,6 @@ import { I18nPipe } from '../../../../pipes/i18n.pipe';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToggleInputComponent {
-    @Input({ required: true }) control!: FormControl<boolean>;
-    @Input({ required: true }) label!: string;
+    public control = input.required<FormControl<boolean>>();
+    public label = input.required<string>();
 }

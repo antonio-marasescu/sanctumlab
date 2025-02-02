@@ -5,7 +5,7 @@ import { FormControl, Validators } from '@angular/forms';
 import {
     ComponentSizes,
     ComponentThemes
-} from '@sanctumlab/fe/component-library';
+} from '../../../types/shared/theme.types';
 
 const control = new FormControl<string>('matRamenDining', {
     validators: [Validators.required],

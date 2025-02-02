@@ -32,7 +32,7 @@ import { NgClass } from '@angular/common';
                             'text-sm': size() === 'sm',
                             'text-md': size() === 'md',
                             'text-lg': size() === 'lg',
-                            'text-xl': size === 'xl'
+                            'text-xl': size() === 'xl'
                         }"
                         >{{ placeholder() }}</span
                     >

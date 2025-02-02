@@ -2,18 +2,16 @@ import {
     ChangeDetectionStrategy,
     Component,
     computed,
-    Input,
     input
 } from '@angular/core';
 import { LibraryIcon } from '../../../types/iconography/iconography.types';
 import { FormControl } from '@angular/forms';
 import { NgIcon } from '@ng-icons/core';
-import { ButtonComponent } from '../../atoms/button/button.component';
+import { NgClass } from '@angular/common';
 import {
     ComponentSize,
     ComponentTheme
-} from '@sanctumlab/fe/component-library';
-import { NgClass } from '@angular/common';
+} from '../../../types/shared/theme.types';
 
 @Component({
     selector: 'ngx-clib-icon-selector',

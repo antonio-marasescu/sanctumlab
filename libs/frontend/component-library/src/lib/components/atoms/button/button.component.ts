@@ -1,11 +1,8 @@
 import {
     ChangeDetectionStrategy,
     Component,
-    EventEmitter,
     input,
-    Input,
-    output,
-    Output
+    output
 } from '@angular/core';
 import { NgClass } from '@angular/common';
 import {
@@ -58,7 +55,7 @@ import { I18nPipe } from '../../../pipes/i18n.pipe';
                     'btn-neutral': theme() === 'neutral',
                     'btn-info': theme() === 'info',
                     'btn-success': theme() === 'success',
-                    'btn-error': theme === 'error',
+                    'btn-error': theme() === 'error',
                     'btn-ghost': theme() === 'ghost',
                     'btn-active': isActive(),
                     'btn-outline': isOutlined(),

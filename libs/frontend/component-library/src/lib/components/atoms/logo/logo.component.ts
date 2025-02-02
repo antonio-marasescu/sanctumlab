@@ -1,9 +1,8 @@
 import {
     ChangeDetectionStrategy,
     Component,
-    EventEmitter,
-    Input,
-    Output
+    input,
+    output
 } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { ComponentSize } from '../../../types/shared/theme.types';
@@ -13,33 +12,33 @@ import { ComponentSize } from '../../../types/shared/theme.types';
     imports: [NgClass],
     template: ` <div
         class="flex"
-        [ngClass]="{ 'hover:opacity-85 cursor-pointer': interactable }"
+        [ngClass]="{ 'hover:opacity-85 cursor-pointer': interactable() }"
         (click)="onClickEvent()"
     >
-        @if (!isResponsive) {
+        @if (!isResponsive()) {
             <img
-                [src]="logoUrl"
+                [src]="logoUrl()"
                 class="me-3"
                 [ngClass]="{
-                    'h-4': size === 'xs',
-                    'h-6': size === 'sm',
-                    'h-8': size === 'md',
-                    'h-12': size === 'lg',
-                    'h-24': size === 'xl'
+                    'h-4': size() === 'xs',
+                    'h-6': size() === 'sm',
+                    'h-8': size() === 'md',
+                    'h-12': size() === 'lg',
+                    'h-24': size() === 'xl'
                 }"
-                [alt]="title"
+                [alt]="title()"
             />
         } @else {
             <img
-                [src]="logoUrl"
+                [src]="logoUrl()"
                 class="h-8 sm:h-10 me-2 sm:me-3"
-                [alt]="title"
+                [alt]="title()"
             />
         }
-        @if (useTitle) {
+        @if (useTitle()) {
             <span
                 class="self-center text-sm text-base-content font-semibold sm:text-xl lg:text-2xl whitespace-nowrap"
-                >{{ title }}</span
+                >{{ title() }}</span
             >
         }
     </div>`,
@@ -47,16 +46,16 @@ import { ComponentSize } from '../../../types/shared/theme.types';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LogoComponent {
-    @Input({ required: true }) logoUrl!: string;
-    @Input({ required: true }) title!: string;
-    @Input({ required: false }) useTitle = true;
-    @Input({ required: false }) size: ComponentSize = 'md';
-    @Input({ required: false }) isResponsive = false;
-    @Input({ required: false }) interactable = false;
-    @Output() clickEvent = new EventEmitter<void>();
+    public logoUrl = input.required<string>();
+    public title = input.required<string>();
+    public useTitle = input<boolean>(true);
+    public size = input<ComponentSize>('md');
+    public isResponsive = input<boolean>(false);
+    public interactable = input<boolean>(false);
+    public clickEvent = output<void>();
 
     protected onClickEvent(): void {
-        if (this.interactable) {
+        if (this.interactable()) {
             this.clickEvent.emit();
         }
     }

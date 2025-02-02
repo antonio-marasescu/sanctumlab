@@ -20,8 +20,8 @@
             <div class="mx-2 flex-1 px-2">
                 <div class="hidden md:block">
                     <ngx-clib-logo
-                        [logoUrl]="logoUrl"
-                        [title]="title"
+                        [logoUrl]="logoUrl()"
+                        [title]="title()"
                         [isResponsive]="true"
                         [interactable]="true"
                         (clickEvent)="onNavigateHome()"
@@ -55,8 +55,8 @@
                     />
                     <div class="flex-grow"></div>
                     <ngx-clib-logo
-                        [logoUrl]="logoUrl"
-                        [title]="title"
+                        [logoUrl]="logoUrl()"
+                        [title]="title()"
                         [isResponsive]="true"
                         [interactable]="true"
                         (clickEvent)="onNavigateHome()"
@@ -64,7 +64,7 @@
                 </div>
             </div>
 
-            @for (category of itemCategories; track category.id) {
+            @for (category of itemCategories(); track category.id) {
                 <li [id]="category.id">
                     <h2 class="menu-title">
                         {{ category.label | i18nTranslate }}

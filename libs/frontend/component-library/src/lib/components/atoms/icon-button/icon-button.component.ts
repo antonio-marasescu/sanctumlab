@@ -38,17 +38,17 @@ import {
         (click)="clickEvent.emit()"
         (keydown.enter)="clickEvent.emit()"
     >
-        <ng-icon [name]="icon" [size]="iconSize.toString()"></ng-icon>
+        <ng-icon [name]="icon()" [size]="iconSize().toString()"></ng-icon>
     </button>`,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class IconButtonComponent {
-    icon = input.required<string>();
-    theme = input<ComponentTheme | 'ghost'>('primary');
-    size = input<Omit<ComponentSize, 'xl'>>('md');
-    iconSize = input<number>(14);
-    isCircle = input<boolean>(true);
-    isOutlined = input<boolean>(false);
-    disabled = input<boolean>(false);
-    clickEvent = output<void>();
+    public icon = input.required<string>();
+    public theme = input<ComponentTheme | 'ghost'>('primary');
+    public size = input<Omit<ComponentSize, 'xl'>>('md');
+    public iconSize = input<number>(14);
+    public isCircle = input<boolean>(true);
+    public isOutlined = input<boolean>(false);
+    public disabled = input<boolean>(false);
+    public clickEvent = output<void>();
 }

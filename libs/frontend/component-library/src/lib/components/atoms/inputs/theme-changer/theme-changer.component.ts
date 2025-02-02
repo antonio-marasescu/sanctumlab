@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
@@ -9,7 +9,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
             <input
                 type="checkbox"
                 class="theme-controller"
-                [formControl]="control"
+                [formControl]="control()"
             />
 
             <!-- sun icon -->
@@ -39,5 +39,5 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ThemeChangerComponent {
-    @Input({ required: true }) control!: FormControl<boolean>;
+    public control = input.required<FormControl<boolean>>();
 }

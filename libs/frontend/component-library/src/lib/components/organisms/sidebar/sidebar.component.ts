@@ -1,9 +1,8 @@
 import {
     ChangeDetectionStrategy,
     Component,
-    EventEmitter,
-    Input,
-    Output
+    input,
+    output
 } from '@angular/core';
 import { NgIcon } from '@ng-icons/core';
 import { SidebarCategoryItem } from '../../../types/organisms/sidebar.types';
@@ -26,11 +25,11 @@ import { I18nPipe } from '../../../pipes/i18n.pipe';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SidebarComponent {
-    @Input({ required: true }) logoUrl!: string;
-    @Input({ required: true }) title!: string;
-    @Input({ required: true }) itemCategories: SidebarCategoryItem[] = [];
-    @Output() navigate = new EventEmitter<string>();
-    @Output() navigateHome = new EventEmitter<void>();
+    public logoUrl = input.required<string>();
+    public title = input.required<string>();
+    public itemCategories = input<SidebarCategoryItem[]>([]);
+    public navigate = output<string>();
+    public navigateHome = output<void>();
 
     protected readonly sidebarControl = new FormControl<boolean>(false, {
         nonNullable: true

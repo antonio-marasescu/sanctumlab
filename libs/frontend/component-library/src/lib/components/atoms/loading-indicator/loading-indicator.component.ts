@@ -1,11 +1,11 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { NgClass } from '@angular/common';
 
 @Component({
     selector: 'ngx-clib-loading-indicator',
     imports: [NgClass],
     template: `
-        @if (isOverlay) {
+        @if (isOverlay()) {
             <div
                 class="fixed inset-0 flex items-center justify-center bg-base-300 bg-opacity-50 z-50"
             >
@@ -13,8 +13,8 @@ import { NgClass } from '@angular/common';
                     <span
                         class="loading loading-dots text-info"
                         [ngClass]="{
-                            'loading-md': size === 'md',
-                            'loading-lg': size === 'lg'
+                            'loading-md': size() === 'md',
+                            'loading-lg': size() === 'lg'
                         }"
                     ></span>
                     <span class="sr-only text-info">Loading...</span>
@@ -28,8 +28,8 @@ import { NgClass } from '@angular/common';
                 <span
                     class="loading loading-dots text-info"
                     [ngClass]="{
-                        'loading-md': size === 'md',
-                        'loading-lg': size === 'lg'
+                        'loading-md': size() === 'md',
+                        'loading-lg': size() === 'lg'
                     }"
                 ></span>
                 <span class="sr-only text-info">Loading...</span>
@@ -40,6 +40,6 @@ import { NgClass } from '@angular/common';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoadingIndicatorComponent {
-    @Input({ required: false }) isOverlay = false;
-    @Input({ required: false }) size: 'md' | 'lg' = 'md';
+    public isOverlay = input<boolean>(false);
+    public size = input<'md' | 'lg'>('md');
 }

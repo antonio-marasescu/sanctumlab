@@ -3,18 +3,15 @@ import {
     ChangeDetectorRef,
     Component,
     EnvironmentInjector,
-    EventEmitter,
     Inject,
-    Input,
+    input,
     OnInit,
-    Output,
-    runInInjectionContext
+    output,
+    runInInjectionContext,
+    signal
 } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import {
-    InputState,
-    InputStateType
-} from '../../types/internal/input-internal.types';
+import { FormControl, FormControlStatus } from '@angular/forms';
+import { InputState } from '../../types/internal/input-internal.types';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { retrieveErrorMessage } from '../../utils/validation.utils';
 import {
@@ -26,19 +23,19 @@ import {
 @Component({
     selector: 'ngx-clib-input-validation',
     imports: [],
-    template: `@if (controlState === InputState.Invalid && errorMessage) {
+    template: `@if (controlStatus() === InputState.INVALID && errorMessage()) {
         <div class="label">
-            <span class="label-text-alt text-error">{{ errorMessage }} </span>
+            <span class="label-text-alt text-error">{{ errorMessage() }} </span>
         </div>
     }`,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InputValidationComponent implements OnInit {
-    @Input({ required: true }) control!: FormControl;
-    @Output() controlStateChange = new EventEmitter<InputStateType>();
-
+    public control = input.required<FormControl>();
+    public controlStateChange = output<FormControlStatus>();
     protected readonly InputState = InputState;
-    protected errorMessage = '';
+    protected errorMessage = signal('');
+    protected controlStatus = signal('');
 
     constructor(
         @Inject(InputValidationConfigToken)
@@ -48,33 +45,19 @@ export class InputValidationComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        this.control.statusChanges.pipe(untilDestroyed(this)).subscribe(() => {
-            this.errorMessage = runInInjectionContext(this.injector, () =>
-                retrieveErrorMessage(this.validationConfiguration, this.control)
-            );
-            this.controlStateChange.emit(this.controlState);
-            this.changeDetectorRef.markForCheck();
-        });
-    }
-
-    protected get hasError(): boolean {
-        return (
-            this.control.invalid && (this.control.touched || this.control.dirty)
-        );
-    }
-
-    protected get disabled(): boolean {
-        return this.control.disabled;
-    }
-
-    protected get controlState(): InputStateType {
-        if (this.disabled) {
-            return InputState.Disabled;
-        }
-        if (this.hasError) {
-            return InputState.Invalid;
-        }
-
-        return InputState.Valid;
+        this.control()
+            .statusChanges.pipe(untilDestroyed(this))
+            .subscribe(status => {
+                const message = runInInjectionContext(this.injector, () =>
+                    retrieveErrorMessage(
+                        this.validationConfiguration,
+                        this.control()
+                    )
+                );
+                this.errorMessage.set(message);
+                this.controlStatus.set(status);
+                this.controlStateChange.emit(status);
+                this.changeDetectorRef.markForCheck();
+            });
     }
 }
