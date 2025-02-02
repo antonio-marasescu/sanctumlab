@@ -39,7 +39,7 @@ describe('AdminLoginFormViewComponent', () => {
             })
         });
         component = fixture.componentInstance;
-        component.form = form;
+        fixture.componentRef.setInput('form', form);
         fixture.detectChanges();
     });
 
@@ -60,7 +60,7 @@ describe('AdminLoginFormViewComponent', () => {
 
         form.patchValue({ username: 'test@email.com', password: '123456' });
         fixture.detectChanges();
-        expect(button.componentInstance.disabled).toBeFalsy();
+        expect(button.componentInstance.disabled()).toBeFalsy();
 
         button.children[0].nativeElement.click();
         expect(loginEventSpy).toHaveBeenCalledTimes(1);

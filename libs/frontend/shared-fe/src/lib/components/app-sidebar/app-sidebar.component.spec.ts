@@ -29,6 +29,7 @@ describe('AppSidebarComponent', () => {
     let fixture: ComponentFixture<AppSidebarComponent>;
     let mockAppNavigationService: Partial<AppNavigationService>;
     let mockThemingService: Partial<ThemingService>;
+    let consoleSpy: jest.SpyInstance;
 
     beforeEach(waitForAsync(() => {
         mockAppNavigationService = {
@@ -72,12 +73,26 @@ describe('AppSidebarComponent', () => {
                 }
             ]
         }).compileComponents();
+
+        consoleSpy = jest
+            .spyOn(global.console, 'error')
+            .mockImplementation(message => {
+                if (
+                    !message?.message?.includes(
+                        'Could not parse CSS stylesheet'
+                    )
+                ) {
+                    global.console.warn(message);
+                }
+            });
     }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(AppSidebarComponent);
         component = fixture.componentInstance;
     });
+
+    afterAll(() => consoleSpy.mockRestore());
 
     it('should create', () => {
         fixture.detectChanges();
@@ -159,10 +174,10 @@ describe('AppSidebarComponent', () => {
     it('should open and close modal', fakeAsync(() => {
         fixture.detectChanges();
 
-        expect(component['modalOpened']).toBe(false);
+        expect(component['modalOpened']()).toBe(false);
         component['onOpenModal']();
-        expect(component['modalOpened']).toBe(true);
+        expect(component['modalOpened']()).toBe(true);
         component['onCloseModal']();
-        expect(component['modalOpened']).toBe(false);
+        expect(component['modalOpened']()).toBe(false);
     }));
 });

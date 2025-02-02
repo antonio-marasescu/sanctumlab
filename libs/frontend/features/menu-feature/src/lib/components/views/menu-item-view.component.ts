@@ -1,9 +1,8 @@
 import {
     ChangeDetectionStrategy,
     Component,
-    EventEmitter,
-    Input,
-    Output
+    input,
+    output
 } from '@angular/core';
 import {
     ButtonComponent,
@@ -24,19 +23,20 @@ import { QuillViewComponent } from 'ngx-quill';
         I18nPipe
     ],
     template: ` <ngx-clib-modal
-        [opened]="opened"
+        [opened]="opened()"
         [positionBottom]="true"
         (closeEvent)="modalClose.emit()"
     >
+        @let productItem = item();
         <div content>
-            @if (item) {
+            @if (productItem) {
                 <div class="flex flex-col gap-4">
                     <div class="flex gap-4">
                         <h2 class="text-xl md:text-2xl lg:text-3xl font-bold">
-                            {{ item.name }}
+                            {{ productItem.name }}
                         </h2>
                         <div class="flex-grow"></div>
-                        @if (!item.available) {
+                        @if (!productItem.available) {
                             <div>
                                 <div
                                     class="badge badge-error badge-sm md:badge-md"
@@ -50,12 +50,12 @@ import { QuillViewComponent } from 'ngx-quill';
                         }
                     </div>
                     <div class="flex gap-2">
-                        @for (tag of item.tags; track tag) {
+                        @for (tag of productItem.tags; track tag) {
                             <div class="badge badge-accent">{{ tag }}</div>
                         }
                     </div>
 
-                    <p>{{ item.description }}</p>
+                    <p>{{ productItem.description }}</p>
 
                     <div class="collapse bg-base-200 collapse-open">
                         <input type="checkbox" />
@@ -63,7 +63,9 @@ import { QuillViewComponent } from 'ngx-quill';
                             {{ 'menu:pages.list.view.recipe' | i18nTranslate }}
                         </div>
                         <div class="collapse-content">
-                            <quill-view [content]="item.recipe"></quill-view>
+                            <quill-view
+                                [content]="productItem.recipe"
+                            ></quill-view>
                         </div>
                     </div>
                 </div>
@@ -76,23 +78,23 @@ import { QuillViewComponent } from 'ngx-quill';
                 [isResponsive]="true"
                 (clickEvent)="modalClose.emit()"
             />
-            @if (item) {
+            @if (productItem) {
                 <ngx-clib-button
                     id="delete-button"
                     *ngxAuthAdminRestrict
                     label="menu:pages.list.view.actions.delete"
                     [isResponsive]="true"
                     theme="error"
-                    (clickEvent)="deleteEvent.emit(item.id)"
+                    (clickEvent)="deleteEvent.emit(productItem.id || '')"
                 />
-                @if (item.available) {
+                @if (productItem.available) {
                     <ngx-clib-button
                         id="disable-button"
                         *ngxAuthAdminRestrict
                         label="menu:pages.list.view.actions.disable"
                         [isResponsive]="true"
                         theme="secondary"
-                        (clickEvent)="disableEvent.emit(item)"
+                        (clickEvent)="disableEvent.emit(productItem || '')"
                     />
                 } @else {
                     <ngx-clib-button
@@ -101,7 +103,7 @@ import { QuillViewComponent } from 'ngx-quill';
                         label="menu:pages.list.view.actions.enable"
                         [isResponsive]="true"
                         theme="success"
-                        (clickEvent)="enableEvent.emit(item)"
+                        (clickEvent)="enableEvent.emit(productItem || '')"
                     />
                 }
             }
@@ -111,18 +113,18 @@ import { QuillViewComponent } from 'ngx-quill';
                 label="menu:pages.list.view.actions.update"
                 [isResponsive]="true"
                 theme="primary"
-                (clickEvent)="editEvent.emit(item?.id || '')"
+                (clickEvent)="editEvent.emit(item()?.id || '')"
             />
         </div>
     </ngx-clib-modal>`,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MenuItemViewComponent {
-    @Input({ required: true }) opened = false;
-    @Input({ required: true }) item!: ProductItemDto | null;
-    @Output() modalClose = new EventEmitter<void>();
-    @Output() editEvent = new EventEmitter<string>();
-    @Output() disableEvent = new EventEmitter<ProductItemDto>();
-    @Output() enableEvent = new EventEmitter<ProductItemDto>();
-    @Output() deleteEvent = new EventEmitter<string>();
+    public item = input.required<ProductItemDto>();
+    public opened = input<boolean>(false);
+    public modalClose = output<void>();
+    public editEvent = output<string>();
+    public disableEvent = output<ProductItemDto>();
+    public enableEvent = output<ProductItemDto>();
+    public deleteEvent = output<string>();
 }

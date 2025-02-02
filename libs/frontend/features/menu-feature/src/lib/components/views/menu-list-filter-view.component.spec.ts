@@ -33,7 +33,7 @@ describe('MenuListFilterViewComponent', () => {
             })
         });
         component = fixture.componentInstance;
-        component.form = form;
+        fixture.componentRef.setInput('form', form);
     });
 
     it('should create', () => {

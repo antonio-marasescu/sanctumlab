@@ -16,7 +16,7 @@ describe('NotificationsListContainerComponent', () => {
 
     beforeEach(waitForAsync(() => {
         mockNotificationsApiService = {
-            retrieveNotificationsStream: jest.fn(),
+            retrieveNotificationsStream: jest.fn().mockReturnValue(of([])),
             removeNotificationById: jest.fn()
         };
 

@@ -1,9 +1,8 @@
 import {
     ChangeDetectionStrategy,
     Component,
-    EventEmitter,
-    Input,
-    Output
+    input,
+    output
 } from '@angular/core';
 import {
     ButtonComponent,
@@ -36,13 +35,13 @@ import { MenuListFilterViewComponent } from './menu-list-filter-view.component';
                 (clickEvent)="createEvent.emit()"
             />
         </div>
-        <ngx-menu-list-filter-view [form]="filterForm">
+        <ngx-menu-list-filter-view [form]="filterForm()">
         </ngx-menu-list-filter-view>
-        @if (items && items.length > 0) {
+        @if (items()?.length > 0) {
             <div
                 class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-center justify-center pt-8"
             >
-                @for (item of items; track item.id) {
+                @for (item of items(); track item.id) {
                     <ngx-clib-item-card
                         [id]="item.id || ''"
                         [title]="item.name || ''"
@@ -51,7 +50,7 @@ import { MenuListFilterViewComponent } from './menu-list-filter-view.component';
                         [hasIndicator]="!item.available"
                         indicator="menu:pages.list.indicator.unavailable"
                         indicatorTheme="error"
-                        (cardClick)="itemSelect.emit(item.id)"
+                        (cardClick)="itemSelect.emit(item.id || '')"
                     />
                 }
             </div>
@@ -68,8 +67,8 @@ import { MenuListFilterViewComponent } from './menu-list-filter-view.component';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MenuListViewComponent {
-    @Input({ required: true }) filterForm!: FormGroup<ProductFilterForm>;
-    @Input() items: ProductItemDto[] | null = [];
-    @Output() itemSelect = new EventEmitter<string>();
-    @Output() createEvent = new EventEmitter<void>();
+    public filterForm = input.required<FormGroup<ProductFilterForm>>();
+    public items = input<ProductItemDto[] | null>([]);
+    public itemSelect = output<string>();
+    public createEvent = output<void>();
 }

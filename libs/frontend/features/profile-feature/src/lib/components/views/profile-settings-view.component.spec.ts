@@ -25,7 +25,7 @@ describe('ProfileSettingsViewComponent', () => {
             })
         });
         component = fixture.componentInstance;
-        component.form = form;
+        fixture.componentRef.setInput('form', form);
         fixture.detectChanges();
     });
 

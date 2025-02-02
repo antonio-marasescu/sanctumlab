@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    EnvironmentInjector,
+    OnInit,
+    Signal
+} from '@angular/core';
 import {
     MenuAvatarComponent,
     MenuItem
@@ -9,18 +15,18 @@ import {
     selectAuthStateCurrentUser
 } from '@sanctumlab/fe/auth';
 import { Store } from '@ngrx/store';
-import { map, Observable } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
+import { map } from 'rxjs';
 import { AppNavigationService } from '../../services/app-navigation.service';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @UntilDestroy()
 @Component({
     selector: 'ngx-shared-auth-avatar',
-    imports: [MenuAvatarComponent, AsyncPipe],
+    imports: [MenuAvatarComponent],
     template: ` <ngx-clib-menu-avatar
         [size]="'xs'"
         [isPlaceholder]="true"
-        [placeholder]="(username$ | async) || ''"
+        [placeholder]="username()"
         [items]="items"
         [rightSide]="true"
         (menuClick)="onMenuClick($event)"
@@ -30,7 +36,7 @@ import { AppNavigationService } from '../../services/app-navigation.service';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AuthAvatarComponent implements OnInit {
-    protected username$!: Observable<string>;
+    protected username!: Signal<string>;
 
     protected readonly items: MenuItem[] = [
         { id: 'settings', label: 'shared:avatar.actions.settings' },
@@ -40,13 +46,17 @@ export class AuthAvatarComponent implements OnInit {
     constructor(
         private readonly authService: AuthenticationService,
         private readonly appNavigationService: AppNavigationService,
-        private readonly store: Store
+        private readonly store: Store,
+        private readonly injector: EnvironmentInjector
     ) {}
 
     ngOnInit() {
-        this.username$ = this.store
-            .select(selectAuthStateCurrentUser())
-            .pipe(map(user => user?.username?.slice(0, 2) ?? ''));
+        this.username = toSignal(
+            this.store
+                .select(selectAuthStateCurrentUser())
+                .pipe(map(user => user?.username?.slice(0, 2) ?? '')),
+            { initialValue: '', injector: this.injector }
+        );
     }
 
     protected async onMenuClick(id: string): Promise<void> {

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { ProductFilterForm } from '../../types/product-filter-form.types';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import {
@@ -10,7 +10,7 @@ import {
     selector: 'ngx-menu-list-filter-view',
     imports: [ReactiveFormsModule, ToggleInputComponent, TextInputComponent],
     template: `<form
-        [formGroup]="form"
+        [formGroup]="form()"
         novalidate
         class="flex flex-row flex-wrap items-center gap-4 rounded-xl"
     >
@@ -20,17 +20,17 @@ import {
                 inputStyle="bordered"
                 placeholder="menu:filter.searchPlaceholder"
                 label="menu:filter.search"
-                [control]="form.controls.search"
+                [control]="form().controls.search"
             />
         </div>
         <ngx-clib-toggle-input
             label="menu:filter.showAll"
-            [control]="form.controls.showUnavailable"
+            [control]="form().controls.showUnavailable"
         />
         <div class="flex-grow"></div>
     </form>`,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MenuListFilterViewComponent {
-    @Input({ required: true }) form!: FormGroup<ProductFilterForm>;
+    public form = input.required<FormGroup<ProductFilterForm>>();
 }

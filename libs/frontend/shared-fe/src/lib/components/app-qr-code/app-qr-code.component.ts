@@ -1,10 +1,11 @@
 import {
     ChangeDetectionStrategy,
     Component,
-    EventEmitter,
-    Input,
+    EnvironmentInjector,
+    input,
     OnInit,
-    Output
+    output,
+    Signal
 } from '@angular/core';
 import {
     ModalComponent,
@@ -12,19 +13,14 @@ import {
     TextInputComponent
 } from '@sanctumlab/fe/component-library';
 import { FormControl } from '@angular/forms';
-import { map, Observable, startWith } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
+import { map, startWith } from 'rxjs';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'ngx-shared-app-qr-code',
-    imports: [
-        ModalComponent,
-        QRDisplayComponent,
-        TextInputComponent,
-        AsyncPipe
-    ],
+    imports: [ModalComponent, QRDisplayComponent, TextInputComponent],
     template: ` <ngx-clib-modal
-        [opened]="modalOpened"
+        [opened]="modalOpened()"
         [positionBottom]="false"
         [hasActions]="false"
         (closeEvent)="modalClose.emit()"
@@ -40,7 +36,7 @@ import { AsyncPipe } from '@angular/common';
                 />
             </form>
             <ngx-clib-qr-display
-                [data]="(qrCode$ | async) || ''"
+                [data]="qrCode() || ''"
                 [isResponsive]="true"
             />
         </div>
@@ -48,25 +44,30 @@ import { AsyncPipe } from '@angular/common';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppQrCodeComponent implements OnInit {
-    @Input({ required: true }) modalOpened = false;
-    @Output() modalClose = new EventEmitter<void>();
+    public modalOpened = input<boolean>(false);
+    public modalClose = output<void>();
     protected readonly protocol = window.location.protocol;
     protected readonly hostname = window.location.hostname;
-    protected qrCode$!: Observable<string>;
     protected codeControl!: FormControl<string>;
+    protected qrCode!: Signal<string>;
+
+    constructor(private readonly injector: EnvironmentInjector) {}
 
     ngOnInit() {
         this.codeControl = new FormControl<string>('', {
             nonNullable: true,
             validators: []
         });
-        this.qrCode$ = this.codeControl.valueChanges.pipe(
-            startWith(''),
-            map(value =>
-                value
-                    ? `${this.protocol}//${this.hostname}?code=${value}`
-                    : `${this.protocol}//${this.hostname}`
-            )
+        this.qrCode = toSignal(
+            this.codeControl.valueChanges.pipe(
+                startWith(''),
+                map(value =>
+                    value
+                        ? `${this.protocol}//${this.hostname}?code=${value}`
+                        : `${this.protocol}//${this.hostname}`
+                )
+            ),
+            { initialValue: '', injector: this.injector }
         );
     }
 }

@@ -25,11 +25,12 @@ describe('AppQrCodeComponent', () => {
 
     it('should initialize on ngOnInit', () => {
         expect(component['codeControl']).toBeUndefined();
-        expect(component['qrCode$']).toBeUndefined();
+        expect(component['qrCode']).toBeUndefined();
 
         fixture.detectChanges();
 
         expect(component['codeControl']).toBeDefined();
-        expect(component['qrCode$']).toBeDefined();
+        expect(component['qrCode']).toBeDefined();
+        expect(component['qrCode']()).toEqual('http://localhost');
     });
 });

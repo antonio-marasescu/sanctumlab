@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    OnInit,
+    signal
+} from '@angular/core';
 import {
     IconButtonComponent,
     SidebarCategoryItem,
@@ -48,7 +53,7 @@ import { AppQrCodeComponent } from '../app-qr-code/app-qr-code.component';
             </ng-container>
         </ngx-clib-sidebar>
         <ngx-shared-app-qr-code
-            [modalOpened]="modalOpened"
+            [modalOpened]="modalOpened()"
             (modalClose)="onCloseModal()"
         />
     `,
@@ -76,7 +81,7 @@ export class AppSidebarComponent implements OnInit {
             ]
         }
     ];
-    protected modalOpened = false;
+    protected modalOpened = signal<boolean>(false);
     protected themeControl!: FormControl<boolean>;
 
     constructor(
@@ -118,10 +123,10 @@ export class AppSidebarComponent implements OnInit {
     }
 
     protected onOpenModal(): void {
-        this.modalOpened = true;
+        this.modalOpened.set(true);
     }
 
     protected onCloseModal(): void {
-        this.modalOpened = false;
+        this.modalOpened.set(false);
     }
 }

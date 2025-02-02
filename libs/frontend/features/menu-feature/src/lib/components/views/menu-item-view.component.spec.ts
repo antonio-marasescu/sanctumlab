@@ -55,6 +55,10 @@ describe('MenuItemViewComponent', () => {
     });
 
     it('should create', () => {
+        fixture.componentRef.setInput(
+            'item',
+            createMockProductItemDto({ available: true })
+        );
         fixture.detectChanges();
         expect(component).toBeDefined();
     });

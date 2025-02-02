@@ -16,14 +16,14 @@
                 >
                     {{ 'auth:admin.title' | i18nTranslate }}
                 </h1>
-                <form class="space-y-4 md:space-y-6" [formGroup]="form">
+                <form class="space-y-4 md:space-y-6" [formGroup]="form()">
                     <div>
                         <ngx-clib-text-input
                             id="username"
                             label="auth:admin.form.username"
                             placeholder="john@email.com"
                             [autofocus]="true"
-                            [control]="form.controls.username"
+                            [control]="form().controls.username"
                         />
                     </div>
                     <div>
@@ -32,11 +32,11 @@
                             type="password"
                             label="auth:admin.form.password"
                             placeholder="••••••••"
-                            [control]="form.controls.password"
+                            [control]="form().controls.password"
                         />
                     </div>
 
-                    @if (validLogin !== null && !validLogin) {
+                    @if (validLogin() !== null && !validLogin()) {
                         <p
                             id="form-error-message"
                             class="label-text-alt text-error"
@@ -51,7 +51,7 @@
                             label="auth:admin.actions.signIn"
                             (clickEvent)="loginEvent.emit()"
                             [isWide]="true"
-                            [disabled]="form.invalid"
+                            [disabled]="form().invalid"
                         />
                     </div>
 

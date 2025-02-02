@@ -16,7 +16,7 @@
                 >
                     {{ 'auth:guest.title' | i18nTranslate }}
                 </h1>
-                <form class="space-y-4 md:space-y-6" [formGroup]="form">
+                <form class="space-y-4 md:space-y-6" [formGroup]="form()">
                     <div>
                         <ngx-clib-text-input
                             id="code"
@@ -24,11 +24,11 @@
                             label="auth:guest.form.code"
                             placeholder="••••••••"
                             [autofocus]="true"
-                            [control]="form.controls.code"
+                            [control]="form().controls.code"
                         />
                     </div>
 
-                    @if (validLogin !== null && !validLogin) {
+                    @if (validLogin() !== null && !validLogin()) {
                         <p
                             id="form-error-message"
                             class="label-text-alt text-error"
@@ -43,7 +43,7 @@
                             label="auth:guest.actions.signIn"
                             (clickEvent)="loginEvent.emit()"
                             [isWide]="true"
-                            [disabled]="form.invalid"
+                            [disabled]="form().invalid"
                         />
                     </div>
                     <p class="text-sm font-light text-base-content">

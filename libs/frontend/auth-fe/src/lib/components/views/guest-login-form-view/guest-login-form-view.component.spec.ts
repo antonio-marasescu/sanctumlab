@@ -31,7 +31,7 @@ describe('GuestLoginFormViewComponent', () => {
             })
         });
         component = fixture.componentInstance;
-        component.form = form;
+        fixture.componentRef.setInput('form', form);
         fixture.detectChanges();
     });
 
@@ -42,7 +42,6 @@ describe('GuestLoginFormViewComponent', () => {
     it('should have login button disabled if form invalid', () => {
         const button = fixture.debugElement.query(By.css('#login-button'));
         form.patchValue({ code: '' });
-        fixture.detectChanges();
         expect(button.componentInstance.disabled).toBeTruthy();
     });
 
@@ -52,7 +51,7 @@ describe('GuestLoginFormViewComponent', () => {
 
         form.patchValue({ code: '123456' });
         fixture.detectChanges();
-        expect(button.componentInstance.disabled).toBeFalsy();
+        expect(button.componentInstance.disabled()).toBeFalsy();
 
         button.children[0].nativeElement.click();
         expect(loginEventSpy).toHaveBeenCalledTimes(1);
@@ -66,6 +65,7 @@ describe('GuestLoginFormViewComponent', () => {
         );
 
         button.nativeElement.click();
+        fixture.detectChanges();
         expect(redirectEventSpy).toHaveBeenCalledTimes(1);
     });
 

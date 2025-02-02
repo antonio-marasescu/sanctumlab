@@ -1,21 +1,24 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    OnInit,
+    signal
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication.service';
 import { GuestLoginFormViewComponent } from '../views/guest-login-form-view/guest-login-form-view.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthFeatureName, AuthRoutes } from '../../types/auth-navigation.types';
 import { GuestForm } from '../../types/auth-form.types';
-import { from, Observable, of } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 @UntilDestroy()
 @Component({
     selector: 'ngx-auth-guest-login-page',
-    imports: [GuestLoginFormViewComponent, AsyncPipe],
+    imports: [GuestLoginFormViewComponent],
     template: `<ngx-auth-guest-login-form-view
         [form]="guestForm"
-        [validLogin]="validLogin$ | async"
+        [validLogin]="validLogin()"
         (loginEvent)="onLogin()"
         (redirectToAdminLogin)="onRedirectToAdminLogin()"
     />`,
@@ -24,7 +27,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 })
 export class GuestLoginPageComponent implements OnInit {
     protected guestForm!: FormGroup<GuestForm>;
-    protected validLogin$: Observable<boolean> = of(true);
+    protected validLogin = signal<boolean>(true);
 
     constructor(
         private readonly authenticationService: AuthenticationService,
@@ -53,7 +56,8 @@ export class GuestLoginPageComponent implements OnInit {
             return;
         }
         const { code } = this.guestForm.getRawValue();
-        this.validLogin$ = from(this.authenticationService.loginAsGuest(code));
+        const success = await this.authenticationService.loginAsGuest(code);
+        this.validLogin.set(success);
     }
 
     protected async onRedirectToAdminLogin(): Promise<void> {

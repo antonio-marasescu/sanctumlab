@@ -1,24 +1,25 @@
 import {
     ChangeDetectionStrategy,
     Component,
+    EnvironmentInjector,
     Input,
-    OnInit
+    OnInit,
+    Signal
 } from '@angular/core';
 import { MenuItemFormContainerComponent } from '../containers/menu-item-form-container.component';
 import { ProductApiService } from '@sanctumlab/fe/data-access';
-import { Observable } from 'rxjs';
 import {
     ProductItemCategory,
     ProductItemDto
 } from '@sanctumlab/api-interfaces';
-import { AsyncPipe } from '@angular/common';
 import { ProductFormSubmitEvent } from '../../types/product-item-form.types';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'ngx-menu-item-edit-page',
-    imports: [MenuItemFormContainerComponent, AsyncPipe],
+    imports: [MenuItemFormContainerComponent],
     template: `<ngx-menu-item-form-container
-        [item]="currentItem$ | async"
+        [item]="currentItem()"
         title="menu:pages.edit.title"
         actionLabel="menu:pages.edit.mainAction"
         (submitEvent)="onSubmitEvent($event)"
@@ -27,13 +28,18 @@ import { ProductFormSubmitEvent } from '../../types/product-item-form.types';
 })
 export class MenuItemEditPageComponent implements OnInit {
     @Input() id!: string;
-    protected currentItem$!: Observable<ProductItemDto | null>;
+    protected currentItem!: Signal<ProductItemDto | null>;
 
-    constructor(private readonly productApiService: ProductApiService) {}
+    constructor(
+        private readonly productApiService: ProductApiService,
+        private injector: EnvironmentInjector
+    ) {}
 
     ngOnInit() {
-        this.currentItem$ =
-            this.productApiService.retrieveCurrentProductStream();
+        this.currentItem = toSignal(
+            this.productApiService.retrieveCurrentProductStream(),
+            { initialValue: null, injector: this.injector }
+        );
         this.productApiService.sendRetrieveProductById(this.id);
     }
 

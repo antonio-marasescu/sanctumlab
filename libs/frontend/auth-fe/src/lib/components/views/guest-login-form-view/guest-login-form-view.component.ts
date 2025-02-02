@@ -1,9 +1,8 @@
 import {
     ChangeDetectionStrategy,
     Component,
-    EventEmitter,
-    Input,
-    Output
+    input,
+    output
 } from '@angular/core';
 import {
     ButtonComponent,
@@ -28,8 +27,8 @@ import { GuestForm } from '../../../types/auth-form.types';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GuestLoginFormViewComponent {
-    @Input({ required: true }) form!: FormGroup<GuestForm>;
-    @Input({ required: true }) validLogin: boolean | null = true;
-    @Output() loginEvent = new EventEmitter<void>();
-    @Output() redirectToAdminLogin = new EventEmitter<void>();
+    public form = input.required<FormGroup<GuestForm>>();
+    public validLogin = input<boolean | null>(true);
+    public loginEvent = output<void>();
+    public redirectToAdminLogin = output<void>();
 }

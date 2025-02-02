@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import {
     I18nPipe,
     SelectInputComponent,
@@ -13,7 +13,7 @@ import { ProfileSettingsForm } from '../../types/profile-settings-form.types';
     template: `<div class="m-12">
         <h2 class="text-xl">{{ 'profile:title' | i18nTranslate }}</h2>
         <form
-            [formGroup]="form"
+            [formGroup]="form()"
             novalidate
             class="grid grid-cols-1 md:grid-cols-3 pt-4"
         >
@@ -21,14 +21,14 @@ import { ProfileSettingsForm } from '../../types/profile-settings-form.types';
                 id="languages"
                 label="profile:form.language"
                 placeholder="profile:form.languagePlaceholder"
-                [control]="form.controls.language"
-                [options]="languageOptions"
+                [control]="form().controls.language"
+                [options]="languageOptions()"
             />
         </form>
     </div>`,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProfileSettingsViewComponent {
-    @Input() form!: FormGroup<ProfileSettingsForm>;
-    @Input() languageOptions: SelectOption[] = [];
+    public form = input.required<FormGroup<ProfileSettingsForm>>();
+    public languageOptions = input<SelectOption[]>([]);
 }

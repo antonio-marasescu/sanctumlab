@@ -58,11 +58,12 @@ describe('AuthAvatarComponent', () => {
     });
 
     it('should register username observable on ngOnInit', () => {
-        expect(component['username$']).toBeUndefined();
+        expect(component['username']).toBeUndefined();
 
         fixture.detectChanges();
 
-        expect(component['username$']).toBeDefined();
+        expect(component['username']).toBeDefined();
+        expect(component['username']()).toEqual('');
     });
 
     it('should handle menu click', async () => {

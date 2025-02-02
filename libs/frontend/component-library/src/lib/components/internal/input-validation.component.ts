@@ -1,6 +1,5 @@
 import {
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     EnvironmentInjector,
     Inject,
@@ -40,7 +39,6 @@ export class InputValidationComponent implements OnInit {
     constructor(
         @Inject(InputValidationConfigToken)
         private readonly validationConfiguration: InputValidationConfiguration,
-        private readonly changeDetectorRef: ChangeDetectorRef,
         private readonly injector: EnvironmentInjector
     ) {}
 
@@ -57,7 +55,6 @@ export class InputValidationComponent implements OnInit {
                 this.errorMessage.set(message);
                 this.controlStatus.set(status);
                 this.controlStateChange.emit(status);
-                this.changeDetectorRef.markForCheck();
             });
     }
 }
