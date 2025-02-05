@@ -23,6 +23,7 @@ import {
     createMockProductItemDto,
     ProductItemCategory
 } from '@sanctumlab/api-interfaces';
+import { cold } from 'jasmine-marbles';
 
 describe('MenuListContainerComponent', () => {
     let component: MenuListContainerComponent;
@@ -32,6 +33,7 @@ describe('MenuListContainerComponent', () => {
     let mockAuthService: Partial<AuthenticationService>;
     let mockActivatedRoute: Partial<ActivatedRoute>;
     let mockParams: Record<string, string>;
+    const initialMockProducts = [createMockProductItemDto()];
 
     beforeEach(waitForAsync(() => {
         mockParams = {
@@ -44,8 +46,7 @@ describe('MenuListContainerComponent', () => {
         };
         mockProductsApiService = {
             retrieveProductsIsLoadingStream: () => of(false),
-            retrieveProductsByCategoryStream: () =>
-                of([createMockProductItemDto()]),
+            retrieveProductsByCategoryStream: () => of(initialMockProducts),
             sendRetrieveProductList: jest.fn(),
             sendSetCurrentProduct: jest.fn()
         };
@@ -94,6 +95,7 @@ describe('MenuListContainerComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(MenuListContainerComponent);
         component = fixture.componentInstance;
+        fixture.componentRef.setInput('category', ProductItemCategory.Cocktail);
     });
 
     it('should create', () => {
@@ -102,15 +104,13 @@ describe('MenuListContainerComponent', () => {
     });
 
     it('should initialize forms and subscriptions on ngOnInit', () => {
-        expect(component['filterForm']).toBeUndefined();
-        expect(component['isLoading$']).toBeUndefined();
-        expect(component['items$']).toBeUndefined();
-
+        const expectedInitialItems = cold('a', { a: initialMockProducts });
         fixture.detectChanges();
-
         expect(component['filterForm']).toBeDefined();
-        expect(component['isLoading$']).toBeDefined();
-        expect(component['items$']).toBeDefined();
+        expect(component['isLoading']).toBeDefined();
+        expect(component['isLoading']()).toEqual(false);
+        expect(component['items']).toBeDefined();
+        expect(component['items']()).toBeObservable(expectedInitialItems);
     });
 
     it('should send retrieve products on ngOnInit', () => {

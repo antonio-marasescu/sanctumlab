@@ -55,7 +55,8 @@ import { I18nPipe } from '../../../pipes/i18n.pipe';
                             {{ description() }}
                         </p>
                     </div>
-                    @if (tags()?.length > 0) {
+                    @let tagsData = tags();
+                    @if (tagsData && tagsData.length > 0) {
                         <div class="card-actions pt-2">
                             @for (tag of tags(); track tag) {
                                 <div class="badge badge-accent">{{ tag }}</div>

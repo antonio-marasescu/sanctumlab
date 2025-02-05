@@ -30,7 +30,11 @@ import { I18nPipe } from '../../../../pipes/i18n.pipe';
                 [attr.id]="id()"
                 [attr.name]="id()"
                 [formControl]="control()"
-                [placeholder]="placeholder() | i18nTranslate"
+                [placeholder]="
+                    translatePlaceholder()
+                        ? (placeholder() | i18nTranslate)
+                        : placeholder()
+                "
                 [attr.aria-label]="label()"
                 [autofocus]="autofocus()"
                 autocomplete="false"
@@ -56,6 +60,7 @@ export class TextInputComponent {
     public placeholder = input.required<string>();
     public type = input<TextInputType>('text');
     public autofocus = input<boolean>(false);
+    public translatePlaceholder = input<boolean>(true);
     public inputStyle = input<'default' | 'bordered' | 'ghost'>('default');
     protected readonly InputState = InputState;
     protected controlState = signal<FormControlStatus>(InputState.VALID);

@@ -1,42 +1,47 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    EnvironmentInjector,
+    OnInit,
+    Signal
+} from '@angular/core';
 import { ProductItemDto } from '@sanctumlab/api-interfaces';
 import { MenuItemViewComponent } from '../views/menu-item-view.component';
-import { Observable } from 'rxjs';
-import { UntilDestroy } from '@ngneat/until-destroy';
-import { AsyncPipe } from '@angular/common';
 import { AppNavigationService } from '@sanctumlab/fe/shared';
 import { ProductApiService } from '@sanctumlab/fe/data-access';
+import { toSignal } from '@angular/core/rxjs-interop';
 
-@UntilDestroy()
 @Component({
     selector: `ngx-menu-item-container`,
-    imports: [MenuItemViewComponent, AsyncPipe],
+    imports: [MenuItemViewComponent],
     template: `
-        @if (item$) {
-            @let item = item$ | async;
-            <ngx-menu-item-view
-                [item]="item"
-                [opened]="item !== null"
-                (modalClose)="onModalClosed()"
-                (editEvent)="onItemEdit($event)"
-                (enableEvent)="onEnableEvent($event)"
-                (disableEvent)="onDisableEvent($event)"
-                (deleteEvent)="onDeleteEvent($event)"
-            />
-        }
+        @let item = currentItem();
+        <ngx-menu-item-view
+            [item]="item"
+            [opened]="item !== null"
+            (modalClose)="onModalClosed()"
+            (editEvent)="onItemEdit($event)"
+            (enableEvent)="onEnableEvent($event)"
+            (disableEvent)="onDisableEvent($event)"
+            (deleteEvent)="onDeleteEvent($event)"
+        />
     `,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MenuItemContainerComponent implements OnInit {
-    protected item$!: Observable<ProductItemDto | null>;
+    protected currentItem!: Signal<ProductItemDto | null>;
 
     constructor(
         private readonly appNavigationService: AppNavigationService,
-        private readonly productApiService: ProductApiService
+        private readonly productApiService: ProductApiService,
+        private readonly injector: EnvironmentInjector
     ) {}
 
     ngOnInit() {
-        this.item$ = this.productApiService.retrieveCurrentProductStream();
+        this.currentItem = toSignal(
+            this.productApiService.retrieveCurrentProductStream(),
+            { initialValue: null, injector: this.injector }
+        );
     }
 
     protected onModalClosed(): void {

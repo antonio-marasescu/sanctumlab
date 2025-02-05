@@ -29,6 +29,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
             <form class="w-[256px] sm:w-full">
                 <ngx-clib-text-input
                     [control]="codeControl"
+                    [translatePlaceholder]="false"
                     id="qr-code-control"
                     label="shared:sidebar.qr.code"
                     type="password"

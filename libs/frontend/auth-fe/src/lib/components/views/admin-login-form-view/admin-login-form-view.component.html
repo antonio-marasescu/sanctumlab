@@ -22,6 +22,7 @@
                             id="username"
                             label="auth:admin.form.username"
                             placeholder="john@email.com"
+                            [translatePlaceholder]="false"
                             [autofocus]="true"
                             [control]="form().controls.username"
                         />
@@ -32,6 +33,7 @@
                             type="password"
                             label="auth:admin.form.password"
                             placeholder="••••••••"
+                            [translatePlaceholder]="false"
                             [control]="form().controls.password"
                         />
                     </div>

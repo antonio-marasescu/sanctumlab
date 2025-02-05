@@ -37,7 +37,8 @@ import { MenuListFilterViewComponent } from './menu-list-filter-view.component';
         </div>
         <ngx-menu-list-filter-view [form]="filterForm()">
         </ngx-menu-list-filter-view>
-        @if (items()?.length > 0) {
+        @let itemsData = items();
+        @if (itemsData && itemsData.length > 0) {
             <div
                 class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-center justify-center pt-8"
             >

@@ -2,7 +2,7 @@ import {
     ChangeDetectionStrategy,
     Component,
     EnvironmentInjector,
-    Input,
+    input,
     OnInit,
     Signal
 } from '@angular/core';
@@ -27,12 +27,12 @@ import { toSignal } from '@angular/core/rxjs-interop';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MenuItemEditPageComponent implements OnInit {
-    @Input() id!: string;
+    public id = input.required<string>();
     protected currentItem!: Signal<ProductItemDto | null>;
 
     constructor(
         private readonly productApiService: ProductApiService,
-        private injector: EnvironmentInjector
+        private readonly injector: EnvironmentInjector
     ) {}
 
     ngOnInit() {
@@ -40,7 +40,7 @@ export class MenuItemEditPageComponent implements OnInit {
             this.productApiService.retrieveCurrentProductStream(),
             { initialValue: null, injector: this.injector }
         );
-        this.productApiService.sendRetrieveProductById(this.id);
+        this.productApiService.sendRetrieveProductById(this.id());
     }
 
     protected onSubmitEvent({ form, id }: ProductFormSubmitEvent) {

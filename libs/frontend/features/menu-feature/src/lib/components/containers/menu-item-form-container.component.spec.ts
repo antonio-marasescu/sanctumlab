@@ -66,6 +66,7 @@ describe('MenuItemFormContainerComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(MenuItemFormContainerComponent);
         component = fixture.componentInstance;
+        fixture.componentRef.setInput('item', null);
     });
 
     it('should create', () => {
@@ -74,12 +75,9 @@ describe('MenuItemFormContainerComponent', () => {
     });
 
     it('should initialize subscription and form on ngOnInit', () => {
-        expect(component['isLoading$']).toBeUndefined();
-        expect(component['form']).toBeUndefined();
-
         fixture.detectChanges();
-
-        expect(component['isLoading$']).toBeDefined();
+        expect(component['isLoading']).toBeDefined();
+        expect(component['isLoading']()).toEqual(false);
         expect(component['form']).toBeDefined();
     });
 
@@ -90,7 +88,10 @@ describe('MenuItemFormContainerComponent', () => {
         fixture.componentRef.setInput('item', payload);
         fixture.detectChanges();
 
-        expect(component['form'].value).toEqual({ ...payload, id: undefined });
+        expect(component['form'].value).toEqual({
+            ...payload,
+            id: undefined
+        });
     });
 
     it('should emit on submitEvent', () => {

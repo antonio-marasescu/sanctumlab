@@ -87,9 +87,10 @@ import {
         >
             <ngx-clib-button
                 id="submit-button"
+                [disabled]="this.form().invalid"
                 [label]="actionLabel()"
                 [size]="'sm'"
-                theme="neutral"
+                theme="success"
                 (clickEvent)="submitEvent.emit()"
             />
             <ngx-clib-button

@@ -64,6 +64,7 @@ export const productsStateReducer = createReducer(
     on(ProductsActions.getProductList, state => {
         return {
             ...state,
+            currentProductId: null,
             loading: true
         };
     }),

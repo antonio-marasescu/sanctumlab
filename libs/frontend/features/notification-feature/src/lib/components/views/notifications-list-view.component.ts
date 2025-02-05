@@ -13,24 +13,27 @@ import { NotificationComponent } from '@sanctumlab/fe/component-library';
 @Component({
     selector: 'ngx-notifications-list-view',
     imports: [NotificationComponent],
-    template: `@if (notifications()?.length > 0) {
-        <div
-            class="absolute top-0 right-0 w-40 sm:w-64 lg:w-96 flex flex-col gap-2 z-50"
-        >
-            @for (notification of notifications(); track notification.id) {
-                <ngx-clib-notification
-                    #notificationElement
-                    tabindex="-1"
-                    [id]="notification.id"
-                    [label]="'notification:titles.' + notification.title"
-                    icon="matWarning"
-                    [theme]="notification.type"
-                    [description]="'notification:errors.' + notification.code"
-                    (closeEvent)="notificationClose.emit($event)"
-                />
-            }
-        </div>
-    }`,
+    template: ` @let notificationsData = notifications();
+        @if (notificationsData && notificationsData.length > 0) {
+            <div
+                class="absolute top-0 right-0 w-40 sm:w-64 lg:w-96 flex flex-col gap-2 z-50"
+            >
+                @for (notification of notifications(); track notification.id) {
+                    <ngx-clib-notification
+                        #notificationElement
+                        tabindex="-1"
+                        [id]="notification.id"
+                        [label]="'notification:titles.' + notification.title"
+                        icon="matWarning"
+                        [theme]="notification.type"
+                        [description]="
+                            'notification:errors.' + notification.code
+                        "
+                        (closeEvent)="notificationClose.emit($event)"
+                    />
+                }
+            </div>
+        }`,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NotificationsListViewComponent implements AfterViewChecked {

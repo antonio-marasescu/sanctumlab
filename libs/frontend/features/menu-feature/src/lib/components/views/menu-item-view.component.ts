@@ -93,7 +93,7 @@ import { QuillViewComponent } from 'ngx-quill';
                         *ngxAuthAdminRestrict
                         label="menu:pages.list.view.actions.disable"
                         [isResponsive]="true"
-                        theme="secondary"
+                        theme="error"
                         (clickEvent)="disableEvent.emit(productItem || '')"
                     />
                 } @else {
@@ -120,7 +120,7 @@ import { QuillViewComponent } from 'ngx-quill';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MenuItemViewComponent {
-    public item = input.required<ProductItemDto>();
+    public item = input.required<ProductItemDto | null>();
     public opened = input<boolean>(false);
     public modalClose = output<void>();
     public editEvent = output<string>();

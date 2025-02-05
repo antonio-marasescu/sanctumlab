@@ -6,6 +6,17 @@ export enum ProductItemCategory {
     Unknown = 'Unknown'
 }
 
+export const ProductItemCategoryOptions = [
+    {
+        id: ProductItemCategory.Cocktail,
+        label: ProductItemCategory.Cocktail
+    },
+    {
+        id: ProductItemCategory.Snacks,
+        label: ProductItemCategory.Snacks
+    }
+];
+
 export const ProductItemCategoryValues = [
     ProductItemCategory.Cocktail,
     ProductItemCategory.Snacks,

@@ -41,7 +41,7 @@ describe('MenuItemContainerComponent', () => {
             navigateToMenuEditItem: jest.fn()
         };
         mockProductsApiService = {
-            retrieveCurrentProductStream: jest.fn(),
+            retrieveCurrentProductStream: jest.fn().mockReturnValue(of(null)),
             sendUnsetCurrentProduct: jest.fn(),
             sendRemoveProduct: jest.fn(),
             sendUpdateProduct: jest.fn()
@@ -91,15 +91,17 @@ describe('MenuItemContainerComponent', () => {
     });
 
     it('should initialize subscription on ngOnInit', () => {
-        expect(component['item$']).toBeUndefined();
+        const mockProduct = createMockProductItemDto();
+        expect(component['currentItem']).toBeUndefined();
         jest.spyOn(
             mockProductsApiService,
             'retrieveCurrentProductStream'
-        ).mockReturnValue(of(createMockProductItemDto()));
+        ).mockReturnValue(of(mockProduct));
 
         fixture.detectChanges();
 
-        expect(component['item$']).toBeDefined();
+        expect(component['currentItem']).toBeDefined();
+        expect(component['currentItem']()).toEqual(mockProduct);
     });
 
     it('should navigate to edit item on item edit event', () => {

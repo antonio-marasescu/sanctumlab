@@ -36,7 +36,8 @@ import { I18nPipe } from '../../../pipes/i18n.pipe';
                             'left-2': !rightSide()
                         }"
                     >
-                        @if (items()?.length > 0) {
+                        @let itemsData = items();
+                        @if (itemsData && itemsData.length > 0) {
                             <ul
                                 class="menu menu-md bg-base-200 rounded-box w-32 md:w-44 dark:shadow-neutral dark:shadow-sm"
                             >

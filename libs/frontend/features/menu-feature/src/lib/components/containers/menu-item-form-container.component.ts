@@ -1,12 +1,11 @@
 import {
     ChangeDetectionStrategy,
     Component,
-    EventEmitter,
-    Input,
-    OnChanges,
+    EnvironmentInjector,
+    input,
     OnInit,
-    Output,
-    SimpleChanges
+    output,
+    signal
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import {
@@ -16,7 +15,7 @@ import {
 import { createProductItemForm } from '../../utils/product-item-form.utils';
 import { MenuItemFormViewComponent } from '../views/menu-item-form-view.component';
 import {
-    ProductItemCategory,
+    ProductItemCategoryOptions,
     ProductItemDto
 } from '@sanctumlab/api-interfaces';
 import {
@@ -24,73 +23,57 @@ import {
     SelectOption
 } from '@sanctumlab/fe/component-library';
 import { AppNavigationService } from '@sanctumlab/fe/shared';
-import { AsyncPipe } from '@angular/common';
 import { ProductApiService } from '@sanctumlab/fe/data-access';
-import { Observable } from 'rxjs';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
     selector: 'ngx-menu-item-form-container',
-    imports: [MenuItemFormViewComponent, AsyncPipe, LoadingIndicatorComponent],
-    template: ` @if (isLoading$ | async) {
+    imports: [MenuItemFormViewComponent, LoadingIndicatorComponent],
+    template: `@if (isLoading()) {
             <ngx-clib-loading-indicator [isOverlay]="true" />
         }
         <ngx-menu-item-form-view
             [form]="form"
             [categoryOptions]="categoryOptions"
-            [title]="title"
-            [actionLabel]="actionLabel"
+            [title]="title()"
+            [actionLabel]="actionLabel()"
             (closeEvent)="onCloseEvent()"
             (submitEvent)="onSubmitEvent()"
         />`,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MenuItemFormContainerComponent implements OnInit, OnChanges {
-    @Input({ required: true }) item?: ProductItemDto | null;
-    @Input({ required: true }) title = '';
-    @Input({ required: true }) actionLabel = '';
-    @Output() submitEvent = new EventEmitter<ProductFormSubmitEvent>();
-
-    protected isLoading$!: Observable<boolean>;
+export class MenuItemFormContainerComponent implements OnInit {
+    public item = input.required<ProductItemDto | null>();
+    public title = input<string>('');
+    public actionLabel = input<string>('');
+    public submitEvent = output<ProductFormSubmitEvent>();
+    protected isLoading = signal<boolean>(false).asReadonly();
     protected form!: FormGroup<ProductItemForm>;
     protected readonly categoryOptions: SelectOption[] = [
-        {
-            id: ProductItemCategory.Cocktail,
-            label: ProductItemCategory.Cocktail
-        },
-        {
-            id: ProductItemCategory.Snacks,
-            label: ProductItemCategory.Snacks
-        }
+        ...ProductItemCategoryOptions
     ];
 
     constructor(
         private readonly productApiService: ProductApiService,
-        private readonly appNavigationService: AppNavigationService
+        private readonly appNavigationService: AppNavigationService,
+        private readonly injector: EnvironmentInjector
     ) {}
 
     ngOnInit() {
-        this.isLoading$ =
-            this.productApiService.retrieveProductsIsLoadingStream();
-        this.form = createProductItemForm(this.item);
-    }
-
-    ngOnChanges(changes: SimpleChanges) {
-        if (changes['item'].previousValue !== changes['item'].currentValue) {
-            this.updateFormValue(changes['item'].currentValue);
-        }
-    }
-
-    protected updateFormValue(item?: ProductItemDto) {
-        if (this.form) {
-            this.form.patchValue({
-                name: item?.name ?? '',
-                description: item?.description ?? '',
-                category: item?.category ?? '',
-                tags: item?.tags ?? [],
-                recipe: item?.recipe ?? '',
-                available: item?.available ?? false
+        this.isLoading = toSignal(
+            this.productApiService.retrieveProductsIsLoadingStream(),
+            { initialValue: false, injector: this.injector }
+        );
+        this.form = createProductItemForm(this.item());
+        toObservable(this.item, { injector: this.injector })
+            .pipe(untilDestroyed(this))
+            .subscribe(value => {
+                if (value) {
+                    this.form.patchValue({ ...value });
+                }
             });
-        }
     }
 
     protected onSubmitEvent(): void {
@@ -98,7 +81,7 @@ export class MenuItemFormContainerComponent implements OnInit, OnChanges {
             return;
         }
         const formValue = this.form.getRawValue();
-        this.submitEvent.emit({ form: formValue, id: this.item?.id });
+        this.submitEvent.emit({ form: formValue, id: this.item()?.id });
     }
 
     protected async onCloseEvent(): Promise<void> {
