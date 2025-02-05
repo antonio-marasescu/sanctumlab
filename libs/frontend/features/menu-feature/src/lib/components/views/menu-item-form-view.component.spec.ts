@@ -37,23 +37,23 @@ describe('MenuItemFormViewComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(MenuItemFormViewComponent);
         form = new FormGroup<ProductItemForm>({
-            name: new FormControl<string>('', {
+            name: new FormControl<string>('Test', {
                 nonNullable: true,
                 validators: []
             }),
-            description: new FormControl<string>('', {
+            description: new FormControl<string>('Test', {
                 nonNullable: true,
                 validators: [Validators.required]
             }),
-            category: new FormControl<string>('', {
+            category: new FormControl<string>('Unknown', {
                 nonNullable: true,
                 validators: [Validators.required]
             }),
-            recipe: new FormControl<string>('', {
+            recipe: new FormControl<string>('Test', {
                 nonNullable: true,
                 validators: [Validators.required]
             }),
-            tags: new FormControl<string[]>([], {
+            tags: new FormControl<string[]>(['test'], {
                 nonNullable: true,
                 validators: [Validators.required]
             }),
