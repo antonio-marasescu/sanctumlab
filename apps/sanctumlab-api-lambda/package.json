@@ -3,7 +3,7 @@
     "version": "0.0.1",
     "dependencies": {
         "@sanctumlab/products-api-feature": "^0.0.1",
-        "@sanctumlab/recipes-management-api-feature": "^0.0.1",
+        "@sanctumlab/recipes-api-feature": "^0.0.1",
         "@sanctumlab/shared-be": "^0.0.1"
     },
     "main": "./index.js",

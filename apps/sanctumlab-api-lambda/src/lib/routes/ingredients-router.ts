@@ -4,9 +4,9 @@ import {
     LambdaRequestPayload,
     LambdaResponsePayload
 } from '@sanctumlab/be/shared';
-import { IngredientsApiInstance } from '@sanctumlab/be/recipes-management-api-feature';
+import { IngredientsApiInstance } from '@sanctumlab/be/recipes-api-feature';
 
-export const IngredientsRoute = '/ingredients';
+export const IngredientsRoute = '/recipes/ingredients';
 
 export async function handleIngredientsRoute(
     event: LambdaRequestPayload

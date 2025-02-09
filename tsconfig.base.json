@@ -30,8 +30,8 @@
             "@sanctumlab/be/products-api-feature": [
                 "libs/backend/features/products-api-feature/src/index.ts"
             ],
-            "@sanctumlab/be/recipes-management-api-feature": [
-                "libs/backend/features/recipes-management-api-feature/src/index.ts"
+            "@sanctumlab/be/recipes-api-feature": [
+                "libs/backend/features/recipes-api-feature/src/index.ts"
             ],
             "@sanctumlab/be/sanctumlab-authorizer": [
                 "apps/sanctumlab-authorizer/src/index.ts"

@@ -1,7 +1,7 @@
 import express from 'express';
 import { AuthenticatedRequest } from '../../types/request.types';
 import { handleException } from '@sanctumlab/be/shared';
-import { RecipesApiInstance } from '@sanctumlab/be/recipes-management-api-feature';
+import { RecipesApiInstance } from '@sanctumlab/be/recipes-api-feature';
 
 const recipesRouter = express.Router();
 

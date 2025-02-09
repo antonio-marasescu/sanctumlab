@@ -20,7 +20,7 @@ app.use(
 app.use(express.json());
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 app.use(`${baseRoute}/products`, authGuard, productsRouter);
-app.use(`${baseRoute}/ingredients`, authGuard, ingredientsRouter);
+app.use(`${baseRoute}/recipes/ingredients`, authGuard, ingredientsRouter);
 app.use(`${baseRoute}/recipes`, authGuard, recipesRouter);
 
 const port = process.env.PORT || 3333;

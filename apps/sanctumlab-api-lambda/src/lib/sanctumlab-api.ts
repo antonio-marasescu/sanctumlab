@@ -26,11 +26,13 @@ export const main = async (mainEvent: LambdaRequestPayload) =>
         }
         if (event.resource.includes(RecipesRoute)) {
             AppLogger.info('[Handler] Recipes Routing');
+
+            if (event.resource.includes(IngredientsRoute)) {
+                AppLogger.info('[Handler] Ingredients Routing');
+                return handleIngredientsRoute(event);
+            }
+
             return handleRecipesRoute(event);
-        }
-        if (event.resource.includes(IngredientsRoute)) {
-            AppLogger.info('[Handler] Ingredients Routing');
-            return handleIngredientsRoute(event);
         }
 
         return buildPathNotFoundResponse();
