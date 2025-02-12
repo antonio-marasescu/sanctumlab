@@ -42,12 +42,12 @@ describe('ProductsClientService', () => {
     });
 
     it('should call POST /products to create a product', done => {
-        const mockProduct = createMockCreateProductItemDto();
+        const mockPayload = createMockCreateProductItemDto();
         const mockResponse = createMockProductItemDto({
             id: '1'
         });
 
-        service.createProduct(mockProduct).subscribe({
+        service.createProduct(mockPayload).subscribe({
             next: response => {
                 expect(response).toEqual(mockResponse);
                 done();
@@ -59,7 +59,7 @@ describe('ProductsClientService', () => {
 
         const req = httpTestingController.expectOne(mockAddressEndpoint);
         expect(req.request.method).toBe('POST');
-        expect(req.request.body).toEqual(mockProduct);
+        expect(req.request.body).toEqual(mockPayload);
         req.flush(mockResponse);
     });
 

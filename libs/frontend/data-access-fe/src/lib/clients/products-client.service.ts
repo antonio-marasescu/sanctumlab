@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@angular/core';
+import { inject, Inject, Injectable } from '@angular/core';
 import {
     CreateProductItemDto,
     ProductItemDto,
@@ -13,14 +13,9 @@ import {
 
 @Injectable({ providedIn: 'root' })
 export class ProductsClientService {
-    private readonly baseRoute: string;
-    constructor(
-        @Inject(API_ENDPOINT_CONFIG)
-        private readonly apiEndpointConfiguration: ApiEndpointConfiguration,
-        private readonly httpClient: HttpClient
-    ) {
-        this.baseRoute = `${this.apiEndpointConfiguration.address}/products`;
-    }
+    private readonly apiEndpointConfiguration = inject(API_ENDPOINT_CONFIG);
+    private readonly httpClient = inject(HttpClient);
+    private readonly baseRoute: string = `${this.apiEndpointConfiguration.address}/products`;
 
     public createProduct(
         payload: CreateProductItemDto

@@ -11,10 +11,27 @@ import {
     notificationsStateReducer
 } from '../state/notifications/notifications.reducers';
 import { NotificationsEffects } from '../state/notifications/notifications.effects';
+import { IngredientsEffects } from '../state/ingredients/ingredients.effects';
+import { RecipesEffects } from '../state/recipes/recipes.effects';
+import {
+    IngredientsStateFeatureName,
+    ingredientsStateReducer
+} from '../state/ingredients/ingredients.reducers';
+import {
+    RecipesStateFeatureName,
+    recipesStateReducer
+} from '../state/recipes/recipes.reducers';
 
 export const provideDataAccessState = (): EnvironmentProviders =>
     makeEnvironmentProviders([
         provideState(ProductsStateFeatureName, productsStateReducer),
         provideState(NotificationsStateFeatureName, notificationsStateReducer),
-        provideEffects(ProductsEffects, NotificationsEffects)
+        provideState(IngredientsStateFeatureName, ingredientsStateReducer),
+        provideState(RecipesStateFeatureName, recipesStateReducer),
+        provideEffects(
+            ProductsEffects,
+            NotificationsEffects,
+            IngredientsEffects,
+            RecipesEffects
+        )
     ]);

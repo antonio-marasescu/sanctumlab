@@ -1,0 +1,20 @@
+{
+    "name": "recipes-feature",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "libs/frontend/features/recipes-feature/src",
+    "prefix": "lib",
+    "projectType": "library",
+    "tags": ["scope:project-frontend scope:feature"],
+    "targets": {
+        "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+            "options": {
+                "jestConfig": "libs/frontend/features/recipes-feature/jest.config.ts"
+            }
+        },
+        "lint": {
+            "executor": "@nx/eslint:lint"
+        }
+    }
+}

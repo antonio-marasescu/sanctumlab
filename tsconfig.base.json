@@ -53,7 +53,10 @@
             "@sanctumlab/fe/profile-feature": [
                 "libs/frontend/features/profile-feature/src/index.ts"
             ],
-            "@sanctumlab/fe/shared": ["libs/frontend/shared-fe/src/index.ts"]
+            "@sanctumlab/fe/shared": ["libs/frontend/shared-fe/src/index.ts"],
+            "@sanctumlab/recipes-feature": [
+                "libs/frontend/features/recipes-feature/src/index.ts"
+            ]
         }
     },
     "exclude": ["node_modules", "tmp"]
